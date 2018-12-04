@@ -38,6 +38,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/smile"/>
         <TextView
+            android:id="@+id/face"
             android:layout_width="match_parent"
             android:layout_marginTop="25dp"
             android:layout_height="wrap_content"
@@ -60,6 +61,7 @@
             android:scaleType="fitCenter"
             android:src="@drawable/voice"/>
         <TextView
+            android:id="@+id/voice"
             android:layout_width="match_parent"
             android:layout_marginTop="25dp"
             android:layout_height="wrap_content"

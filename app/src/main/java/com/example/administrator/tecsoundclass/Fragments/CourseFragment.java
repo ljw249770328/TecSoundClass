@@ -8,10 +8,13 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.example.administrator.tecsoundclass.Adapter.MyClassListAdapter;
 import com.example.administrator.tecsoundclass.CreateClassActivity;
 import com.example.administrator.tecsoundclass.JoinActivity;
 import com.example.administrator.tecsoundclass.R;
@@ -19,7 +22,7 @@ import com.example.administrator.tecsoundclass.R;
 public class CourseFragment extends Fragment {
     private ImageView mIvMenu;
     private PopupWindow mPop;
-
+    private ListView mLv1;
     public CourseFragment() {
 
     }
@@ -42,6 +45,7 @@ public class CourseFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         mIvMenu=view.findViewById(R.id.iv_more);
+        mLv1=view.findViewById(R.id.lv_1);
         mIvMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +59,13 @@ public class CourseFragment extends Fragment {
                 mPop.setOutsideTouchable(true);
                 mPop.setFocusable(true);
                 mPop.showAsDropDown(mIvMenu);
+            }
+        });
+        mLv1.setAdapter(new MyClassListAdapter(getActivity()));
+        mLv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Intent intent=new Intent()
             }
         });
     }
