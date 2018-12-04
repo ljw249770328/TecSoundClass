@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorWhite">
+    <TextView
+        android:id="@+id/tv_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="修改密码"
+        android:drawableLeft="@drawable/resetcode"
+        android:textSize="17sp"
+        android:textColor="@color/colorBlack"
+        android:paddingTop="10dp"
+        android:paddingBottom="8dp"/>
+    <TextView
+        android:id="@+id/tv_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="设置"
+        android:drawableLeft="@drawable/settings"
+        android:textSize="17sp"
+        android:textColor="@color/colorBlack"
+        android:paddingTop="10dp"
+        android:paddingBottom="8dp"/>
+    <TextView
+        android:id="@+id/tv_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="退出登录"
+        android:drawableLeft="@drawable/exit"
+        android:textSize="17sp"
+        android:textColor="@color/colorBlack"
+        android:paddingTop="10dp"
+        android:paddingBottom="8dp"/>
+
+
+
+</LinearLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBgGray"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/colorGreen">
+        <TextView
+            android:id="@+id/tv_cancle"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:text="取消"
+            android:gravity="center"
+            android:textSize="17sp"
+            android:layout_marginLeft="7dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="加入课堂"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+        <TextView
+            android:id="@+id/tv_next"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:text="下一步"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="7dp"
+            android:src="@drawable/add" />
+    </RelativeLayout>
+    <EditText
+        android:id="@+id/et_input"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/bg_et_edit"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/colorBlack"
+        android:paddingLeft="15dp"
+        android:hint="输入班级号后点击下一步"
+        android:textColorHint="@color/colorSmallGray"
+        android:textSize="14dp"
+        android:inputType="number"
+        />
+</LinearLayout>
