@@ -1,9 +1,11 @@
 package com.example.administrator.tecsoundclass;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -18,6 +20,9 @@ public class LoginActivity extends AppCompatActivity {
         mTvForget=findViewById(R.id.tv_forget);
         mTvRegedit=findViewById(R.id.tv_regedit);
         setListeners();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
     }
     private void setListeners(){
         OnClick onClick=new OnClick();

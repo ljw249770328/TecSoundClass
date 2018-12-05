@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="(当前课程名)"
+                android:text="签到"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"
                 android:textSize="18sp" />
