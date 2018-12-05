@@ -4,13 +4,16 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingRight="15dp"
-    android:paddingTop="5dp">
+    android:paddingTop="5dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="5dp">
         <LinearLayout
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:background="@drawable/message"
             android:gravity="right">
             <TextView
+                android:id="@+id/tv_review_time"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -19,10 +22,11 @@
                 android:textSize="9sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorDarkGray"
-                android:drawableLeft=""
+                android:drawableRight="@drawable/sound"
                 android:text="(语音时长)"/>
         </LinearLayout>
     <TextView
+        android:id="@+id/tv_review_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="(日期)"
@@ -30,13 +34,13 @@
         android:paddingLeft="5dp"
         android:textSize="12sp"
         android:textColor="@color/colorSmallGray"/>
-
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_above="@id/rg_main"
         android:layout_gravity="bottom"
-        android:background="#232323" />
+        android:background="#BBBBBB" />
+
 
 </LinearLayout>

@@ -18,7 +18,7 @@ public class MyReviewListAdapter extends BaseAdapter {
     }
     @Override
     public int getCount() {
-        return 1;
+        return 2;
     }
 
     @Override
@@ -31,25 +31,23 @@ public class MyReviewListAdapter extends BaseAdapter {
         return 0;
     }
     static  class ClassViewHolder{
-        public TextView mSignDate,mSigntime,mSignStatus;
+        public TextView mReviewDate,mReviewTime;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ClassViewHolder holder=null;
         if (convertView==null){
-            convertView=mLayoutInflater.inflate(R.layout.layout_list_my_sign_item,null);
+            convertView=mLayoutInflater.inflate(R.layout.layout_list_my_review_item,null);
             holder=new ClassViewHolder();
-            holder.mSignDate=convertView.findViewById(R.id.tv_sign_date);
-            holder.mSigntime=convertView.findViewById(R.id.tv_sign_time);
-            holder.mSignStatus=convertView.findViewById(R.id.tv_sign_status);
+            holder.mReviewDate=convertView.findViewById(R.id.tv_review_date);
+            holder.mReviewTime=convertView.findViewById(R.id.tv_review_time);
             convertView.setTag(holder);
         }else {
             holder= (ClassViewHolder) convertView.getTag();
         }
-        holder.mSignDate.setText("2018.12.5");
-        holder.mSigntime.setText("11:14");
-        holder.mSignStatus.setText("成功");
+        holder.mReviewDate.setText("2018.12.5");
+        holder.mReviewTime.setText("5'");
         return convertView;
     }
 }

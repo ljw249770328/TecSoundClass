@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="(当前课程名)"
+                android:text="课堂回顾"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"
                 android:textSize="18sp" />
@@ -36,29 +36,11 @@
             android:layout_below="@id/rl_1"
             android:background="@color/colorBgGray"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/ll_data"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:background="@color/colorSmallGray"
-                android:orientation="horizontal"
-                android:text="近期更新"
-                android:textSize="15sp"
-                android:padding="5dp">
-
-            </TextView>
-            <ListView
-                android:id="@+id/lv_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/ll_data"
-                android:background="@color/colorWhite">
-            </ListView>
             <LinearLayout
+                android:id="@+id/ll_search"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
+                android:layout_alignParentTop="true"
                 android:gravity="center"
                 android:background="@color/colorSmallGray"
                 android:textColor="@color/colorButtonText"
@@ -90,6 +72,25 @@
                     android:background="@drawable/bg_btn_search" />
 
             </LinearLayout>
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@color/colorSmallGray"
+                android:orientation="horizontal"
+                android:layout_below="@id/ll_search"
+                android:text="近期更新"
+                android:textSize="15sp"
+                android:padding="5dp">
+
+            </TextView>
+            <ListView
+                android:id="@+id/lv_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_title">
+            </ListView>
+
         </RelativeLayout>
 
     </RelativeLayout>

@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import com.example.administrator.tecsoundclass.R;
 
-public class MySignListAdapter extends BaseAdapter {
+public class MyInteractAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mLayoutInflater;
-    public MySignListAdapter(Context context){
+    public MyInteractAdapter(Context context){
         this.mContext=context;
         mLayoutInflater=LayoutInflater.from(context);
     }
@@ -32,25 +32,31 @@ public class MySignListAdapter extends BaseAdapter {
         return 0;
     }
     static  class ClassViewHolder{
-        public TextView mSignDate,mSigntime,mSignStatus;
+        public ImageView mInteractVoi;
+        public TextView mInteractScore,InteractDate;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ClassViewHolder holder=null;
         if (convertView==null){
-            convertView=mLayoutInflater.inflate(R.layout.layout_list_my_sign_item,null);
+            convertView=mLayoutInflater.inflate(R.layout.layout_list_my_interact_item,null);
             holder=new ClassViewHolder();
-            holder.mSignDate=convertView.findViewById(R.id.tv_sign_date);
-            holder.mSigntime=convertView.findViewById(R.id.tv_sign_time);
-            holder.mSignStatus=convertView.findViewById(R.id.tv_sign_status);
+            holder.mInteractVoi=convertView.findViewById(R.id.iv_interact_voice);
+            holder.mInteractScore=convertView.findViewById(R.id.tv_interact_score);
+            holder.InteractDate=convertView.findViewById(R.id.tv_interact_date);
             convertView.setTag(holder);
         }else {
             holder= (ClassViewHolder) convertView.getTag();
         }
-        holder.mSignDate.setText("2018.12.5");
-        holder.mSigntime.setText("11:14");
-        holder.mSignStatus.setText("成功");
+        holder.mInteractScore.setText("88");
+        holder.InteractDate.setText("2018.12.5");
+        holder.mInteractVoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return convertView;
     }
 }

@@ -6,12 +6,16 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 
+import com.example.administrator.tecsoundclass.Adapter.MyInteractAdapter;
 import com.example.administrator.tecsoundclass.R;
 
 public class InteractFragment extends Fragment {
     private ImageView mIvBack;
+    private ListView mLv;
     public InteractFragment(){
 
     }
@@ -32,7 +36,15 @@ public class InteractFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mIvBack=view.findViewById(R.id.im_back);
+        mIvBack.setOnClickListener(new Onclick());
+        mLv=view.findViewById(R.id.lv_1);
+        mLv.setAdapter(new MyInteractAdapter(getActivity()));
+        mLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+            }
+        });
     }
     private class Onclick implements View.OnClickListener{
 

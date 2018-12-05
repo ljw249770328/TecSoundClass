@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.example.administrator.tecsoundclass.Adapter.MyReviewListAdapter;
 import com.example.administrator.tecsoundclass.R;
 
 public class ReviewFragment extends Fragment {
@@ -36,6 +37,7 @@ public class ReviewFragment extends Fragment {
         mIvBack=view.findViewById(R.id.im_back);
         mIvBack.setOnClickListener(new Onclick());
         mLv=view.findViewById(R.id.lv_1);
+        mLv.setAdapter(new MyReviewListAdapter(getActivity()));
     }
     private class Onclick implements View.OnClickListener{
 

@@ -40,6 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
+            android:dividerHeight="0.25dp"
+            android:divider="@color/colorDarkGray"
             android:listSelector="@drawable/course_list_item">
         </ListView>
     </LinearLayout>
