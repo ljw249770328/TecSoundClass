@@ -53,4 +53,5 @@ public class MySignListAdapter extends BaseAdapter {
         holder.mSignStatus.setText("成功");
         return convertView;
     }
+
 }

@@ -80,28 +80,54 @@
                     </LinearLayout>
 
                 </LinearLayout>
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:layout_marginTop="25dp">
                     <TextView
+                        android:id="@+id/tv_tea_info"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="7dp"
                         android:text="教师信息:"
-                        android:textSize="15sp"
+                        android:textSize="16sp"
+                        android:background="@drawable/bg_et_edit"
+                        android:textColor="@color/colorBlack"/>
+                    <TextView
+                        android:id="@+id/tv_class_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="7dp"
+                        android:layout_below="@id/tv_tea_info"
+                        android:text="上课时间:"
+                        android:textSize="16sp"
+                        android:background="@drawable/bg_et_edit"
+                        android:textColor="@color/colorBlack"/>
+                    <TextView
+                        android:id="@+id/tv_class_request"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:layout_below="@id/tv_class_time"
+                        android:padding="7dp"
+                        android:text="课堂要求:"
+                        android:drawableRight="@drawable/down"
+                        android:textSize="16sp"
                         android:background="@drawable/bg_et_edit"
                         android:textColor="@color/colorBlack"/>
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="45dp"
                         android:padding="7dp"
-                        android:text="课堂要求:"
-                        android:textSize="15sp"
+                        android:gravity="center"
+                        android:text="退出课堂"
+                        android:textSize="16sp"
+                        android:layout_alignParentBottom="true"
                         android:background="@drawable/bg_et_edit"
-                        android:textColor="@color/colorBlack"/>
-                </LinearLayout>
+                        android:layout_marginBottom="15dp"
+                        android:textColor="@color/colorTextRed"/>
+                </RelativeLayout>
 
         </LinearLayout>
 

@@ -32,7 +32,7 @@ public class MoreFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mIvBack=view.findViewById(R.id.im_back);
-
+        mIvBack.setOnClickListener(new Onclick());
     }
     private class Onclick implements View.OnClickListener{
 

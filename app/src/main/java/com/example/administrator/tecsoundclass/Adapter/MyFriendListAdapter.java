@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import com.example.administrator.tecsoundclass.R;
 
-public class MyClassListAdapter extends BaseAdapter {
+public class MyFriendListAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mLayoutInflater;
-    public MyClassListAdapter(Context context){
+    public MyFriendListAdapter(Context context){
         this.mContext=context;
         mLayoutInflater=LayoutInflater.from(context);
     }
@@ -32,28 +32,27 @@ public class MyClassListAdapter extends BaseAdapter {
         return 0;
     }
     static  class ClassViewHolder{
-        public ImageView mCoursePic;
-        public TextView mCourseName,mCourseTea,mClass;
+        public ImageView mFriendPic;
+        public TextView mFriendName,mFriendStatus,mTime;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ClassViewHolder holder=null;
         if (convertView==null){
-            convertView=mLayoutInflater.inflate(R.layout.layout_list_my_course_item,null);
+            convertView=mLayoutInflater.inflate(R.layout.layout_list_my_friends_item,null);
             holder=new ClassViewHolder();
-            holder.mCoursePic=convertView.findViewById(R.id.iv_course_pic);
-            holder.mCourseName=convertView.findViewById(R.id.tv_class_name);
-            holder.mCourseTea=convertView.findViewById(R.id.tv_tea_name);
-            holder.mClass=convertView.findViewById(R.id.tv_class_name);
+            holder.mFriendPic=convertView.findViewById(R.id.iv_friend_pic);
+            holder.mFriendName=convertView.findViewById(R.id.tv_friend_name);
+            holder.mFriendStatus=convertView.findViewById(R.id.tv_friend_status);
+            holder.mTime=convertView.findViewById(R.id.tv_time);
             convertView.setTag(holder);
         }else {
             holder= (ClassViewHolder) convertView.getTag();
         }
-        holder.mCourseName.setText("java基础");
-        holder.mCourseTea.setText("xx老师");
-        holder.mClass.setText("16级软件工程2班");
-        holder.mCoursePic.setImageResource(R.drawable.java);
+        holder.mFriendName.setText("小明");
+        holder.mFriendStatus.setText("正在上'java基础'");
+        holder.mTime.setText("2:22");
         return convertView;
     }
 }

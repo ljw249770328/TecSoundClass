@@ -3,9 +3,18 @@ package com.example.administrator.tecsoundclass;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.Service;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 
 import com.example.administrator.tecsoundclass.Fragments.CourseFragment;
 import com.example.administrator.tecsoundclass.Fragments.FriendFragment;
@@ -45,6 +54,8 @@ public class MainMenuActivity extends AppCompatActivity {
             changeFragment(CourseFragment.class.getName());
         }
 
+
+
     }
     public void changeFragment(String tag) {
         hideFragment();
@@ -73,4 +84,5 @@ public class MainMenuActivity extends AppCompatActivity {
         }
         ft.commit();
     }
+
 }
