@@ -37,12 +37,10 @@
             android:layout_below="@id/rl_1"
             android:background="@color/colorBgGray"
             android:orientation="vertical">
-            <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
                 <LinearLayout
+                    android:id="@+id/ll_more_head"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:background="@color/colorWhite"
                     android:padding="10dp"
                     android:gravity="center"
@@ -54,7 +52,7 @@
                         android:background="@drawable/bg_im_class_head"/>
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:layout_marginLeft="20dp"
                         android:orientation="vertical">
@@ -82,12 +80,29 @@
                     </LinearLayout>
 
                 </LinearLayout>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_et_edit"
-                android:text="教师信息"/>
-            </ScrollView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="25dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="7dp"
+                        android:text="教师信息:"
+                        android:textSize="15sp"
+                        android:background="@drawable/bg_et_edit"
+                        android:textColor="@color/colorBlack"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="7dp"
+                        android:text="课堂要求:"
+                        android:textSize="15sp"
+                        android:background="@drawable/bg_et_edit"
+                        android:textColor="@color/colorBlack"/>
+                </LinearLayout>
+
         </LinearLayout>
 
     </RelativeLayout>
