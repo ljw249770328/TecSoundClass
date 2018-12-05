@@ -7,11 +7,15 @@
     <color name="colorDarkGreen">#22a58b</color>
     <color name="colorOrange">#ebb774</color>
     <color name="colorWhite">#FFF</color>
-    <color name="colorBgGray">#f6f6f7</color>
+    <color name="colorBgGray">#ececed</color>
     <color name="colorDarkWhite">#e0e0e4</color>
     <color name="colorSmallGray">#c4bfbf</color>
     <color name="colorTranslucence">#82ffffff</color>
     <color name="colorBlack">#000</color>
     <color name="colorGray">#a0a0a1</color>
     <color name="colorDarkGray">#5d5d5e</color>
+    <color name="colorTextGreen">#009866</color>
+    <color name="colorTextYellow">#f7f84d</color>
+    <color name="colorTextRed">#fd0001</color>
+    <color name="colorButtonText">#33ab94</color>
 </resources>

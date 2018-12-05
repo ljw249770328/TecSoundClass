@@ -15,6 +15,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.administrator.tecsoundclass.Adapter.MyClassListAdapter;
+import com.example.administrator.tecsoundclass.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.CreateClassActivity;
 import com.example.administrator.tecsoundclass.JoinActivity;
 import com.example.administrator.tecsoundclass.R;
@@ -65,7 +66,8 @@ public class CourseFragment extends Fragment {
         mLv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent=new Intent()
+               Intent intent=new Intent(getActivity(),CourseMenuActivity.class);
+               startActivity(intent);
             }
         });
     }

@@ -28,7 +28,8 @@
         <activity android:name=".JoinActivity" />
         <activity android:name=".ClassResultActivity" />
         <activity android:name=".StandDataActivity" />
-        <activity android:name=".CreateClassActivity"></activity>
+        <activity android:name=".CreateClassActivity" />
+        <activity android:name=".CourseMenuActivity"></activity>
     </application>
 
 </manifest>
