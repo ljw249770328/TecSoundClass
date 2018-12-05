@@ -4,36 +4,39 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingRight="15dp"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp">
+    android:paddingTop="5dp">
     <LinearLayout
         android:id="@+id/ll_data"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:padding="10dp"
+        android:layout_height="60dp"
+        android:padding="5dp"
         android:orientation="horizontal">
         <LinearLayout
             android:layout_width="230dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/tv_sign_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="17sp"
+                android:textSize="19sp"
                 android:text="(签到日期)"
                 android:textColor="@color/colorDarkGray"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="5dp">
+
                 <TextView
+                    android:id="@+id/tv_sign_time"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="(具体时间)"
-                    android:textSize="13sp"
-                    android:textColor="@color/colorSmallGray"/>
+                    android:textColor="@color/colorSmallGray"
+                    android:textSize="15sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -43,20 +46,21 @@
             android:orientation="vertical"
             android:gravity="center">
             <TextView
+                android:id="@+id/tv_sign_status"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textSize="17sp"
                 android:text="(签到状态)"
                 android:textColor="@color/colorDarkGray"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="100%"
-                android:textSize="23sp"
-                android:layout_marginLeft="70dp"/>
         </LinearLayout>
     </LinearLayout>
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@id/rg_main"
+        android:layout_gravity="bottom"
+        android:background="#232323" />
 
 </LinearLayout>

@@ -15,11 +15,11 @@
             android:background="@color/colorGreen">
             <ImageView
                 android:id="@+id/im_back"
-                android:layout_width="35dp"
+                android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/small_back"
                 android:scaleType="fitCenter"
-                android:layout_marginLeft="7dp" />
+                android:layout_marginLeft="5dp" />
             <TextView
                 android:id="@+id/course_title"
                 android:layout_width="match_parent"

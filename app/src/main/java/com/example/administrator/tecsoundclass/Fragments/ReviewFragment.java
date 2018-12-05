@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.example.administrator.tecsoundclass.R;
 
 public class ReviewFragment extends Fragment {
     private ImageView mIvBack;
+    private ListView mLv;
     public ReviewFragment(){
 
     }
@@ -32,7 +34,8 @@ public class ReviewFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         mIvBack=view.findViewById(R.id.im_back);
-
+        mIvBack.setOnClickListener(new Onclick());
+        mLv=view.findViewById(R.id.lv_1);
     }
     private class Onclick implements View.OnClickListener{
 

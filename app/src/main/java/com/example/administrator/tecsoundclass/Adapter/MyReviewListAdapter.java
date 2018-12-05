@@ -5,15 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.administrator.tecsoundclass.R;
 
-public class MySignListAdapter extends BaseAdapter {
+public class MyReviewListAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mLayoutInflater;
-    public MySignListAdapter(Context context){
+    public MyReviewListAdapter(Context context){
         this.mContext=context;
         mLayoutInflater=LayoutInflater.from(context);
     }
