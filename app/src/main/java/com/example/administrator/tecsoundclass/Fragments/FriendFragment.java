@@ -59,7 +59,7 @@ public class FriendFragment extends Fragment {
                     mTvAdd.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
+                            mPop.dismiss();
                         }
                     });
                     mPop=new PopupWindow(view,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);

@@ -3,6 +3,7 @@
     package="com.example.administrator.tecsoundclass">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -30,7 +31,9 @@
         <activity android:name=".ClassResultActivity" />
         <activity android:name=".StandDataActivity" />
         <activity android:name=".CreateClassActivity" />
-        <activity android:name=".CourseMenuActivity"></activity>
+        <activity android:name=".CourseMenuActivity" />
+        <activity android:name=".EditMyInfoActivity" />
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 
 </manifest>

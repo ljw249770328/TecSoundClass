@@ -72,9 +72,9 @@ public class CourseFragment extends Fragment {
         });
     }
     private class OnClick implements View.OnClickListener{
-
         @Override
         public void onClick(View v) {
+            mPop.dismiss();
             Intent intent=null;
             switch (v.getId()){
                 case R.id.tv_create:
