@@ -78,16 +78,18 @@ public class MyselfFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Intent intent=null;
-            mPop.dismiss();
             switch (v.getId()){
                 case R.id.tv_send_zone:
+                    mPop.dismiss();
                     Toast.makeText(getActivity(),"暂未开放,敬请期待",Toast.LENGTH_LONG).show();
                     break;
                 case R.id.tv_reset:
+                    mPop.dismiss();
                     intent=new Intent(getActivity(),FindPswActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.tv_settings:
+                    mPop.dismiss();
                     intent=new Intent(getActivity(),SettingsActivity.class);
                     startActivity(intent);
                     break;
@@ -96,8 +98,10 @@ public class MyselfFragment extends Fragment {
                     startActivity(intent);
                     break;
                 case R.id.tv_exit:
+                    mPop.dismiss();
                     intent=new Intent(getActivity(),LoginActivity.class);
                     startActivity(intent);
+                    getActivity().finish();
                     break;
                 case R.id.m_status_data:
                     intent=new Intent(getActivity(),StandDataActivity.class);
