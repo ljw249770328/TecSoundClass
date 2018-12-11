@@ -8,6 +8,9 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
 
+import com.iflytek.cloud.SpeechConstant;
+import com.iflytek.cloud.SpeechUtility;
+
 import org.litepal.LitePal;
 
 public class LauncherActivity extends AppCompatActivity {
@@ -16,7 +19,10 @@ public class LauncherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
+        //加载数据库
         LitePal.getDatabase();
+        //初始化引擎
+        SpeechUtility.createUtility(LauncherActivity.this, SpeechConstant.APPID +"=5be8469d");
         Handler handler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
