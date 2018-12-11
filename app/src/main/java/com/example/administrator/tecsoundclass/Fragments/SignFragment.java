@@ -1,5 +1,6 @@
 package com.example.administrator.tecsoundclass.Fragments;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
 import com.example.administrator.tecsoundclass.R;
@@ -16,6 +18,7 @@ import com.example.administrator.tecsoundclass.R;
 public class SignFragment extends Fragment {
     private ImageView mIvBack;
     private ListView mLv;
+    private TextView mTvSign;
     public SignFragment(){
 
     }
@@ -38,8 +41,10 @@ public class SignFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         Onclick onclick=new Onclick();
         mIvBack=view.findViewById(R.id.im_back);
-        mIvBack.setOnClickListener(onclick);
+        mTvSign=view.findViewById(R.id.tv_start_sign);
         mLv=view.findViewById(R.id.lv_1);
+        mIvBack.setOnClickListener(onclick);
+        mTvSign.setOnClickListener(onclick);
         mLv.setAdapter(new MySignListAdapter(getActivity()));
         mLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -57,6 +62,17 @@ public class SignFragment extends Fragment {
                 case R.id.im_back:
                     getActivity().finish();
                     break;
+                case R.id.tv_start_sign:
+                    AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+                    View view =LayoutInflater.from(getActivity()).inflate(R.layout.layout_sign_dialog,null);
+                    TextView mSign=view.findViewById(R.id.tv_press_sign);
+                    builder.setView(view).show();
+                    mSign.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //To do
+                        }
+                    });
             }
         }
     }

@@ -18,4 +18,6 @@
     <color name="colorTextYellow">#f7f84d</color>
     <color name="colorTextRed">#fd0001</color>
     <color name="colorButtonText">#33ab94</color>
+    <color name="colorDialogButtonText">#986534</color>
+
 </resources>

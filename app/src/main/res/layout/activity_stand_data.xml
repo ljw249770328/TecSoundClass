@@ -45,6 +45,7 @@
             android:padding="10dp"
             android:textSize="15sp"
             android:text="人脸数据"
+            android:drawableRight="@drawable/edit"
             android:textColor="@color/colorBlack"
             android:background="@drawable/bg_et_edit"
             />
@@ -61,13 +62,14 @@
             android:scaleType="fitCenter"
             android:src="@drawable/voice"/>
         <TextView
-            android:id="@+id/voice"
+            android:id="@+id/tv_voice_data"
             android:layout_width="match_parent"
             android:layout_marginTop="25dp"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:textSize="15sp"
             android:text="声纹数据"
+            android:drawableRight="@drawable/edit"
             android:textColor="@color/colorBlack"
             android:background="@drawable/bg_et_edit"
             />
