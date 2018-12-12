@@ -20,11 +20,14 @@ import java.util.List;
 public class CourseMenuActivity extends AppCompatActivity {
     private RadioGroup mRgTab;
     private List<Fragment> mFragmentList=new ArrayList<>();
+    private String StudentId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_menu);
         mRgTab=findViewById(R.id.rg_course_menu);
+        Bundle bundle=getIntent().getExtras();
+        StudentId=bundle.getString("StudengId");
         mRgTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
