@@ -18,29 +18,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="老师喊你签到啦"
+        android:text="老师提问啦,抢答得分哦"
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
         android:textColor="@color/colorWhite"/>
     <TextView
-        android:id="@+id/edt_result"
+        android:id="@+id/tv_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:gravity="center"
         android:text=""
         android:textStyle="bold"
-        android:textSize="30sp"/>
+        android:textSize="23sp"/>
     <Button
-        android:id="@+id/error_result"
+        android:id="@+id/tv_getchance"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:background="@drawable/bg_tv_sign_button"
         android:layout_marginTop="55dp"
         android:gravity="center"
-        android:text="签到"
-        android:textSize="18sp"
+        android:text="抢答"
+        android:textStyle="bold"
+        android:textSize="25sp"
         android:textColor="@color/colorDialogButtonText"/>
 
 

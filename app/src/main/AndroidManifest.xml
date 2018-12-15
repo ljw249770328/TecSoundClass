@@ -63,7 +63,7 @@
         <activity android:name=".CourseMenuActivity" />
         <activity android:name=".EditMyInfoActivity" />
         <activity android:name=".SettingsActivity" />
-        <activity android:name=".iFlytecactivities.RegeditVoiceActivity"></activity>
+        <activity android:name=".iFlytec.RegeditVoiceActivity"></activity>
     </application>
 
 </manifest>

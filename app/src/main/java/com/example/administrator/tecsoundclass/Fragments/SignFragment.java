@@ -3,6 +3,8 @@ package com.example.administrator.tecsoundclass.Fragments;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -20,6 +23,7 @@ import android.widget.Toast;
 import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
 import com.example.administrator.tecsoundclass.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.iFlytec.RegeditVoiceActivity;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
 import com.iflytek.cloud.SpeakerVerifier;
@@ -37,14 +41,17 @@ public class SignFragment extends Fragment {
     private ImageView mIvBack;
     private ListView mLv;
     private TextView mTvSign;
+    private AlertDialog mSignDialog;
     private SpeakerVerifier mSpeakerVerifier;
     private Toast mToast;
     private String mAuthId;
     private String mTextPwd = "";
     private  final String TAG = CourseMenuActivity.class.getSimpleName();
     private static final int PWD_TYPE_TEXT = 1;
-    private TextView mResultText,mErrorResult;
+    private TextView mResultText;
+    private Button mErrorResult;
     private String[] items;
+    private Bundle bundle;
 
     public SignFragment(){
 
@@ -70,7 +77,8 @@ public class SignFragment extends Fragment {
         mToast = Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT);
         mIvBack=view.findViewById(R.id.im_back);
         mTvSign=view.findViewById(R.id.tv_start_sign);
-        mAuthId=getActivity().getIntent().getExtras().getString("StudentId");
+        bundle=getActivity().getIntent().getExtras();
+        mAuthId=bundle.getString("StudentId");
         mLv=view.findViewById(R.id.lv_1);
         mIvBack.setOnClickListener(onclick);
         mTvSign.setOnClickListener(onclick);
@@ -79,17 +87,6 @@ public class SignFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            }
-        });
-
-        mSpeakerVerifier = SpeakerVerifier.createVerifier(getActivity(), new InitListener() {
-            @Override
-            public void onInit(int i) {
-                if (ErrorCode.SUCCESS == i) {
-                    showTip("引擎初始化成功");
-                } else {
-                    showTip("引擎初始化失败，错误码：" + i);
-                }
             }
         });
     }
@@ -102,11 +99,25 @@ public class SignFragment extends Fragment {
                     getActivity().finish();
                     break;
                 case R.id.tv_start_sign:
+                    //初始化引擎
+                    mSpeakerVerifier = SpeakerVerifier.createVerifier(getActivity(), new InitListener() {
+                        @Override
+                        public void onInit(int i) {
+                            if (ErrorCode.SUCCESS == i) {
+                                showTip("引擎初始化成功");
+                            } else {
+                                showTip("引擎初始化失败，错误码：" + i);
+                            }
+                        }
+                    });
+
                     AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
                     View view =LayoutInflater.from(getActivity()).inflate(R.layout.layout_sign_dialog,null);
                     mResultText=view.findViewById(R.id.edt_result);
                     mErrorResult=view.findViewById(R.id.error_result);
-                    builder.setView(view).show();
+                    builder.setView(view);
+                    mSignDialog=builder.create();
+                    mSignDialog.show();
                     mErrorResult.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -167,9 +178,10 @@ public class SignFragment extends Fragment {
             // 设置业务类型为验证
             mSpeakerVerifier.setParameter(SpeechConstant.ISV_SST, "verify");
             // 消噪
-//       mVerify.setParameter(SpeechConstant.AUDIO_SOURCE, "" + MediaRecorder.AudioSource.VOICE_RECOGNITION);
+            mSpeakerVerifier.setParameter(SpeechConstant.AUDIO_SOURCE, "" + MediaRecorder.AudioSource.VOICE_RECOGNITION);
             mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWD, mTextPwd);
             mResultText.setText("请读出：" + mTextPwd);
+            mErrorResult.setText("识别中...");
             // 设置auth_id，不能设置为空
             mSpeakerVerifier.setParameter(SpeechConstant.AUTH_ID, mAuthId);
             mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWDT, "" + PWD_TYPE_TEXT);
@@ -192,11 +204,12 @@ public class SignFragment extends Fragment {
 
             @Override
             public void onResult(VerifierResult result) {
-                mErrorResult.setText("签到完成");
 
                 if (result.ret == 0) {
-                    // 验证通过 这里就意味着通过了！！！
-                    mResultText.setText("签到验证通过");
+                    // 验证通过
+                     mResultText.setText("签到验证通过");
+                     mErrorResult.setText("签到完成");
+                     mErrorResult.setClickable(false);
                 } else {
                     // 验证不通过
                     switch (result.err) {
@@ -239,6 +252,16 @@ public class SignFragment extends Fragment {
                 switch (error.getErrorCode()) {
                     case ErrorCode.MSP_ERROR_NOT_FOUND:
                         mResultText.setText("模型不存在，请先注册");
+                        mErrorResult.setText("注册");
+                        mErrorResult.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent=new Intent(getActivity(),RegeditVoiceActivity.class);
+                                intent.putExtras(bundle);
+                                mSignDialog.dismiss();
+                                startActivity(intent);
+                            }
+                        });
                         break;
                     default:
                         showTip("onError Code：" + error.getPlainDescription(true));
@@ -248,13 +271,11 @@ public class SignFragment extends Fragment {
 
             @Override
             public void onEndOfSpeech() {
-                // 此回调表示：检测到了语音的尾端点，已经进入识别过程，不再接受语音输入
                 showTip("结束说话");
             }
 
             @Override
             public void onBeginOfSpeech() {
-                // 此回调表示：sdk内部录音机已经准备好了，用户可以开始语音输入
                 showTip("开始说话");
             }
         };

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".iFlytecactivities.RegeditVoiceActivity"
+    tools:context=".iFlytec.RegeditVoiceActivity"
     android:background="@color/colorGreen"
     android:gravity="center">
     <LinearLayout

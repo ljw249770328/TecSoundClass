@@ -1,4 +1,4 @@
-package com.example.administrator.tecsoundclass.iFlytecactivities;
+package com.example.administrator.tecsoundclass.iFlytec;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -21,7 +21,6 @@ import com.iflytek.cloud.InitListener;
 import com.iflytek.cloud.SpeakerVerifier;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechError;
-import com.iflytek.cloud.SpeechEvent;
 import com.iflytek.cloud.SpeechListener;
 import com.iflytek.cloud.VerifierListener;
 import com.iflytek.cloud.VerifierResult;
@@ -319,7 +318,7 @@ public class RegeditVoiceActivity extends AppCompatActivity implements View.OnCl
                 } else {
                     int nowTimes = verifierResult.suc + 1;
                     int leftTimes = verifierResult.rgn - nowTimes;
-
+                    mErrorResult.setText("");
                     StringBuffer strBuffer = new StringBuffer();
                     strBuffer.append("请点击“开始录音”按钮！\n");
                     strBuffer.append("“" + mTextPwd + "”\n");
