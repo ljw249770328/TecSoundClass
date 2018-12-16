@@ -19,5 +19,7 @@
     <color name="colorTextRed">#fd0001</color>
     <color name="colorButtonText">#33ab94</color>
     <color name="colorDialogButtonText">#986534</color>
-
+    <color name="colorLightGreen">#47bca5</color>
+    <color name="colorDarkOrange">#a47548</color>
+    <color name="colorTextOrange">#a4733e</color>
 </resources>

@@ -16,14 +16,14 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-public class SpeechHandler {
+public class InteractHandler {
     private RecognizerDialog mIatDialog;
     private TextView mTvSpeechResult;
     private String mfilepath,mfilename;
     private RecognizerDialogListener mRListener;
     private String result="";
 
-    public SpeechHandler(Context context, TextView tv, final Button button){
+    public InteractHandler(Context context, TextView tv, final Button button){
         mTvSpeechResult=tv;
         button.setText("录音中");
         mRListener = new RecognizerDialogListener() {

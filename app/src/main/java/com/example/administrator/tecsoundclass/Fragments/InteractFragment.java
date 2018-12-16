@@ -2,6 +2,7 @@ package com.example.administrator.tecsoundclass.Fragments;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,9 +18,8 @@ import android.widget.TextView;
 
 import com.example.administrator.tecsoundclass.Adapter.MyInteractAdapter;
 import com.example.administrator.tecsoundclass.R;
-import com.example.administrator.tecsoundclass.iFlytec.SpeechHandler;
+import com.example.administrator.tecsoundclass.iFlytec.InteractHandler;
 
-import java.sql.Time;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -27,11 +27,12 @@ public class InteractFragment extends Fragment {
     private ImageView mIvBack;
     private ListView mLv;
     private TextView mTvTime;
-    private Button mTvcatch;
+    private Button mBtncatch;
     private AlertDialog dialog;
     private Timer timer=null;
     private TimerTask task=null;
     private int i=5 ;
+    private AlertDialog Grades;
     private Onclick onclick=new Onclick();
 
     public InteractFragment(){
@@ -59,6 +60,14 @@ public class InteractFragment extends Fragment {
         mIvBack.setOnClickListener(onclick);
         mLv=view.findViewById(R.id.lv_1);
         mLv.setAdapter(new MyInteractAdapter(getActivity()));
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                if (mBtncatch.getText().equals("答题完成"));
+                AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+                ///写到这里!!
+            }
+        });
         mLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -78,9 +87,9 @@ public class InteractFragment extends Fragment {
                 case  R.id.btn_race_resp:
                     AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
                     View view=LayoutInflater.from(getActivity()).inflate(R.layout.layout_raceresp_dialog,null);
-                    mTvcatch=view.findViewById(R.id.tv_getchance);
+                    mBtncatch=view.findViewById(R.id.tv_getchance);
                     mTvTime=view.findViewById(R.id.tv_message);
-                    mTvcatch.setOnClickListener(onclick);
+                    mBtncatch.setOnClickListener(onclick);
                     mTvTime.setText(i+"");//这里不加""就会崩溃暂未找到原因怀疑是可能怕变量i不存在导致赋了空值
                     builder.setView(view);
                     dialog=builder.show();
@@ -89,12 +98,12 @@ public class InteractFragment extends Fragment {
                 case R.id.tv_getchance:
                     StopTime();
                     mTvTime.setText("抢到机会,点击开始回答");
-                    mTvcatch.setText("开始");
-                    mTvcatch.setOnClickListener(new View.OnClickListener() {
+                    mBtncatch.setText("开始");
+                    mBtncatch.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            SpeechHandler speechHandler=new SpeechHandler(getActivity(),mTvTime,mTvcatch);
-                            speechHandler.StartHandle("test");
+                            InteractHandler interactHandler =new InteractHandler(getActivity(),mTvTime,mBtncatch);
+                            interactHandler.StartHandle("test");
                         }
                     });
 
