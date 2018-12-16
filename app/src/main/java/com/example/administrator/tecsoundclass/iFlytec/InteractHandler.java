@@ -2,6 +2,7 @@ package com.example.administrator.tecsoundclass.iFlytec;
 
 import android.content.Context;
 import android.os.Environment;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,6 +31,8 @@ public class InteractHandler {
             @Override
             public void onResult(RecognizerResult results, boolean isLast) {
                 String text = parseIatResult(results.getResultString());
+                mTvSpeechResult.setTextSize(19);
+                mTvSpeechResult.setMovementMethod(new ScrollingMovementMethod());
                 Log.d("text",text);
                 result +=text;
                 mTvSpeechResult.setText(result);

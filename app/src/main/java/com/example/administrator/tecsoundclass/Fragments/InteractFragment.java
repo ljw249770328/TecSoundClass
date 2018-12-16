@@ -12,10 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.administrator.tecsoundclass.Adapter.KeyboardAdapter;
 import com.example.administrator.tecsoundclass.Adapter.MyInteractAdapter;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.InteractHandler;
@@ -32,7 +34,8 @@ public class InteractFragment extends Fragment {
     private Timer timer=null;
     private TimerTask task=null;
     private int i=5 ;
-    private AlertDialog Grades;
+    private AlertDialog GradeDialog;
+    private String grades="";
     private Onclick onclick=new Onclick();
 
     public InteractFragment(){
@@ -60,14 +63,7 @@ public class InteractFragment extends Fragment {
         mIvBack.setOnClickListener(onclick);
         mLv=view.findViewById(R.id.lv_1);
         mLv.setAdapter(new MyInteractAdapter(getActivity()));
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                if (mBtncatch.getText().equals("答题完成"));
-                AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-                ///写到这里!!
-            }
-        });
+
         mLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -106,7 +102,76 @@ public class InteractFragment extends Fragment {
                             interactHandler.StartHandle("test");
                         }
                     });
-
+                    dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            if (mBtncatch.getText().equals("答题完成"));
+                            AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+                            View view1=LayoutInflater.from(getActivity()).inflate(R.layout.layout_grade_dialog,null);
+                            final TextView mTvgrade=view1.findViewById(R.id.tv_grade);
+                            GridView mGvKeyboard=view1.findViewById(R.id.gv_keyboard);
+                            mGvKeyboard.setAdapter(new KeyboardAdapter(getActivity()));
+                            mGvKeyboard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    switch (position){
+                                        case 0:
+                                            grades+="1";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 1:
+                                            grades+="2";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 2:
+                                            grades+="3";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 3:
+                                            grades+="4";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 4:
+                                            grades+="5";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 5:
+                                            grades+="6";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 6:
+                                            grades+="7";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 7:
+                                            grades+="8";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 8:
+                                            grades+="9";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 9:
+                                            grades="";
+                                            mTvgrade.setText("");
+                                            break;
+                                        case 10:
+                                            grades+="0";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 11:
+                                            grades+="√";
+                                            GradeDialog.dismiss();
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
+                            });
+                            GradeDialog=builder.setView(view1).create();
+                            GradeDialog.show();
+                        }
+                    });
                     break;
             }
         }

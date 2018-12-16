@@ -19,7 +19,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="35dp"
         android:gravity="center">
         <TextView
             android:id="@+id/tv_grade"
@@ -28,7 +28,7 @@
             android:gravity="center"
             android:background="@color/colorLightGreen"
             android:padding="10dp"
-            android:text="123"
+            android:text=""
             android:textColor="@color/colorBlack"
             android:textStyle="bold"
             android:textSize="30sp"/>
@@ -36,12 +36,12 @@
 
 
     <GridView
+        android:id="@+id/gv_keyboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:padding="1dp"
+        android:layout_marginTop="55dp"
         android:numColumns="3"
-        android:background="@color/colorOrange">
+        android:background="@color/colorDarkOrange">
 
     </GridView>
 
