@@ -3,6 +3,7 @@ package com.example.administrator.tecsoundclass.Fragments;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,6 +17,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.tecsoundclass.Adapter.KeyboardAdapter;
 import com.example.administrator.tecsoundclass.Adapter.MyInteractAdapter;
@@ -28,12 +30,12 @@ import java.util.TimerTask;
 public class InteractFragment extends Fragment {
     private ImageView mIvBack;
     private ListView mLv;
-    private TextView mTvTime;
+    private TextView mTvTime, mTvgrade;
     private Button mBtncatch;
     private AlertDialog dialog;
     private Timer timer=null;
     private TimerTask task=null;
-    private int i=5 ;
+    private int i ;
     private AlertDialog GradeDialog;
     private String grades="";
     private Onclick onclick=new Onclick();
@@ -83,6 +85,7 @@ public class InteractFragment extends Fragment {
                 case  R.id.btn_race_resp:
                     AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
                     View view=LayoutInflater.from(getActivity()).inflate(R.layout.layout_raceresp_dialog,null);
+                    i=5;
                     mBtncatch=view.findViewById(R.id.tv_getchance);
                     mTvTime=view.findViewById(R.id.tv_message);
                     mBtncatch.setOnClickListener(onclick);
@@ -108,7 +111,7 @@ public class InteractFragment extends Fragment {
                             if (mBtncatch.getText().equals("答题完成"));
                             AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
                             View view1=LayoutInflater.from(getActivity()).inflate(R.layout.layout_grade_dialog,null);
-                            final TextView mTvgrade=view1.findViewById(R.id.tv_grade);
+                            mTvgrade=view1.findViewById(R.id.tv_grade);
                             GridView mGvKeyboard=view1.findViewById(R.id.gv_keyboard);
                             mGvKeyboard.setAdapter(new KeyboardAdapter(getActivity()));
                             mGvKeyboard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -153,7 +156,7 @@ public class InteractFragment extends Fragment {
                                             break;
                                         case 9:
                                             grades="";
-                                            mTvgrade.setText("");
+                                            mTvgrade.setText(grades);
                                             break;
                                         case 10:
                                             grades+="0";
@@ -162,9 +165,14 @@ public class InteractFragment extends Fragment {
                                         case 11:
                                             grades+="√";
                                             GradeDialog.dismiss();
+                                            Toast.makeText(getActivity(),"教师评分:"+Integer.parseInt((String) mTvgrade.getText()),Toast.LENGTH_LONG).show();
                                             break;
                                         default:
                                             break;
+                                    }
+                                    if(mTvgrade.getText()!=""){
+                                        if(Integer.parseInt((String) mTvgrade.getText())>100)
+                                        mTvgrade.setText("100");
                                     }
                                 }
                             });
