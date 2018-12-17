@@ -17,12 +17,28 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-public class InteractHandler {
+public class InteractHandler   {
     private RecognizerDialog mIatDialog;
     private TextView mTvSpeechResult;
     private String mfilepath,mfilename;
     private RecognizerDialogListener mRListener;
     private String result="";
+
+    public String getMfilepath() {
+        return mfilepath;
+    }
+
+    public void setMfilepath(String mfilepath) {
+        this.mfilepath = mfilepath;
+    }
+
+    public String getMfilename() {
+        return mfilename;
+    }
+
+    public void setMfilename(String mfilename) {
+        this.mfilename = mfilename;
+    }
 
     public InteractHandler(Context context, TextView tv, final Button button){
         mTvSpeechResult=tv;

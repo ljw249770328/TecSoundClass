@@ -2,13 +2,11 @@ package com.example.administrator.tecsoundclass.Fragments;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +20,10 @@ import android.widget.Toast;
 
 import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
 import com.example.administrator.tecsoundclass.CourseMenuActivity;
+import com.example.administrator.tecsoundclass.JavaBean.Sign;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.RegeditVoiceActivity;
+import com.example.administrator.tecsoundclass.utils.Timer;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
 import com.iflytek.cloud.SpeakerVerifier;
@@ -44,7 +44,7 @@ public class SignFragment extends Fragment {
     private AlertDialog mSignDialog;
     private SpeakerVerifier mSpeakerVerifier;
     private Toast mToast;
-    private String mAuthId;
+    private String mAuthId="",mTime="",mDate="",mStatus="";
     private String mTextPwd = "";
     private  final String TAG = CourseMenuActivity.class.getSimpleName();
     private static final int PWD_TYPE_TEXT = 1;
@@ -209,6 +209,17 @@ public class SignFragment extends Fragment {
                     // 验证通过
                      mResultText.setText("签到验证通过");
                      mErrorResult.setText("签到完成");
+                     mStatus="成功";
+                     //签到完成存入数据库
+                     Timer timer=new Timer();
+                     mDate=timer.getmDate();
+                     mTime=timer.getmTime();
+                     Sign sign=new Sign();
+                     sign.setSign_id(mAuthId);
+                     sign.setSign_date(mDate);
+                     sign.setSign_time(mTime);
+                     sign.setSign_state(mStatus);
+                     sign.save();
                      mErrorResult.setClickable(false);
                 } else {
                     // 验证不通过

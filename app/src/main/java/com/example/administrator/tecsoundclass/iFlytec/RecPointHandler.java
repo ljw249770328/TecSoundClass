@@ -24,6 +24,22 @@ public class RecPointHandler {
     private RecognizerDialogListener mRListener;
     private String result="";
 
+
+    public String getMfilepath() {
+        return mfilepath;
+    }
+
+    public void setMfilepath(String mfilepath) {
+        this.mfilepath = mfilepath;
+    }
+
+    public String getMfilename() {
+        return mfilename;
+    }
+
+    public void setMfilename(String mfilename) {
+        this.mfilename = mfilename;
+    }
     public RecPointHandler(Context context, TextView tv, final Button button){
         mTvSpeechResult=tv;
         button.setText("录音中");

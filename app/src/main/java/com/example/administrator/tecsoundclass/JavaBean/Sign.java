@@ -1,8 +1,26 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
-public class Sign {
+import org.litepal.crud.LitePalSupport;
+
+public class Sign extends LitePalSupport {
     int sign_frequency,absence_frequency, late_frequency;
-    String sign_id,sign_course,sign_adress,sign_time,sign_state,sign_voice_src,sign_pacepic_src;
+    String sign_id;
+    String sign_course;
+    String sign_adress;
+    String sign_time;
+    String sign_state;
+    String sign_voice_src;
+    String sign_pacepic_src;
+    String sign_date;
+    public String getSign_date() {
+        return sign_date;
+    }
+
+    public void setSign_date(String sign_date) {
+        this.sign_date = sign_date;
+    }
+
+
 
     public int getSign_frequency() {
         return sign_frequency;
@@ -19,7 +37,6 @@ public class Sign {
     public void setAbsence_frequency(int absence_frequency) {
         this.absence_frequency = absence_frequency;
     }
-
     public int getLate_frequency() {
         return late_frequency;
     }

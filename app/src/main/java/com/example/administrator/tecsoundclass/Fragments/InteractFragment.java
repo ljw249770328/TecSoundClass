@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.administrator.tecsoundclass.Adapter.KeyboardAdapter;
 import com.example.administrator.tecsoundclass.Adapter.MyInteractAdapter;
+import com.example.administrator.tecsoundclass.JavaBean.Interaction;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.InteractHandler;
 
@@ -37,8 +38,9 @@ public class InteractFragment extends Fragment {
     private TimerTask task=null;
     private int i ;
     private AlertDialog GradeDialog;
-    private String grades="";
+    private String grades="",date="";
     private Onclick onclick=new Onclick();
+    private InteractHandler interactHandler;
 
     public InteractFragment(){
 
@@ -101,7 +103,7 @@ public class InteractFragment extends Fragment {
                     mBtncatch.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            InteractHandler interactHandler =new InteractHandler(getActivity(),mTvTime,mBtncatch);
+                            interactHandler =new InteractHandler(getActivity(),mTvTime,mBtncatch);
                             interactHandler.StartHandle("test");
                         }
                     });
@@ -174,12 +176,24 @@ public class InteractFragment extends Fragment {
                                             if(Integer.parseInt((String) mTvgrade.getText())>100)
                                                 mTvgrade.setText("100");
                                         }
+                                        //教师评分完成存入数据库
+                                        GradeDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                                            @Override
+                                            public void onDismiss(DialogInterface dialog) {
+                                                com.example.administrator.tecsoundclass.utils.Timer timer1=new com.example.administrator.tecsoundclass.utils.Timer();
+                                                Interaction interaction=new Interaction();
+                                                interaction.setAnswer_user_id(getActivity().getIntent().getExtras().getString("StudengId"));
+                                                interaction.setAnswer_content_src(interactHandler.getMfilepath());
+                                                interaction.setAnswer_time(timer1.getmDate());
+                                                interaction.setAnswer_grace(Integer.parseInt((String) mTvgrade.getText()));
+                                                interaction.save();
+                                            }
+                                        });
                                     }
                                 });
                                 GradeDialog=builder.setView(view1).create();
                                 GradeDialog.show();
                             }
-
                         }
                     });
                     break;

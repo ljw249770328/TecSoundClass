@@ -14,8 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.tecsoundclass.Adapter.MyReviewListAdapter;
+import com.example.administrator.tecsoundclass.JavaBean.Point;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.RecPointHandler;
+import com.example.administrator.tecsoundclass.utils.Timer;
 
 public class ReviewFragment extends Fragment {
     private ImageView mIvBack;
@@ -25,6 +27,7 @@ public class ReviewFragment extends Fragment {
     private AlertDialog mRecordDialog;
     private TextView mTvResult;
     private Toast mToast;
+    private RecPointHandler recPointHandler;
     public ReviewFragment(){
 
     }
@@ -76,11 +79,15 @@ public class ReviewFragment extends Fragment {
                 case R.id.btn_record:
                     if (mBtnRecord.getText().equals("完成")){
                         showTip("[已记录]");
-                        //
+                        //存入数据库
+                        Timer timer=new Timer();
+                        Point point=new Point();
+                        point.setPoint_time(timer.getmDate()+timer.getmTime());
+                        point.setPoint_voice_src(recPointHandler.getMfilepath());
                         mTvResult.setText("");
                         mBtnRecord.setText("记录");
                     }else{
-                        RecPointHandler recPointHandler=new RecPointHandler(getActivity(),mTvResult,mBtnRecord);
+                        recPointHandler=new RecPointHandler(getActivity(),mTvResult,mBtnRecord);
                         recPointHandler.StartHandle("test1");
                     }
                     break;
