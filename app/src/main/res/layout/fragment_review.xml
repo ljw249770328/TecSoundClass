@@ -36,49 +36,48 @@
             android:layout_below="@id/rl_1"
             android:background="@color/colorBgGray"
             android:orientation="vertical">
-            <LinearLayout
-                android:id="@+id/ll_search"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_alignParentTop="true"
-                android:gravity="center"
-                android:background="@color/colorSmallGray"
-                android:textColor="@color/colorButtonText"
-                >
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="111"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_marginBottom="7dp"
-                    android:layout_marginRight="15dp"
-                    android:textColor="@color/colorSmallGray"
-                    android:hint="请输入上课时间检索相关语音"
-                    android:textSize="14dp"
-                    android:paddingLeft="10dp"
-                    android:inputType="number"
-                    android:drawableLeft="@drawable/plane"
-                    android:textColorHint="@color/colorSmallGray"
-                    android:background="@drawable/bg_edit_seach"/>
+            <!--<LinearLayout-->
+                <!--android:id="@+id/ll_search"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="50dp"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:gravity="center"-->
+                <!--android:background="@color/colorSmallGray"-->
+                <!--android:textColor="@color/colorButtonText"-->
+                <!--&gt;-->
+                <!--<EditText-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="111"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:layout_marginTop="7dp"-->
+                    <!--android:layout_marginBottom="7dp"-->
+                    <!--android:layout_marginRight="15dp"-->
+                    <!--android:textColor="@color/colorSmallGray"-->
+                    <!--android:hint="请输入上课时间检索相关语音"-->
+                    <!--android:textSize="14dp"-->
+                    <!--android:paddingLeft="10dp"-->
+                    <!--android:inputType="number"-->
+                    <!--android:drawableLeft="@drawable/plane"-->
+                    <!--android:textColorHint="@color/colorSmallGray"-->
+                    <!--android:background="@drawable/bg_edit_seach"/>-->
 
-                <Button
-                    android:layout_width="45dp"
-                    android:layout_height="30dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:text="搜索"
-                    android:textColor="@color/colorDarkGray"
-                    android:background="@drawable/bg_btn_search" />
+                <!--<Button-->
+                    <!--android:layout_width="45dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="搜索"-->
+                    <!--android:textColor="@color/colorDarkGray"-->
+                    <!--android:background="@drawable/bg_btn_search" />-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:background="@color/colorSmallGray"
                 android:orientation="horizontal"
-                android:layout_below="@id/ll_search"
                 android:text="近期更新"
                 android:textSize="15sp"
                 android:padding="5dp">
@@ -92,7 +91,17 @@
             </ListView>
 
         </RelativeLayout>
-
+        <Button
+            android:id="@+id/btn_class_begin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="10dp"
+            android:text="开始上课"
+            android:textSize="16sp"
+            android:background="@drawable/bg_btn_button"
+            android:textColor="@color/colorGreen"
+            android:layout_marginBottom="3dp"/>
     </RelativeLayout>
 
 </FrameLayout>

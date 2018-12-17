@@ -29,4 +29,5 @@ dependencies {
     implementation files('libs/AIUI.jar')
     implementation files('libs/Msc.jar')
     implementation files('libs/Sunflower.jar')
+    implementation 'com.example.weeboos:permissionLib:1.1.4'
 }

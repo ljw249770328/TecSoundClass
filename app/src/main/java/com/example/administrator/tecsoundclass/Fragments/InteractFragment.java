@@ -108,76 +108,78 @@ public class InteractFragment extends Fragment {
                     dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
                         public void onDismiss(DialogInterface dialog) {
-                            if (mBtncatch.getText().equals("答题完成"));
-                            AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-                            View view1=LayoutInflater.from(getActivity()).inflate(R.layout.layout_grade_dialog,null);
-                            mTvgrade=view1.findViewById(R.id.tv_grade);
-                            GridView mGvKeyboard=view1.findViewById(R.id.gv_keyboard);
-                            mGvKeyboard.setAdapter(new KeyboardAdapter(getActivity()));
-                            mGvKeyboard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                    switch (position){
-                                        case 0:
-                                            grades+="1";
-                                            mTvgrade.setText(grades);
-                                            break;
-                                        case 1:
-                                            grades+="2";
-                                            mTvgrade.setText(grades);
-                                            break;
-                                        case 2:
-                                            grades+="3";
-                                            mTvgrade.setText(grades);
-                                            break;
-                                        case 3:
-                                            grades+="4";
-                                            mTvgrade.setText(grades);
-                                            break;
-                                        case 4:
-                                            grades+="5";
-                                            mTvgrade.setText(grades);
-                                            break;
-                                        case 5:
-                                            grades+="6";
-                                            mTvgrade.setText(grades);
-                                            break;
-                                        case 6:
-                                            grades+="7";
-                                            mTvgrade.setText(grades);
-                                            break;
-                                        case 7:
-                                            grades+="8";
-                                            mTvgrade.setText(grades);
-                                            break;
-                                        case 8:
-                                            grades+="9";
-                                            mTvgrade.setText(grades);
-                                            break;
-                                        case 9:
-                                            grades="";
-                                            mTvgrade.setText(grades);
-                                            break;
-                                        case 10:
-                                            grades+="0";
-                                            mTvgrade.setText(grades);
-                                            break;
-                                        case 11:
-                                            grades+="√";
-                                            GradeDialog.dismiss();
-                                            Toast.makeText(getActivity(),"教师评分:"+Integer.parseInt((String) mTvgrade.getText()),Toast.LENGTH_LONG).show();
-                                            break;
-                                        default:
-                                            break;
+                            if (mBtncatch.getText().equals("答题完成")){
+                                AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+                                View view1=LayoutInflater.from(getActivity()).inflate(R.layout.layout_grade_dialog,null);
+                                mTvgrade=view1.findViewById(R.id.tv_grade);
+                                GridView mGvKeyboard=view1.findViewById(R.id.gv_keyboard);
+                                mGvKeyboard.setAdapter(new KeyboardAdapter(getActivity()));
+                                mGvKeyboard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        switch (position){
+                                            case 0:
+                                                grades+="1";
+                                                mTvgrade.setText(grades);
+                                                break;
+                                            case 1:
+                                                grades+="2";
+                                                mTvgrade.setText(grades);
+                                                break;
+                                            case 2:
+                                                grades+="3";
+                                                mTvgrade.setText(grades);
+                                                break;
+                                            case 3:
+                                                grades+="4";
+                                                mTvgrade.setText(grades);
+                                                break;
+                                            case 4:
+                                                grades+="5";
+                                                mTvgrade.setText(grades);
+                                                break;
+                                            case 5:
+                                                grades+="6";
+                                                mTvgrade.setText(grades);
+                                                break;
+                                            case 6:
+                                                grades+="7";
+                                                mTvgrade.setText(grades);
+                                                break;
+                                            case 7:
+                                                grades+="8";
+                                                mTvgrade.setText(grades);
+                                                break;
+                                            case 8:
+                                                grades+="9";
+                                                mTvgrade.setText(grades);
+                                                break;
+                                            case 9:
+                                                grades="";
+                                                mTvgrade.setText(grades);
+                                                break;
+                                            case 10:
+                                                grades+="0";
+                                                mTvgrade.setText(grades);
+                                                break;
+                                            case 11:
+                                                grades+="√";
+                                                GradeDialog.dismiss();
+                                                Toast.makeText(getActivity(),"教师评分:"+Integer.parseInt((String) mTvgrade.getText()),Toast.LENGTH_LONG).show();
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                        if(mTvgrade.getText()!=""){
+                                            if(Integer.parseInt((String) mTvgrade.getText())>100)
+                                                mTvgrade.setText("100");
+                                        }
                                     }
-                                    if(mTvgrade.getText()!=""){
-                                        if(Integer.parseInt((String) mTvgrade.getText())>100)
-                                        mTvgrade.setText("100");
-                                    }
-                                }
-                            });
-                            GradeDialog=builder.setView(view1).create();
-                            GradeDialog.show();
+                                });
+                                GradeDialog=builder.setView(view1).create();
+                                GradeDialog.show();
+                            }
+
                         }
                     });
                     break;
