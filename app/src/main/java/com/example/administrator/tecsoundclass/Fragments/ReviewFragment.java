@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,21 +15,31 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.tecsoundclass.Adapter.MyInteractAdapter;
 import com.example.administrator.tecsoundclass.Adapter.MyReviewListAdapter;
+import com.example.administrator.tecsoundclass.JavaBean.Interaction;
 import com.example.administrator.tecsoundclass.JavaBean.Point;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.RecPointHandler;
 import com.example.administrator.tecsoundclass.utils.Timer;
+import com.iflytek.cloud.InitListener;
+
+import org.litepal.LitePal;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReviewFragment extends Fragment {
     private ImageView mIvBack;
-    private ListView mLv;
+    private RecyclerView mRvPoint;
     private Button mBtnClassBegin,mBtnClassOver,mBtnRecord;
     private Onclick onclick=new Onclick();
     private AlertDialog mRecordDialog;
     private TextView mTvResult;
     private Toast mToast;
+    private MyReviewListAdapter adapter;
     private RecPointHandler recPointHandler;
+    private List<Point> mPointList=new ArrayList<>();
     public ReviewFragment(){
 
     }
@@ -50,10 +62,20 @@ public class ReviewFragment extends Fragment {
         mToast = Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT);
         mIvBack=view.findViewById(R.id.im_back);
         mIvBack.setOnClickListener(onclick);
-        mLv=view.findViewById(R.id.lv_1);
-        mLv.setAdapter(new MyReviewListAdapter(getActivity()));
+        mRvPoint=view.findViewById(R.id.recycler_view_point);
         mBtnClassBegin=view.findViewById(R.id.btn_class_begin);
         mBtnClassBegin.setOnClickListener(onclick);
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getActivity());
+        mRvPoint.setLayoutManager(layoutManager);
+        mPointList=InitList();
+        adapter=new MyReviewListAdapter(mPointList);
+        mRvPoint.setAdapter(adapter);
+    }
+
+    private List<Point> InitList(){
+        List<Point> list=new ArrayList<>();
+        list=LitePal.select("point_time","point_voice_src").order("point_time").find(Point.class);
+        return list;
     }
     private class Onclick implements View.OnClickListener{
 
@@ -82,8 +104,13 @@ public class ReviewFragment extends Fragment {
                         //存入数据库
                         Timer timer=new Timer();
                         Point point=new Point();
-                        point.setPoint_time(timer.getmDate()+timer.getmTime());
+                        point.setPoint_time(timer.getmDate()+"  "+timer.getmTime());
                         point.setPoint_voice_src(recPointHandler.getMfilepath());
+                        point.save();
+                        //刷新列表
+                        mPointList.clear();
+                        mPointList.addAll(InitList());
+                        adapter.notifyDataSetChanged();
                         mTvResult.setText("");
                         mBtnRecord.setText("记录");
                     }else{

@@ -134,19 +134,19 @@ public class SignFragment extends Fragment {
                         @Override
                         public void onClick(View v) {
                             VoiceIdentifier voiceIdentifier=new VoiceIdentifier();
-                            voiceIdentifier.StartIdentify();
+                            voiceIdentifier.PrepareIdentify();
                         }
                     });
             }
         }
     }
     private class VoiceIdentifier{
-        private void StartIdentify(){
-            //获取密码
+        private void PrepareIdentify() {
+            //获取密码监听
             // 清空参数
             mSpeakerVerifier.setParameter(SpeechConstant.PARAMS, null);
             mSpeakerVerifier.setParameter(SpeechConstant.MFV_SCENES, "ivp");
-            mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWDT, "" +PWD_TYPE_TEXT);
+            mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWDT, "" + PWD_TYPE_TEXT);
             SpeechListener mPwdListenter = new SpeechListener() {
                 @Override
                 public void onEvent(int i, Bundle bundle) {
@@ -178,10 +178,13 @@ public class SignFragment extends Fragment {
                     if (null != speechError && ErrorCode.SUCCESS != speechError.getErrorCode()) {
                         showTip("获取失败：" + speechError.getErrorCode());
                     }
+                    //在这里调用开始验证可以解决业务类型为验证时由于mTextPwd未获取到导致传参错误的问题
+                    StartIdentify();
                 }
             };
             mSpeakerVerifier.getPasswordList(mPwdListenter);
-
+        }
+        private void StartIdentify(){
             //验证
             mSpeakerVerifier.setParameter(SpeechConstant.PARAMS, null);
             mSpeakerVerifier.setParameter(SpeechConstant.ISV_AUDIO_PATH,
@@ -194,11 +197,16 @@ public class SignFragment extends Fragment {
             mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWD, mTextPwd);
             mResultText.setText("请读出：" + mTextPwd);
             mErrorResult.setText("识别中...");
-            // 设置auth_id，不能设置为空
+            // 设置auth_id
             mSpeakerVerifier.setParameter(SpeechConstant.AUTH_ID, mAuthId);
             mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWDT, "" + PWD_TYPE_TEXT);
             // 开始验证
-            mSpeakerVerifier.startListening(mVerifyListener);
+            if(mTextPwd==""){
+                showTip("mText未下载");
+            }else{
+                mSpeakerVerifier.startListening(mVerifyListener);
+            }
+
         }
 
     }
@@ -206,6 +214,8 @@ public class SignFragment extends Fragment {
             mToast.setText(str);
             mToast.show();
         }
+
+        //验证监听
         private VerifierListener mVerifyListener = new VerifierListener() {
 
             @Override
@@ -247,27 +257,35 @@ public class SignFragment extends Fragment {
                     switch (result.err) {
                         case VerifierResult.MSS_ERROR_IVP_GENERAL:
                             mErrorResult.setText("内核异常");
+                            mErrorResult.setText("签到");
                             break;
                         case VerifierResult.MSS_ERROR_IVP_TRUNCATED:
                             mErrorResult.setText("出现截幅");
+                            mErrorResult.setText("签到");
                             break;
                         case VerifierResult.MSS_ERROR_IVP_MUCH_NOISE:
                             mErrorResult.setText("太多噪音");
+                            mErrorResult.setText("签到");
                             break;
                         case VerifierResult.MSS_ERROR_IVP_UTTER_TOO_SHORT:
                             mErrorResult.setText("录音太短");
+                            mErrorResult.setText("签到");
                             break;
                         case VerifierResult.MSS_ERROR_IVP_TEXT_NOT_MATCH:
                             mErrorResult.setText("验证不通过，您所读的文本不一致");
+                            mErrorResult.setText("签到");
                             break;
                         case VerifierResult.MSS_ERROR_IVP_TOO_LOW:
                             mErrorResult.setText("音量太低");
+                            mErrorResult.setText("签到");
                             break;
                         case VerifierResult.MSS_ERROR_IVP_NO_ENOUGH_AUDIO:
                             mErrorResult.setText("音频长达不到自由说的要求");
+                            mErrorResult.setText("签到");
                             break;
                         default:
                             mErrorResult.setText("验证不通过,相似度:" + result.score + "%。");
+                            mErrorResult.setText("签到");
                             break;
                     }
                 }
@@ -296,7 +314,7 @@ public class SignFragment extends Fragment {
                         });
                         break;
                     default:
-                        showTip("onError Code：" + error.getPlainDescription(true));
+                        showTip("错误码：" + error.getPlainDescription(true));
                         break;
                 }
             }

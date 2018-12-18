@@ -30,35 +30,27 @@
                 android:textStyle="bold"
                 android:textSize="18sp" />
         </RelativeLayout>
-        <RelativeLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_interact"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:dividerHeight="0.25dp"
             android:layout_below="@id/rl_1"
-            android:background="@color/colorBgGray"
-            android:orientation="vertical">
+            android:layout_above="@id/btn_race_resp"
+            android:divider="@color/colorDarkGray">
+        </android.support.v7.widget.RecyclerView>
 
-            <ListView
-                android:id="@+id/lv_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:dividerHeight="0.25dp"
-                android:divider="@color/colorDarkGray">
-            </ListView>
-
-            <Button
-                android:id="@+id/btn_race_resp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:padding="10dp"
-                android:text="抢答测试"
-                android:textSize="16sp"
-                android:background="@drawable/bg_btn_button"
-                android:textColor="@color/colorGreen"
-                android:layout_marginBottom="3dp"/>
-
-        </RelativeLayout>
+        <Button
+            android:id="@+id/btn_race_resp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="10dp"
+            android:text="抢答测试"
+            android:textSize="16sp"
+            android:background="@drawable/bg_btn_button"
+            android:textColor="@color/colorGreen"
+            android:layout_marginBottom="3dp"/>
 
     </RelativeLayout>
-
 </FrameLayout>

@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,22 +17,27 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.tecsoundclass.Adapter.KeyboardAdapter;
+
 import com.example.administrator.tecsoundclass.Adapter.MyInteractAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.Interaction;
+
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.InteractHandler;
 
+import org.litepal.LitePal;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class InteractFragment extends Fragment {
     private ImageView mIvBack;
-    private ListView mLv;
+    private RecyclerView mRvInteract;
     private TextView mTvTime, mTvgrade;
     private Button mBtncatch;
     private AlertDialog dialog;
@@ -41,6 +48,8 @@ public class InteractFragment extends Fragment {
     private String grades="",date="";
     private Onclick onclick=new Onclick();
     private InteractHandler interactHandler;
+    private MyInteractAdapter adapter;
+    private List<Interaction> mInteractionList=new ArrayList<>();
 
     public InteractFragment(){
 
@@ -63,18 +72,19 @@ public class InteractFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         mIvBack=view.findViewById(R.id.im_back);
-
         mIvBack.setOnClickListener(onclick);
-        mLv=view.findViewById(R.id.lv_1);
-        mLv.setAdapter(new MyInteractAdapter(getActivity()));
-
-        mLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
+        mRvInteract=view.findViewById(R.id.recycler_view_interact);
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getActivity());
+        mRvInteract.setLayoutManager(layoutManager);
+        mInteractionList=InitList();
+        adapter=new MyInteractAdapter(mInteractionList);
+        mRvInteract.setAdapter(adapter);
         view.findViewById(R.id.btn_race_resp).setOnClickListener(onclick);
+    }
+    private List<Interaction> InitList(){
+        List<Interaction> list=new ArrayList<>();
+        list=LitePal.select("answer_grace","answer_time","answer_content_src").order("answer_time").find(Interaction.class);
+        return list;
     }
     private class Onclick implements View.OnClickListener{
 
@@ -176,7 +186,7 @@ public class InteractFragment extends Fragment {
                                             if(Integer.parseInt((String) mTvgrade.getText())>100)
                                                 mTvgrade.setText("100");
                                         }
-                                        //教师评分完成存入数据库
+                                        //教师评分完成存入数据库并显示在recycview中
                                         GradeDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                                             @Override
                                             public void onDismiss(DialogInterface dialog) {
@@ -187,6 +197,10 @@ public class InteractFragment extends Fragment {
                                                 interaction.setAnswer_time(timer1.getmDate());
                                                 interaction.setAnswer_grace(Integer.parseInt((String) mTvgrade.getText()));
                                                 interaction.save();
+                                                //刷新列表
+                                                mInteractionList.clear();
+                                                mInteractionList.addAll(InitList());
+                                                adapter.notifyDataSetChanged();
                                             }
                                         });
                                     }

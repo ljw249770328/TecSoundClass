@@ -81,16 +81,15 @@
                 android:text="近期更新"
                 android:textSize="15sp"
                 android:padding="5dp">
-
             </TextView>
-            <ListView
-                android:id="@+id/lv_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_title">
-            </ListView>
 
-        </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_point"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             android:layout_below="@id/tv_title"
+            android:layout_above="@id/btn_class_begin">
+         </android.support.v7.widget.RecyclerView>
         <Button
             android:id="@+id/btn_class_begin"
             android:layout_width="match_parent"
@@ -102,6 +101,7 @@
             android:background="@drawable/bg_btn_button"
             android:textColor="@color/colorGreen"
             android:layout_marginBottom="3dp"/>
+        </RelativeLayout>
     </RelativeLayout>
 
 </FrameLayout>
