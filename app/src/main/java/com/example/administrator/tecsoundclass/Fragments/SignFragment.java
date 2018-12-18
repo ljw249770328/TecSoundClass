@@ -257,35 +257,27 @@ public class SignFragment extends Fragment {
                     switch (result.err) {
                         case VerifierResult.MSS_ERROR_IVP_GENERAL:
                             mErrorResult.setText("内核异常");
-                            mErrorResult.setText("签到");
                             break;
                         case VerifierResult.MSS_ERROR_IVP_TRUNCATED:
                             mErrorResult.setText("出现截幅");
-                            mErrorResult.setText("签到");
                             break;
                         case VerifierResult.MSS_ERROR_IVP_MUCH_NOISE:
                             mErrorResult.setText("太多噪音");
-                            mErrorResult.setText("签到");
                             break;
                         case VerifierResult.MSS_ERROR_IVP_UTTER_TOO_SHORT:
                             mErrorResult.setText("录音太短");
-                            mErrorResult.setText("签到");
                             break;
                         case VerifierResult.MSS_ERROR_IVP_TEXT_NOT_MATCH:
                             mErrorResult.setText("验证不通过，您所读的文本不一致");
-                            mErrorResult.setText("签到");
                             break;
                         case VerifierResult.MSS_ERROR_IVP_TOO_LOW:
                             mErrorResult.setText("音量太低");
-                            mErrorResult.setText("签到");
                             break;
                         case VerifierResult.MSS_ERROR_IVP_NO_ENOUGH_AUDIO:
                             mErrorResult.setText("音频长达不到自由说的要求");
-                            mErrorResult.setText("签到");
                             break;
                         default:
                             mErrorResult.setText("验证不通过,相似度:" + result.score + "%。");
-                            mErrorResult.setText("签到");
                             break;
                     }
                 }
@@ -322,6 +314,7 @@ public class SignFragment extends Fragment {
             @Override
             public void onEndOfSpeech() {
                 showTip("结束说话");
+                mErrorResult.setText("签到");
             }
 
             @Override

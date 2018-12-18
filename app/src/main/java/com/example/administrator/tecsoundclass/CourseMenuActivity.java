@@ -27,7 +27,7 @@ public class CourseMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_course_menu);
         mRgTab=findViewById(R.id.rg_course_menu);
         Bundle bundle=getIntent().getExtras();
-        StudentId=bundle.getString("StudengId");
+        StudentId=bundle.getString("StudentId");
         mRgTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

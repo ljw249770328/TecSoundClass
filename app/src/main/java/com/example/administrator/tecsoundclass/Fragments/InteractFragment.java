@@ -44,15 +44,16 @@ public class InteractFragment extends Fragment {
     private Timer timer=null;
     private TimerTask task=null;
     private int i ;
+    private String mAuthId="";
     private AlertDialog GradeDialog;
     private String grades="",date="";
     private Onclick onclick=new Onclick();
     private InteractHandler interactHandler;
     private MyInteractAdapter adapter;
+    private com.example.administrator.tecsoundclass.utils.Timer timer1;
     private List<Interaction> mInteractionList=new ArrayList<>();
 
     public InteractFragment(){
-
     }
     public static Fragment newInstance() {
         Fragment fragment = new InteractFragment();
@@ -61,6 +62,8 @@ public class InteractFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuthId=getActivity().getIntent().getExtras().getString("StudentId");
+        timer1=new com.example.administrator.tecsoundclass.utils.Timer();
     }
 
     @Override
@@ -97,7 +100,7 @@ public class InteractFragment extends Fragment {
                 case  R.id.btn_race_resp:
                     AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
                     View view=LayoutInflater.from(getActivity()).inflate(R.layout.layout_raceresp_dialog,null);
-                    i=5;
+                    i=10;
                     mBtncatch=view.findViewById(R.id.tv_getchance);
                     mTvTime=view.findViewById(R.id.tv_message);
                     mBtncatch.setOnClickListener(onclick);
@@ -114,7 +117,7 @@ public class InteractFragment extends Fragment {
                         @Override
                         public void onClick(View v) {
                             interactHandler =new InteractHandler(getActivity(),mTvTime,mBtncatch);
-                            interactHandler.StartHandle("test");
+                            interactHandler.StartHandle(mAuthId+"_"+timer1.getmDate()+timer1.getmTime());
                         }
                     });
                     dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -175,7 +178,6 @@ public class InteractFragment extends Fragment {
                                                 mTvgrade.setText(grades);
                                                 break;
                                             case 11:
-                                                grades+="√";
                                                 GradeDialog.dismiss();
                                                 Toast.makeText(getActivity(),"教师评分:"+Integer.parseInt((String) mTvgrade.getText()),Toast.LENGTH_LONG).show();
                                                 break;
@@ -183,16 +185,18 @@ public class InteractFragment extends Fragment {
                                                 break;
                                         }
                                         if(mTvgrade.getText()!=""){
-                                            if(Integer.parseInt((String) mTvgrade.getText())>100)
+                                            if(Integer.parseInt((String) mTvgrade.getText())>100){
                                                 mTvgrade.setText("100");
+                                                grades="100";
+                                            }
+
                                         }
                                         //教师评分完成存入数据库并显示在recycview中
                                         GradeDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                                             @Override
                                             public void onDismiss(DialogInterface dialog) {
-                                                com.example.administrator.tecsoundclass.utils.Timer timer1=new com.example.administrator.tecsoundclass.utils.Timer();
                                                 Interaction interaction=new Interaction();
-                                                interaction.setAnswer_user_id(getActivity().getIntent().getExtras().getString("StudengId"));
+                                                interaction.setAnswer_user_id(mAuthId);
                                                 interaction.setAnswer_content_src(interactHandler.getMfilepath());
                                                 interaction.setAnswer_time(timer1.getmDate());
                                                 interaction.setAnswer_grace(Integer.parseInt((String) mTvgrade.getText()));

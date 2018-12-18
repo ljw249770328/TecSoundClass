@@ -40,6 +40,8 @@ public class ReviewFragment extends Fragment {
     private MyReviewListAdapter adapter;
     private RecPointHandler recPointHandler;
     private List<Point> mPointList=new ArrayList<>();
+    private String mAuthId;
+    private Timer timer1;
     public ReviewFragment(){
 
     }
@@ -50,6 +52,8 @@ public class ReviewFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAuthId=getActivity().getIntent().getExtras().getString("StudentId");
+        timer1=new com.example.administrator.tecsoundclass.utils.Timer();
     }
 
     @Override
@@ -115,7 +119,7 @@ public class ReviewFragment extends Fragment {
                         mBtnRecord.setText("记录");
                     }else{
                         recPointHandler=new RecPointHandler(getActivity(),mTvResult,mBtnRecord);
-                        recPointHandler.StartHandle("test1");
+                        recPointHandler.StartHandle(mAuthId+"_"+timer1.getmDate()+timer1.getmTime());
                     }
                     break;
                 case R.id.btn_class_over:

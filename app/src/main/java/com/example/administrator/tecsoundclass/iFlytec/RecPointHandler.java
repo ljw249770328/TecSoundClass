@@ -59,6 +59,7 @@ public class RecPointHandler {
             }
             @Override
             public void onError(SpeechError speechError) {
+                button.setText("记录");
             }
         };
         mIatDialog = new RecognizerDialog(context, null);
@@ -67,10 +68,10 @@ public class RecPointHandler {
     public void StartHandle(String filename){
         mfilename=filename;
         mfilepath=Environment.getExternalStorageDirectory() + "/MyApplication/" + filename + ".wav";
-        setIatParam(mfilename);
+        setIatParam(mfilepath);
         mIatDialog.show();
     }
-    private void setIatParam(String filename) {
+    private void setIatParam(String filepath) {
         // 清空参数
         mIatDialog.setParameter(SpeechConstant.PARAMS, null);
         // 设置听写引擎
@@ -90,7 +91,7 @@ public class RecPointHandler {
         // 设置音频保存路径，保存音频格式支持pcm、wav，设置路径为sd卡请注意WRITE_EXTERNAL_STORAGE权限
         // 注：AUDIO_FORMAT参数语记需要更新版本才能生效
         mIatDialog.setParameter(SpeechConstant.AUDIO_FORMAT,"wav");
-        mIatDialog.setParameter(SpeechConstant.ASR_AUDIO_PATH, mfilepath);
+        mIatDialog.setParameter(SpeechConstant.ASR_AUDIO_PATH, filepath);
     }
     public static String parseIatResult(String json) {
         StringBuffer ret = new StringBuffer();
