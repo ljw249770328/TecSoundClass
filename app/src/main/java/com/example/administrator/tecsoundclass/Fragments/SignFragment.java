@@ -2,11 +2,14 @@ package com.example.administrator.tecsoundclass.Fragments;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,10 +39,14 @@ import com.iflytek.cloud.VerifierResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.litepal.LitePal;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignFragment extends Fragment {
     private ImageView mIvBack;
-    private ListView mLv;
+    private RecyclerView mRvSign;
     private TextView mTvSign;
     private AlertDialog mSignDialog;
     private SpeakerVerifier mSpeakerVerifier;
@@ -52,6 +59,8 @@ public class SignFragment extends Fragment {
     private Button mErrorResult;
     private String[] items;
     private Bundle bundle;
+    private MySignListAdapter adapter;
+    private List<Sign> signList=new ArrayList<>();
 
     public SignFragment(){
 
@@ -79,16 +88,19 @@ public class SignFragment extends Fragment {
         mTvSign=view.findViewById(R.id.tv_start_sign);
         bundle=getActivity().getIntent().getExtras();
         mAuthId=bundle.getString("StudentId");
-        mLv=view.findViewById(R.id.lv_1);
+        mRvSign=view.findViewById(R.id.recycler_view_sign);
         mIvBack.setOnClickListener(onclick);
         mTvSign.setOnClickListener(onclick);
-        mLv.setAdapter(new MySignListAdapter(getActivity()));
-        mLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getActivity());
+        mRvSign.setLayoutManager(layoutManager);
+        signList=InitList();
+        adapter=new MySignListAdapter(signList);
+        mRvSign.setAdapter(adapter);
+    }
+    private List<Sign> InitList(){
+        List<Sign> list=new ArrayList<>();
+        list=LitePal.select("sign_date","sign_time","sign_state").order("sign_date").find(Sign.class);
+        return list;
     }
     private class Onclick implements View.OnClickListener{
 
@@ -214,13 +226,22 @@ public class SignFragment extends Fragment {
                      Timer timer=new Timer();
                      mDate=timer.getmDate();
                      mTime=timer.getmTime();
-                     Sign sign=new Sign();
+                     final Sign sign=new Sign();
                      sign.setSign_id(mAuthId);
                      sign.setSign_date(mDate);
                      sign.setSign_time(mTime);
                      sign.setSign_state(mStatus);
                      sign.save();
                      mErrorResult.setClickable(false);
+                     //签到弹窗消失后刷新RecyclerView
+                     mSignDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                         @Override
+                         public void onDismiss(DialogInterface dialog) {
+                             signList.clear();
+                             signList.addAll(InitList());
+                             adapter.notifyDataSetChanged();
+                         }
+                     });
                 } else {
                     // 验证不通过
                     switch (result.err) {

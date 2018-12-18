@@ -1,57 +1,54 @@
 package com.example.administrator.tecsoundclass.Adapter;
 
-import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.administrator.tecsoundclass.JavaBean.Sign;
 import com.example.administrator.tecsoundclass.R;
 
-public class MySignListAdapter extends BaseAdapter {
-    private Context mContext;
-    private LayoutInflater mLayoutInflater;
-    public MySignListAdapter(Context context){
-        this.mContext=context;
-        mLayoutInflater=LayoutInflater.from(context);
-    }
-    @Override
-    public int getCount() {
-        return 2;
-    }
+import java.util.List;
 
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
+public class MySignListAdapter extends RecyclerView.Adapter<MySignListAdapter.ViewHolder> {
+    private List<Sign> mSignList;
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-    static  class ClassViewHolder{
-        public TextView mSignDate,mSigntime,mSignStatus;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ClassViewHolder holder=null;
-        if (convertView==null){
-            convertView=mLayoutInflater.inflate(R.layout.layout_list_my_sign_item,null);
-            holder=new ClassViewHolder();
-            holder.mSignDate=convertView.findViewById(R.id.tv_sign_date);
-            holder.mSigntime=convertView.findViewById(R.id.tv_sign_time);
-            holder.mSignStatus=convertView.findViewById(R.id.tv_sign_status);
-            convertView.setTag(holder);
-        }else {
-            holder= (ClassViewHolder) convertView.getTag();
+    static class ViewHolder extends  RecyclerView.ViewHolder{
+        TextView mTime,mDate,mState;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            mTime=itemView.findViewById(R.id.tv_sign_time);
+            mDate=itemView.findViewById(R.id.tv_sign_date);
+            mState=itemView.findViewById(R.id.tv_sign_status);
         }
-        holder.mSignDate.setText("2018.12.5");
-        holder.mSigntime.setText("11:14");
-        holder.mSignStatus.setText("成功");
-        return convertView;
     }
+
+    public MySignListAdapter(List<Sign> signlist){
+        mSignList=signlist;
+    }
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view=LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.layout_list_my_sign_item,viewGroup,false);
+        ViewHolder holder=new ViewHolder(view);
+        return  holder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        Sign sign=mSignList.get(i);
+        viewHolder.mTime.setText(sign.getSign_time());
+        viewHolder.mDate.setText(sign.getSign_date());
+        viewHolder.mState.setText(sign.getSign_state());
+    }
+
+    @Override
+    public int getItemCount() {
+        return mSignList.size();
+    }
+
 
 }
