@@ -86,7 +86,7 @@ public class InteractFragment extends Fragment {
     }
     private List<Interaction> InitList(){
         List<Interaction> list=new ArrayList<>();
-        list=LitePal.select("answer_grace","answer_time","answer_content_src").order("answer_time").find(Interaction.class);
+        list=LitePal.select("answer_grace","answer_time","answer_content_src").where("answer_user_id=?",mAuthId).order("answer_time").find(Interaction.class);
         return list;
     }
     private class Onclick implements View.OnClickListener{

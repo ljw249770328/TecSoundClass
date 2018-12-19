@@ -3,11 +3,13 @@ package com.example.administrator.tecsoundclass;
 import android.Manifest;
 import android.content.Intent;
 
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.view.View;
 
+import android.view.WindowManager;
 import android.widget.Button;
 
 import android.widget.EditText;
@@ -41,6 +43,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        //状态栏沉浸
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
         //安卓6.0以上需要动态获取权限
         //初始化权限
         Requestpermission();
@@ -75,8 +81,9 @@ public class LoginActivity extends AppCompatActivity {
                     bundle.putString("LoginId",accountEdit.getText().toString());
                     s.putExtras(bundle);
                     startActivity(s);
+                    finish();
                 }else{
-                    Toast.makeText(LoginActivity.this,username+"  "+password,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"登录失败:用户名或密码错误",Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -84,17 +91,15 @@ public class LoginActivity extends AppCompatActivity {
         mTvForget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_Login_to_Forget = new Intent(LoginActivity.this,ForgetpswActivity.class) ;    //切换User Activity至Login Activity
+                Intent intent_Login_to_Forget = new Intent(LoginActivity.this,ForgetpswActivity.class) ;    //切换User Activity至ForgetpswActivity
                 startActivity(intent_Login_to_Forget);
-                finish();
             }
         });
         mTvRegedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent_Login_to_Register = new Intent(LoginActivity.this,RegeditActivity.class) ;    //切换User Activity至Login Activity
+                Intent intent_Login_to_Register = new Intent(LoginActivity.this,RegeditActivity.class) ;    //切换User Activity至RegeditActivity
                 startActivity(intent_Login_to_Register);
-                finish();
             }
         });
     }

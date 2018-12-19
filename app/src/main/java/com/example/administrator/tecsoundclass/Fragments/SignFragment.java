@@ -99,7 +99,7 @@ public class SignFragment extends Fragment {
     }
     private List<Sign> InitList(){
         List<Sign> list=new ArrayList<>();
-        list=LitePal.select("sign_date","sign_time","sign_state").order("sign_date").find(Sign.class);
+        list=LitePal.select("sign_date","sign_time","sign_state").where("sign_id=?",mAuthId).order("sign_date").find(Sign.class);
         return list;
     }
     private class Onclick implements View.OnClickListener{

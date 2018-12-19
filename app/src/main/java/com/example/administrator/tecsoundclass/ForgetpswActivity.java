@@ -40,6 +40,10 @@ public class ForgetpswActivity extends AppCompatActivity {
         et_fgt_id=findViewById(R.id.et_fgt_id);
         et_fgt_realname=findViewById(R.id.et_fgt_realname);
 
+        //状态栏沉浸
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
         mBtnAlter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

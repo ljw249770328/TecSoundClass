@@ -114,13 +114,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="7dp"
-            android:padding="15dp">
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/tv_regedit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
+                android:padding="12dp"
                 android:text="注册"
                 android:textColor="@color/colorSmallGray"
                 android:textSize="13sp"/>
@@ -129,6 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:padding="12dp"
                 android:text="忘记密码?"
                 android:textColor="@color/colorSmallGray"
                 android:textSize="15sp"/>

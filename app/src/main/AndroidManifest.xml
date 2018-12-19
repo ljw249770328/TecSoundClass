@@ -47,9 +47,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".LoginActivity"
-            android:launchMode="singleTask" />
+        <activity android:name=".LoginActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".RegeditActivity" />
         <activity android:name=".FindPswActivity" />
         <activity android:name=".ForgetpswActivity" />

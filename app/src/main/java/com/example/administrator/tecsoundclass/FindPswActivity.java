@@ -26,6 +26,10 @@ public class FindPswActivity extends AppCompatActivity {
         mBtnAlter=findViewById(R.id.btn_alter);
         et_fgt_id=findViewById(R.id.et_mod_psw);
         et_fgt_realname=findViewById(R.id.et_cfg_psw);
+        //状态栏沉浸
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
         Intent intent=getIntent();
         final String name=intent.getStringExtra("username");
         final String id=intent.getStringExtra("user_id");
