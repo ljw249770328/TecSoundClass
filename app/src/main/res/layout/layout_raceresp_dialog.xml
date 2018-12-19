@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:paddingTop="60dp"
+    android:paddingBottom="70dp"
+    android:background="@color/colorGreen">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="来自XXXX课堂"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorGray"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="老师提问啦,抢答得分哦"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorWhite"/>
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:maxLines="3"
+        android:scrollbars = "vertical"
+        android:gravity="center"
+        android:text=""
+        android:textStyle="bold"
+        android:textSize="23sp"/>
+    <Button
+        android:id="@+id/tv_getchance"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/bg_tv_sign_button"
+        android:layout_marginTop="55dp"
+        android:gravity="center"
+        android:text="抢答"
+        android:textStyle="bold"
+        android:textSize="25sp"
+        android:textColor="@color/colorDialogButtonText"/>
+
+
+</LinearLayout>

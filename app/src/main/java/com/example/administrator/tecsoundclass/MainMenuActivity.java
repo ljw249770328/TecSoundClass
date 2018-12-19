@@ -27,6 +27,16 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private RadioGroup mRgTab;
     private List<Fragment> mFragmentList = new ArrayList<>();
+    private String StudentID="123";
+    public String getStudentID() {
+        return StudentID;
+    }
+
+    public void setStudentID(String studentID) {
+        StudentID = studentID;
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -40,7 +40,7 @@
                 android:id="@+id/ll_data"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:padding="10dp"
+                android:padding="9dp"
                 android:orientation="horizontal"
                 android:background="@color/colorSmallGray">
                 <LinearLayout
@@ -115,19 +115,20 @@
                         android:textStyle="bold"
                         android:text="100%"
                         android:textSize="23sp"
-                        android:layout_marginLeft="60dp" />
+                        android:layout_marginLeft="50dp" />
                 </LinearLayout>
             </LinearLayout>
-            <ListView
-                android:id="@+id/lv_1"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_sign"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/ll_data"
                 android:background="@color/colorWhite"
                 android:dividerHeight="0.25dp"
+                android:layout_above="@id/tv_start_sign"
                 android:divider="@color/colorDarkGray"
                 android:listSelector="@drawable/course_list_item">
-            </ListView>
+            </android.support.v7.widget.RecyclerView>
             <TextView
                 android:id="@+id/tv_start_sign"
                 android:layout_width="match_parent"

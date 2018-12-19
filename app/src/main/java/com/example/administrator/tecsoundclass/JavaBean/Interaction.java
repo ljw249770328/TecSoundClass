@@ -1,6 +1,8 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
-public class Interaction {
+import org.litepal.crud.LitePalSupport;
+
+public class Interaction extends LitePalSupport {
     int problem_id,answer_grace;
     String propose_course_id,answer_user_id,answer_content_src,answer_time;
 

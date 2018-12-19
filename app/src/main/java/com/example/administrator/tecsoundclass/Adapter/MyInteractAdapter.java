@@ -1,62 +1,56 @@
 package com.example.administrator.tecsoundclass.Adapter;
 
-import android.content.Context;
+
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.administrator.tecsoundclass.JavaBean.Interaction;
 import com.example.administrator.tecsoundclass.R;
 
-public class MyInteractAdapter extends BaseAdapter {
-    private Context mContext;
-    private LayoutInflater mLayoutInflater;
-    public MyInteractAdapter(Context context){
-        this.mContext=context;
-        mLayoutInflater=LayoutInflater.from(context);
-    }
-    @Override
-    public int getCount() {
-        return 2;
-    }
+import java.util.List;
 
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
+public class MyInteractAdapter extends RecyclerView.Adapter<MyInteractAdapter.ViewHolder>{
+    private List<Interaction> mInteractList;
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-    static  class ClassViewHolder{
-        public ImageView mInteractVoi;
-        public TextView mInteractScore,InteractDate;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ClassViewHolder holder=null;
-        if (convertView==null){
-            convertView=mLayoutInflater.inflate(R.layout.layout_list_my_interact_item,null);
-            holder=new ClassViewHolder();
-            holder.mInteractVoi=convertView.findViewById(R.id.iv_interact_voice);
-            holder.mInteractScore=convertView.findViewById(R.id.tv_interact_score);
-            holder.InteractDate=convertView.findViewById(R.id.tv_interact_date);
-            convertView.setTag(holder);
-        }else {
-            holder= (ClassViewHolder) convertView.getTag();
+    static class ViewHolder extends RecyclerView.ViewHolder{
+        TextView mScore,mDate;
+        ImageView mVoice;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            mScore=itemView.findViewById(R.id.tv_interact_score);
+            mDate=itemView.findViewById(R.id.tv_interact_date);
+            mVoice=itemView.findViewById(R.id.iv_interact_voice);
         }
-        holder.mInteractScore.setText("88");
-        holder.InteractDate.setText("2018.12.5");
-        holder.mInteractVoi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        return convertView;
     }
+    public MyInteractAdapter(List<Interaction> interactionList){
+        mInteractList=interactionList;
+    }
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view=LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.layout_list_my_interact_item,viewGroup,false);
+        ViewHolder holder=new ViewHolder(view);
+        return  holder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        Interaction interaction=mInteractList.get(i);
+        viewHolder.mScore.setText(interaction.getAnswer_grace()+"");
+        viewHolder.mDate.setText(interaction.getAnswer_time());
+//        viewHolder.mVoice.setText(sign.getSign_state());声音路径
+    }
+
+    @Override
+    public int getItemCount() {
+       return mInteractList.size();
+    }
+
+
 }
