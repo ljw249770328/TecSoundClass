@@ -27,7 +27,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private RadioGroup mRgTab;
     private List<Fragment> mFragmentList = new ArrayList<>();
-    private String StudentID="123";
+    private String StudentID="";
     public String getStudentID() {
         return StudentID;
     }
@@ -43,6 +43,7 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         mRgTab=findViewById(R.id.rg_main);
+        StudentID=getIntent().getExtras().getString("LoginId");
         //点击切换Fragment
         mRgTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

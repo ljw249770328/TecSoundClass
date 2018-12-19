@@ -117,13 +117,13 @@
             android:padding="15dp">
 
             <TextView
-            android:id="@+id/tv_regedit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="注册"
-            android:textColor="@color/colorSmallGray"
-            android:textSize="13sp"/>
+                android:id="@+id/tv_regedit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="注册"
+                android:textColor="@color/colorSmallGray"
+                android:textSize="13sp"/>
             <TextView
                 android:id="@+id/tv_forget"
                 android:layout_width="wrap_content"
@@ -134,7 +134,7 @@
                 android:textSize="15sp"/>
         </RelativeLayout>
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_login1"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:background="@drawable/bg_btn_login"

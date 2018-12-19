@@ -55,6 +55,7 @@
         android:orientation="vertical"
         android:layout_marginTop="30dp">
         <RadioGroup
+            android:id="@+id/rb_radiogroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -123,7 +124,7 @@
                 android:paddingLeft="13dp"
                 android:textSize="12sp"
                 android:textColor="@color/colorWhite"
-                android:inputType="number"
+                android:inputType="numberPassword"
                 android:hint="请输入6-11位密码"
                 android:textColorHint="@color/colorSmallGray"
                 />
@@ -151,7 +152,7 @@
                 android:layout_marginLeft="5dp"
                 android:textSize="12sp"
                 android:textColor="@color/colorWhite"
-                android:inputType="number"
+                android:inputType="numberPassword"
                 android:hint="请输入6-11位密码"
                 android:textColorHint="@color/colorSmallGray"
                 />

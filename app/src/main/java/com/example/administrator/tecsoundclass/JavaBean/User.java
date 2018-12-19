@@ -1,6 +1,9 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
-public class User {
+import org.litepal.crud.DataSupport;
+import org.litepal.crud.LitePalSupport;
+
+public class User extends LitePalSupport {
     private  String user_id,user_password,user_sex,user_institution,user_age,user_identity,user_name,user_pic_src;
 
     public String getUser_id() {
