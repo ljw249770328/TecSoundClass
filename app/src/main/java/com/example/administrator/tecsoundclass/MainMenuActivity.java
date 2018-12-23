@@ -69,6 +69,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
     }
     public void changeFragment(String tag) {
+        //先遍历隐藏Fragment
         hideFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         Fragment fragment = getFragmentManager().findFragmentByTag(tag);
@@ -82,6 +83,7 @@ public class MainMenuActivity extends AppCompatActivity {
             } else if (tag.equals(MyselfFragment.class.getName())) {
                 fragment = MyselfFragment.newInstance();
             }
+            //fragment栈管理
             mFragmentList.add(fragment);
             transaction.add(R.id.fl_container, fragment, fragment.getClass().getName());
         }

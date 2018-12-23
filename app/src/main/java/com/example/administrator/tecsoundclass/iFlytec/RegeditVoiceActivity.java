@@ -167,7 +167,7 @@ public class RegeditVoiceActivity extends AppCompatActivity implements View.OnCl
         mSpeakerVerifier.setParameter(SpeechConstant.ISV_SST, "train");
         // 设置声纹密码类型参数
         mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWDT, "" + mPwdType);
-        //训练次数默认设置5次
+        //训练次数默认设置5次,不更改设置
         // 开始注册
         mSpeakerVerifier.startListening(mRegisterListener);
     }
@@ -176,7 +176,8 @@ public class RegeditVoiceActivity extends AppCompatActivity implements View.OnCl
     private void performModelOperation(String operation, SpeechListener listener) {
         // 清空参数
         mSpeakerVerifier.setParameter(SpeechConstant.PARAMS, null);
-        //设置密码类型(就是咱要读的)
+        //设置密码类型
+
         mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWDT, "" + mPwdType);
             if (TextUtils.isEmpty(mTextPwd)) {
                 showTip("请获取密码后进行操作");
@@ -201,7 +202,6 @@ public class RegeditVoiceActivity extends AppCompatActivity implements View.OnCl
                 JSONObject object = new JSONObject(result);
                 String cmd = object.getString("cmd");
                 int ret = object.getInt("ret");
-
                 if ("del".equals(cmd)) {
                     if (ret == ErrorCode.SUCCESS) {
                         showTip("删除成功");
@@ -309,7 +309,7 @@ public class RegeditVoiceActivity extends AppCompatActivity implements View.OnCl
                 if (verifierResult.suc == verifierResult.rgn){
                     mResultText.setText("注册成功");
                     mErrorResult.setText("您的声纹ID：\n" + verifierResult.vid);
-                    Log.e(TAG, "onResult:文字 " + verifierResult.vid);
+                    Log.e(TAG, "onResult: " + verifierResult.vid);
                     isStartWork = false;
                     if (mSpeakerVerifier != null) {
                         mSpeakerVerifier.stopListening();

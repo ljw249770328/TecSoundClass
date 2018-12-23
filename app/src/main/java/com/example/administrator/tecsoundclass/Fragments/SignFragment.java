@@ -97,6 +97,8 @@ public class SignFragment extends Fragment {
         adapter=new MySignListAdapter(signList);
         mRvSign.setAdapter(adapter);
     }
+
+    //从数据库中获得显示的数据
     private List<Sign> InitList(){
         List<Sign> list=new ArrayList<>();
         list=LitePal.select("sign_date","sign_time","sign_state").where("sign_id=?",mAuthId).order("sign_date").find(Sign.class);
@@ -111,7 +113,7 @@ public class SignFragment extends Fragment {
                     getActivity().finish();
                     break;
                 case R.id.tv_start_sign:
-                    //初始化引擎
+                    //初始化声纹识别引擎
                     mSpeakerVerifier = SpeakerVerifier.createVerifier(getActivity(), new InitListener() {
                         @Override
                         public void onInit(int i) {
@@ -122,7 +124,7 @@ public class SignFragment extends Fragment {
                             }
                         }
                     });
-
+                    //点击签到按钮产生签到弹窗
                     AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
                     View view =LayoutInflater.from(getActivity()).inflate(R.layout.layout_sign_dialog,null);
                     mResultText=view.findViewById(R.id.edt_result);
@@ -130,6 +132,7 @@ public class SignFragment extends Fragment {
                     builder.setView(view);
                     mSignDialog=builder.create();
                     mSignDialog.show();
+                    //点击按钮开始验证
                     mErrorResult.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -141,11 +144,13 @@ public class SignFragment extends Fragment {
         }
     }
     private class VoiceIdentifier{
+        //获取密码
         private void PrepareIdentify() {
-            //获取密码监听
             // 清空参数
             mSpeakerVerifier.setParameter(SpeechConstant.PARAMS, null);
+            //设置会话场景
             mSpeakerVerifier.setParameter(SpeechConstant.MFV_SCENES, "ivp");
+            //设置下载密码类型为文本
             mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWDT, "" + PWD_TYPE_TEXT);
             SpeechListener mPwdListenter = new SpeechListener() {
                 @Override
@@ -162,6 +167,7 @@ public class SignFragment extends Fragment {
                             mResultText.setText("");
                             return;
                         }
+                        //JSONBOJECT.optjsonarray()方法比与getjsonarray()方法类似,前者不需要trycatch
                         JSONArray pwdArray = object.optJSONArray("txt_pwd");
                         items = new String[pwdArray.length()];
                         for (int i = 0; i < pwdArray.length(); i++) {
@@ -193,7 +199,8 @@ public class SignFragment extends Fragment {
             // 设置业务类型为验证
             mSpeakerVerifier.setParameter(SpeechConstant.ISV_SST, "verify");
             // 消噪
-            mSpeakerVerifier.setParameter(SpeechConstant.AUDIO_SOURCE, "" + MediaRecorder.AudioSource.VOICE_RECOGNITION);
+            //mSpeakerVerifier.setParameter(SpeechConstant.AUDIO_SOURCE, "" + MediaRecorder.AudioSource.VOICE_RECOGNITION);
+            //设置识别类型
             mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWD, mTextPwd);
             mResultText.setText("请读出：" + mTextPwd);
             mErrorResult.setText("识别中...");

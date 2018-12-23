@@ -27,7 +27,7 @@ public class LauncherActivity extends AppCompatActivity {
         setContentView(R.layout.activity_launcher);
         //加载数据库
         LitePal.getDatabase();
-        //初始化引擎
+        //初始化讯飞引擎
         SpeechUtility.createUtility(LauncherActivity.this, SpeechConstant.APPID +"=5be8469d");
         Handler handler = new Handler(){
             @Override
