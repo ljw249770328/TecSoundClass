@@ -178,19 +178,25 @@ public class InteractFragment extends Fragment {
                                                 mTvgrade.setText(grades);
                                                 break;
                                             case 11:
-                                                GradeDialog.dismiss();
-                                                Toast.makeText(getActivity(),"教师评分:"+Integer.parseInt((String) mTvgrade.getText()),Toast.LENGTH_LONG).show();
-                                                break;
+                                                if(mTvgrade.getText().toString().isEmpty()){
+                                                    Toast.makeText(getActivity(),"您还未评分",Toast.LENGTH_SHORT).show();
+                                                    break;
+                                                }
+                                                else {
+                                                    GradeDialog.dismiss();
+                                                    Toast.makeText(getActivity(),"教师评分:"+Integer.parseInt((String) mTvgrade.getText()),Toast.LENGTH_LONG).show();
+                                                    break;
+                                                }
                                             default:
                                                 break;
                                         }
-                                        if(mTvgrade.getText()!=""){
+                                        if(!mTvgrade.getText().toString().isEmpty()){
                                             if(Integer.parseInt((String) mTvgrade.getText())>100){
                                                 mTvgrade.setText("100");
                                                 grades="100";
                                             }
-
                                         }
+
                                         //教师评分完成存入数据库并显示在recycview中
                                         GradeDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                                             @Override
