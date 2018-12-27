@@ -27,12 +27,23 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private RadioGroup mRgTab;
     private List<Fragment> mFragmentList = new ArrayList<>();
+    private String StudentID="";
+    public String getStudentID() {
+        return StudentID;
+    }
+
+    public void setStudentID(String studentID) {
+        StudentID = studentID;
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         mRgTab=findViewById(R.id.rg_main);
+        StudentID=getIntent().getExtras().getString("LoginId");
         //点击切换Fragment
         mRgTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -58,6 +69,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
     }
     public void changeFragment(String tag) {
+        //先遍历隐藏Fragment
         hideFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         Fragment fragment = getFragmentManager().findFragmentByTag(tag);
@@ -71,6 +83,7 @@ public class MainMenuActivity extends AppCompatActivity {
             } else if (tag.equals(MyselfFragment.class.getName())) {
                 fragment = MyselfFragment.newInstance();
             }
+            //fragment栈管理
             mFragmentList.add(fragment);
             transaction.add(R.id.fl_container, fragment, fragment.getClass().getName());
         }

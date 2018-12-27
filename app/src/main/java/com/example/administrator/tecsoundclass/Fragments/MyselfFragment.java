@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.administrator.tecsoundclass.EditMyInfoActivity;
 import com.example.administrator.tecsoundclass.FindPswActivity;
 import com.example.administrator.tecsoundclass.LoginActivity;
+import com.example.administrator.tecsoundclass.MainMenuActivity;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.SettingsActivity;
 import com.example.administrator.tecsoundclass.StandDataActivity;
@@ -105,6 +106,10 @@ public class MyselfFragment extends Fragment {
                     break;
                 case R.id.m_status_data:
                     intent=new Intent(getActivity(),StandDataActivity.class);
+                    Bundle bundle=new Bundle();
+                    MainMenuActivity activity= (MainMenuActivity) getActivity();
+                    bundle.putString("StudentId",activity.getStudentID());
+                    intent.putExtras(bundle);
                     startActivity(intent);
                     break;
             }

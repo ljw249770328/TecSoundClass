@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="15dp">
+        android:padding="13dp">
         <ImageView
             android:id="@+id/im_back"
             android:layout_width="20dp"
@@ -69,13 +69,13 @@
                 android:layout_marginRight="35dp"
                 />
             <EditText
-                android:id="@+id/et_fgt_id"
+                android:id="@+id/et_mod_psw"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingLeft="13dp"
                 android:textSize="12sp"
                 android:textColor="@color/colorWhite"
-                android:inputType="number"
+                android:inputType="textPassword"
                 android:hint="请输入6-11位密码"
                 android:textColorHint="@color/colorSmallGray"
                 />
@@ -97,14 +97,14 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
             <EditText
-                android:id="@+id/et_fgt_realname"
+                android:id="@+id/et_cfg_psw"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingLeft="13dp"
                 android:layout_marginLeft="5dp"
                 android:textSize="12sp"
                 android:textColor="@color/colorWhite"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:hint="再次输入密码"
                 android:textColorHint="@color/colorSmallGray"
                 />

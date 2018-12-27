@@ -13,7 +13,7 @@
             android:background="@drawable/message"
             android:gravity="right">
             <TextView
-                android:id="@+id/tv_review_time"
+                android:id="@+id/tv_voice_time"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
