@@ -1,6 +1,5 @@
 package com.example.administrator.tecsoundclass.Fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,14 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.example.administrator.tecsoundclass.Adapter.MyClassListAdapter;
 import com.example.administrator.tecsoundclass.Adapter.MyFriendListAdapter;
-import com.example.administrator.tecsoundclass.CourseMenuActivity;
-import com.example.administrator.tecsoundclass.MainMenuActivity;
 import com.example.administrator.tecsoundclass.R;
 
 public class FriendFragment extends Fragment {

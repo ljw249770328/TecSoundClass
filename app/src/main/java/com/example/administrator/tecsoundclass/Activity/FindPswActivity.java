@@ -1,4 +1,4 @@
-package com.example.administrator.tecsoundclass;
+package com.example.administrator.tecsoundclass.Activity;
 
 import android.content.Intent;
 import android.os.Build;
@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.administrator.tecsoundclass.JavaBean.User;
+import com.example.administrator.tecsoundclass.R;
 
 public class FindPswActivity extends AppCompatActivity {
     private ImageView mIvbackicon;

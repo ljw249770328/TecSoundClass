@@ -1,7 +1,6 @@
-package com.example.administrator.tecsoundclass;
+package com.example.administrator.tecsoundclass.Activity;
 
 import android.content.Intent;
-import android.opengl.ETC1;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.administrator.tecsoundclass.JavaBean.User;
+import com.example.administrator.tecsoundclass.R;
 
 import org.litepal.LitePal;
 

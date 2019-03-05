@@ -40,28 +40,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".LauncherActivity">
+        <activity android:name=".Activity.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"
+        <activity android:name=".Activity.LoginActivity"
             android:launchMode="singleTask"/>
-        <activity android:name=".RegeditActivity" />
-        <activity android:name=".FindPswActivity" />
-        <activity android:name=".ForgetpswActivity" />
+        <activity android:name=".Activity.RegeditActivity" />
+        <activity android:name=".Activity.FindPswActivity" />
+        <activity android:name=".Activity.ForgetpswActivity" />
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".Activity.MainMenuActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".JoinActivity" />
-        <activity android:name=".ClassResultActivity" />
-        <activity android:name=".StandDataActivity" />
-        <activity android:name=".CreateClassActivity" />
-        <activity android:name=".CourseMenuActivity" />
-        <activity android:name=".EditMyInfoActivity" />
-        <activity android:name=".SettingsActivity" />
+        <activity android:name=".Activity.JoinActivity" />
+        <activity android:name=".Activity.ClassResultActivity" />
+        <activity android:name=".Activity.StandDataActivity" />
+        <activity android:name=".Activity.CreateClassActivity" />
+        <activity android:name=".Activity.CourseMenuActivity" />
+        <activity android:name=".Activity.EditMyInfoActivity" />
+        <activity android:name=".Activity.SettingsActivity" />
         <activity android:name=".iFlytec.RegeditVoiceActivity"></activity>
     </application>
 

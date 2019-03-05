@@ -15,10 +15,10 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.administrator.tecsoundclass.Adapter.MyClassListAdapter;
-import com.example.administrator.tecsoundclass.CourseMenuActivity;
-import com.example.administrator.tecsoundclass.CreateClassActivity;
-import com.example.administrator.tecsoundclass.JoinActivity;
-import com.example.administrator.tecsoundclass.MainMenuActivity;
+import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
+import com.example.administrator.tecsoundclass.Activity.CreateClassActivity;
+import com.example.administrator.tecsoundclass.Activity.JoinActivity;
+import com.example.administrator.tecsoundclass.Activity.MainMenuActivity;
 import com.example.administrator.tecsoundclass.R;
 
 public class CourseFragment extends Fragment {

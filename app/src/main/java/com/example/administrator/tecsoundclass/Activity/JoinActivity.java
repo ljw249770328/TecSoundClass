@@ -1,4 +1,4 @@
-package com.example.administrator.tecsoundclass;
+package com.example.administrator.tecsoundclass.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.administrator.tecsoundclass.R;
 
 public class JoinActivity extends AppCompatActivity {
     private TextView mTvCancle,mTvNext;

@@ -1,9 +1,11 @@
-package com.example.administrator.tecsoundclass;
+package com.example.administrator.tecsoundclass.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.example.administrator.tecsoundclass.R;
 
 public class EditMyInfoActivity extends AppCompatActivity {
     private ImageView mBack;

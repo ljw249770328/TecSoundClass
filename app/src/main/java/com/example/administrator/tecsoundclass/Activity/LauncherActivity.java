@@ -1,6 +1,5 @@
-package com.example.administrator.tecsoundclass;
+package com.example.administrator.tecsoundclass.Activity;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,16 +7,12 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
-import android.widget.Toast;
 
-import com.example.weeboos.permissionlib.PermissionRequest;
-import com.example.weeboos.permissionlib.PermissionUtils;
+import com.example.administrator.tecsoundclass.R;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
 
 import org.litepal.LitePal;
-
-import java.util.ArrayList;
 
 public class LauncherActivity extends AppCompatActivity {
 
@@ -26,7 +21,7 @@ public class LauncherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
         //加载数据库
-        LitePal.getDatabase();
+        //LitePal.getDatabase();
         //初始化讯飞引擎
         SpeechUtility.createUtility(LauncherActivity.this, SpeechConstant.APPID +"=5be8469d");
         Handler handler = new Handler(){

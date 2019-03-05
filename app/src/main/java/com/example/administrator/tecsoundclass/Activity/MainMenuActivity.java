@@ -1,4 +1,4 @@
-package com.example.administrator.tecsoundclass;
+package com.example.administrator.tecsoundclass.Activity;
 
 
 import android.app.Fragment;
@@ -19,6 +19,7 @@ import android.widget.ScrollView;
 import com.example.administrator.tecsoundclass.Fragments.CourseFragment;
 import com.example.administrator.tecsoundclass.Fragments.FriendFragment;
 import com.example.administrator.tecsoundclass.Fragments.MyselfFragment;
+import com.example.administrator.tecsoundclass.R;
 
 import java.util.ArrayList;
 import java.util.List;

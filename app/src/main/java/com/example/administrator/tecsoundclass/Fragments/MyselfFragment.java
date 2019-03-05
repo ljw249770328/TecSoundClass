@@ -14,13 +14,13 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.administrator.tecsoundclass.EditMyInfoActivity;
-import com.example.administrator.tecsoundclass.FindPswActivity;
-import com.example.administrator.tecsoundclass.LoginActivity;
-import com.example.administrator.tecsoundclass.MainMenuActivity;
+import com.example.administrator.tecsoundclass.Activity.EditMyInfoActivity;
+import com.example.administrator.tecsoundclass.Activity.FindPswActivity;
+import com.example.administrator.tecsoundclass.Activity.LoginActivity;
+import com.example.administrator.tecsoundclass.Activity.MainMenuActivity;
 import com.example.administrator.tecsoundclass.R;
-import com.example.administrator.tecsoundclass.SettingsActivity;
-import com.example.administrator.tecsoundclass.StandDataActivity;
+import com.example.administrator.tecsoundclass.Activity.SettingsActivity;
+import com.example.administrator.tecsoundclass.Activity.StandDataActivity;
 
 public class MyselfFragment extends Fragment {
     private ImageView mIvMenu;

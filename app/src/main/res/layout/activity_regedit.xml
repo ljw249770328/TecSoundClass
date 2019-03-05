@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegeditActivity"
+    tools:context=".Activity.RegeditActivity"
     android:orientation="vertical"
     android:background="@color/colorGreen"
     android:padding="15dp">
@@ -197,7 +197,7 @@
         android:gravity="center"
         android:layout_alignParentEnd="true">
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btn_regedit"
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:background="@drawable/bg_btn_login"

@@ -1,4 +1,4 @@
-package com.example.administrator.tecsoundclass;
+package com.example.administrator.tecsoundclass.Activity;
 
 import android.app.FragmentTransaction;
 import android.app.Fragment;
@@ -13,6 +13,7 @@ import com.example.administrator.tecsoundclass.Fragments.MoreFragment;
 import com.example.administrator.tecsoundclass.Fragments.MyselfFragment;
 import com.example.administrator.tecsoundclass.Fragments.ReviewFragment;
 import com.example.administrator.tecsoundclass.Fragments.SignFragment;
+import com.example.administrator.tecsoundclass.R;
 
 import java.util.ArrayList;
 import java.util.List;
