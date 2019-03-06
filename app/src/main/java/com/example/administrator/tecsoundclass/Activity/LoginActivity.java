@@ -119,7 +119,8 @@ public class LoginActivity extends AppCompatActivity {
                     startActivityForResult(intent,1);
 
                     break;
-                case R.id.tv_forget:new Intent(LoginActivity.this,ForgetpswActivity.class) ;    //切换User Activity至ForgetpswActivity
+                case R.id.tv_forget:
+                    intent=new Intent(LoginActivity.this,ForgetpswActivity.class) ;    //切换User Activity至ForgetpswActivity
                     startActivity(intent);
                     break;
                 default:
@@ -168,15 +169,17 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = (JSONObject) new JSONObject(response).get("params");  //注③
                             String result = jsonObject.getString("Result");  //注④
-                            if (result.equals("success")) {  //注⑤
+                            if (result.equals("pass")) {  //注⑤
                                 Intent intent=new Intent(LoginActivity.this,MainMenuActivity.class);
                                 Bundle bundle=new Bundle();
                                 bundle.putString("LoginId",mEtaccount.getText().toString());
                                 intent.putExtras(bundle);
                                 startActivity(intent);
                                 finish();
-                            } else {
-                                Toast.makeText(LoginActivity.this,"用户名或密码错误，登陆失败",Toast.LENGTH_SHORT).show();
+                            } else if(result.equals("pswerror")) {
+                                Toast.makeText(LoginActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
+                            }else if(result.equals("notexists")) {
+                                Toast.makeText(LoginActivity.this,"用户不存在,请先注册",Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             //做自己的请求异常操作，如Toast提示（“无网络连接”等）
