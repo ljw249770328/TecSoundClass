@@ -58,6 +58,7 @@ public class RegeditActivity extends AppCompatActivity {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
+    //注册组件
     private void init(){
         mIvbackicon=findViewById(R.id.im_back);
         radioGroup=findViewById(R.id.rb_radiogroup);
@@ -79,6 +80,7 @@ public class RegeditActivity extends AppCompatActivity {
             }
         });
     }
+    //设置监听
     private void setListener(){
         mEtregId.setOnFocusChangeListener(new mOnFocusListener(mEtregId));
         mEtPsw.setOnFocusChangeListener(new mOnFocusListener(mEtPsw));
@@ -113,6 +115,7 @@ public class RegeditActivity extends AppCompatActivity {
             }
         });
     }
+    //自定义焦点丢失时间
     private class mOnFocusListener implements View.OnFocusChangeListener{
         private EditText e;
         private mOnFocusListener(EditText editText){
@@ -182,6 +185,7 @@ public class RegeditActivity extends AppCompatActivity {
 
         }
     }
+    //注册请求
     private void RegeditRequest() {
         //请求地址
         String url = "http://101.132.71.111:8080/TecSoundWebApp/RegeditServlet";

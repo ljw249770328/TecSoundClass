@@ -46,15 +46,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mEtpassword;
     final String [] permissions=new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.INTERNET,Manifest.permission.RECORD_AUDIO,Manifest.permission.ACCESS_WIFI_STATE,Manifest.permission.ACCESS_NETWORK_STATE,Manifest.permission.READ_EXTERNAL_STORAGE};
 
-    //private CheckBox rememberPass;
-//    private String getPasswordById(String id){
-//        List<User> userlist=LitePal.select("user_password")
-//                .where("user_id=?",id)
-//                .find(User.class);
-//        User user=userlist.get(0);
-//        String psw=user.getUser_password();
-//        return psw;
-//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +61,26 @@ public class LoginActivity extends AppCompatActivity {
         init();
         //注册点击事件
         SetListeners();
+
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //判断是否有数据传递
+        if(getIntent().getExtras()!=null){
+            Toast.makeText(LoginActivity.this,"有传递",Toast.LENGTH_SHORT).show();
+            if(!getIntent().getExtras().getString("userid").equals("")){
+                Toast.makeText(LoginActivity.this,"已设置",Toast.LENGTH_SHORT).show();
+                mEtaccount.setText(getIntent().getExtras().getString("userid"));
+            }
+            if(!getIntent().getExtras().getString("psw").equals("")){
+                mEtpassword.setText(getIntent().getExtras().getString("psw"));
+            }
+        }
+    }
+
+    //获取返回数据
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         switch (requestCode){
@@ -79,9 +89,15 @@ public class LoginActivity extends AppCompatActivity {
                     mEtaccount.setText(data.getStringExtra("id"));
                 }
                 break;
+            case 2:
+                if (resultCode==RESULT_OK){
+                    mEtaccount.setText(data.getStringExtra("userid"));
+                    mEtpassword.setText(data.getStringExtra("psw"));
+                }
             default:
         }
     }
+    //注册组件
     private void init(){
         mBtnLogin=findViewById(R.id.btn_login1);
         mTvForget=findViewById(R.id.tv_forget);
@@ -89,10 +105,9 @@ public class LoginActivity extends AppCompatActivity {
         mEtaccount=findViewById(R.id.et_username);
         mEtpassword=findViewById(R.id.et_password);
 
+
     }
-
-
-
+    //设置监听
     private void SetListeners(){
         OnClick onClick=new OnClick();
         mBtnLogin.setOnClickListener(onClick);
@@ -100,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
         mTvRegedit.setOnClickListener(onClick);
 
     }
+    //自定义点击事件内部类
     private class OnClick implements View.OnClickListener{
         @Override
         public void onClick(View v) {
@@ -120,14 +136,20 @@ public class LoginActivity extends AppCompatActivity {
 
                     break;
                 case R.id.tv_forget:
-                    intent=new Intent(LoginActivity.this,ForgetpswActivity.class) ;    //切换User Activity至ForgetpswActivity
-                    startActivity(intent);
+                    intent=new Intent(LoginActivity.this,ForgetpswActivity.class) ;
+                    if(!mEtaccount.getText().toString().equals("")) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("userid", mEtaccount.getText().toString());
+                        intent.putExtras(bundle);
+                    }
+                    startActivityForResult(intent,2);
                     break;
                 default:
                     break;
             }
         }
     }
+    //权限获取
     private void Requestpermission(){
         PermissionRequest request = new PermissionRequest(this); // 这个this需要一个activity对象或者fragment对象
         request.requestPermission(new PermissionRequest.PermissionListener() {
@@ -151,6 +173,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         },permissions);
     }
+    //登陆请求
     private void LoginRequest(final String accountNumber, final String password) {
         //请求地址
         String url = "http://101.132.71.111:8080/TecSoundWebApp/LoginServlet";
