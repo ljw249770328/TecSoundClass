@@ -26,6 +26,12 @@ public class CourseMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_menu);
+        init();
+        if(savedInstanceState == null){
+            changeFragment(SignFragment.class.getName());
+        }
+    }
+    private void  init(){
         mRgTab=findViewById(R.id.rg_course_menu);
         Bundle bundle=getIntent().getExtras();
         StudentId=bundle.getString("StudentId");
@@ -48,9 +54,7 @@ public class CourseMenuActivity extends AppCompatActivity {
                 }
             }
         });
-        if(savedInstanceState == null){
-            changeFragment(SignFragment.class.getName());
-        }
+
     }
     public void changeFragment(String tag) {
         hideFragment();

@@ -245,7 +245,6 @@ public class SignFragment extends Fragment {
                      sign.setSign_date(mDate);
                      sign.setSign_time(mTime);
                      sign.setSign_state(mStatus);
-                     sign.save();
                      mErrorResult.setClickable(false);
                      //签到弹窗消失后刷新RecyclerView
                      mSignDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {

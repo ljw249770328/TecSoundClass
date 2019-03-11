@@ -110,7 +110,7 @@ public class ReviewFragment extends Fragment {
                         Point point=new Point();
                         point.setPoint_time(timer.getmDate()+"  "+timer.getmTime());
                         point.setPoint_voice_src(recPointHandler.getMfilepath());
-                        point.save();
+
                         //刷新列表
                         mPointList.clear();
                         mPointList.addAll(InitList());

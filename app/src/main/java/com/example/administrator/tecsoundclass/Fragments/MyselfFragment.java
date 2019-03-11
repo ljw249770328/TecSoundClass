@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +15,27 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.administrator.tecsoundclass.Activity.EditMyInfoActivity;
 import com.example.administrator.tecsoundclass.Activity.FindPswActivity;
 import com.example.administrator.tecsoundclass.Activity.LoginActivity;
 import com.example.administrator.tecsoundclass.Activity.MainMenuActivity;
+import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.Activity.SettingsActivity;
 import com.example.administrator.tecsoundclass.Activity.StandDataActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MyselfFragment extends Fragment {
     private ImageView mIvMenu;
@@ -45,33 +60,19 @@ public class MyselfFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_my,container,false);
         return view;
     }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    private void init(@NonNull View view){
         mIvMenu=view.findViewById(R.id.iv_menu_list);
         mTvStandards=view.findViewById(R.id.m_status_data);
         mEditInfo=view.findViewById(R.id.ll_2);
-        mIvMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                View view=getActivity().getLayoutInflater().inflate(R.layout.layout_pop_menu_my,null);
-                TextView mTvSZone=view.findViewById(R.id.tv_send_zone);
-                TextView mTvReset=view.findViewById(R.id.tv_reset);
-                TextView mTvSettings=view.findViewById(R.id.tv_settings);
-                TextView mTvExits=view.findViewById(R.id.tv_exit);
-                OnClick onclick=new OnClick();
-                mTvSZone.setOnClickListener(onclick);
-                mTvReset.setOnClickListener(onclick);
-                mTvSettings.setOnClickListener(onclick);
-                mTvExits.setOnClickListener(onclick);
-                mPop=new PopupWindow(view,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-                mPop.setOutsideTouchable(true);
-                mPop.setFocusable(true);
-                mPop.showAsDropDown(mIvMenu);
-            }
-        });
-        mTvStandards.setOnClickListener(new OnClick());
-        mEditInfo.setOnClickListener(new OnClick());
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        init(view);
+        OnClick onClick=new OnClick();
+        mIvMenu.setOnClickListener(onClick);
+        mTvStandards.setOnClickListener(onClick);
+        mEditInfo.setOnClickListener(onClick);
     }
 
     private class OnClick implements View.OnClickListener{
@@ -79,7 +80,24 @@ public class MyselfFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Intent intent=null;
+            MainMenuActivity activity=(MainMenuActivity)getActivity();
             switch (v.getId()){
+                case R.id.iv_menu_list:
+                    View view=getActivity().getLayoutInflater().inflate(R.layout.layout_pop_menu_my,null);
+                    TextView mTvSZone=view.findViewById(R.id.tv_send_zone);
+                    TextView mTvReset=view.findViewById(R.id.tv_reset);
+                    TextView mTvSettings=view.findViewById(R.id.tv_settings);
+                    TextView mTvExits=view.findViewById(R.id.tv_exit);
+                    OnClick onclick=new OnClick();
+                    mTvSZone.setOnClickListener(onclick);
+                    mTvReset.setOnClickListener(onclick);
+                    mTvSettings.setOnClickListener(onclick);
+                    mTvExits.setOnClickListener(onclick);
+                    mPop=new PopupWindow(view,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                    mPop.setOutsideTouchable(true);
+                    mPop.setFocusable(true);
+                    mPop.showAsDropDown(mIvMenu);
+                    break;
                 case R.id.tv_send_zone:
                     mPop.dismiss();
                     Toast.makeText(getActivity(),"暂未开放,敬请期待",Toast.LENGTH_LONG).show();
@@ -87,6 +105,9 @@ public class MyselfFragment extends Fragment {
                 case R.id.tv_reset:
                     mPop.dismiss();
                     intent=new Intent(getActivity(),FindPswActivity.class);
+                    Bundle b =new Bundle();
+                    b.putString("userid",activity.getStudentID());
+                    intent.putExtras(b);
                     startActivity(intent);
                     break;
                 case R.id.tv_settings:
@@ -107,7 +128,6 @@ public class MyselfFragment extends Fragment {
                 case R.id.m_status_data:
                     intent=new Intent(getActivity(),StandDataActivity.class);
                     Bundle bundle=new Bundle();
-                    MainMenuActivity activity= (MainMenuActivity) getActivity();
                     bundle.putString("StudentId",activity.getStudentID());
                     intent.putExtras(bundle);
                     startActivity(intent);

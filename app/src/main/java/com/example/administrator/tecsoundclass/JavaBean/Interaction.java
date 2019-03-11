@@ -2,9 +2,9 @@ package com.example.administrator.tecsoundclass.JavaBean;
 
 import org.litepal.crud.LitePalSupport;
 
-public class Interaction extends LitePalSupport {
-    int problem_id,answer_grace;
-    String propose_course_id,answer_user_id,answer_content_src,answer_time;
+public class Interaction {
+    private int problem_id,answer_grace;
+    private String propose_course_id,answer_user_id,answer_content_src,answer_time;
 
     public int getProblem_id() {
         return problem_id;

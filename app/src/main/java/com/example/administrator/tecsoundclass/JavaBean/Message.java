@@ -1,8 +1,8 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
 public class Message {
-    int mes_id;
-    String set_user_id,receive_user_id,mes_content,mes_time;
+    private int mes_id;
+    private String set_user_id,receive_user_id,mes_content,mes_time;
 
     public int getMes_id() {
         return mes_id;

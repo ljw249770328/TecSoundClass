@@ -1,8 +1,8 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
 public class Follow {
-    int follow_id;
-    String follower_user_id,fan_user_id,follow_time;
+    private int follow_id;
+    private String follower_user_id,fan_user_id,follow_time;
 
     public int getFollow_id() {
         return follow_id;

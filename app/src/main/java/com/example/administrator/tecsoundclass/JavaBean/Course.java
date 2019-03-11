@@ -1,7 +1,7 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
 public class Course {
-    String course_id,teacher_user_id,belong_class,class_time ,class_request ,register_time;
+    private String course_id,teacher_user_id,belong_class,class_time ,class_request ,register_time;
 
     public String getCourse_id() {
         return course_id;

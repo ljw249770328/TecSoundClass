@@ -1,8 +1,8 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
 public class Note {
-    int note_id;
-    String note_user_id,note_content,note_voice_src,note_pic_src,note_time_src;
+    private int note_id;
+    private String note_user_id,note_content,note_voice_src,note_pic_src,note_time_src;
 
     public int getNote_id() {
         return note_id;

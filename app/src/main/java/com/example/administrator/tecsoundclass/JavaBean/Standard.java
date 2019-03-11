@@ -1,8 +1,8 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
 public class Standard {
-    int stand_info;
-    String stand_user_id,point_facepic_src,point_voice_src;
+    private int stand_info;
+    private String stand_user_id,point_facepic_src,point_voice_src,update_time;
 
     public int getStand_info() {
         return stand_info;
@@ -35,4 +35,13 @@ public class Standard {
     public void setPoint_voice_src(String point_voice_src) {
         this.point_voice_src = point_voice_src;
     }
+
+    public String getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(String update_time) {
+        this.update_time = update_time;
+    }
+
 }

@@ -5,7 +5,7 @@
     <list>
         <mapping class="com.example.administrator.tecsoundclass.JavaBean.User"></mapping>
         <mapping class="com.example.administrator.tecsoundclass.JavaBean.Course"></mapping>
-        <mapping class="com.example.administrator.tecsoundclass.JavaBean.Elective"></mapping>
+        <mapping class="com.example.administrator.tecsoundclass.JavaBean.Selective"></mapping>
         <mapping class="com.example.administrator.tecsoundclass.JavaBean.Follow"></mapping>
         <mapping class="com.example.administrator.tecsoundclass.JavaBean.Interaction"></mapping>
         <mapping class="com.example.administrator.tecsoundclass.JavaBean.Message"></mapping>

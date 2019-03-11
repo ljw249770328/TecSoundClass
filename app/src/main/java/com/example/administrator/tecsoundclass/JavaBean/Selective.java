@@ -1,15 +1,15 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
-public class Elective {
-    int elective_id;
+public class  Selective {
+    int selective_id;
     String course_id,join_user_id,join_time;
 
-    public int getElective_id() {
-        return elective_id;
+    public int getSelective_id() {
+        return selective_id;
     }
 
-    public void setElective_id(int elective_id) {
-        this.elective_id = elective_id;
+    public void setSelective_id(int elective_id) {
+        this.selective_id = elective_id;
     }
 
     public String getCourse_id() {

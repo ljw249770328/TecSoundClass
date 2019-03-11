@@ -3,8 +3,8 @@ package com.example.administrator.tecsoundclass.JavaBean;
 import org.litepal.crud.DataSupport;
 import org.litepal.crud.LitePalSupport;
 
-public class User extends LitePalSupport {
-    private  String user_id,user_password,user_sex,user_institution,user_age,user_identity,user_name,user_pic_src;
+public class User {
+    private  String user_id,user_password,user_sex,user_institution,user_age,user_identity,user_name,user_pic_src,update_time;
 
     public String getUser_id() {
         return user_id;
@@ -69,4 +69,13 @@ public class User extends LitePalSupport {
     public void setUser_pic_src(String user_pic_src) {
         this.user_pic_src = user_pic_src;
     }
+
+    public String getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(String update_time) {
+        this.update_time = update_time;
+    }
+
 }

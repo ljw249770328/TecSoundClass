@@ -206,7 +206,6 @@ public class InteractFragment extends Fragment {
                                                 interaction.setAnswer_content_src(interactHandler.getMfilepath());
                                                 interaction.setAnswer_time(timer1.getmDate());
                                                 interaction.setAnswer_grace(Integer.parseInt((String) mTvgrade.getText()));
-                                                interaction.save();
                                                 //刷新列表
                                                 mInteractionList.clear();
                                                 mInteractionList.addAll(InitList());

@@ -1,7 +1,9 @@
 package com.example.administrator.tecsoundclass.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +36,8 @@ public class FindPswActivity extends AppCompatActivity {
     private EditText mEtNewPsw;
     private  EditText mEtConfPsw;
     private String userid=null;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +58,8 @@ public class FindPswActivity extends AppCompatActivity {
         mEtNewPsw=findViewById(R.id.et_mod_psw);
         mEtConfPsw=findViewById(R.id.et_cfg_psw);
         userid=getIntent().getExtras().getString("userid");
+        pref=PreferenceManager.getDefaultSharedPreferences(this);
+        editor=pref.edit();
         //状态栏沉浸
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -148,6 +154,7 @@ public class FindPswActivity extends AppCompatActivity {
                             JSONObject jsonObject = (JSONObject) new JSONObject(response).get("params");  //注③
                             String result = jsonObject.getString("Result");  //注④
                              if(result.equals("success")) {
+                                 editor.putString("psw",mEtConfPsw.getText().toString());
                                  Intent intent=new Intent();
                                  intent.putExtra("userid",userid);
                                  intent.putExtra("psw",mEtConfPsw.getText().toString());

@@ -2,9 +2,9 @@ package com.example.administrator.tecsoundclass.JavaBean;
 
 import org.litepal.crud.LitePalSupport;
 
-public class Point extends LitePalSupport {
-    String point_id;
-    String release_course_id,point_time,point_voice_src;
+public class Point {
+    private String point_id,release_course_id,point_time,point_voice_src;
+
 
     public String getPoint_id() {
         return point_id;

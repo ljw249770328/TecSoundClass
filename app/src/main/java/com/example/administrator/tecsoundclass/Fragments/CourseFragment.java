@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,16 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.administrator.tecsoundclass.Activity.LoginActivity;
 import com.example.administrator.tecsoundclass.Adapter.MyClassListAdapter;
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.Activity.CreateClassActivity;
@@ -21,10 +31,17 @@ import com.example.administrator.tecsoundclass.Activity.JoinActivity;
 import com.example.administrator.tecsoundclass.Activity.MainMenuActivity;
 import com.example.administrator.tecsoundclass.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class CourseFragment extends Fragment {
     private ImageView mIvMenu;
     private PopupWindow mPop;
     private ListView mLv1;
+    private MainMenuActivity activity;
     public CourseFragment() {
 
     }
@@ -69,7 +86,7 @@ public class CourseFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                Intent intent=new Intent(getActivity(),CourseMenuActivity.class);
                 Bundle bundle=new Bundle();
-                MainMenuActivity activity= (MainMenuActivity) getActivity();
+                activity= (MainMenuActivity) getActivity();
                 bundle.putString("StudentId",activity.getStudentID());
                 intent.putExtras(bundle);
                startActivity(intent);
@@ -83,7 +100,11 @@ public class CourseFragment extends Fragment {
             Intent intent=null;
             switch (v.getId()){
                 case R.id.tv_create:
+                    if(activity.getUser().getUser_identity().equals("教师"))
                     intent=new Intent(getActivity(),CreateClassActivity.class);
+                    else {
+                        Toast.makeText(getActivity(),"您没有权限",Toast.LENGTH_SHORT).show();
+                    }
                     break;
                 case R.id.tv_add_course:
                     intent=new Intent(getActivity(),JoinActivity.class);
@@ -92,4 +113,6 @@ public class CourseFragment extends Fragment {
             startActivity(intent);
         }
     }
+
+
 }
