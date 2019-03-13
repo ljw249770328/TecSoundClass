@@ -30,6 +30,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.example.weeboos.permissionlib.PermissionRequest;
 import com.example.weeboos.permissionlib.PermissionUtils;
 
@@ -141,7 +142,46 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this,"用户名或密码为空，登陆失败",Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        LoginRequest(mEtaccount.getText().toString(),mEtpassword.getText().toString());
+//                        LoginRequest(mEtaccount.getText().toString(),mEtpassword.getText().toString());
+                        String url = "http://101.132.71.111:8080/TecSoundWebApp/LoginServlet";
+                        Map<String, String> params = new HashMap<>();
+                        params.put("user_id", mEtaccount.getText().toString());  //注⑥
+                        params.put("user_password", mEtpassword.getText().toString());
+                        //登陆请求
+                        VolleyCallback.getJSONObject(getApplicationContext(), "Login", url, params, new VolleyCallback.VolleyJsonCallback() {
+                            @Override
+                            public void onFinish(JSONObject r) {
+                                String result = null;  //注④
+                                try {
+                                    result = r.getString("Result");
+                                    if (result.equals("pass")) {
+                                        editor=pref.edit();
+                                        if (rememberPass.isChecked()){
+                                            editor.putBoolean("remember_password",true);
+                                            editor.putString("userid",mEtaccount.getText().toString());
+                                            editor.putString("psw",mEtpassword.getText().toString());
+                                        }else{
+                                            editor.clear();
+                                        }
+                                        editor.apply();
+                                        Intent intent=new Intent(LoginActivity.this,MainMenuActivity.class);
+                                        Bundle bundle=new Bundle();
+                                        bundle.putString("LoginId",mEtaccount.getText().toString());
+                                        intent.putExtras(bundle);
+                                        startActivity(intent);
+                                        finish();
+                                    } else if(result.equals("pswerror")) {
+                                        Toast.makeText(LoginActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
+                                    }else if(result.equals("notexists")) {
+                                        Toast.makeText(LoginActivity.this,"用户不存在,请先注册",Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (JSONException e) {
+                                   // 做自己的请求异常操作，如Toast提示（“无网络连接”等）
+                                     Log.e("TAG", e.getMessage(), e);
+                                }
+
+                            }
+                        });
                     }
                     break;
                 case R.id.tv_regedit:
@@ -185,72 +225,72 @@ public class LoginActivity extends AppCompatActivity {
         },permissions);
     }
     //登陆请求
-    private void LoginRequest(final String accountNumber, final String password) {
-        //请求地址
-        String url = "http://101.132.71.111:8080/TecSoundWebApp/LoginServlet";
-        String tag = "Login";
-        //取得请求队列
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-
-        //防止重复请求，所以先取消tag标识的请求队列
-        requestQueue.cancelAll(tag);
-
-        //创建StringRequest，定义字符串请求的请求方式为POST(省略第一个参数会默认为GET方式)
-        final StringRequest request = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = (JSONObject) new JSONObject(response).get("params");  //注③
-                            String result = jsonObject.getString("Result");  //注④
-                            if (result.equals("pass")) {
-                                editor=pref.edit();
-                                if (rememberPass.isChecked()){
-                                    editor.putBoolean("remember_password",true);
-                                    editor.putString("userid",mEtaccount.getText().toString());
-                                    editor.putString("psw",mEtpassword.getText().toString());
-                                }else{
-                                    editor.clear();
-                                }
-                                editor.apply();
-                                Intent intent=new Intent(LoginActivity.this,MainMenuActivity.class);
-                                Bundle bundle=new Bundle();
-                                bundle.putString("LoginId",mEtaccount.getText().toString());
-                                intent.putExtras(bundle);
-                                startActivity(intent);
-                                finish();
-                            } else if(result.equals("pswerror")) {
-                                Toast.makeText(LoginActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
-                            }else if(result.equals("notexists")) {
-                                Toast.makeText(LoginActivity.this,"用户不存在,请先注册",Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            //做自己的请求异常操作，如Toast提示（“无网络连接”等）
-                            Log.e("TAG", e.getMessage(), e);
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
-                Log.e("TAG", error.getMessage(), error);
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("user_id", accountNumber);  //注⑥
-                params.put("user_password", password);
-                return params;
-            }
-        };
-
-        //设置Tag标签
-        request.setTag(tag);
-
-        //将请求添加到队列中
-        requestQueue.add(request);
-    }
+//    private void LoginRequest(final String accountNumber, final String password) {
+//        //请求地址
+//        String url = "http://101.132.71.111:8080/TecSoundWebApp/LoginServlet";
+//        String tag = "Login";
+//        //取得请求队列
+//        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+//
+//        //防止重复请求，所以先取消tag标识的请求队列
+//        requestQueue.cancelAll(tag);
+//
+//        //创建StringRequest，定义字符串请求的请求方式为POST(省略第一个参数会默认为GET方式)
+//        final StringRequest request = new StringRequest(Request.Method.POST, url,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        try {
+//                            JSONObject jsonObject = (JSONObject) new JSONObject(response).get("params");  //注③
+//                            String result = jsonObject.getString("Result");  //注④
+//                            if (result.equals("pass")) {
+//                                editor=pref.edit();
+//                                if (rememberPass.isChecked()){
+//                                    editor.putBoolean("remember_password",true);
+//                                    editor.putString("userid",mEtaccount.getText().toString());
+//                                    editor.putString("psw",mEtpassword.getText().toString());
+//                                }else{
+//                                    editor.clear();
+//                                }
+//                                editor.apply();
+//                                Intent intent=new Intent(LoginActivity.this,MainMenuActivity.class);
+//                                Bundle bundle=new Bundle();
+//                                bundle.putString("LoginId",mEtaccount.getText().toString());
+//                                intent.putExtras(bundle);
+//                                startActivity(intent);
+//                                finish();
+//                            } else if(result.equals("pswerror")) {
+//                                Toast.makeText(LoginActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
+//                            }else if(result.equals("notexists")) {
+//                                Toast.makeText(LoginActivity.this,"用户不存在,请先注册",Toast.LENGTH_SHORT).show();
+//                            }
+//                        } catch (JSONException e) {
+//                            //做自己的请求异常操作，如Toast提示（“无网络连接”等）
+//                            Log.e("TAG", e.getMessage(), e);
+//                        }
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
+//                Log.e("TAG", error.getMessage(), error);
+//            }
+//        }) {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("user_id", accountNumber);  //注⑥
+//                params.put("user_password", password);
+//                return params;
+//            }
+//        };
+//
+//        //设置Tag标签
+//        request.setTag(tag);
+//
+//        //将请求添加到队列中
+//        requestQueue.add(request);
+//    }
 
 
 }

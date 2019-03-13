@@ -1,5 +1,6 @@
 package com.example.administrator.tecsoundclass.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -29,8 +30,11 @@ import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.Activity.CreateClassActivity;
 import com.example.administrator.tecsoundclass.Activity.JoinActivity;
 import com.example.administrator.tecsoundclass.Activity.MainMenuActivity;
+import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -41,7 +45,8 @@ public class CourseFragment extends Fragment {
     private ImageView mIvMenu;
     private PopupWindow mPop;
     private ListView mLv1;
-    private MainMenuActivity activity;
+    MainMenuActivity activity;
+    String StuId="";
     public CourseFragment() {
 
     }
@@ -59,6 +64,12 @@ public class CourseFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_course,container,false);
         return view;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity= (MainMenuActivity) getActivity();
     }
 
     @Override
@@ -86,7 +97,6 @@ public class CourseFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                Intent intent=new Intent(getActivity(),CourseMenuActivity.class);
                 Bundle bundle=new Bundle();
-                activity= (MainMenuActivity) getActivity();
                 bundle.putString("StudentId",activity.getStudentID());
                 intent.putExtras(bundle);
                startActivity(intent);
@@ -97,22 +107,40 @@ public class CourseFragment extends Fragment {
         @Override
         public void onClick(View v) {
             mPop.dismiss();
-            Intent intent=null;
             switch (v.getId()){
                 case R.id.tv_create:
-                    if(activity.getUser().getUser_identity().equals("教师"))
-                    intent=new Intent(getActivity(),CreateClassActivity.class);
-                    else {
-                        Toast.makeText(getActivity(),"您没有权限",Toast.LENGTH_SHORT).show();
-                    }
+                    String url = "http://101.132.71.111:8080/TecSoundWebApp/GetUInfoServlet";
+                    Map<String, String> params = new HashMap<>();
+                    params.put("user_id", activity.getStudentID());
+                    VolleyCallback.getJSONObject(getActivity().getApplicationContext(), "GetUInfo", url, params, new VolleyCallback.VolleyJsonCallback() {
+                        @Override
+                        public void onFinish(JSONObject r) {
+                            try {
+                                JSONArray users=r.getJSONArray("users");
+                                JSONObject user= (JSONObject) users.get(0);
+                                if(user.getString("user_identity").equals("老师")){
+                                    Intent intent=new Intent(getActivity(),CreateClassActivity.class);
+                                    Bundle b=new Bundle();
+                                    b.putString("teaId",activity.getStudentID());
+                                    intent.putExtras(b);
+                                    startActivity(intent);
+                                } else {
+                                    Toast.makeText(getActivity(),"您没有权限",Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
                     break;
                 case R.id.tv_add_course:
+                    Intent intent=null;
                     intent=new Intent(getActivity(),JoinActivity.class);
+                    startActivity(intent);
                     break;
             }
-            startActivity(intent);
+
         }
     }
-
-
 }

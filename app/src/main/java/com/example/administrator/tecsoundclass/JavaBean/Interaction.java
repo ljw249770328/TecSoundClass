@@ -3,8 +3,8 @@ package com.example.administrator.tecsoundclass.JavaBean;
 import org.litepal.crud.LitePalSupport;
 
 public class Interaction {
-    private int problem_id,answer_grace;
-    private String propose_course_id,answer_user_id,answer_content_src,answer_time;
+    private int problem_id=0,answer_grace=0;
+    private String propose_course_id="",answer_user_id="",answer_content_src="",answer_time="";
 
     public int getProblem_id() {
         return problem_id;

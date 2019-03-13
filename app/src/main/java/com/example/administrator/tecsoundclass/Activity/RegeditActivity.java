@@ -26,6 +26,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -90,7 +91,34 @@ public class RegeditActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(k1||k2||k3||k4){
-                    RegeditRequest();
+//                    RegeditRequest();
+                    String url = "http://101.132.71.111:8080/TecSoundWebApp/RegeditServlet";
+                    Map<String, String> params = new HashMap<>();
+                    params.put("user_id",mEtregId.getText().toString());  //注⑥
+                    params.put("user_password",mEtConPsw.getText().toString());
+                    params.put("user_identity",mIdentity);
+                    params.put("user_name",mEtRealname.getText().toString());
+                    VolleyCallback.getJSONObject(getApplicationContext(), "Regedit", url, params, new VolleyCallback.VolleyJsonCallback() {
+                        @Override
+                        public void onFinish(JSONObject r) {
+                            try{
+                            String result = r.getString("Result");  //注④
+                            if (result.equals("success")) {  //注⑤
+                                Intent intent =new Intent(RegeditActivity.this,LoginActivity.class);
+                                intent.putExtra("id",mEtregId.getText().toString());
+                                setResult(RESULT_OK,intent);
+                                finish();
+                            }else if(result.equals("0")){
+                                Toast.makeText(RegeditActivity.this,"帐户已存在", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(RegeditActivity.this,result,Toast.LENGTH_SHORT).show();
+                            }
+                            } catch (JSONException e) {
+                                //做自己的请求异常操作，如Toast提示（“无网络连接”等）
+                                Log.e("TAG", e.getMessage(), e);
+                            }
+                        }
+                    });
                 }else {
                     Toast.makeText(RegeditActivity.this,"填写信息有误",Toast.LENGTH_SHORT).show();
                 }
@@ -186,61 +214,61 @@ public class RegeditActivity extends AppCompatActivity {
         }
     }
     //注册请求
-    private void RegeditRequest() {
-        //请求地址
-        String url = "http://101.132.71.111:8080/TecSoundWebApp/RegeditServlet";
-        String tag = "Regedit";
-        //取得请求队列
-        final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-
-        //防止重复请求，所以先取消tag标识的请求队列
-        requestQueue.cancelAll(tag);
-
-        //创建StringRequest，定义字符串请求的请求方式为POST(省略第一个参数会默认为GET方式)
-        final StringRequest request = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = (JSONObject) new JSONObject(response).get("params");  //注③
-                            String result = jsonObject.getString("Result");  //注④
-                            if (result.equals("success")) {  //注⑤
-                                Intent intent =new Intent(RegeditActivity.this,LoginActivity.class);
-                                intent.putExtra("id",mEtregId.getText().toString());
-                                setResult(RESULT_OK,intent);
-                                finish();
-                            }else if(result.equals("0")){
-                                Toast.makeText(RegeditActivity.this,"帐户已存在", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(RegeditActivity.this,result,Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (JSONException e) {
-                            //做自己的请求异常操作，如Toast提示（“无网络连接”等）
-                            Log.e("TAG", e.getMessage(), e);
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
-                Log.e("TAG", error.getMessage(), error);
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("user_id",mEtregId.getText().toString());  //注⑥
-                params.put("user_password",mEtConPsw.getText().toString());
-                params.put("user_identity",mIdentity);
-                params.put("user_name",mEtRealname.getText().toString());
-                return params;
-            }
-        };
-
-        //设置Tag标签
-        request.setTag(tag);
-
-        //将请求添加到队列中
-        requestQueue.add(request);
-    }
+//    private void RegeditRequest() {
+//        //请求地址
+//        String url = "http://101.132.71.111:8080/TecSoundWebApp/RegeditServlet";
+//        String tag = "Regedit";
+//        //取得请求队列
+//        final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+//
+//        //防止重复请求，所以先取消tag标识的请求队列
+//        requestQueue.cancelAll(tag);
+//
+//        //创建StringRequest，定义字符串请求的请求方式为POST(省略第一个参数会默认为GET方式)
+//        final StringRequest request = new StringRequest(Request.Method.POST, url,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        try {
+//                            JSONObject jsonObject = (JSONObject) new JSONObject(response).get("params");  //注③
+//                            String result = jsonObject.getString("Result");  //注④
+//                            if (result.equals("success")) {  //注⑤
+//                                Intent intent =new Intent(RegeditActivity.this,LoginActivity.class);
+//                                intent.putExtra("id",mEtregId.getText().toString());
+//                                setResult(RESULT_OK,intent);
+//                                finish();
+//                            }else if(result.equals("0")){
+//                                Toast.makeText(RegeditActivity.this,"帐户已存在", Toast.LENGTH_SHORT).show();
+//                            } else {
+//                                Toast.makeText(RegeditActivity.this,result,Toast.LENGTH_SHORT).show();
+//                            }
+//                        } catch (JSONException e) {
+//                            //做自己的请求异常操作，如Toast提示（“无网络连接”等）
+//                            Log.e("TAG", e.getMessage(), e);
+//                        }
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
+//                Log.e("TAG", error.getMessage(), error);
+//            }
+//        }) {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("user_id",mEtregId.getText().toString());  //注⑥
+//                params.put("user_password",mEtConPsw.getText().toString());
+//                params.put("user_identity",mIdentity);
+//                params.put("user_name",mEtRealname.getText().toString());
+//                return params;
+//            }
+//        };
+//
+//        //设置Tag标签
+//        request.setTag(tag);
+//
+//        //将请求添加到队列中
+//        requestQueue.add(request);
+//    }
 }

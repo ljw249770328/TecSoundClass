@@ -30,6 +30,7 @@ import com.example.administrator.tecsoundclass.Fragments.FriendFragment;
 import com.example.administrator.tecsoundclass.Fragments.MyselfFragment;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,16 +45,9 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private RadioGroup mRgTab;
     private List<Fragment> mFragmentList = new ArrayList<>();
-    private String StudentID="";
-    private  User user=new User();
+    private  String StudentID="";
 
-    public User getUser() {
-        return user;
-    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public String getStudentID() {
         return StudentID;
@@ -71,9 +65,6 @@ public class MainMenuActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main_menu);
         mRgTab=findViewById(R.id.rg_main);
         StudentID=getIntent().getExtras().getString("LoginId");
-        //查询User信息
-        UInfoRequest(StudentID);
-
         //点击切换Fragment
         mRgTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -123,62 +114,5 @@ public class MainMenuActivity extends AppCompatActivity {
             ft.hide(f);
         }
         ft.commit();
-    }
-    private void UInfoRequest(final String accountNumber) {
-        //请求地址
-        String url = "http://101.132.71.111:8080/TecSoundWebApp/GetUInfoServlet";
-        String tag = "getinfo";
-        //取得请求队列
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-
-        //防止重复请求，所以先取消tag标识的请求队列
-        requestQueue.cancelAll(tag);
-
-        //创建StringRequest，定义字符串请求的请求方式为POST(省略第一个参数会默认为GET方式)
-        final StringRequest request = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = (JSONObject) new JSONObject(response).get("params");
-                            JSONArray users=jsonObject.getJSONArray("users");
-
-                            GetUinfo(users.getJSONObject(0));
-                        } catch (JSONException e) {
-                            //做自己的请求异常操作，如Toast提示（“无网络连接”等）
-                            Log.e("TAG", e.getMessage(), e);
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
-                Log.e("TAG", error.getMessage(), error);
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("user_id", accountNumber);  //注⑥
-                return params;
-            }
-        };
-
-        //设置Tag标签
-        request.setTag(tag);
-
-        //将请求添加到队列中
-        requestQueue.add(request);
-
-    }
-    private void GetUinfo(JSONObject users) throws JSONException {
-            Toast.makeText(MainMenuActivity.this,users.toString(),Toast.LENGTH_SHORT).show();
-            user.setUser_id(users.getString("user_id"));
-            user.setUser_age(users.getString("user_age"));
-            user.setUser_identity(users.getString("user_identity"));
-            user.setUser_institution(users.getString("user_institution"));
-            user.setUser_sex(users.getString("user_sex"));
-            user.setUser_name(users.getString("user_name"));
-            user.setUser_pic_src(users.getString("user_pic_src"));
     }
 }

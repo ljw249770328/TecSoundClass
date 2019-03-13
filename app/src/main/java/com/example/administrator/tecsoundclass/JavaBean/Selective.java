@@ -1,8 +1,8 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
 public class  Selective {
-    int selective_id;
-    String course_id,join_user_id,join_time;
+    int selective_id=0;
+    String course_id="",join_user_id="",join_time="";
 
     public int getSelective_id() {
         return selective_id;

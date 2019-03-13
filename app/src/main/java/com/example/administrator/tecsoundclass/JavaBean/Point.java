@@ -3,7 +3,7 @@ package com.example.administrator.tecsoundclass.JavaBean;
 import org.litepal.crud.LitePalSupport;
 
 public class Point {
-    private String point_id,release_course_id,point_time,point_voice_src;
+    private String point_id="",release_course_id="",point_time="",point_voice_src="";
 
 
     public String getPoint_id() {

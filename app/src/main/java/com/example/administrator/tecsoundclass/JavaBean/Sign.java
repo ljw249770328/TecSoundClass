@@ -3,8 +3,8 @@ package com.example.administrator.tecsoundclass.JavaBean;
 import org.litepal.crud.LitePalSupport;
 
 public class Sign {
-    private int sign_frequency,absence_frequency, late_frequency;
-    private String sign_id,sign_course,sign_adress,sign_time,sign_state,sign_voice_src,sign_pacepic_src,sign_date;
+    private int sign_frequency=0,absence_frequency=0, late_frequency=0;
+    private String sign_id="",sign_course="",sign_adress="",sign_time="",sign_state="",sign_voice_src="",sign_pacepic_src="",sign_date="";
     public String getSign_date() {
         return sign_date;
     }
