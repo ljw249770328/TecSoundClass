@@ -42,6 +42,7 @@
         android:gravity="center"
         android:orientation="vertical">
         <ImageView
+            android:id="@+id/iv_load_class_pic"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:scaleType="fitCenter"
@@ -66,26 +67,36 @@
             android:text="基本"
             android:padding="5dp"
             android:textColor="@color/colorDarkGray"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/class_edt_name"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/bg_et_edit"
+                android:hint="课程名"
+                android:textSize="16dp"
+                android:padding="7dp"
+
+                android:textColorHint="@color/colorDarkGray"
+                android:textColor="@color/colorBlack" />
+        </LinearLayout>
+
         <EditText
+            android:id="@+id/class_edt_number"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@drawable/bg_et_edit"
             android:hint="班级"
             android:textSize="16dp"
             android:padding="7dp"
-            android:textColorHint="@color/colorDarkGray"
-            android:textColor="@color/colorBlack" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/bg_et_edit"
-            android:hint="课程名"
-            android:textSize="16dp"
-            android:padding="7dp"
-            android:layout_marginTop="15dp"
+                android:layout_marginTop="15dp"
             android:textColorHint="@color/colorDarkGray"
             android:textColor="@color/colorBlack" />
         <TextView
+            android:id="@+id/tv_class_set_time"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/bg_et_edit"
@@ -103,6 +114,7 @@
             android:layout_marginTop="15dp"
             android:textColor="@color/colorDarkGray"/>
         <EditText
+            android:id="@+id/class_edt_moreinfo"
             android:layout_width="match_parent"
             android:layout_height="125dp"
             android:hint="老师有话说..."
