@@ -36,7 +36,7 @@ public class VolleyCallback {
                     public void onResponse(String r) {
                         try {
                             JSONObject jsonObject = (JSONObject) new JSONObject(r).get("params");
-//                            callback.onFinish(jsonObject);
+                            callback.onFinish(jsonObject);
                         } catch (JSONException e) {
                             //做自己的请求异常操作，如Toast提示（“无网络连接”等）
                             Log.e("TAG", e.getMessage(), e);

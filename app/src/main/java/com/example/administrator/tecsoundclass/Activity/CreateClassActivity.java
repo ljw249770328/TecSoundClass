@@ -57,7 +57,7 @@ public class CreateClassActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.tv_class_set_time:
-                    timePicker.show(time);
+                    datePicker.show(time);
                     break;
             }
         }
@@ -78,7 +78,8 @@ public class CreateClassActivity extends AppCompatActivity {
                 mTvClassTime.setText(time.split(" ")[0]);
             }
         }, "2007-01-01 00:00", time);
-        datePicker.showSpecificTime(false); //显示时和分
+        datePicker.showSpecificTime(true); //显示时和分
+        datePicker.showSpecificDate(true);
         datePicker.setIsLoop(false);
         datePicker.setDayIsLoop(true);
 

@@ -5,6 +5,7 @@ import android.animation.PropertyValuesHolder;
 import android.app.Dialog;
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -132,8 +133,9 @@ public class CustomDatePicker {
             @Override
             public void onClick(View view) {
                 String pat="yyyy-MM-dd HH:mm";
-                if (scrollUnits1==0)
+                if (scrollUnits1==0){
                     pat="HH:mm";
+                }
                 SimpleDateFormat sdf = new SimpleDateFormat(pat, Locale.CHINA);
                 handler.handle(sdf.format(selectedCalender.getTime()));
                 datePickerDialog.dismiss();
@@ -554,6 +556,7 @@ public class CustomDatePicker {
     private int disScrollUnit(SCROLL_TYPE... scroll_types) {
         if (scroll_types == null || scroll_types.length == 0) {
             scrollUnits = SCROLL_TYPE.HOUR.value + SCROLL_TYPE.MINUTE.value;
+            scrollUnits1=SCROLL_TYPE.YEAR.value + SCROLL_TYPE.MONTH.value+ SCROLL_TYPE.DAY.value;
         } else {
             if (scroll_types.length==2){
                 for (SCROLL_TYPE scroll_type : scroll_types) {
@@ -768,7 +771,6 @@ public class CustomDatePicker {
                 executeAnimator(day_pv);
 
                 String[] timeStr = str[1].split(":");
-
                 if ((scrollUnits & SCROLL_TYPE.HOUR.value) == SCROLL_TYPE.HOUR.value) {
                     hour.clear();
                     int selectedDay = selectedCalender.get(Calendar.DAY_OF_MONTH);
