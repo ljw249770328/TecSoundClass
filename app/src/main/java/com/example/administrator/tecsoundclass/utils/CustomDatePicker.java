@@ -23,6 +23,9 @@ import java.util.Locale;
 
 public class CustomDatePicker {
 
+    public CustomDatePicker(TPDialogFactory tpDialogFactory, String 请选择日期, ResultHandler resultHandler, String startDate, String time) {
+    }
+
     /**
      * 定义结果回调接口
      */
@@ -136,6 +139,7 @@ public class CustomDatePicker {
                 if (scrollUnits1==0){
                     pat="HH:mm";
                 }
+                Log.d("------------TAGS--------------",scrollUnits+pat+scrollUnits1);
                 SimpleDateFormat sdf = new SimpleDateFormat(pat, Locale.CHINA);
                 handler.handle(sdf.format(selectedCalender.getTime()));
                 datePickerDialog.dismiss();
@@ -574,7 +578,8 @@ public class CustomDatePicker {
     }
 
     public void show(String time) {
-        String temp="yyyy-MM-dd";
+        String temp="yyyy-MM-dd HH:mm";
+
         if (canAccess) {
             if (isValidDate(time, temp)) {
                 if (startCalendar.getTime().getTime() < endCalendar.getTime().getTime()) {

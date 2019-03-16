@@ -2,6 +2,7 @@ package com.example.administrator.tecsoundclass.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.administrator.tecsoundclass.utils.CustomDatePicker;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.TPDialogFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,7 +20,7 @@ public class CreateClassActivity extends AppCompatActivity {
     private TextView mTvCancle,mTvNext,mTvClassTime;
     private EditText mEtClassNum,mEtClassName,mEtClassInfo;
     private ImageView mIvLoadPic;
-    private CustomDatePicker datePicker,timePicker;
+    private CustomDatePicker fulldatepicker,datePicker,timePicker;
     private String time;
     private String date;
     @Override
@@ -57,7 +59,15 @@ public class CreateClassActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.tv_class_set_time:
-                    datePicker.show(time);
+
+                    fulldatepicker.show(time);
+//                    TPDialogFactory factory =new TPDialogFactory();
+//                    factory.GetFullDatePicker("完整日期", new TPDialogFactory.TimeCallback() {
+//                        @Override
+//                        public void OnTimeSet(String time) {
+//                            mTvClassTime.setText(time);
+//                        }
+//                    });
                     break;
             }
         }
@@ -68,6 +78,20 @@ public class CreateClassActivity extends AppCompatActivity {
         date = time.split(" ")[0];
         //设置当前显示的时间
 //        mTvClassTime.setText(time);
+
+        /**
+         * 设置年月日时分
+         */
+        fulldatepicker = new CustomDatePicker(this, "请选择日期", new CustomDatePicker.ResultHandler() {
+            @Override
+            public void handle(String time) {
+                mTvClassTime.setText(time);
+            }
+        }, "2007-01-01 00:00", time);
+        fulldatepicker.showSpecificTime(true); //显示时和分
+        fulldatepicker.showSpecificDate(true);
+        fulldatepicker.setIsLoop(false);
+        fulldatepicker.setDayIsLoop(true);
 
         /**
          * 设置年月日
@@ -82,7 +106,9 @@ public class CreateClassActivity extends AppCompatActivity {
         datePicker.showSpecificDate(true);
         datePicker.setIsLoop(false);
         datePicker.setDayIsLoop(true);
-
+        /**
+         * 设置小时分钟
+         */
         timePicker = new CustomDatePicker(this, "请选择时间", new CustomDatePicker.ResultHandler() {
             @Override
             public void handle(String time) {
