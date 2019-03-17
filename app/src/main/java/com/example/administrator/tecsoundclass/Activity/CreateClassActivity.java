@@ -17,12 +17,10 @@ import java.util.Date;
 import java.util.Locale;
 
 public class CreateClassActivity extends AppCompatActivity {
-    private TextView mTvCancle,mTvNext,mTvClassTime;
+    private TextView mTvCancle,mTvNext,mTvClassTime,mTvClassOver;
     private EditText mEtClassNum,mEtClassName,mEtClassInfo;
     private ImageView mIvLoadPic;
-    private CustomDatePicker fulldatepicker,datePicker,timePicker;
-    private String time;
-    private String date;
+    private TPDialogFactory factory;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +33,6 @@ public class CreateClassActivity extends AppCompatActivity {
             }
         });
         SetListener();
-        initPicker();
     }
     private void  init(){
         mTvCancle=findViewById(R.id.tv_cancle);
@@ -45,11 +42,14 @@ public class CreateClassActivity extends AppCompatActivity {
         mEtClassNum=findViewById(R.id.class_edt_number);
         mIvLoadPic=findViewById(R.id.iv_load_class_pic);
         mTvClassTime=findViewById(R.id.tv_class_set_time);
+        mTvClassOver=findViewById(R.id.tv_class_set__over_time);
+        factory=new TPDialogFactory();
     }
     private void SetListener(){
         OnClick onClick=new OnClick();
         mTvCancle.setOnClickListener(onClick);
         mTvClassTime.setOnClickListener(onClick);
+        mTvClassOver.setOnClickListener(onClick);
     }
     private class OnClick implements View.OnClickListener{
         @Override
@@ -59,64 +59,15 @@ public class CreateClassActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.tv_class_set_time:
-
-                    fulldatepicker.show(time);
-//                    TPDialogFactory factory =new TPDialogFactory();
-//                    factory.GetFullDatePicker("完整日期", new TPDialogFactory.TimeCallback() {
-//                        @Override
-//                        public void OnTimeSet(String time) {
-//                            mTvClassTime.setText(time);
-//                        }
-//                    });
+                    mTvClassTime.setText("上课时间");
+                    factory.getTimePicker(CreateClassActivity.this,"上课时间",mTvClassTime).show(factory.getTime());
+                    break;
+                case R.id.tv_class_set__over_time:
+                    mTvClassOver.setText("下课时间");
+                    factory.getTimePicker(CreateClassActivity.this,"下课时间",mTvClassOver).show(factory.getTime());
                     break;
             }
         }
     }
-    private void initPicker() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
-        time = sdf.format(new Date());
-        date = time.split(" ")[0];
-        //设置当前显示的时间
-//        mTvClassTime.setText(time);
 
-        /**
-         * 设置年月日时分
-         */
-        fulldatepicker = new CustomDatePicker(this, "请选择日期", new CustomDatePicker.ResultHandler() {
-            @Override
-            public void handle(String time) {
-                mTvClassTime.setText(time);
-            }
-        }, "2007-01-01 00:00", time);
-        fulldatepicker.showSpecificTime(true); //显示时和分
-        fulldatepicker.showSpecificDate(true);
-        fulldatepicker.setIsLoop(false);
-        fulldatepicker.setDayIsLoop(true);
-
-        /**
-         * 设置年月日
-         */
-        datePicker = new CustomDatePicker(this, "请选择日期", new CustomDatePicker.ResultHandler() {
-            @Override
-            public void handle(String time) {
-                mTvClassTime.setText(time.split(" ")[0]);
-            }
-        }, "2007-01-01 00:00", time);
-        datePicker.showSpecificTime(true); //显示时和分
-        datePicker.showSpecificDate(true);
-        datePicker.setIsLoop(false);
-        datePicker.setDayIsLoop(true);
-        /**
-         * 设置小时分钟
-         */
-        timePicker = new CustomDatePicker(this, "请选择时间", new CustomDatePicker.ResultHandler() {
-            @Override
-            public void handle(String time) {
-                mTvClassTime.setText(time);
-            }
-        }, "2007-01-01 00:00", "2027-12-31 23:59");//"2027-12-31 23:59"
-        timePicker.showSpecificTime(true);
-        timePicker.showSpecificDate(false);
-        timePicker.setIsLoop(true);
-    }
 }

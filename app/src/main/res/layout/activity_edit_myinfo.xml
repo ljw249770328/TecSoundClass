@@ -47,6 +47,7 @@
                 android:gravity="center"
                 android:orientation="horizontal">
                 <ImageView
+                    android:id="@+id/iv_edit_head"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginLeft="10dp"
@@ -60,12 +61,12 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="头像"
+                        android:text="点击更换头像"
                         android:textSize="17dp"
                         android:textStyle="bold"
                         android:drawableRight="@drawable/edit"
                         android:layout_marginTop="5dp"
-                        android:textColor="@color/colorBlack"/>
+                        android:textColor="@color/colorGray"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -85,7 +86,7 @@
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="8"
+                            android:layout_weight="7"
                             android:padding="7dp"
                             android:text="真实姓名"
                             android:gravity="left"
@@ -99,7 +100,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
                             android:background="@drawable/bg_textview"
-                            android:gravity="right"
+                            android:gravity="center"
                             android:padding="7dp"
                             android:text="xxxxx"
                             android:textColor="@color/colorDarkGray"
@@ -115,7 +116,7 @@
                             android:padding="7dp"
                             android:layout_below="@id/tv_my_name"
                             android:text="帐号:"
-                            android:layout_weight="8"
+                            android:layout_weight="6"
                             android:textSize="16sp"
                             android:background="@drawable/bg_textview"
                             android:textColor="@color/colorBlack"/>
@@ -126,23 +127,37 @@
                             android:layout_weight="3"
                             android:padding="7dp"
                             android:text="xxxxx"
-                            android:gravity="right"
+                            android:gravity="center"
                             android:textSize="16sp"
                             android:background="@drawable/bg_textview"
                             android:textColor="@color/colorDarkGray"/>
                     </LinearLayout>
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
                     <TextView
-                        android:id="@+id/tv_my_birth_date"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="8"
                         android:layout_height="wrap_content"
                         android:padding="7dp"
                         android:layout_below="@id/tv_my_id"
                         android:text="出生年月:"
-                        android:drawableRight="@drawable/edit"
                         android:textSize="16sp"
-                        android:background="@drawable/bg_et_edit"
+                        android:background="@drawable/bg_textview"
                         android:textColor="@color/colorBlack"/>
+                    <TextView
+                        android:id="@+id/tv_my_birth_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:padding="7dp"
+                        android:drawableRight="@drawable/edit"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:background="@drawable/bg_textview"
+                        android:textColor="@color/colorDarkGray"/>
+                </LinearLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -150,6 +165,7 @@
                         android:padding="5dp"
                         android:textColor="@color/colorDarkGray"/>
                     <RadioGroup
+                        android:id="@+id/rg_sex_group"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -171,7 +187,7 @@
                             android:background="@drawable/selector_my_sex"
                             />
                         <RadioButton
-                            android:id="@+id/rb_sex_demale"
+                            android:id="@+id/rb_sex_female"
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -215,9 +231,6 @@
 
 
                 </LinearLayout>
-
-
-
                 <TextView
                     android:id="@+id/tv_save"
                     android:layout_width="match_parent"
@@ -228,20 +241,8 @@
                     android:textSize="16sp"
                     android:layout_above="@id/tv_logout"
                     android:background="@drawable/bg_et_edit"
-                    android:layout_marginBottom="5dp"
-                    android:textColor="@color/colorTextGreen"/>
-                <TextView
-                    android:id="@+id/tv_logout"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:padding="7dp"
-                    android:gravity="center"
-                    android:text="退出登陆"
-                    android:textSize="16sp"
                     android:layout_alignParentBottom="true"
-                    android:background="@drawable/bg_et_edit"
-                    android:layout_marginBottom="15dp"
-                    android:textColor="@color/colorTextRed"/>
+                    android:textColor="@color/colorTextGreen"/>
             </RelativeLayout>
 
         </LinearLayout>
