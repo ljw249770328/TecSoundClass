@@ -91,7 +91,7 @@ public class CourseFragment extends Fragment {
                 mPop.showAsDropDown(mIvMenu);
             }
         });
-        mLv1.setAdapter(new MyClassListAdapter(getActivity()));
+//        mLv1.setAdapter(new MyClassListAdapter(getActivity()));///记得撤销
         mLv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

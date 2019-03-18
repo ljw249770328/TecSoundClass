@@ -111,7 +111,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
                     mTvMyBirthD.setText(user.getString("user_age"));
                     mTvMyIdentity.setText(user.getString("user_identity"));
                     if (user.getString("user_sex").equals("女"));{
-                        rb_female.isChecked();
+                        mSexGroup.check(R.id.rb_sex_female);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

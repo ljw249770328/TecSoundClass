@@ -45,16 +45,16 @@ public class TPDialogFactory {
         datepicker.setDayIsLoop(true);
         return datepicker;
     }
-    public  CustomDatePicker getTimePicker(Context con, String Tag, final TextView tv){
+    public  CustomDatePicker getTimePicker(Context con, String Tag, final TextView tv,String Starttime){
         CustomDatePicker timepicker = new CustomDatePicker(con, Tag, new CustomDatePicker.ResultHandler() {
             @Override
             public void handle(String time) {
-                tv.append(time);
+                tv.setText(time);
             }
-        }, "1949-01-01 00:00", time);
+        }, Starttime, time);
         timepicker.showSpecificTime(true);
         timepicker.showSpecificDate(false);
-        timepicker.setIsLoop(true);
+        timepicker.setIsLoop(false);
         return timepicker;
     }
 

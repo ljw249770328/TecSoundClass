@@ -1,6 +1,8 @@
 package com.example.administrator.tecsoundclass.Adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,52 +10,46 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.administrator.tecsoundclass.JavaBean.Course;
 import com.example.administrator.tecsoundclass.R;
 
-public class MyClassListAdapter extends BaseAdapter {
-    private Context mContext;
-    private LayoutInflater mLayoutInflater;
-    public MyClassListAdapter(Context context){
-        this.mContext=context;
-        mLayoutInflater=LayoutInflater.from(context);
-    }
-    @Override
-    public int getCount() {
-        return 1;
-    }
+import java.util.List;
 
-    @Override
-    public Object getItem(int position) {
-        return null;
-    }
+public class MyClassListAdapter extends RecyclerView.Adapter<MyClassListAdapter.ViewHolder> {
+    private List<Course> mCourseList;
 
-    @Override
-    public long getItemId(int position) {
-        return 0;
-    }
-    static  class ClassViewHolder{
-        public ImageView mCoursePic;
-        public TextView mCourseName,mCourseTea,mClass;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ClassViewHolder holder=null;
-        if (convertView==null){
-            convertView=mLayoutInflater.inflate(R.layout.layout_list_my_course_item,null);
-            holder=new ClassViewHolder();
-            holder.mCoursePic=convertView.findViewById(R.id.iv_course_pic);
-            holder.mCourseName=convertView.findViewById(R.id.tv_class_name);
-            holder.mCourseTea=convertView.findViewById(R.id.tv_tea_name);
-            holder.mClass=convertView.findViewById(R.id.tv_class_name);
-            convertView.setTag(holder);
-        }else {
-            holder= (ClassViewHolder) convertView.getTag();
+    static class ViewHolder extends  RecyclerView.ViewHolder{
+        ImageView mCoursePic;
+        TextView mCourseName,mCourseTea,mClass;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            mCoursePic=itemView.findViewById(R.id.iv_course_pic);
+            mCourseName=itemView.findViewById(R.id.tv_class_name);
+            mCourseTea=itemView.findViewById(R.id.tv_tea_name);
+            mClass=itemView.findViewById(R.id.tv_class_name);
         }
-        holder.mCourseName.setText("java基础");
-        holder.mCourseTea.setText("xx老师");
-        holder.mClass.setText("16级软件工程2班");
-        holder.mCoursePic.setImageResource(R.drawable.java);
-        return convertView;
+    }
+    public MyClassListAdapter(List<Course> courseList){
+        mCourseList=courseList;
+    }
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View view =LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.layout_list_my_course_item,viewGroup,false);
+        ViewHolder holder =new ViewHolder(view);
+        return holder;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+        Course course =mCourseList.get(i);
+        viewHolder.mClass.setText(course.getCourse_name());
+//        写到这里 更改适配器,参照sign
+    }
+
+    @Override
+    public int getItemCount() {
+        return mCourseList.size();
     }
 }

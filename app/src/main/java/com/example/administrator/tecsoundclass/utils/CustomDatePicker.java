@@ -517,7 +517,7 @@ public class CustomDatePicker {
                     minute.add(formatTimeUnit(i));
                 }
             } else if (selectedYear == endYear && selectedMonth == endMonth && selectedDay == endDay && selectedHour == endHour) {
-                for (int i = MIN_MINUTE; i <= endMinute; i++) {
+                for (int i = MIN_MINUTE; i <= MAX_MINUTE; i++) {
                     minute.add(formatTimeUnit(i));
                 }
             } else {
@@ -694,7 +694,7 @@ public class CustomDatePicker {
                 String[] timeStr = str[1].split(":");
                 if ((scrollUnits & SCROLL_TYPE.HOUR.value) == SCROLL_TYPE.HOUR.value) {
                     hour.clear();
-                    for (int i = MIN_HOUR; i <= MAX_HOUR; i++) {
+                    for (int i = startHour; i <= MAX_HOUR; i++) {
                         hour.add(formatTimeUnit(i));
                     }
                     hour_pv.setData(hour);
@@ -712,7 +712,7 @@ public class CustomDatePicker {
                             minute.add(formatTimeUnit(i));
                         }
                     } else if (selectedHour == endHour) {
-                        for (int i = MIN_MINUTE; i <= endMinute; i++) {
+                        for (int i = MIN_MINUTE; i <= MAX_MINUTE; i++) {
                             minute.add(formatTimeUnit(i));
                         }
                     } else {
@@ -808,7 +808,7 @@ public class CustomDatePicker {
                             minute.add(formatTimeUnit(i));
                         }
                     } else if (selectedYear == endYear && selectedMonth == endMonth && selectedDay == endDay && selectedHour == endHour) {
-                        for (int i = MIN_MINUTE; i <= endMinute; i++) {
+                        for (int i = MIN_MINUTE; i <= MAX_MINUTE; i++) {
                             minute.add(formatTimeUnit(i));
                         }
                     } else {

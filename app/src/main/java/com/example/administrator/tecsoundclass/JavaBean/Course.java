@@ -1,7 +1,7 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
 public class Course {
-    private String course_id="",teacher_user_id="",belong_class="",class_time="",class_request="",register_time="";
+    private String course_id="",teacher_user_id="",course_class="",course_name="",course_time ="",course_request="" ,register_time="";
 
     public String getCourse_id() {
         return course_id;
@@ -19,28 +19,36 @@ public class Course {
         this.teacher_user_id = teacher_user_id;
     }
 
-    public String getBelong_class() {
-        return belong_class;
+    public String getCourse_class() {
+        return course_class;
     }
 
-    public void setBelong_class(String belong_class) {
-        this.belong_class = belong_class;
+    public void setCourse_class(String course_class) {
+        this.course_class = course_class;
     }
 
-    public String getClass_time() {
-        return class_time;
+    public String getCourse_name() {
+        return course_name;
     }
 
-    public void setClass_time(String class_time) {
-        this.class_time = class_time;
+    public void setCourse_name(String course_name) {
+        this.course_name = course_name;
     }
 
-    public String getClass_request() {
-        return class_request;
+    public String getCourse_time() {
+        return course_time;
     }
 
-    public void setClass_request(String class_request) {
-        this.class_request = class_request;
+    public void setCourse_time(String course_time) {
+        this.course_time = course_time;
+    }
+
+    public String getCourse_request() {
+        return course_request;
+    }
+
+    public void setCourse_request(String course_request) {
+        this.course_request = course_request;
     }
 
     public String getRegister_time() {
