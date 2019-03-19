@@ -17,20 +17,33 @@ import java.util.List;
 
 public class MyClassListAdapter extends RecyclerView.Adapter<MyClassListAdapter.ViewHolder> {
     private List<Course> mCourseList;
+    private OnRecyclerItemClickListener mListener;
 
-    static class ViewHolder extends  RecyclerView.ViewHolder{
+     class ViewHolder extends  RecyclerView.ViewHolder{
         ImageView mCoursePic;
         TextView mCourseName,mCourseTea,mClass;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mCoursePic=itemView.findViewById(R.id.iv_course_pic);
-            mCourseName=itemView.findViewById(R.id.tv_class_name);
+            mCourseName=itemView.findViewById(R.id.tv_course_name);
             mCourseTea=itemView.findViewById(R.id.tv_tea_name);
             mClass=itemView.findViewById(R.id.tv_class_name);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener!=null){
+                       mListener.onItemClick(getAdapterPosition(),mCourseList);
+                    }
+                }
+            });
         }
     }
     public MyClassListAdapter(List<Course> courseList){
         mCourseList=courseList;
+    }
+    //提供Set方法调用
+    public void setOnItemClickListener(OnRecyclerItemClickListener listener){
+        mListener=listener;
     }
     @NonNull
     @Override
@@ -44,12 +57,17 @@ public class MyClassListAdapter extends RecyclerView.Adapter<MyClassListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Course course =mCourseList.get(i);
-        viewHolder.mClass.setText(course.getCourse_name());
-//        写到这里 更改适配器,参照sign
+        viewHolder.mClass.setText(course.getCourse_class());
+        viewHolder.mCourseName.setText(course.getCourse_name());
+        viewHolder.mCourseTea.setText(course.getTeacher_user_id());
+
     }
 
     @Override
     public int getItemCount() {
         return mCourseList.size();
+    }
+    public interface OnRecyclerItemClickListener{
+        void onItemClick(int position,List<Course> CourseList);
     }
 }

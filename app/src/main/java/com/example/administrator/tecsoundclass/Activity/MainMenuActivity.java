@@ -32,7 +32,10 @@ public class MainMenuActivity extends AppCompatActivity {
     private List<Fragment> mFragmentList = new ArrayList<>();
     private  String StudentID="";
 
-
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
 
     public String getStudentID() {
         return StudentID;
