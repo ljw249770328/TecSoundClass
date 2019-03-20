@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.JavaBean.Course;
@@ -51,14 +52,15 @@ public class MoreFragment extends Fragment {
         setonclickListener();
         Uid=mActivity.getmUId();
         course=mActivity.getmCourse();
+//        Toast.makeText(getActivity(),course.getCourse_id(),Toast.LENGTH_SHORT).show();
         SetData();
     }
     private void init(View view){
         mIvBack=view.findViewById(R.id.im_back);
         mTvclassid=view.findViewById(R.id.tv_class_id);
-        mTvClassName=view.findViewById(R.id.tv_class_name);
-        mTvCourseName=view.findViewById(R.id.tv_course_name);
-        mTvClasTime=view.findViewById(R.id.tv_class_time);
+        mTvClassName=view.findViewById(R.id.tv_mclass_name);
+        mTvCourseName=view.findViewById(R.id.tv_mcourse_name);
+        mTvClasTime=view.findViewById(R.id.tv_Ctime);
         mTvTeaInfo=view.findViewById(R.id.tv_ctea_name);
         mTvtitle=view.findViewById(R.id.course_title);
         mTvExit=view.findViewById(R.id.tv_exit);
@@ -69,9 +71,9 @@ public class MoreFragment extends Fragment {
         mTvExit.setOnClickListener(onclick);
     }
     private void SetData(){
-        mTvclassid.setText("课堂id："+course.getCourse_id());
+        mTvclassid.setText("课堂id:"+course.getCourse_id());
         mTvCourseName.setText(course.getCourse_name());
-        mTvtitle.setText(course.getCourse_name()+course.getCourse_class());
+        mTvtitle.setText(course.getCourse_name()+"("+course.getCourse_class()+")");
         mTvClassName.setText(course.getCourse_class());
         mTvTeaInfo.setText(course.getTeacher_user_id());
         mTvClasTime.setText(course.getCourse_time());

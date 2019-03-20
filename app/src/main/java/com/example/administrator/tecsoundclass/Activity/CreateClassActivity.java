@@ -87,7 +87,7 @@ public class CreateClassActivity extends AppCompatActivity {
                         String url="http://101.132.71.111:8080/TecSoundWebApp/CreateClassServlet";
                         Map<String,String> params=new HashMap<>();
                         params.put("teacher_user_id",getIntent().getExtras().getString("teaId"));
-                        params.put("course_class",mEtClassNum.getText().toString());
+                        params.put("course_class",mEtClassNum.getText().toString()+"班");
                         params.put("course_time",mTvClassTime.getText().toString()+"-"+mTvClassOver.getText().toString());
                         params.put("course_request",mEtClassInfo.getText().toString());
                         params.put("course_name",mEtClassName.getText().toString());
