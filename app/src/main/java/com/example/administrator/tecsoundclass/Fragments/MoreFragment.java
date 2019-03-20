@@ -1,20 +1,36 @@
 package com.example.administrator.tecsoundclass.Fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
+import com.example.administrator.tecsoundclass.JavaBean.Course;
 import com.example.administrator.tecsoundclass.R;
 
 public class MoreFragment extends Fragment {
     private ImageView mIvBack;
+    private TextView mTvclassid,mTvCourseName,mTvClassName,mTvTeaInfo,mTvClasTime,mTvExit,mTvtitle;
+    private CourseMenuActivity mActivity;
+    private String Uid;
+    private Course course;
     public MoreFragment(){
 
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mActivity=(CourseMenuActivity)getActivity();
+    }
+
     public static Fragment newInstance() {
         Fragment fragment = new MoreFragment();
         return fragment;
@@ -31,8 +47,34 @@ public class MoreFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        init(view);
+        setonclickListener();
+        Uid=mActivity.getmUId();
+        course=mActivity.getmCourse();
+        SetData();
+    }
+    private void init(View view){
         mIvBack=view.findViewById(R.id.im_back);
-        mIvBack.setOnClickListener(new Onclick());
+        mTvclassid=view.findViewById(R.id.tv_class_id);
+        mTvClassName=view.findViewById(R.id.tv_class_name);
+        mTvCourseName=view.findViewById(R.id.tv_course_name);
+        mTvClasTime=view.findViewById(R.id.tv_class_time);
+        mTvTeaInfo=view.findViewById(R.id.tv_ctea_name);
+        mTvtitle=view.findViewById(R.id.course_title);
+        mTvExit=view.findViewById(R.id.tv_exit);
+    }
+    private void setonclickListener(){
+        Onclick onclick=new Onclick();
+        mIvBack.setOnClickListener(onclick);
+        mTvExit.setOnClickListener(onclick);
+    }
+    private void SetData(){
+        mTvclassid.setText("课堂id："+course.getCourse_id());
+        mTvCourseName.setText(course.getCourse_name());
+        mTvtitle.setText(course.getCourse_name()+course.getCourse_class());
+        mTvClassName.setText(course.getCourse_class());
+        mTvTeaInfo.setText(course.getTeacher_user_id());
+        mTvClasTime.setText(course.getCourse_time());
     }
     private class Onclick implements View.OnClickListener{
 
@@ -41,6 +83,10 @@ public class MoreFragment extends Fragment {
             switch (v.getId()){
                 case R.id.im_back:
                     getActivity().finish();
+                    break;
+                case R.id.tv_exit:
+                    break;
+                default:
                     break;
             }
         }

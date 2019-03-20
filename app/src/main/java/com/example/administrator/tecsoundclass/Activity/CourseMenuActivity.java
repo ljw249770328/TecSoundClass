@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.administrator.tecsoundclass.Fragments.CourseFragment;
 import com.example.administrator.tecsoundclass.Fragments.FriendFragment;
@@ -13,6 +14,7 @@ import com.example.administrator.tecsoundclass.Fragments.MoreFragment;
 import com.example.administrator.tecsoundclass.Fragments.MyselfFragment;
 import com.example.administrator.tecsoundclass.Fragments.ReviewFragment;
 import com.example.administrator.tecsoundclass.Fragments.SignFragment;
+import com.example.administrator.tecsoundclass.JavaBean.Course;
 import com.example.administrator.tecsoundclass.R;
 
 import java.util.ArrayList;
@@ -21,7 +23,17 @@ import java.util.List;
 public class CourseMenuActivity extends AppCompatActivity {
     private RadioGroup mRgTab;
     private List<Fragment> mFragmentList=new ArrayList<>();
-    private String StudentId;
+    private String mUId;
+    private Course mCourse;
+    public String getmUId() {
+        return mUId;
+    }
+
+    public Course getmCourse() {
+        return mCourse;
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +46,8 @@ public class CourseMenuActivity extends AppCompatActivity {
     private void  init(){
         mRgTab=findViewById(R.id.rg_course_menu);
         Bundle bundle=getIntent().getExtras();
-        StudentId=bundle.getString("StudentId");
+        mUId=bundle.getString("StudentId");
+        mCourse=(Course)bundle.getSerializable("course");
         mRgTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {

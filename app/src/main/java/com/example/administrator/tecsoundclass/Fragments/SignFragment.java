@@ -90,17 +90,17 @@ public class SignFragment extends Fragment {
         mTvSign.setOnClickListener(onclick);
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getActivity());
         mRvSign.setLayoutManager(layoutManager);
-        signList=InitList();
+//        signList=InitList();
         adapter=new MySignListAdapter(signList);
         mRvSign.setAdapter(adapter);
     }
 
     //从数据库中获得显示的数据
-    private List<Sign> InitList(){
-        List<Sign> list=new ArrayList<>();
-        list=LitePal.select("sign_date","sign_time","sign_state").where("sign_id=?",mAuthId).order("sign_date").find(Sign.class);
-        return list;
-    }
+//    private List<Sign> InitList(){
+//        List<Sign> list=new ArrayList<>();
+//        list=LitePal.select("sign_date","sign_time","sign_state").where("sign_id=?",mAuthId).order("sign_date").find(Sign.class);
+//        return list;
+//    }
     private class Onclick implements View.OnClickListener{
 
         @Override
@@ -251,7 +251,7 @@ public class SignFragment extends Fragment {
                          @Override
                          public void onDismiss(DialogInterface dialog) {
                              signList.clear();
-                             signList.addAll(InitList());
+//                             signList.addAll(InitList());
                              adapter.notifyDataSetChanged();
                          }
                      });

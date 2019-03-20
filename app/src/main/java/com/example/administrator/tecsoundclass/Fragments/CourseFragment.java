@@ -144,9 +144,11 @@ public class CourseFragment extends Fragment {
                     adapter.setOnItemClickListener(new MyClassListAdapter.OnRecyclerItemClickListener() {
                         @Override
                         public void onItemClick(int position, List<Course> CourseList) {
+                            String CourseId=CourseList.get(position).getCourse_id();
                             Intent intent=new Intent(getActivity(),CourseMenuActivity.class);
                             Bundle bundle=new Bundle();
-                            bundle.putString("StudentId",activity.getStudentID());
+                            bundle.putString("UId",activity.getStudentID());
+                            bundle.putSerializable("course",CourseList.get(position));
                             intent.putExtras(bundle);
                             startActivity(intent);
                         }

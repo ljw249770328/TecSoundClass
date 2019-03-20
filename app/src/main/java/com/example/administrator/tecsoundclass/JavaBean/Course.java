@@ -1,6 +1,8 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
-public class Course {
+import java.io.Serializable;
+
+public class Course implements Serializable {
     private String course_id="",teacher_user_id="",course_class="",course_name="",course_time ="",course_request="" ,register_time="";
 
     public String getCourse_id() {
