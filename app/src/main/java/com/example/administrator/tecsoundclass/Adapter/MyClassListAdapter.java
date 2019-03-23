@@ -21,12 +21,12 @@ public class MyClassListAdapter extends RecyclerView.Adapter<MyClassListAdapter.
 
      class ViewHolder extends  RecyclerView.ViewHolder{
         ImageView mCoursePic;
-        TextView mCourseName,mCourseTea,mClass;
+        TextView mCourseName,mCourseid,mClass;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mCoursePic=itemView.findViewById(R.id.iv_course_pic);
             mCourseName=itemView.findViewById(R.id.tv_course_name);
-            mCourseTea=itemView.findViewById(R.id.tv_tea_name);
+            mCourseid=itemView.findViewById(R.id.tv_course_id);
             mClass=itemView.findViewById(R.id.tv_class_name);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -59,7 +59,7 @@ public class MyClassListAdapter extends RecyclerView.Adapter<MyClassListAdapter.
         Course course =mCourseList.get(i);
         viewHolder.mClass.setText(course.getCourse_class());
         viewHolder.mCourseName.setText(course.getCourse_name());
-        viewHolder.mCourseTea.setText(course.getTeacher_user_id());
+        viewHolder.mCourseid.setText(course.getCourse_id());
 
     }
 

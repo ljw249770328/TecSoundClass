@@ -40,7 +40,7 @@ public class VolleyCallback {
                         } catch (JSONException e) {
                             //做自己的请求异常操作，如Toast提示（“无网络连接”等）
                             Log.e("TAG", e.getMessage(), e);
-                            Toast.makeText(context,"无网络连接",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,"连接服务器异常",Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -48,7 +48,7 @@ public class VolleyCallback {
             public void onErrorResponse(VolleyError error) {
                 //做自己的响应错误操作，如Toast提示（“请稍后重试”等）
                 Log.e("TAG", error.getMessage(), error);
-                Toast.makeText(context,"请稍后重试",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"响应错误,请稍后重试",Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override

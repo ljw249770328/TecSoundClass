@@ -160,6 +160,17 @@
                             android:textSize="16sp"
                             android:background="@drawable/bg_textview"
                             android:textColor="@color/colorBlack"/>
+
+                        <TextView
+                            android:id="@+id/tv_request_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:layout_marginTop="1dp"
+                            android:background="@drawable/bg_textview"
+                            android:visibility="gone"
+                            android:padding="7dp"
+                            android:textColor="@color/colorDarkGray"
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <TextView
@@ -172,7 +183,7 @@
                         android:textSize="16sp"
                         android:layout_alignParentBottom="true"
                         android:background="@drawable/bg_et_edit"
-                        android:layout_marginBottom="15dp"
+
                         android:textColor="@color/colorTextRed"/>
                 </RelativeLayout>
 

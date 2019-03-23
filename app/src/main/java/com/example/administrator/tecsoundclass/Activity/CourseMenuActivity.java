@@ -15,6 +15,7 @@ import com.example.administrator.tecsoundclass.Fragments.MyselfFragment;
 import com.example.administrator.tecsoundclass.Fragments.ReviewFragment;
 import com.example.administrator.tecsoundclass.Fragments.SignFragment;
 import com.example.administrator.tecsoundclass.JavaBean.Course;
+import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 
 import java.util.ArrayList;
@@ -23,10 +24,12 @@ import java.util.List;
 public class CourseMenuActivity extends AppCompatActivity {
     private RadioGroup mRgTab;
     private List<Fragment> mFragmentList=new ArrayList<>();
-    private String mUId;
+    private User mUser;
     private Course mCourse;
-    public String getmUId() {
-        return mUId;
+
+
+    public User getmUser() {
+        return mUser;
     }
 
     public Course getmCourse() {
@@ -46,7 +49,7 @@ public class CourseMenuActivity extends AppCompatActivity {
     private void  init(){
         mRgTab=findViewById(R.id.rg_course_menu);
         Bundle bundle=getIntent().getExtras();
-        mUId=bundle.getString("StudentId");
+        mUser= (User) bundle.getSerializable("user");
         mCourse=(Course)bundle.getSerializable("course");
         mRgTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

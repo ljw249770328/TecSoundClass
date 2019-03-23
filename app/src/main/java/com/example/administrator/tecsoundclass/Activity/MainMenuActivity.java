@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.administrator.tecsoundclass.Fragments.CourseFragment;
 import com.example.administrator.tecsoundclass.Fragments.FriendFragment;
@@ -31,6 +32,12 @@ public class MainMenuActivity extends AppCompatActivity {
     private RadioGroup mRgTab;
     private List<Fragment> mFragmentList = new ArrayList<>();
     private  String StudentID="";
+    private User mUser;
+    public User getmUser() {
+        return mUser;
+    }
+
+
 
     @Override
     protected void onRestart() {
@@ -52,7 +59,9 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         mRgTab=findViewById(R.id.rg_main);
-        StudentID=getIntent().getExtras().getString("LoginId");
+
+        mUser= (User) getIntent().getExtras().getSerializable("user");
+        StudentID=mUser.getUser_id();
         //点击切换Fragment
         mRgTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

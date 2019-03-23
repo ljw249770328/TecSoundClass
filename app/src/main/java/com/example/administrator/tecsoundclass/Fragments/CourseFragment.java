@@ -53,7 +53,6 @@ public class CourseFragment extends Fragment {
     private PopupWindow mPop;
     private RecyclerView mRvCourse;
     MainMenuActivity activity;
-    String StuId="";
     private MyClassListAdapter adapter;
     private List<Course> CourseList=new ArrayList<>();
     private  List<Course> list ;
@@ -147,7 +146,7 @@ public class CourseFragment extends Fragment {
                             String CourseId=CourseList.get(position).getCourse_id();
                             Intent intent=new Intent(getActivity(),CourseMenuActivity.class);
                             Bundle bundle=new Bundle();
-                            bundle.putString("UId",activity.getStudentID());
+                            bundle.putSerializable("user",activity.getmUser());
                             bundle.putSerializable("course",CourseList.get(position));
                             intent.putExtras(bundle);
                             startActivity(intent);
