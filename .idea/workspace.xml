@@ -31,18 +31,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05f29af2-eb03-40b2-874f-94e93df6ba0a" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/up.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/CourseMenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/CourseMenuActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/MainMenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/MainMenuActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyClassListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyClassListAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/CourseFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/CourseFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/MoreFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/MoreFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/JavaBean/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/JavaBean/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/VolleyCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/VolleyCallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_more.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_more.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_list_my_course_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_list_my_course_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/JavaBean/Selective.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/JavaBean/Selective.java" afterDir="false" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path=".gradle/" />
@@ -74,8 +66,8 @@
       <file leaf-file-name="CourseFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/CourseFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="118" column="70" selection-start-line="118" selection-start-column="70" selection-end-line="118" selection-end-column="70" />
+            <state relative-caret-position="266">
+              <caret line="129" column="66" lean-forward="true" selection-start-line="129" selection-start-column="66" selection-end-line="129" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -2409,7 +2401,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/JavaBean/Message.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/JavaBean/Note.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/JavaBean/Point.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/JavaBean/Selective.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/JavaBean/Sign.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/JavaBean/Standard.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/JsonCallBck.java" />
@@ -2443,10 +2434,11 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_list_my_course_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyClassListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/MainMenuActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/CourseFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/CourseMenuActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_more.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/MoreFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/JavaBean/Selective.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/CourseFragment.java" />
       </list>
     </option>
   </component>
@@ -2464,7 +2456,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -2551,29 +2542,23 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="tecsoundclass" type="462c0819:PsiDirectoryNode" />
+              <item name="JavaBean" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TecSoundClass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TecSoundClass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tecsoundclass" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TecSoundClass" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TecSoundClass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="TecSoundClass" type="b2602c69:ProjectViewProjectNode" />
-              <item name="TecSoundClass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="drawable-xxxhdpi" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2928,7 +2913,14 @@
       <option name="project" value="LOCAL" />
       <updated>1553094626015</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="小功能制作完毕,下一步制作学生选课">
+      <created>1553331912948</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1553331912949</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2941,7 +2933,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="7" weight="0.32780084" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -2950,7 +2943,6 @@
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50192803" side_tool="true" weight="0.2406639" />
-      <window_info anchor="right" id="Preview" order="4" weight="0.19571045" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.4993573" weight="0.32890365" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49871466" weight="0.32411504" />
@@ -2958,7 +2950,7 @@
       <window_info id="Captures" order="2" weight="0.25" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18297587" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18283582" />
       <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49871466" weight="0.16722038" />
       <window_info anchor="right" id="Gradle" order="3" weight="0.32969153" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -2970,6 +2962,7 @@
       <window_info anchor="bottom" id="DB Execution Console" order="13" />
       <window_info anchor="bottom" id="Messages" order="8" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Preview" order="4" weight="0.19571045" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -2995,6 +2988,7 @@
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50064266" side_tool="true" weight="0.32918397" />
       <window_info anchor="right" id="Preview" order="8" weight="0.22172236" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Device File Explorer" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Logcat" order="10" weight="0.32872927" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32918397" />
@@ -3007,7 +3001,6 @@
       <window_info anchor="right" id="Theme Preview" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
     </layout-to-restore>
   </component>
@@ -3063,7 +3056,8 @@
     <MESSAGE value="完成创建课堂,下一步实现刷新列表" />
     <MESSAGE value="创建课堂并刷新列表完成，下一步给每个item跳转时加传递课堂id" />
     <MESSAGE value="解决bug,下一部制作选择课程" />
-    <option name="LAST_COMMIT_MESSAGE" value="解决bug,下一部制作选择课程" />
+    <MESSAGE value="小功能制作完毕,下一步制作学生选课" />
+    <option name="LAST_COMMIT_MESSAGE" value="小功能制作完毕,下一步制作学生选课" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -3075,13 +3069,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="5" column="84" selection-start-line="5" selection-start-column="84" selection-end-line="5" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/JavaBean/Selective.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="52" selection-start-line="4" selection-start-column="52" selection-end-line="4" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -3294,13 +3281,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1064">
           <caret line="56" column="39" selection-start-line="56" selection-start-column="39" selection-end-line="56" selection-end-column="41" />
         </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/JavaBean/Course.java">
@@ -3469,10 +3456,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/JavaBean/Selective.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="20" column="23" lean-forward="true" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/CourseFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="118" column="70" selection-start-line="118" selection-start-column="70" selection-end-line="118" selection-end-column="70" />
+        <state relative-caret-position="266">
+          <caret line="129" column="66" lean-forward="true" selection-start-line="129" selection-start-column="66" selection-end-line="129" selection-end-column="66" />
         </state>
       </provider>
     </entry>
