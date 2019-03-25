@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:background="@color/colorGreen">
+            android:background="@color/colorBlue">
             <ImageView
                 android:id="@+id/im_back"
                 android:layout_width="35dp"

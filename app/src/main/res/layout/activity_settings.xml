@@ -12,7 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:background="@color/colorGreen">
+            android:background="@color/colorBlue">
             <ImageView
                 android:id="@+id/im_back"
                 android:layout_width="35dp"
@@ -43,24 +43,27 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_marginTop="25dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="8"
+                            android:background="@drawable/bg_textview"
+                            android:gravity="left"
                             android:padding="7dp"
                             android:text="检查更新 "
-                            android:gravity="left"
-                            android:textSize="16sp"
-                            android:background="@drawable/bg_textview"
-                            android:textColor="@color/colorBlack"/>
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/tv_my_name"
@@ -74,60 +77,64 @@
                             android:textColor="@color/colorDarkGray"
                             android:textSize="16sp" />
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="20dp">
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:padding="7dp"
                             android:layout_below="@id/tv_my_name"
-                            android:text="联系我们"
                             android:layout_weight="8"
-                            android:textSize="16sp"
                             android:background="@drawable/bg_textview"
-                            android:textColor="@color/colorBlack"/>
+                            android:padding="7dp"
+                            android:text="联系我们"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <TextView
                         android:id="@+id/tv_my_birth_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="7dp"
                         android:layout_below="@id/tv_my_id"
-                        android:text="意见反馈"
-                        android:textSize="16sp"
                         android:background="@drawable/bg_et_edit"
-                        android:textColor="@color/colorBlack"/>
+                        android:padding="7dp"
+                        android:text="意见反馈"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:padding="7dp"
                             android:layout_below="@id/tv_my_id"
-                            android:text="清理缓存:"
                             android:layout_weight="8"
-                            android:textSize="16sp"
                             android:background="@drawable/bg_textview"
-                            android:textColor="@color/colorBlack"/>
+                            android:padding="7dp"
+                            android:text="清理缓存:"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="16sp" />
+
                         <TextView
                             android:id="@+id/tv_my_occupation"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
-                            android:padding="7dp"
-                            android:text="1.12M"
+                            android:background="@drawable/bg_textview"
                             android:drawableRight="@drawable/edit"
                             android:gravity="right"
-                            android:textSize="16sp"
-                            android:background="@drawable/bg_textview"
-                            android:textColor="@color/colorDarkGray"/>
+                            android:padding="7dp"
+                            android:text="1.12M"
+                            android:textColor="@color/colorDarkGray"
+                            android:textSize="16sp" />
                     </LinearLayout>
 
 
@@ -141,7 +148,7 @@
                     android:text="完成"
                     android:textSize="16sp"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/colorGreen"
+                    android:background="@color/colorBlue"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 

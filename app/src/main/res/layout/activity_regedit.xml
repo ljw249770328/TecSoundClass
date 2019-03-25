@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activity.RegeditActivity"
     android:orientation="vertical"
-    android:background="@color/colorGreen"
+    android:background="@color/colorBlue"
     android:padding="15dp">
     <LinearLayout
         android:id="@+id/ll_toolbar"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorDarkGray"
             android:layout_marginTop="25dp"
             android:text="欢迎加入我们" />
     </LinearLayout>
@@ -86,19 +86,22 @@
                 android:layout_height="wrap_content"
                 android:text="注册帐号:"
                 android:textSize="15sp"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorDarkGray"
                 />
             <EditText
                 android:id="@+id/et_reg_id"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:paddingLeft="13dp"
                 android:layout_marginLeft="5dp"
                 android:textSize="12sp"
                 android:textColor="@color/colorWhite"
-                android:inputType="number"
-                android:hint="手机号/学号"
+                android:inputType="textPassword"
+                android:autoSizeMaxTextSize="11sp"
                 android:textColorHint="@color/colorSmallGray"
+                android:background="@drawable/bg_btn_button"
+                android:hint="手机号/学号"
+
                 />
 
         </LinearLayout>
@@ -114,17 +117,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="密码:"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorDarkGray"
                 android:layout_marginRight="35dp"
                 android:textSize="15sp" />
             <EditText
                 android:id="@+id/et_reg_psw"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:paddingLeft="13dp"
+                android:layout_marginLeft="5dp"
                 android:textSize="12sp"
                 android:textColor="@color/colorWhite"
                 android:inputType="textPassword"
+                android:autoSizeMaxTextSize="11sp"
+                android:background="@drawable/bg_btn_button"
                 android:hint="请输入6-11位密码"
                 android:textColorHint="@color/colorSmallGray"
                 />
@@ -142,17 +148,19 @@
                 android:layout_height="wrap_content"
                 android:text="确认密码:"
                 android:textSize="15sp"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorDarkGray"
                 />
             <EditText
                 android:id="@+id/et_reg_configpsw"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:paddingLeft="13dp"
                 android:layout_marginLeft="5dp"
                 android:textSize="12sp"
                 android:textColor="@color/colorWhite"
                 android:inputType="textPassword"
+                android:autoSizeMaxTextSize="11sp"
+                android:background="@drawable/bg_btn_button"
                 android:hint="请输入6-11位密码"
                 android:textColorHint="@color/colorSmallGray"
                 />
@@ -170,17 +178,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="真实姓名:"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorDarkGray"
                 android:textSize="15sp" />
             <EditText
                 android:id="@+id/et_reg_realname"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:paddingLeft="13dp"
                 android:layout_marginLeft="5dp"
                 android:textSize="12sp"
                 android:textColor="@color/colorWhite"
-                android:inputType="text"
+                android:inputType="textPassword"
+                android:autoSizeMaxTextSize="11sp"
+                android:background="@drawable/bg_btn_button"
                 android:hint="请输入真实姓名便于找回密码"
                 android:textColorHint="@color/colorSmallGray"
                 />
@@ -201,9 +211,10 @@
             android:layout_width="350dp"
             android:layout_height="50dp"
             android:background="@drawable/bg_btn_login"
+            android:layout_marginBottom="70dp"
             android:text="确认注册"
             android:textSize="17sp"
-            android:textColor="@color/colorWhite"/>
+            android:textColor="@color/colorDarkGray"/>
 
     </LinearLayout>
 </RelativeLayout>

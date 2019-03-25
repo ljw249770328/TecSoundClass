@@ -3,17 +3,17 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="colorGreen">#f32bb499</color>
+    <color name="colorBlue">#AAD9ED</color>
     <color name="colorDarkGreen">#22a58b</color>
     <color name="colorOrange">#ebb774</color>
-    <color name="colorWhite">#FFF</color>
+    <color name="colorWhite">#E0DEDE</color>
     <color name="colorBgGray">#ececed</color>
-    <color name="colorDarkWhite">#e0e0e4</color>
-    <color name="colorSmallGray">#c4bfbf</color>
+    <color name="colorDarkWhite">#AAD9ED</color>
+    <color name="colorSmallGray">#85999966</color>
     <color name="colorTranslucence">#82ffffff</color>
     <color name="colorBlack">#000</color>
     <color name="colorGray">#a0a0a1</color>
-    <color name="colorDarkGray">#5d5d5e</color>
+    <color name="colorDarkGray">#868686</color>
     <color name="colorTextGreen">#009866</color>
     <color name="colorTextYellow">#f7f84d</color>
     <color name="colorTextRed">#fd0001</color>
@@ -21,5 +21,8 @@
     <color name="colorDialogButtonText">#986534</color>
     <color name="colorLightGreen">#47bca5</color>
     <color name="colorDarkOrange">#a47548</color>
-    <color name="colorTextOrange">#a4733e</color>
+    <color name="colorTextOrange">#996633</color>
+    <color name="colorLBgGray">#69FFFFCC</color>
+
+
 </resources>

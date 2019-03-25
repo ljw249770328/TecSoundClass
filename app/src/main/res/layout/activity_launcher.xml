@@ -7,7 +7,7 @@
     tools:context=".Activity.LauncherActivity"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/colorGreen">
+    android:background="@color/colorBlue">
 
     <ImageView
         android:id="@+id/iv_1"

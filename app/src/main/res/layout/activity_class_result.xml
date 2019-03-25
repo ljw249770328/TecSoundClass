@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:background="@color/colorGreen">
+        android:background="@color/colorBlue">
         <TextView
             android:id="@+id/tv_back"
             android:layout_width="80dp"
@@ -57,7 +57,7 @@
                 android:text="加入"
                 android:textSize="15dp"
                 android:layout_gravity="center"
-                android:textColor="@color/colorGreen"
+                android:textColor="@color/colorBlue"
                 android:layout_marginTop="10dp"
                 />
             <LinearLayout

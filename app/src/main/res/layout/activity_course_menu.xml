@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorGreen">
+        android:background="@color/colorBlue">
         <RadioButton
             android:id="@+id/rb_sign"
             android:layout_width="0dp"

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".iFlytec.RegeditVoiceActivity"
-    android:background="@color/colorGreen"
+    android:background="@color/colorBlue"
     android:gravity="center">
     <LinearLayout
         android:id="@+id/ll_1"
@@ -66,7 +66,7 @@
         android:background="@color/colorWhite"
         android:layout_alignParentBottom="true"
         android:text="开始录音"
-        android:textColor="@color/colorGreen"
+        android:textColor="@color/colorBlue"
         android:gravity="center"
         android:textSize="17sp"
         android:layout_marginBottom="1dp"
