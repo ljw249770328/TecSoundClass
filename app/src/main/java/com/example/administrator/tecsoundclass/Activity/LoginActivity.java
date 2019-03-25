@@ -34,6 +34,7 @@ import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.example.weeboos.permissionlib.PermissionRequest;
 import com.example.weeboos.permissionlib.PermissionUtils;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.litepal.LitePal;
@@ -164,12 +165,34 @@ public class LoginActivity extends AppCompatActivity {
                                             editor.clear();
                                         }
                                         editor.apply();
-                                        Intent intent=new Intent(LoginActivity.this,MainMenuActivity.class);
-                                        Bundle bundle=new Bundle();
-                                        bundle.putString("LoginId",mEtaccount.getText().toString());
-                                        intent.putExtras(bundle);
-                                        startActivity(intent);
-                                        finish();
+                                        String url = "http://101.132.71.111:8080/TecSoundWebApp/GetUInfoServlet";
+                                        Map<String, String> params = new HashMap<>();
+                                        params.put("user_id", mEtaccount.getText().toString());
+                                        VolleyCallback.getJSONObject(getApplicationContext(), "Getuser", url, params, new VolleyCallback.VolleyJsonCallback() {
+                                            @Override
+                                            public void onFinish(JSONObject r) {
+                                                try {
+                                                    JSONArray users=r.getJSONArray("users");
+                                                    JSONObject user= (JSONObject) users.get(0);
+                                                    User u=new User();
+                                                    //封装user对象
+                                                    u.setUser_id(user.getString("user_id"));
+                                                    u.setUser_age(user.getString("user_age"));
+                                                    u.setUser_identity(user.getString("user_identity"));
+                                                    u.setUser_sex(user.getString("user_sex"));
+                                                    u.setUser_name(user.getString("user_name"));
+                                                    Intent intent=new Intent(LoginActivity.this,MainMenuActivity.class);
+                                                    Bundle bundle=new Bundle();
+                                                    bundle.putSerializable("user",u);
+                                                    intent.putExtras(bundle);
+                                                    startActivity(intent);
+                                                    finish();
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+                                        });
+
                                     } else if(result.equals("pswerror")) {
                                         Toast.makeText(LoginActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
                                     }else if(result.equals("notexists")) {

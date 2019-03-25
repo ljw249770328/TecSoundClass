@@ -1,5 +1,6 @@
 package com.example.administrator.tecsoundclass.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -30,18 +31,23 @@ import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.Activity.SettingsActivity;
 import com.example.administrator.tecsoundclass.Activity.StandDataActivity;
+import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.BufferUnderflowException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MyselfFragment extends Fragment {
-    private ImageView mIvMenu;
+    private ImageView mIvMenu,mIvHead;
     private PopupWindow mPop;
-    private TextView mTvStandards;
+    private TextView mTvStandards,mTvUsername,mTvUserId,mTvFriendNum,mTvCourseNum;
     private LinearLayout mEditInfo;
+    MainMenuActivity activity;
+
     public MyselfFragment() {
 
     }
@@ -56,6 +62,12 @@ public class MyselfFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity= (MainMenuActivity) getActivity();
+    }
+
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.fragment_my,container,false);
         return view;
@@ -64,15 +76,58 @@ public class MyselfFragment extends Fragment {
         mIvMenu=view.findViewById(R.id.iv_menu_list);
         mTvStandards=view.findViewById(R.id.m_status_data);
         mEditInfo=view.findViewById(R.id.ll_2);
+        mIvHead=view.findViewById(R.id.iv_user_head);
+        mTvUsername=view.findViewById(R.id.user_name);
+        mTvUserId=view.findViewById(R.id.user_id);
+        mTvFriendNum=view.findViewById(R.id.fri_num);
+        mTvCourseNum=view.findViewById(R.id.class_num);
     }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        init(view);
+    private void SetOnclick(){
         OnClick onClick=new OnClick();
         mIvMenu.setOnClickListener(onClick);
         mTvStandards.setOnClickListener(onClick);
         mEditInfo.setOnClickListener(onClick);
+    }
+    private void initlist(){
+        View view=getActivity().getLayoutInflater().inflate(R.layout.layout_pop_menu_my,null);
+        TextView mTvSZone=view.findViewById(R.id.tv_send_zone);
+        TextView mTvReset=view.findViewById(R.id.tv_reset);
+        TextView mTvSettings=view.findViewById(R.id.tv_settings);
+        TextView mTvExits=view.findViewById(R.id.tv_exit);
+        OnClick onclick=new OnClick();
+        mTvSZone.setOnClickListener(onclick);
+        mTvReset.setOnClickListener(onclick);
+        mTvSettings.setOnClickListener(onclick);
+        mTvExits.setOnClickListener(onclick);
+        mPop=new PopupWindow(view,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        mPop.setOutsideTouchable(true);
+        mPop.setFocusable(true);
+        mPop.showAsDropDown(mIvMenu);
+    }
+    private void SetInfo(){
+        String url = "http://101.132.71.111:8080/TecSoundWebApp/GetUInfoServlet";
+        Map<String, String> params = new HashMap<>();
+        params.put("user_id", activity.getStudentID());
+        VolleyCallback.getJSONObject(getActivity().getApplicationContext(), "GetUInfo", url, params, new VolleyCallback.VolleyJsonCallback() {
+            @Override
+            public void onFinish(JSONObject r) {
+                try {
+                    JSONArray users=r.getJSONArray("users");
+                    JSONObject user= (JSONObject) users.get(0);
+                    mTvUsername.setText(user.getString("user_name"));
+                    mTvUserId.setText(user.getString("user_id"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        init(view);
+        SetOnclick();
+        SetInfo();
     }
 
     private class OnClick implements View.OnClickListener{
@@ -83,20 +138,7 @@ public class MyselfFragment extends Fragment {
             MainMenuActivity activity=(MainMenuActivity)getActivity();
             switch (v.getId()){
                 case R.id.iv_menu_list:
-                    View view=getActivity().getLayoutInflater().inflate(R.layout.layout_pop_menu_my,null);
-                    TextView mTvSZone=view.findViewById(R.id.tv_send_zone);
-                    TextView mTvReset=view.findViewById(R.id.tv_reset);
-                    TextView mTvSettings=view.findViewById(R.id.tv_settings);
-                    TextView mTvExits=view.findViewById(R.id.tv_exit);
-                    OnClick onclick=new OnClick();
-                    mTvSZone.setOnClickListener(onclick);
-                    mTvReset.setOnClickListener(onclick);
-                    mTvSettings.setOnClickListener(onclick);
-                    mTvExits.setOnClickListener(onclick);
-                    mPop=new PopupWindow(view,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-                    mPop.setOutsideTouchable(true);
-                    mPop.setFocusable(true);
-                    mPop.showAsDropDown(mIvMenu);
+                    initlist();
                     break;
                 case R.id.tv_send_zone:
                     mPop.dismiss();
@@ -117,6 +159,9 @@ public class MyselfFragment extends Fragment {
                     break;
                 case R.id.ll_2:
                     intent=new Intent(getActivity(),EditMyInfoActivity.class);
+                    Bundle bundle1 =new Bundle();
+                    bundle1.putString("user_id",activity.getStudentID());
+                    intent.putExtras(bundle1);
                     startActivity(intent);
                     break;
                 case R.id.tv_exit:

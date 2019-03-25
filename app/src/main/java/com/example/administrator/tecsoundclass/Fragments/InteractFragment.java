@@ -79,16 +79,16 @@ public class InteractFragment extends Fragment {
         mRvInteract=view.findViewById(R.id.recycler_view_interact);
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getActivity());
         mRvInteract.setLayoutManager(layoutManager);
-        mInteractionList=InitList();
+//        mInteractionList=InitList();
         adapter=new MyInteractAdapter(mInteractionList);
         mRvInteract.setAdapter(adapter);
         view.findViewById(R.id.btn_race_resp).setOnClickListener(onclick);
     }
-    private List<Interaction> InitList(){
-        List<Interaction> list=new ArrayList<>();
-        list=LitePal.select("answer_grace","answer_time","answer_content_src").where("answer_user_id=?",mAuthId).order("answer_time").find(Interaction.class);
-        return list;
-    }
+//    private List<Interaction> InitList(){
+//        List<Interaction> list=new ArrayList<>();
+//        list=LitePal.select("answer_grace","answer_time","answer_content_src").where("answer_user_id=?",mAuthId).order("answer_time").find(Interaction.class);
+//        return list;
+//    }
     private class Onclick implements View.OnClickListener{
 
         @Override
@@ -208,7 +208,7 @@ public class InteractFragment extends Fragment {
                                                 interaction.setAnswer_grace(Integer.parseInt((String) mTvgrade.getText()));
                                                 //刷新列表
                                                 mInteractionList.clear();
-                                                mInteractionList.addAll(InitList());
+//                                                mInteractionList.addAll(InitList());
                                                 adapter.notifyDataSetChanged();
                                             }
                                         });

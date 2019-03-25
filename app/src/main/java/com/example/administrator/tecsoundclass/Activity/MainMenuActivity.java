@@ -7,24 +7,10 @@ import android.app.Service;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
+
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.administrator.tecsoundclass.Fragments.CourseFragment;
 import com.example.administrator.tecsoundclass.Fragments.FriendFragment;
 import com.example.administrator.tecsoundclass.Fragments.MyselfFragment;
@@ -46,8 +32,17 @@ public class MainMenuActivity extends AppCompatActivity {
     private RadioGroup mRgTab;
     private List<Fragment> mFragmentList = new ArrayList<>();
     private  String StudentID="";
+    private User mUser;
+    public User getmUser() {
+        return mUser;
+    }
 
 
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
 
     public String getStudentID() {
         return StudentID;
@@ -64,7 +59,9 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         mRgTab=findViewById(R.id.rg_main);
-        StudentID=getIntent().getExtras().getString("LoginId");
+
+        mUser= (User) getIntent().getExtras().getSerializable("user");
+        StudentID=mUser.getUser_id();
         //点击切换Fragment
         mRgTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override

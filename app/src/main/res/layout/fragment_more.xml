@@ -56,13 +56,16 @@
                         android:padding="10dp"
                         android:layout_marginLeft="20dp"
                         android:orientation="vertical">
+
                         <TextView
+                            android:id="@+id/tv_class_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="班级名称"
-                            android:textSize="14dp"
-                            android:textColor="@color/colorBlack"/>
+                            android:text="课堂ID:"
+                            android:textColor="@color/colorBlack"
+                            android:textSize="14dp" />
                         <TextView
+                            android:id="@+id/tv_mcourse_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="课堂名称"
@@ -71,9 +74,10 @@
                             android:layout_marginTop="5dp"
                             android:textColor="@color/colorBlack"/>
                         <TextView
+                            android:id="@+id/tv_mclass_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="教师名称"
+                            android:text="班级名称"
                             android:textSize="14dp"
                             android:textColor="@color/colorGray"
                             android:layout_marginTop="15dp" />
@@ -105,15 +109,16 @@
                             android:background="@drawable/bg_textview"
                             android:textColor="@color/colorBlack"/>
                         <TextView
-                            android:id="@+id/tv_my_name"
+                            android:id="@+id/tv_ctea_name"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
+                            android:layout_weight="5"
                             android:background="@drawable/bg_textview"
                             android:gravity="right"
                             android:padding="7dp"
                             android:text="xxxxx"
                             android:textColor="@color/colorDarkGray"
+                            android:maxLines="1"
                             android:textSize="16sp" />
                     </LinearLayout>
                     <LinearLayout
@@ -131,14 +136,15 @@
                             android:background="@drawable/bg_textview"
                             android:textColor="@color/colorBlack"/>
                         <TextView
-                            android:id="@+id/tv_my_id"
+                            android:id="@+id/tv_Ctime"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="3"
+                            android:layout_weight="5"
                             android:padding="7dp"
                             android:text="xxxxx"
                             android:gravity="right"
                             android:textSize="16sp"
+                            android:maxLines="1"
                             android:background="@drawable/bg_textview"
                             android:textColor="@color/colorDarkGray"/>
                     </LinearLayout>
@@ -154,9 +160,21 @@
                             android:textSize="16sp"
                             android:background="@drawable/bg_textview"
                             android:textColor="@color/colorBlack"/>
+
+                        <TextView
+                            android:id="@+id/tv_request_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:layout_marginTop="1dp"
+                            android:background="@drawable/bg_textview"
+                            android:visibility="gone"
+                            android:padding="7dp"
+                            android:textColor="@color/colorDarkGray"
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/tv_exit"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:padding="7dp"
@@ -165,7 +183,7 @@
                         android:textSize="16sp"
                         android:layout_alignParentBottom="true"
                         android:background="@drawable/bg_et_edit"
-                        android:layout_marginBottom="15dp"
+
                         android:textColor="@color/colorTextRed"/>
                 </RelativeLayout>
 

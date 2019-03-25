@@ -42,6 +42,7 @@
         android:gravity="center"
         android:orientation="vertical">
         <ImageView
+            android:id="@+id/iv_load_class_pic"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:scaleType="fitCenter"
@@ -66,35 +67,94 @@
             android:text="基本"
             android:padding="5dp"
             android:textColor="@color/colorDarkGray"/>
-        <EditText
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/bg_et_edit"
-            android:hint="班级"
-            android:textSize="16dp"
-            android:padding="7dp"
-            android:textColorHint="@color/colorDarkGray"
-            android:textColor="@color/colorBlack" />
-        <EditText
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/class_edt_name"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/bg_et_edit"
+                android:hint="课程名"
+                android:textSize="16dp"
+                android:padding="7dp"
+                android:textColorHint="@color/colorDarkGray"
+                android:textColor="@color/colorBlack" />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/bg_et_edit"
-            android:hint="课程名"
-            android:textSize="16dp"
-            android:padding="7dp"
-            android:layout_marginTop="15dp"
-            android:textColorHint="@color/colorDarkGray"
-            android:textColor="@color/colorBlack" />
-        <TextView
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/class_edt_number"
+                android:layout_width="0dp"
+                android:layout_height="45dp"
+                android:layout_weight="8"
+                android:background="@drawable/bg_et_edit"
+                android:hint="班级"
+                android:textSize="16dp"
+                android:padding="7dp"
+                android:layout_marginTop="15dp"
+                android:textColorHint="@color/colorDarkGray"
+                android:textColor="@color/colorBlack" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:textColor="@color/colorBlack"
+                android:padding="7dp"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bg_et_edit"
+                android:text="班"
+                android:textSize="16dp"
+                android:gravity="center"
+                />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/bg_et_edit"
-            android:text="上课时间"
-            android:textSize="16dp"
-            android:padding="7dp"
-            android:layout_marginTop="15dp"
-            android:textColor="@color/colorBlack"
-            android:drawableRight="@drawable/edit"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_class_set_time"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="3"
+                android:background="@drawable/bg_et_edit"
+                android:text="上课时间"
+                android:textSize="16sp"
+                android:padding="7dp"
+                android:gravity="center"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/colorBlack"
+                android:drawableRight="@drawable/edit"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="─"
+                android:padding="7dp"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/colorBlack"
+                android:textSize="16sp"
+                />
+            <TextView
+                android:id="@+id/tv_class_set__over_time"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="3"
+                android:background="@drawable/bg_et_edit"
+                android:text="下课时间"
+                android:textSize="16sp"
+                android:layout_marginRight="6dp"
+                android:padding="7dp"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:textColor="@color/colorBlack"
+                android:drawableRight="@drawable/edit"/>
+        </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,8 +163,10 @@
             android:layout_marginTop="15dp"
             android:textColor="@color/colorDarkGray"/>
         <EditText
+            android:id="@+id/class_edt_moreinfo"
             android:layout_width="match_parent"
             android:layout_height="125dp"
+            android:padding="5dp"
             android:hint="老师有话说..."
             android:gravity="top"
             android:textColorHint="@color/colorDarkGray"

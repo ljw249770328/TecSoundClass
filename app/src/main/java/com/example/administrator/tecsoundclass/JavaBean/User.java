@@ -3,7 +3,9 @@ package com.example.administrator.tecsoundclass.JavaBean;
 import org.litepal.crud.DataSupport;
 import org.litepal.crud.LitePalSupport;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private  String user_id="",user_password="",user_sex="",user_institution="",user_age="",user_identity="",user_name="",user_pic_src="",update_time="";
 
     public String getUser_id() {

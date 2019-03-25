@@ -90,7 +90,12 @@ public class RegeditActivity extends AppCompatActivity {
         mBtnRegedit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(k1||k2||k3||k4){
+                //清空焦点事件
+                mEtregId.clearFocus();
+                mEtPsw.clearFocus();
+                mEtConPsw.clearFocus();
+                mEtRealname.clearFocus();
+                if(k1&&k2&&k3&&k4){
 //                    RegeditRequest();
                     String url = "http://101.132.71.111:8080/TecSoundWebApp/RegeditServlet";
                     Map<String, String> params = new HashMap<>();
@@ -143,7 +148,7 @@ public class RegeditActivity extends AppCompatActivity {
             }
         });
     }
-    //自定义焦点丢失时间
+    //自定义焦点丢失事件
     private class mOnFocusListener implements View.OnFocusChangeListener{
         private EditText e;
         private mOnFocusListener(EditText editText){
