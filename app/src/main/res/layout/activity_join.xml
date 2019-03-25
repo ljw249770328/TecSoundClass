@@ -44,7 +44,7 @@
         android:layout_marginTop="40dp"
         android:textColor="@color/colorBlack"
         android:paddingLeft="15dp"
-        android:hint="输入班级号后点击下一步"
+        android:hint="输入从教师处获取到的班级号"
         android:textColorHint="@color/colorSmallGray"
         android:textSize="14dp"
         android:inputType="number"

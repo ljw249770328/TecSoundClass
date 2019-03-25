@@ -191,9 +191,10 @@ public class CourseFragment extends Fragment {
 
                     break;
                 case R.id.tv_add_course:
-                    Intent intent=null;
+                    Intent intent=new Intent(getActivity(),JoinActivity.class);;
                     Bundle bundle=new Bundle();
-                    intent=new Intent(getActivity(),JoinActivity.class);
+                    bundle.putString("Stuid",activity.getmUser().getUser_id());
+                    intent.putExtras(bundle);
                     startActivity(intent);
                     break;
             }

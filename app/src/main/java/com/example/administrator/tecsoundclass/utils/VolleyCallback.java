@@ -40,7 +40,7 @@ public class VolleyCallback {
                         } catch (JSONException e) {
                             //做自己的请求异常操作，如Toast提示（“无网络连接”等）
                             Log.e("TAG", e.getMessage(), e);
-                            Toast.makeText(context,"连接服务器异常",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,"服务器异常",Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, new Response.ErrorListener() {
