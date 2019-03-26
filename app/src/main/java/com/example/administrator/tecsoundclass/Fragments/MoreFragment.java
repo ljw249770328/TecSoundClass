@@ -95,9 +95,16 @@ public class MoreFragment extends Fragment {
         mTvRequestText.setText(course.getCourse_request());
     }
     private void Deleteclass(String CourseId){
-        String url="http://101.132.71.111:8080/TecSoundWebApp/DeleteClassServlet";
+        String url="";
         Map<String ,String> params=new HashMap<>();
-        params.put("course_id",CourseId);
+        if(mActivity.getmUser().getUser_identity().equals("老师")){
+            url="http://101.132.71.111:8080/TecSoundWebApp/DeleteClassServlet";
+            params.put("course_id",CourseId);
+        }else{
+            url="http://101.132.71.111:8080/TecSoundWebApp/ExitCourseServlet";
+            params.put("Cid",course.getCourse_id());
+            params.put("Sid",mActivity.getmUser().getUser_id());
+        }
         VolleyCallback.getJSONObject(getActivity().getApplication(), "DeleteCourse", url, params, new VolleyCallback.VolleyJsonCallback() {
             @Override
             public void onFinish(JSONObject r) {

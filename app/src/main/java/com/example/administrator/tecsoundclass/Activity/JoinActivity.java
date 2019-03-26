@@ -68,6 +68,7 @@ public class JoinActivity extends AppCompatActivity {
                                     bundle.putString("Stuid",getIntent().getExtras().getString("Stuid"));
                                     intent.putExtras(bundle);
                                     startActivity(intent);
+                                    finish();
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();

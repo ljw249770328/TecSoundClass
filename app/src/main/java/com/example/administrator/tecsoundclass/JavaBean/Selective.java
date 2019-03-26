@@ -4,14 +4,17 @@ public class  Selective {
     String course_id="";
     String join_user_id="";
     String join_time="";
-    String selective_id="";
-    public String getSelective_id() {
+    int selective_id;
+    public int getSelective_id() {
         return selective_id;
     }
 
-    public void setSelective_id(String selective_id) {
+    public void setSelective_id(int selective_id) {
         this.selective_id = selective_id;
     }
+
+
+
 
     public String getCourse_id() {
         return course_id;

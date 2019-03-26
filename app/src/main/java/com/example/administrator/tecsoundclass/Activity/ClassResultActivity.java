@@ -11,6 +11,7 @@ import com.example.administrator.tecsoundclass.JavaBean.Course;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public class ClassResultActivity extends AppCompatActivity {
 
     }
     private void init(){
-        StuId=getIntent().getExtras().getString(";Stuid");
+        StuId=getIntent().getExtras().getString("Stuid");
         course= (Course) getIntent().getExtras().getSerializable("CourseInfo");
         mTvBack=findViewById(R.id.tv_back);
         mTvCourseName=findViewById(R.id.tv_result_name);
@@ -65,14 +66,28 @@ public class ClassResultActivity extends AppCompatActivity {
                     finish();
                     break;
                 case R.id.btn_join:
-                    String url ="";
+                    String url ="http://101.132.71.111:8080/TecSoundWebApp/SelectCourseServlet";
                     Map<String,String> params=new HashMap<>();
                     params.put("Sid",StuId);
                     params.put("Cid",course.getCourse_id());
                     VolleyCallback.getJSONObject(getApplicationContext(), "select course", url, params, new VolleyCallback.VolleyJsonCallback() {
                         @Override
                         public void onFinish(JSONObject r) {
-                            //这理
+                            try {
+                                String result=r.getString("Result");
+                                if (result.equals("exists")){
+                                    Toast.makeText(ClassResultActivity.this,"不能重复加入已加入的课堂",Toast.LENGTH_SHORT).show();
+                                }
+                                if (result.equals("abandon")){
+                                    Toast.makeText(ClassResultActivity.this,"已加入该课堂的其他班级,请退出原班级后重新进入",Toast.LENGTH_SHORT).show();
+                                }else{
+                                    Toast.makeText(ClassResultActivity.this,result,Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     });
                     break;

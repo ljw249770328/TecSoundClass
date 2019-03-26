@@ -166,7 +166,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="150dp"
                             android:layout_marginTop="1dp"
-                            android:background="@drawable/bg_textview"
+                            android:background="@drawable/bg_layout_classres_bg"
                             android:visibility="gone"
                             android:padding="7dp"
                             android:textColor="@color/colorDarkGray"

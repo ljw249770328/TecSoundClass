@@ -42,6 +42,7 @@
         android:layout_height="40dp"
         android:background="@drawable/bg_et_edit"
         android:layout_marginTop="40dp"
+        android:maxLength="10"
         android:textColor="@color/colorBlack"
         android:paddingLeft="15dp"
         android:hint="输入从教师处获取到的班级号"
