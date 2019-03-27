@@ -181,6 +181,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     u.setUser_identity(user.getString("user_identity"));
                                                     u.setUser_sex(user.getString("user_sex"));
                                                     u.setUser_name(user.getString("user_name"));
+                                                    u.setUser_pic_src(user.getString("user_pic_src"));
                                                     Intent intent=new Intent(LoginActivity.this,MainMenuActivity.class);
                                                     Bundle bundle=new Bundle();
                                                     bundle.putSerializable("user",u);

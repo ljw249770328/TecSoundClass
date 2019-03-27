@@ -23,6 +23,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.administrator.tecsoundclass.Activity.EditMyInfoActivity;
 import com.example.administrator.tecsoundclass.Activity.FindPswActivity;
 import com.example.administrator.tecsoundclass.Activity.LoginActivity;
@@ -59,6 +60,12 @@ public class MyselfFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        SetInfo();
     }
 
     @Override
@@ -116,6 +123,7 @@ public class MyselfFragment extends Fragment {
                     JSONObject user= (JSONObject) users.get(0);
                     mTvUsername.setText(user.getString("user_name"));
                     mTvUserId.setText(user.getString("user_id"));
+                    Glide.with(MyselfFragment.this).load(user.getString("user_pic_src")).into(mIvHead);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -127,7 +135,6 @@ public class MyselfFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         init(view);
         SetOnclick();
-        SetInfo();
     }
 
     private class OnClick implements View.OnClickListener{
