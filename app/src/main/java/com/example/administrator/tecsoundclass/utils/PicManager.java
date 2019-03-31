@@ -16,7 +16,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class PicManager {
     private static Bitmap bitmap = null;
@@ -50,7 +49,7 @@ public class PicManager {
         }
         return  result;
     }
-    public static String  UpLoadPic(final Context context, String tag, String FilePath,String kinds){
+    public static String  UpLoadPic(final Context context, String tag, String FilePath,String tagid,String kinds){
 
         FileInputStream fis= null;
         try {
@@ -63,7 +62,7 @@ public class PicManager {
 
         String user_img =bitmapToBase64(bitmap);
         String url="http://101.132.71.111:8080/TecSoundWebApp/Base642fileServlet";
-        String path=UUID.randomUUID() +"_"+kinds+".jpeg";
+        String path=tagid+"_"+kinds+".jpeg";
         Map<String,String> params =new HashMap<>();
         params.put("user_img",user_img);
         params.put("path","C:\\apache-tomcat-8.0.44\\webapps\\images\\"+path);

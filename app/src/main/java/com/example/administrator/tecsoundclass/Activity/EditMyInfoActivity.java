@@ -1,9 +1,11 @@
 package com.example.administrator.tecsoundclass.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.signature.ObjectKey;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.utils.PicManager;
 import com.example.administrator.tecsoundclass.utils.TPDialogFactory;
@@ -34,6 +37,8 @@ public class EditMyInfoActivity extends AppCompatActivity {
     private RadioGroup mSexGroup;
     private RadioButton rb_male;
     private RadioButton rb_female;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
     private String mSex="男";
     private String picTurePath="";
 
@@ -50,6 +55,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
         rb_male=findViewById(R.id.rb_sex_male);
         rb_female=findViewById(R.id.rb_sex_female);
         mTvChangeHead=findViewById(R.id.tv_change_head);
+        pref=PreferenceManager.getDefaultSharedPreferences(this);
     }
     private void SetListeners(){
         OnClick onClick =new OnClick();
@@ -82,7 +88,13 @@ public class EditMyInfoActivity extends AppCompatActivity {
                     factory.getDatePicker(EditMyInfoActivity.this,"出生日期",mTvMyBirthD).show(factory.getTime());
                     break;
                 case R.id.tv_save:
-                    String path=PicManager.UpLoadPic(getApplicationContext(),"upload",picTurePath,"headpic");
+                    //更新sharedpref中的时间信息使glide更新
+                    String updateTime = String.valueOf(System.currentTimeMillis());
+                    editor=pref.edit();
+                    editor.putString("time",updateTime);
+                    editor.apply();
+
+                    String path=PicManager.UpLoadPic(getApplicationContext(),"upload",picTurePath,mTvMyId.getText().toString(),"headpic");
                     String url="http://101.132.71.111:8080/TecSoundWebApp/AlterUInfoServlet";
                     Map<String,String> params=new HashMap<>();
                     params.put("user_id",mTvMyId.getText().toString());
@@ -129,7 +141,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
                     mTvMyId.setText(user.getString("user_id"));
                     mTvMyBirthD.setText(user.getString("user_age"));
                     mTvMyIdentity.setText(user.getString("user_identity"));
-                    Glide.with(getApplicationContext()).load(user.getString("user_pic_src")).into(mIvEditedHead);
+                    Glide.with(getApplicationContext()).load(user.getString("user_pic_src")).signature(new ObjectKey(pref.getString("time",""))).encodeQuality(70).into(mIvEditedHead);
                     if (user.getString("user_sex").equals("女"));{
                         mSexGroup.check(R.id.rb_sex_female);
                     }

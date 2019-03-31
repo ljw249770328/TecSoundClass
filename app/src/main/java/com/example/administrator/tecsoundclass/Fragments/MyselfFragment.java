@@ -2,7 +2,9 @@ package com.example.administrator.tecsoundclass.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
@@ -24,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.signature.ObjectKey;
 import com.example.administrator.tecsoundclass.Activity.EditMyInfoActivity;
 import com.example.administrator.tecsoundclass.Activity.FindPswActivity;
 import com.example.administrator.tecsoundclass.Activity.LoginActivity;
@@ -47,6 +50,8 @@ public class MyselfFragment extends Fragment {
     private PopupWindow mPop;
     private TextView mTvStandards,mTvUsername,mTvUserId,mTvFriendNum,mTvCourseNum;
     private LinearLayout mEditInfo;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor editor;
     MainMenuActivity activity;
 
     public MyselfFragment() {
@@ -88,6 +93,7 @@ public class MyselfFragment extends Fragment {
         mTvUserId=view.findViewById(R.id.user_id);
         mTvFriendNum=view.findViewById(R.id.fri_num);
         mTvCourseNum=view.findViewById(R.id.class_num);
+        pref=PreferenceManager.getDefaultSharedPreferences(getActivity());
     }
     private void SetOnclick(){
         OnClick onClick=new OnClick();
@@ -123,7 +129,8 @@ public class MyselfFragment extends Fragment {
                     JSONObject user= (JSONObject) users.get(0);
                     mTvUsername.setText(user.getString("user_name"));
                     mTvUserId.setText(user.getString("user_id"));
-                    Glide.with(getActivity()).load(user.getString("user_pic_src")).into(mIvHead);
+                    String updateTime = String.valueOf(System.currentTimeMillis());
+                    Glide.with(activity.getApplicationContext()).load(user.getString("user_pic_src")).signature(new ObjectKey(pref.getString("time",""))).encodeQuality(70).into(mIvHead);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
