@@ -123,7 +123,7 @@ public class MyselfFragment extends Fragment {
                     JSONObject user= (JSONObject) users.get(0);
                     mTvUsername.setText(user.getString("user_name"));
                     mTvUserId.setText(user.getString("user_id"));
-                    Glide.with(MyselfFragment.this).load(user.getString("user_pic_src")).into(mIvHead);
+                    Glide.with(getActivity()).load(user.getString("user_pic_src")).into(mIvHead);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

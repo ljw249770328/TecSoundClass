@@ -25,7 +25,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +35,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
     private RadioButton rb_male;
     private RadioButton rb_female;
     private String mSex="男";
+    private String picTurePath="";
 
 
     private void init(){
@@ -82,13 +82,13 @@ public class EditMyInfoActivity extends AppCompatActivity {
                     factory.getDatePicker(EditMyInfoActivity.this,"出生日期",mTvMyBirthD).show(factory.getTime());
                     break;
                 case R.id.tv_save:
-
+                    String path=PicManager.UpLoadPic(getApplicationContext(),"upload",picTurePath,"headpic");
                     String url="http://101.132.71.111:8080/TecSoundWebApp/AlterUInfoServlet";
                     Map<String,String> params=new HashMap<>();
                     params.put("user_id",mTvMyId.getText().toString());
                     params.put("user_age",mTvMyBirthD.getText().toString());
                     params.put("user_sex",mSex);
-                    params.put("user_pic_src","http://101.132.71.111:8080/images/"+mTvMyId.getText().toString()+"_headpic.jpeg");
+                    params.put("user_pic_src",path);
                     VolleyCallback.getJSONObject(EditMyInfoActivity.this, "EditMyinfo", url, params, new VolleyCallback.VolleyJsonCallback() {
                         @Override
                         public void onFinish(JSONObject r) {
@@ -136,7 +136,6 @@ public class EditMyInfoActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         });
     }
@@ -154,10 +153,9 @@ public class EditMyInfoActivity extends AppCompatActivity {
                     cursor.moveToFirst();
                     //获取已选择的图片路径
                     int columIndex =cursor.getColumnIndex(filePathClumn[0]);
-                    String picTurePath= cursor.getString(columIndex);
+                    picTurePath= cursor.getString(columIndex);
                     cursor.close();
                     mIvEditedHead.setImageBitmap(BitmapFactory.decodeFile(picTurePath));
-                    PicManager.UpLoadPic(getApplicationContext(),"upload",picTurePath,mTvMyId.getText().toString(),"headpic");
                     break;
             }
         }

@@ -14,9 +14,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class PicManager {
     private static Bitmap bitmap = null;
@@ -50,7 +50,7 @@ public class PicManager {
         }
         return  result;
     }
-    public static String  UpLoadPic(final Context context, String tag, String FilePath,String tagid,String kinds){
+    public static String  UpLoadPic(final Context context, String tag, String FilePath,String kinds){
 
         FileInputStream fis= null;
         try {
@@ -63,22 +63,22 @@ public class PicManager {
 
         String user_img =bitmapToBase64(bitmap);
         String url="http://101.132.71.111:8080/TecSoundWebApp/Base642fileServlet";
+        String path=UUID.randomUUID() +"_"+kinds+".jpeg";
         Map<String,String> params =new HashMap<>();
         params.put("user_img",user_img);
-        params.put("tag_id",tagid);
-        params.put("kinds",kinds);
+        params.put("path","C:\\apache-tomcat-8.0.44\\webapps\\images\\"+path);
         VolleyCallback.getJSONObject(context, tag, url, params, new VolleyCallback.VolleyJsonCallback() {
             @Override
             public void onFinish(JSONObject r) {
                 try {
                     String result=r.getString("Result");
                     Log.d("Tag",result);
-                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
             }
         });
-        return null;
+        return "http://101.132.71.111:8080/images/"+path;
     }
 }
