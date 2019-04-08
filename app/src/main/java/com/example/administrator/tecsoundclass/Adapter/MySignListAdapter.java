@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.administrator.tecsoundclass.JavaBean.Course;
 import com.example.administrator.tecsoundclass.JavaBean.Sign;
 import com.example.administrator.tecsoundclass.R;
 
@@ -14,19 +15,31 @@ import java.util.List;
 
 public class MySignListAdapter extends RecyclerView.Adapter<MySignListAdapter.ViewHolder> {
     private List<Sign> mSignList;
+    private OnRecyclerItemClickListener mListener;
 
-    static class ViewHolder extends  RecyclerView.ViewHolder{
+     class ViewHolder extends  RecyclerView.ViewHolder{
         TextView mTime,mDate,mState;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mTime=itemView.findViewById(R.id.tv_sign_time);
             mDate=itemView.findViewById(R.id.tv_sign_date);
             mState=itemView.findViewById(R.id.tv_sign_status);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener!=null){
+                        mListener.onItemClick(getAdapterPosition(),mSignList);
+                    }
+                }
+            });
         }
     }
 
     public MySignListAdapter(List<Sign> signlist){
         mSignList=signlist;
+    }
+    public void setOnItemClickListener(OnRecyclerItemClickListener listener){
+         mListener= listener;
     }
     @NonNull
     @Override
@@ -48,6 +61,10 @@ public class MySignListAdapter extends RecyclerView.Adapter<MySignListAdapter.Vi
     @Override
     public int getItemCount() {
         return mSignList.size();
+    }
+
+    public interface OnRecyclerItemClickListener{
+        void onItemClick(int position, List<Sign> SignList);
     }
 
 

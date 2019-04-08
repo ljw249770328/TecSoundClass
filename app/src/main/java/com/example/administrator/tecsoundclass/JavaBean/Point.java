@@ -3,8 +3,19 @@ package com.example.administrator.tecsoundclass.JavaBean;
 import org.litepal.crud.LitePalSupport;
 
 public class Point {
-    private String point_id="",release_course_id="",point_time="",point_voice_src="";
+    private String point_id="";
+    private String release_course_id="";
+    private String point_time="";
+    private String point_voice_src="";
+    private String point_content="";
 
+    public String getPoint_content() {
+        return point_content;
+    }
+
+    public void setPoint_content(String point_content) {
+        this.point_content = point_content;
+    }
 
     public String getPoint_id() {
         return point_id;
