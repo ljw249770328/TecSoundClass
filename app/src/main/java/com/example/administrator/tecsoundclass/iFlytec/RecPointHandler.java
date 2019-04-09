@@ -55,7 +55,7 @@ public class RecPointHandler {
                     result = "";
                     button.setText("完成");
                     //点击完成后上传写到这里
-
+                    //
                 }
             }
             @Override
