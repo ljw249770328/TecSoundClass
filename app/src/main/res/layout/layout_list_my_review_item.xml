@@ -4,14 +4,12 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingRight="15dp"
-    android:paddingTop="5dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="5dp">
         <LinearLayout
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:background="@drawable/message"
-            android:gravity="right">
+            android:background="@drawable/message">
             <TextView
                 android:id="@+id/tv_voice_time"
                 android:layout_width="wrap_content"
@@ -24,6 +22,16 @@
                 android:textColor="@color/colorDarkGray"
                 android:drawableRight="@drawable/sound"
                 android:text="(语音时长)"/>
+            <TextView
+                android:id="@+id/tv_point_content"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="13dp"
+                android:layout_marginRight="3dp"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                />
         </LinearLayout>
     <TextView
         android:id="@+id/tv_review_date"

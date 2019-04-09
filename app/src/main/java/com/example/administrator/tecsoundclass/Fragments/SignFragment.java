@@ -150,7 +150,6 @@ public class SignFragment extends Fragment {
                     }
                     signList.clear();
                     signList.addAll(list);
-
                     adapter = new MySignListAdapter(signList);
                     adapter.notifyDataSetChanged();
                     mRvSign.setAdapter(adapter);

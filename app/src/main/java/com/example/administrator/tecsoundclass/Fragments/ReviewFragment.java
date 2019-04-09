@@ -2,6 +2,7 @@ package com.example.administrator.tecsoundclass.Fragments;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.Adapter.MyInteractAdapter;
 import com.example.administrator.tecsoundclass.Adapter.MyReviewListAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.Interaction;
@@ -22,12 +24,20 @@ import com.example.administrator.tecsoundclass.JavaBean.Point;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.RecPointHandler;
 import com.example.administrator.tecsoundclass.utils.Timer;
+import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.iflytek.cloud.InitListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.litepal.LitePal;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class ReviewFragment extends Fragment {
     private ImageView mIvBack;
@@ -39,9 +49,12 @@ public class ReviewFragment extends Fragment {
     private Toast mToast;
     private MyReviewListAdapter adapter;
     private RecPointHandler recPointHandler;
+    private List<Point> list;
     private List<Point> mPointList=new ArrayList<>();
     private String mAuthId;
-    private Timer timer1;
+    CourseMenuActivity mActivity;
+
+
     public ReviewFragment(){
 
     }
@@ -49,12 +62,35 @@ public class ReviewFragment extends Fragment {
         Fragment fragment = new ReviewFragment();
         return fragment;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        InitList();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mActivity= (CourseMenuActivity) getActivity();
+    }
+
+    private void init(View view){
+        mToast = Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT);
+        mIvBack=view.findViewById(R.id.im_back);
+        mRvPoint=view.findViewById(R.id.recycler_view_point);
+        mBtnClassBegin=view.findViewById(R.id.btn_class_begin);
+    }
+    private void SetListener(){
+        mIvBack.setOnClickListener(onclick);
+        mBtnClassBegin.setOnClickListener(onclick);
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAuthId=getActivity().getIntent().getExtras().getString("StudentId");
-        timer1=new com.example.administrator.tecsoundclass.utils.Timer();
+        mAuthId=mActivity.getmUser().getUser_id();
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -63,22 +99,44 @@ public class ReviewFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        mToast = Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT);
-        mIvBack=view.findViewById(R.id.im_back);
-        mIvBack.setOnClickListener(onclick);
-        mRvPoint=view.findViewById(R.id.recycler_view_point);
-        mBtnClassBegin=view.findViewById(R.id.btn_class_begin);
-        mBtnClassBegin.setOnClickListener(onclick);
+        init(view);
+        SetListener();
         RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getActivity());
         mRvPoint.setLayoutManager(layoutManager);
-        mPointList=InitList();
-        adapter=new MyReviewListAdapter(mPointList);
-        mRvPoint.setAdapter(adapter);
+
     }
 
     private List<Point> InitList(){
-        List<Point> list=new ArrayList<>();
-        list=LitePal.select("point_time","point_voice_src").order("point_time").find(Point.class);
+        list=new ArrayList<>();
+        String url ="http://101.132.71.111:8080/TecSoundWebApp/GetPointListServlet";
+        Map <String,String> params =new HashMap<>();
+        params.put("course_id",mActivity.getmCourse().getCourse_id());
+        VolleyCallback.getJSONObject(mActivity.getApplicationContext(), "GetPoints", url, params, new VolleyCallback.VolleyJsonCallback() {
+            @Override
+            public void onFinish(JSONObject r) {
+                try {
+                    JSONArray points=r.getJSONArray("Points");
+
+                    for (int i=0;i<points.length();i++){
+                        JSONObject obj= (JSONObject) points.get(i);
+                        Point point =new Point();
+                        point.setPoint_id(obj.getString("point_id"));
+                        point.setRelease_course_id(obj.getString("release_course_id"));
+                        point.setPoint_time(obj.getString("point_time"));
+                        point.setPoint_voice_src(obj.getString("point_voice_src"));
+                        point.setPoint_content(obj.getString("point_content"));
+                        list.add(point);
+                    }
+                    mPointList.clear();
+                    mPointList.addAll(list);
+                    adapter=new MyReviewListAdapter(mPointList);
+                    adapter.notifyDataSetChanged();
+                    mRvPoint.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         return list;
     }
     private class Onclick implements View.OnClickListener{
@@ -119,7 +177,7 @@ public class ReviewFragment extends Fragment {
                         mBtnRecord.setText("记录");
                     }else{
                         recPointHandler=new RecPointHandler(getActivity(),mTvResult,mBtnRecord);
-                        recPointHandler.StartHandle(mAuthId+"_"+timer1.getmDate()+timer1.getmTime());
+                        recPointHandler.StartHandle(mAuthId+"_"+UUID.randomUUID().toString());
                     }
                     break;
                 case R.id.btn_class_over:

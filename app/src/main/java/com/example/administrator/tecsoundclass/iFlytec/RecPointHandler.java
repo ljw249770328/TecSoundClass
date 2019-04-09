@@ -1,6 +1,7 @@
 package com.example.administrator.tecsoundclass.iFlytec;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Environment;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -37,9 +38,6 @@ public class RecPointHandler {
         return mfilename;
     }
 
-    public void setMfilename(String mfilename) {
-        this.mfilename = mfilename;
-    }
     public RecPointHandler(Context context, TextView tv, final Button button){
         mTvSpeechResult=tv;
         button.setText("录音中");
@@ -52,9 +50,12 @@ public class RecPointHandler {
                 Log.d("text",text);
                 result +=text;
                 mTvSpeechResult.setText(result);
+                button.setText("记录");
                 if (isLast) {
                     result = "";
                     button.setText("完成");
+                    //点击完成后上传写到这里
+
                 }
             }
             @Override
@@ -93,6 +94,10 @@ public class RecPointHandler {
         mIatDialog.setParameter(SpeechConstant.AUDIO_FORMAT,"wav");
         mIatDialog.setParameter(SpeechConstant.ASR_AUDIO_PATH, filepath);
     }
+    private void UpLoadPoints(){
+
+    }
+
     public static String parseIatResult(String json) {
         StringBuffer ret = new StringBuffer();
         try {
