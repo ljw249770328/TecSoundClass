@@ -145,7 +145,7 @@ public class RegeditVoiceActivity extends AppCompatActivity implements View.OnCl
     private void vocalRegedit() {
         mSpeakerVerifier.setParameter(SpeechConstant.PARAMS, null);
         mSpeakerVerifier.setParameter(SpeechConstant.ASR_AUDIO_PATH,
-                Environment.getExternalStorageDirectory().getAbsolutePath() + "/msc/test.pcm");
+                Environment.getExternalStorageDirectory().getAbsolutePath() + "/msc/test.wav");
         // 消除噪音,但是需要的音量很大
          mSpeakerVerifier.setParameter(SpeechConstant.AUDIO_SOURCE, "" + MediaRecorder.AudioSource.VOICE_RECOGNITION);
 

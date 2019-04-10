@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.administrator.tecsoundclass.utils.VoiceManager;
 import com.iflytek.cloud.RecognizerResult;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechError;
@@ -38,7 +39,7 @@ public class RecPointHandler {
         return mfilename;
     }
 
-    public RecPointHandler(Context context, TextView tv, final Button button){
+    public RecPointHandler(final Context context, TextView tv, final Button button){
         mTvSpeechResult=tv;
         button.setText("录音中");
         mRListener = new RecognizerDialogListener() {
@@ -54,8 +55,8 @@ public class RecPointHandler {
                 if (isLast) {
                     result = "";
                     button.setText("完成");
-                    //点击完成后上传写到这里
-                    //
+                    //点击完成后上传
+                    VoiceManager.UploadFile(context,"PointVoice",mfilepath,mfilename,"sound");
                 }
             }
             @Override
@@ -93,9 +94,6 @@ public class RecPointHandler {
         // 注：AUDIO_FORMAT参数语记需要更新版本才能生效
         mIatDialog.setParameter(SpeechConstant.AUDIO_FORMAT,"wav");
         mIatDialog.setParameter(SpeechConstant.ASR_AUDIO_PATH, filepath);
-    }
-    private void UpLoadPoints(){
-
     }
 
     public static String parseIatResult(String json) {

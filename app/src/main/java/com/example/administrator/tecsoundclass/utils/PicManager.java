@@ -67,8 +67,9 @@ public class PicManager {
         String url = "http://101.132.71.111:8080/TecSoundWebApp/Base642fileServlet";
         String path = tagid + "_" + kinds + ".jpeg";
         Map<String, String> params = new HashMap<>();
-        params.put("user_img", user_img);
-        params.put("path", "C:\\apache-tomcat-8.0.44\\webapps\\images\\" + path);
+        params.put("file", user_img);
+        params.put("kinds",kinds);
+        params.put("path",  path);
         VolleyCallback.getJSONObject(context, tag, url, params, new VolleyCallback.VolleyJsonCallback() {
             @Override
             public void onFinish(JSONObject r) {

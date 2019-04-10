@@ -164,9 +164,11 @@ public class ReviewFragment extends Fragment {
                     if (mBtnRecord.getText().equals("完成")){
                         showTip("[已记录]");
                         //存入数据库
+//                        从这里开始
                         Timer timer=new Timer();
                         Point point=new Point();
                         point.setPoint_time(timer.getmDate()+"  "+timer.getmTime());
+
                         point.setPoint_voice_src(recPointHandler.getMfilepath());
 
                         //刷新列表
@@ -177,7 +179,7 @@ public class ReviewFragment extends Fragment {
                         mBtnRecord.setText("记录");
                     }else{
                         recPointHandler=new RecPointHandler(getActivity(),mTvResult,mBtnRecord);
-                        recPointHandler.StartHandle(mAuthId+"_"+UUID.randomUUID().toString());
+                        recPointHandler.StartHandle(mAuthId+"_"+mActivity.getmCourse().getCourse_id()+"_"+UUID.randomUUID().toString());
                     }
                     break;
                 case R.id.btn_class_over:

@@ -94,7 +94,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
                     editor.putString("time",updateTime);
                     editor.apply();
 
-                    String path=PicManager.UpLoadPic(getApplicationContext(),"upload",picTurePath,mTvMyId.getText().toString(),"headpic");
+                    String path=PicManager.UpLoadPic(getApplicationContext(),"upload",picTurePath,mTvMyId.getText().toString(),"images");
                     String url="http://101.132.71.111:8080/TecSoundWebApp/AlterUInfoServlet";
                     Map<String,String> params=new HashMap<>();
                     params.put("user_id",mTvMyId.getText().toString());
