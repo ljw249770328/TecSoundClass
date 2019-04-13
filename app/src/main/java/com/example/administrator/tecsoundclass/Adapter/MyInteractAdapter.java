@@ -42,7 +42,7 @@ public class MyInteractAdapter extends RecyclerView.Adapter<MyInteractAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Interaction interaction=mInteractList.get(i);
-        viewHolder.mScore.setText(interaction.getAnswer_grace()+"");
+        viewHolder.mScore.setText(interaction.getAnswer_grade()+"");
         viewHolder.mDate.setText(interaction.getAnswer_time());
 //        viewHolder.mVoice.setText(sign.getSign_state());声音路径
     }

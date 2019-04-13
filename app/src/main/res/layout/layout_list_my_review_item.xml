@@ -9,6 +9,7 @@
         <LinearLayout
             android:layout_width="200dp"
             android:layout_height="50dp"
+            android:orientation="horizontal"
             android:background="@drawable/message">
             <TextView
                 android:id="@+id/tv_voice_time"

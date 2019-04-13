@@ -55,8 +55,6 @@ public class RecPointHandler {
                 if (isLast) {
                     result = "";
                     button.setText("完成");
-                    //点击完成后上传
-                    VoiceManager.UploadFile(context,"PointVoice",mfilepath,mfilename,"sound");
                 }
             }
             @Override

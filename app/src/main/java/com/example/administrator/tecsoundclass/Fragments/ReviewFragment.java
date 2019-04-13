@@ -19,11 +19,13 @@ import android.widget.Toast;
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.Adapter.MyInteractAdapter;
 import com.example.administrator.tecsoundclass.Adapter.MyReviewListAdapter;
+import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.Interaction;
 import com.example.administrator.tecsoundclass.JavaBean.Point;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.RecPointHandler;
 import com.example.administrator.tecsoundclass.utils.Timer;
+import com.example.administrator.tecsoundclass.utils.VoiceManager;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.iflytek.cloud.InitListener;
 
@@ -162,19 +164,30 @@ public class ReviewFragment extends Fragment {
                     break;
                 case R.id.btn_record:
                     if (mBtnRecord.getText().equals("完成")){
-                        showTip("[已记录]");
                         //存入数据库
-//                        从这里开始
-                        Timer timer=new Timer();
-                        Point point=new Point();
-                        point.setPoint_time(timer.getmDate()+"  "+timer.getmTime());
+//                        //上传音频
+                        String FileUrl=VoiceManager.UploadFile(mActivity.getApplicationContext(),"PointVoice",recPointHandler.getMfilepath(),recPointHandler.getMfilename(),"sound");
+                        //存储数据词条
+                        String url="http://101.132.71.111:8080/TecSoundWebApp/AddPointServlet";
+                        Map<String,String> params =new HashMap<>();
+                        params.put("course_id",mActivity.getmCourse().getCourse_id());
+                        params.put("voice_url",FileUrl);
+                        params.put("content",mTvResult.getText().toString());
+                        VolleyCallback.getJSONObject(mActivity.getApplicationContext(), "AddPoint", url, params, new VolleyCallback.VolleyJsonCallback() {
+                            @Override
+                            public void onFinish(JSONObject r) {
+                                try {
+                                    String result =r.getString("Result");
+                                    Toast.makeText(getActivity(),result,Toast.LENGTH_SHORT).show();
+                                    InitList();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
 
-                        point.setPoint_voice_src(recPointHandler.getMfilepath());
-
+                            }
+                        });
+                        showTip("[已记录]");
                         //刷新列表
-                        mPointList.clear();
-                        mPointList.addAll(InitList());
-                        adapter.notifyDataSetChanged();
                         mTvResult.setText("");
                         mBtnRecord.setText("记录");
                     }else{

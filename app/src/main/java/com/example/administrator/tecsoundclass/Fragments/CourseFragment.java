@@ -57,6 +57,7 @@ public class CourseFragment extends Fragment {
     private List<Course> CourseList = new ArrayList<>();
     private List<Course> list;
     private SwipeRefreshLayout swipeRefresh;
+    private TextView mTvCreate,mTvJoin;
 
     public CourseFragment() {
 
@@ -98,8 +99,11 @@ public class CourseFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 View view = getActivity().getLayoutInflater().inflate(R.layout.layout_pop_add_course, null);
-                TextView mTvCreate = view.findViewById(R.id.tv_create);
-                TextView mTvJoin = view.findViewById(R.id.tv_add_course);
+                mTvCreate = view.findViewById(R.id.tv_create);
+                mTvJoin = view.findViewById(R.id.tv_add_course);
+                if (activity.getmUser().getUser_identity().equals("老师")) {
+                    mTvCreate.setVisibility(View.VISIBLE);
+                }
                 OnClick onclick = new OnClick();
                 mTvCreate.setOnClickListener(onclick);
                 mTvJoin.setOnClickListener(onclick);
@@ -165,35 +169,17 @@ public class CourseFragment extends Fragment {
         @Override
         public void onClick(View v) {
             mPop.dismiss();
+            Intent intent ;
             switch (v.getId()) {
                 case R.id.tv_create:
-                    String url = "http://101.132.71.111:8080/TecSoundWebApp/GetUInfoServlet";
-                    Map<String, String> params = new HashMap<>();
-                    params.put("user_id", activity.getStudentID());
-                    VolleyCallback.getJSONObject(getActivity().getApplicationContext(), "GetUInfo", url, params, new VolleyCallback.VolleyJsonCallback() {
-                        @Override
-                        public void onFinish(JSONObject r) {
-                            try {
-                                JSONArray users = r.getJSONArray("users");
-                                JSONObject user = (JSONObject) users.get(0);
-                                if (user.getString("user_identity").equals("老师")) {
-                                    Intent intent = new Intent(getActivity(), CreateClassActivity.class);
-                                    Bundle b = new Bundle();
-                                    b.putString("teaId", activity.getStudentID());
-                                    intent.putExtras(b);
-                                    startActivity(intent);
-                                } else {
-                                    Toast.makeText(getActivity(), "您没有权限", Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-
+                    intent = new Intent(getActivity(), CreateClassActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("teaId", activity.getStudentID());
+                    intent.putExtras(b);
+                    startActivity(intent);
                     break;
                 case R.id.tv_add_course:
-                    Intent intent = new Intent(getActivity(), JoinActivity.class);
+                    intent = new Intent(getActivity(), JoinActivity.class);
                     ;
                     Bundle bundle = new Bundle();
                     bundle.putString("Stuid", activity.getmUser().getUser_id());

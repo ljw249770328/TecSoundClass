@@ -18,11 +18,12 @@ public class MyReviewListAdapter extends RecyclerView.Adapter<MyReviewListAdapte
    private List<Point> mPointList;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView mDate,mVoiceSound;
+        TextView mDate,mVoiceSound,mPointContent;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mDate=itemView.findViewById(R.id.tv_review_date);
             mVoiceSound=itemView.findViewById(R.id.tv_voice_time);
+            mPointContent=itemView.findViewById(R.id.tv_point_content);
         }
     }
     public MyReviewListAdapter(List<Point> pointList){
@@ -41,6 +42,7 @@ public class MyReviewListAdapter extends RecyclerView.Adapter<MyReviewListAdapte
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Point point=mPointList.get(i);
         viewHolder.mDate.setText(point.getPoint_time());
+        viewHolder.mPointContent.setText(point.getPoint_content());
         //填入录音时间
     }
 
