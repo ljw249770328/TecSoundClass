@@ -38,9 +38,7 @@ public class MySignListAdapter extends RecyclerView.Adapter<MySignListAdapter.Vi
     public MySignListAdapter(List<Sign> signlist){
         mSignList=signlist;
     }
-    public void setOnItemClickListener(OnRecyclerItemClickListener listener){
-         mListener= listener;
-    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -62,7 +60,9 @@ public class MySignListAdapter extends RecyclerView.Adapter<MySignListAdapter.Vi
     public int getItemCount() {
         return mSignList.size();
     }
-
+    public void setOnItemClickListener(OnRecyclerItemClickListener listener){
+        mListener= listener;
+    }
     public interface OnRecyclerItemClickListener{
         void onItemClick(int position, List<Sign> SignList);
     }

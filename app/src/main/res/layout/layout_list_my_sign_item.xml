@@ -12,7 +12,7 @@
         android:layout_height="60dp"
         android:padding="5dp"
         android:orientation="horizontal"
-        android:background="#d8edd5">
+        android:background="@drawable/recyclelist_sign_item">
         <LinearLayout
             android:layout_width="230dp"
             android:layout_height="match_parent"

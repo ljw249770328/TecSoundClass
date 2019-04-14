@@ -20,11 +20,13 @@ public class MyInteractAdapter extends RecyclerView.Adapter<MyInteractAdapter.Vi
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView mScore,mDate;
         ImageView mVoice;
+        View interactview ;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             mScore=itemView.findViewById(R.id.tv_interact_score);
             mDate=itemView.findViewById(R.id.tv_interact_date);
             mVoice=itemView.findViewById(R.id.iv_interact_voice);
+            interactview=itemView;
         }
     }
     public MyInteractAdapter(List<Interaction> interactionList){
@@ -36,6 +38,14 @@ public class MyInteractAdapter extends RecyclerView.Adapter<MyInteractAdapter.Vi
         View view=LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.layout_list_my_interact_item,viewGroup,false);
         ViewHolder holder=new ViewHolder(view);
+
+        holder.interactview.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return false;
+            }
+        });
+
         return  holder;
     }
 

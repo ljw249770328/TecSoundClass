@@ -14,6 +14,8 @@
     <color name="colorBlack">#000</color>
     <color name="colorGray">#a0a0a1</color>
     <color name="colorDarkGray">#5d5d5e</color>
+    <color name="colorSignItemGreen">#d8edd5</color>
+    <color name="colorSignItemPressedGreen">#abd9a4</color>
     <color name="colorTextGreen">#009866</color>
     <color name="colorTextYellow">#f7f84d</color>
     <color name="colorTextRed">#fd0001</color>

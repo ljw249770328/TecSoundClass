@@ -18,9 +18,11 @@ public class MyReviewListAdapter extends RecyclerView.Adapter<MyReviewListAdapte
    private List<Point> mPointList;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
+        View Pointview;
         TextView mDate,mVoiceSound,mPointContent;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            Pointview=itemView;
             mDate=itemView.findViewById(R.id.tv_review_date);
             mVoiceSound=itemView.findViewById(R.id.tv_voice_time);
             mPointContent=itemView.findViewById(R.id.tv_point_content);
@@ -35,6 +37,14 @@ public class MyReviewListAdapter extends RecyclerView.Adapter<MyReviewListAdapte
         View view=LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.layout_list_my_review_item,viewGroup,false);
         ViewHolder holder=new ViewHolder(view);
+
+        holder.Pointview.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return false;
+            }
+        });
+
         return  holder;
     }
 
