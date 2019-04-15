@@ -12,11 +12,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,6 +67,8 @@ public class SignFragment extends Fragment {
     private MySignListAdapter adapter;
     private List<Sign> signList = new ArrayList<>();
     private List<Sign> list;
+    private PopupWindow mpop;
+    private Onclick onclick = new Onclick();
     CourseMenuActivity mActivity;
 
     public SignFragment() {
@@ -109,7 +113,6 @@ public class SignFragment extends Fragment {
     }
 
     private void SetClickLIstener() {
-        Onclick onclick = new Onclick();
         mIvBack.setOnClickListener(onclick);
         mTvSign.setOnClickListener(onclick);
     }
@@ -151,6 +154,7 @@ public class SignFragment extends Fragment {
                     signList.clear();
                     signList.addAll(list);
                     adapter = new MySignListAdapter(signList);
+                    setPopupWindow(adapter);
                     adapter.notifyDataSetChanged();
                     mRvSign.setAdapter(adapter);
                 } catch (JSONException e) {
@@ -161,6 +165,33 @@ public class SignFragment extends Fragment {
         return list;
     }
 
+    private void setPopupWindow (MySignListAdapter adapter){
+        //设置长按显示item操作菜单
+        adapter.setOnItemLongClickListener(new MySignListAdapter.OnSignItemLongClickListener() {
+            @Override
+            public void onItemLongClick(int position, List<Sign> SignList) {
+                View view = getActivity().getLayoutInflater().inflate(R.layout.layout_course_popupwindow,null);
+                TextView mTvPopcopy =view.findViewById(R.id.tv_copy);
+                TextView mTbPopdelete =view.findViewById(R.id.tv_delete);
+                TextView mTvPopshare =view.findViewById(R.id.tv_share);
+                //设置选项事件
+                mTvPopcopy.setOnClickListener(onclick);
+                mTbPopdelete.setOnClickListener(onclick);
+                mTvPopshare.setOnClickListener(onclick);
+                //弹出窗口
+                mpop=new PopupWindow(view,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                mpop.setOutsideTouchable(true);
+                mpop.setFocusable(true);
+                view .measure(View.MeasureSpec.UNSPECIFIED,View.MeasureSpec.UNSPECIFIED);
+                RecyclerView.ViewHolder holder= mRvSign.findViewHolderForAdapterPosition(position);
+                MySignListAdapter.SignItemViewHolder viewHolder = (MySignListAdapter.SignItemViewHolder) holder;
+                int [] location =new int [2];
+                View v =viewHolder.getmItemView();
+                v.getLocationOnScreen(location);
+                mpop.showAtLocation(v, Gravity.NO_GRAVITY, (location[0] + v.getWidth() / 2) - view.getMeasuredWidth() / 2, location[1] - v.getMeasuredHeight()+50);
+            }
+        });
+    }
     private class Onclick implements View.OnClickListener {
 
         @Override
@@ -197,6 +228,13 @@ public class SignFragment extends Fragment {
                             voiceIdentifier.PrepareIdentify();
                         }
                     });
+                    break;
+                case R.id.tv_copy:
+                    break;
+                case R.id.tv_delete:
+                    break;
+                case R.id.tv_share:
+                    break;
             }
         }
     }

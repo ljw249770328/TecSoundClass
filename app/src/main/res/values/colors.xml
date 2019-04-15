@@ -24,7 +24,8 @@
     <color name="colorLightGreen">#47bca5</color>
     <color name="colorDarkOrange">#a47548</color>
     <color name="colorTextOrange">#a4733e</color>
-
+    <color name="colorTransparentwhite">#d4ffffff</color>
+    <color name="colorTransparent">#00ffffff</color>
     <color name="color_unit">#000000</color>
     <color name="color_item_bg">#FFFFFF</color>
     <color name="color_text_unselected">#33ab94</color>
@@ -32,4 +33,5 @@
     <color name="color_result">#57C5E8</color>
     <color name="color_bg">#b0ffffff</color>
     <color name="color_gold">#00574B</color>
+    <color name="color_popwindow_bg">#000000</color>
 </resources>

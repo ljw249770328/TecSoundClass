@@ -14,19 +14,32 @@ import com.example.administrator.tecsoundclass.R;
 
 import java.util.List;
 
-public class MyInteractAdapter extends RecyclerView.Adapter<MyInteractAdapter.ViewHolder>{
+public class MyInteractAdapter extends RecyclerView.Adapter<MyInteractAdapter.InteractItemViewHolder>{
     private List<Interaction> mInteractList;
-
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    private OnInteractItemLongClickListener mListener;
+    public class InteractItemViewHolder extends RecyclerView.ViewHolder{
         TextView mScore,mDate;
         ImageView mVoice;
         View interactview ;
-        public ViewHolder(@NonNull View itemView) {
+        public View getInteractview() {
+            return interactview;
+        }
+        public InteractItemViewHolder(@NonNull View itemView) {
             super(itemView);
+            interactview=itemView;
             mScore=itemView.findViewById(R.id.tv_interact_score);
             mDate=itemView.findViewById(R.id.tv_interact_date);
             mVoice=itemView.findViewById(R.id.iv_interact_voice);
-            interactview=itemView;
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (mListener!=null){
+                        mListener.onItemLongClick(getAdapterPosition(),mInteractList);
+                    }
+                    return false;
+                }
+            });
         }
     }
     public MyInteractAdapter(List<Interaction> interactionList){
@@ -34,10 +47,10 @@ public class MyInteractAdapter extends RecyclerView.Adapter<MyInteractAdapter.Vi
     }
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public InteractItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view=LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.layout_list_my_interact_item,viewGroup,false);
-        ViewHolder holder=new ViewHolder(view);
+        InteractItemViewHolder holder=new InteractItemViewHolder(view);
 
         holder.interactview.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -50,7 +63,7 @@ public class MyInteractAdapter extends RecyclerView.Adapter<MyInteractAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull InteractItemViewHolder viewHolder, int i) {
         Interaction interaction=mInteractList.get(i);
         viewHolder.mScore.setText(interaction.getAnswer_grade()+"");
         viewHolder.mDate.setText(interaction.getAnswer_time());
@@ -62,5 +75,11 @@ public class MyInteractAdapter extends RecyclerView.Adapter<MyInteractAdapter.Vi
        return mInteractList.size();
     }
 
+    public void SetOnItemLongClickListener(OnInteractItemLongClickListener listener){
+        mListener=listener;
+    }
+    public interface OnInteractItemLongClickListener{
+        void onItemLongClick(int pos,List<Interaction> interactionList);
+    }
 
 }

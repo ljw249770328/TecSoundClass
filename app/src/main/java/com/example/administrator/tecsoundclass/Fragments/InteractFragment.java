@@ -11,6 +11,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.Adapter.KeyboardAdapter;
 
 import com.example.administrator.tecsoundclass.Adapter.MyInteractAdapter;
+import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.Interaction;
 
 import com.example.administrator.tecsoundclass.R;
@@ -62,6 +65,7 @@ public class InteractFragment extends Fragment {
     private MyInteractAdapter adapter;
     private List<Interaction> mInteractionList = new ArrayList<>();
     private List<Interaction> list;
+    private PopupWindow mpop;
     CourseMenuActivity mActivity;
 
     public InteractFragment() {
@@ -136,6 +140,7 @@ public class InteractFragment extends Fragment {
                     mInteractionList.clear();
                     mInteractionList.addAll(list);
                     adapter = new MyInteractAdapter(mInteractionList);
+                    setPopupWindow(adapter);
                     mRvInteract.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -146,6 +151,33 @@ public class InteractFragment extends Fragment {
         return list;
     }
 
+    private void  setPopupWindow(MyInteractAdapter adapter){
+        adapter.SetOnItemLongClickListener(new MyInteractAdapter.OnInteractItemLongClickListener() {
+            @Override
+            public void onItemLongClick(int pos, List<Interaction> interactionList) {
+                Toast.makeText(getActivity(),pos,Toast.LENGTH_SHORT).show();
+                View view = getActivity().getLayoutInflater().inflate(R.layout.layout_course_popupwindow,null);
+                TextView mTvPopcopy =view.findViewById(R.id.tv_copy);
+                TextView mTbPopdelete =view.findViewById(R.id.tv_delete);
+                TextView mTvPopshare =view.findViewById(R.id.tv_share);
+                //设置选项事件
+                mTvPopcopy.setOnClickListener(onclick);
+                mTbPopdelete.setOnClickListener(onclick);
+                mTvPopshare.setOnClickListener(onclick);
+                //弹出窗口
+                mpop=new PopupWindow(view,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                mpop.setOutsideTouchable(true);
+                mpop.setFocusable(true);
+                view .measure(View.MeasureSpec.UNSPECIFIED,View.MeasureSpec.UNSPECIFIED);
+                RecyclerView.ViewHolder holder= mRvInteract.findViewHolderForAdapterPosition(pos);
+                MyInteractAdapter.InteractItemViewHolder viewHolder = (MyInteractAdapter.InteractItemViewHolder) holder;
+                int [] location =new int [2];
+                View v =viewHolder.getInteractview();
+                v.getLocationOnScreen(location);
+                mpop.showAtLocation(v, Gravity.NO_GRAVITY, (location[0] + v.getWidth() / 2) - view.getMeasuredWidth() / 2, location[1] - v.getMeasuredHeight()+50);
+            }
+        });
+    }
     private class Onclick implements View.OnClickListener {
 
         @Override
@@ -153,6 +185,12 @@ public class InteractFragment extends Fragment {
             switch (v.getId()) {
                 case R.id.im_back:
                     getActivity().finish();
+                    break;
+                case R.id.tv_copy:
+                    break;
+                case R.id.tv_delete:
+                    break;
+                case R.id.tv_share:
                     break;
                 case R.id.btn_race_resp:
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

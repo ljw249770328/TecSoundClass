@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +56,7 @@ public class ReviewFragment extends Fragment {
     private List<Point> list;
     private List<Point> mPointList=new ArrayList<>();
     private String mAuthId;
+    private PopupWindow mpop;
     CourseMenuActivity mActivity;
 
 
@@ -132,6 +135,7 @@ public class ReviewFragment extends Fragment {
                     mPointList.clear();
                     mPointList.addAll(list);
                     adapter=new MyReviewListAdapter(mPointList);
+                    setPopupWindow(adapter);
                     adapter.notifyDataSetChanged();
                     mRvPoint.setAdapter(adapter);
                 } catch (JSONException e) {
@@ -140,6 +144,32 @@ public class ReviewFragment extends Fragment {
             }
         });
         return list;
+    }
+    private void setPopupWindow(MyReviewListAdapter adapter){
+        adapter.setOnItemLongClickListener(new MyReviewListAdapter.OnPointItemLongClickListener() {
+            @Override
+            public void onItemLongClick(int pos, List<Point> pointList) {
+                View view = getActivity().getLayoutInflater().inflate(R.layout.layout_course_popupwindow,null);
+                TextView mTvPopcopy =view.findViewById(R.id.tv_copy);
+                TextView mTbPopdelete =view.findViewById(R.id.tv_delete);
+                TextView mTvPopshare =view.findViewById(R.id.tv_share);
+                //设置选项事件
+                mTvPopcopy.setOnClickListener(onclick);
+                mTbPopdelete.setOnClickListener(onclick);
+                mTvPopshare.setOnClickListener(onclick);
+                //弹出窗口
+                mpop=new PopupWindow(view,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                mpop.setOutsideTouchable(true);
+                mpop.setFocusable(true);
+                view .measure(View.MeasureSpec.UNSPECIFIED,View.MeasureSpec.UNSPECIFIED);
+                RecyclerView.ViewHolder holder= mRvPoint.findViewHolderForAdapterPosition(pos);
+                MyReviewListAdapter.PointItemViewHolder viewHolder = (MyReviewListAdapter.PointItemViewHolder) holder;
+                int [] location =new int [2];
+                View v =viewHolder.getPointview();
+                v.getLocationOnScreen(location);
+                mpop.showAtLocation(v, Gravity.NO_GRAVITY, (location[0] + v.getWidth() / 2) - view.getMeasuredWidth() / 2, location[1] - v.getMeasuredHeight()+50);
+            }
+        });
     }
     private class Onclick implements View.OnClickListener{
 
@@ -200,6 +230,12 @@ public class ReviewFragment extends Fragment {
                     mRecordDialog.dismiss();
                     mRecordDialog.cancel();
                     showTip("状态:下课");
+                    break;
+                case R.id.tv_copy:
+                    break;
+                case R.id.tv_delete:
+                    break;
+                case R.id.tv_share:
                     break;
             }
         }

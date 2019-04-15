@@ -13,23 +13,29 @@ import com.example.administrator.tecsoundclass.R;
 
 import java.util.List;
 
-public class MySignListAdapter extends RecyclerView.Adapter<MySignListAdapter.ViewHolder> {
+public class MySignListAdapter extends RecyclerView.Adapter<MySignListAdapter.SignItemViewHolder> {
     private List<Sign> mSignList;
-    private OnRecyclerItemClickListener mListener;
+    private OnSignItemLongClickListener mListener;
 
-     class ViewHolder extends  RecyclerView.ViewHolder{
+     public class SignItemViewHolder extends  RecyclerView.ViewHolder{
         TextView mTime,mDate,mState;
-        public ViewHolder(@NonNull View itemView) {
+        View mItemView;
+         public View getmItemView() {
+             return mItemView;
+         }
+        public SignItemViewHolder(@NonNull View itemView) {
             super(itemView);
             mTime=itemView.findViewById(R.id.tv_sign_time);
             mDate=itemView.findViewById(R.id.tv_sign_date);
             mState=itemView.findViewById(R.id.tv_sign_status);
-            itemView.setOnClickListener(new View.OnClickListener() {
+            mItemView=itemView;
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
-                public void onClick(View v) {
-                    if (mListener!=null){
-                        mListener.onItemClick(getAdapterPosition(),mSignList);
+                public boolean onLongClick(View v) {
+                    if (mListener!=null) {
+                        mListener.onItemLongClick(getAdapterPosition(), mSignList);
                     }
+                    return true;
                 }
             });
         }
@@ -41,15 +47,15 @@ public class MySignListAdapter extends RecyclerView.Adapter<MySignListAdapter.Vi
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public SignItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view=LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.layout_list_my_sign_item,viewGroup,false);
-        ViewHolder holder=new ViewHolder(view);
+        SignItemViewHolder holder=new SignItemViewHolder(view);
         return  holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull SignItemViewHolder viewHolder, int i) {
         Sign sign=mSignList.get(i);
         viewHolder.mTime.setText(sign.getSign_time());
         viewHolder.mDate.setText(sign.getSign_date());
@@ -60,11 +66,11 @@ public class MySignListAdapter extends RecyclerView.Adapter<MySignListAdapter.Vi
     public int getItemCount() {
         return mSignList.size();
     }
-    public void setOnItemClickListener(OnRecyclerItemClickListener listener){
+    public void setOnItemLongClickListener(OnSignItemLongClickListener listener){
         mListener= listener;
     }
-    public interface OnRecyclerItemClickListener{
-        void onItemClick(int position, List<Sign> SignList);
+    public interface OnSignItemLongClickListener{
+        void onItemLongClick(int position, List<Sign> SignList);
     }
 
 
