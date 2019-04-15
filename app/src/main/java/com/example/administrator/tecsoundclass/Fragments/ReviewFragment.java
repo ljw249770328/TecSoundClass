@@ -13,31 +13,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
-import com.example.administrator.tecsoundclass.Adapter.MyInteractAdapter;
 import com.example.administrator.tecsoundclass.Adapter.MyReviewListAdapter;
-import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
-import com.example.administrator.tecsoundclass.JavaBean.Interaction;
 import com.example.administrator.tecsoundclass.JavaBean.Point;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.RecPointHandler;
-import com.example.administrator.tecsoundclass.utils.Timer;
 import com.example.administrator.tecsoundclass.utils.VoiceManager;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
-import com.iflytek.cloud.InitListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.litepal.LitePal;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -149,7 +141,7 @@ public class ReviewFragment extends Fragment {
         adapter.setOnItemLongClickListener(new MyReviewListAdapter.OnPointItemLongClickListener() {
             @Override
             public void onItemLongClick(int pos, List<Point> pointList) {
-                View view = getActivity().getLayoutInflater().inflate(R.layout.layout_course_popupwindow,null);
+                View view = getActivity().getLayoutInflater().inflate(R.layout.layout_sign_popupwindow,null);
                 TextView mTvPopcopy =view.findViewById(R.id.tv_copy);
                 TextView mTbPopdelete =view.findViewById(R.id.tv_delete);
                 TextView mTvPopshare =view.findViewById(R.id.tv_share);

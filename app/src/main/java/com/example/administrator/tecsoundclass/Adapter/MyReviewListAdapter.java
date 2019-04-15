@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.administrator.tecsoundclass.JavaBean.Point;
@@ -20,26 +21,32 @@ public class MyReviewListAdapter extends RecyclerView.Adapter<MyReviewListAdapte
     private OnPointItemLongClickListener mListener;
 
     public class PointItemViewHolder extends RecyclerView.ViewHolder{
-        View Pointview;
+        View Pointview,PopSound;
         TextView mDate,mVoiceSound,mPointContent;
-
         public View getPointview() {
             return Pointview;
         }
         public PointItemViewHolder(@NonNull View itemView) {
             super(itemView);
             Pointview=itemView;
+            PopSound=itemView.findViewById(R.id.v_pop_pointsound);
             mDate=itemView.findViewById(R.id.tv_review_date);
             mVoiceSound=itemView.findViewById(R.id.tv_voice_time);
             mPointContent=itemView.findViewById(R.id.tv_point_content);
             //设置点击事件
+            PopSound.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     if (mListener!=null){
                         mListener.onItemLongClick(getAdapterPosition(),mPointList);
                     }
-                    return false;
+                    return true;
                 }
             });
         }

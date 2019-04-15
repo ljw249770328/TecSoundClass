@@ -8,6 +8,7 @@
     android:layout_marginBottom="5dp"
     android:background="@drawable/recyclelist_point_item">
         <LinearLayout
+            android:id="@+id/v_pop_pointsound"
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:orientation="horizontal"

@@ -1,6 +1,5 @@
 package com.example.administrator.tecsoundclass.Fragments;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -24,11 +23,9 @@ import android.widget.Toast;
 
 import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
-import com.example.administrator.tecsoundclass.JavaBean.Course;
 import com.example.administrator.tecsoundclass.JavaBean.Sign;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.RegeditVoiceActivity;
-import com.example.administrator.tecsoundclass.utils.Timer;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
@@ -42,7 +39,6 @@ import com.iflytek.cloud.VerifierResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -170,7 +166,7 @@ public class SignFragment extends Fragment {
         adapter.setOnItemLongClickListener(new MySignListAdapter.OnSignItemLongClickListener() {
             @Override
             public void onItemLongClick(int position, List<Sign> SignList) {
-                View view = getActivity().getLayoutInflater().inflate(R.layout.layout_course_popupwindow,null);
+                View view = getActivity().getLayoutInflater().inflate(R.layout.layout_sign_popupwindow,null);
                 TextView mTvPopcopy =view.findViewById(R.id.tv_copy);
                 TextView mTbPopdelete =view.findViewById(R.id.tv_delete);
                 TextView mTvPopshare =view.findViewById(R.id.tv_share);

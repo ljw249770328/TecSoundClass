@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="19sp"
-                android:text="(签到日期)"
+                android:text="(签到人)"
                 android:textColor="@color/colorDarkGray"/>
             <LinearLayout
                 android:layout_width="match_parent"

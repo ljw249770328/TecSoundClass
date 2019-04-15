@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -27,7 +26,6 @@ import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.Adapter.KeyboardAdapter;
 
 import com.example.administrator.tecsoundclass.Adapter.MyInteractAdapter;
-import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.Interaction;
 
 import com.example.administrator.tecsoundclass.R;
@@ -38,7 +36,6 @@ import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.litepal.LitePal;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -141,6 +138,7 @@ public class InteractFragment extends Fragment {
                     mInteractionList.addAll(list);
                     adapter = new MyInteractAdapter(mInteractionList);
                     setPopupWindow(adapter);
+                    adapter.notifyDataSetChanged();
                     mRvInteract.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -155,8 +153,7 @@ public class InteractFragment extends Fragment {
         adapter.SetOnItemLongClickListener(new MyInteractAdapter.OnInteractItemLongClickListener() {
             @Override
             public void onItemLongClick(int pos, List<Interaction> interactionList) {
-                Toast.makeText(getActivity(),pos,Toast.LENGTH_SHORT).show();
-                View view = getActivity().getLayoutInflater().inflate(R.layout.layout_course_popupwindow,null);
+                View view = getActivity().getLayoutInflater().inflate(R.layout.layout_sign_popupwindow,null);
                 TextView mTvPopcopy =view.findViewById(R.id.tv_copy);
                 TextView mTbPopdelete =view.findViewById(R.id.tv_delete);
                 TextView mTvPopshare =view.findViewById(R.id.tv_share);

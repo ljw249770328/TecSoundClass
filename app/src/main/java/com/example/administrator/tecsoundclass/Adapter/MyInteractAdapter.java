@@ -3,6 +3,7 @@ package com.example.administrator.tecsoundclass.Adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import java.util.List;
 public class MyInteractAdapter extends RecyclerView.Adapter<MyInteractAdapter.InteractItemViewHolder>{
     private List<Interaction> mInteractList;
     private OnInteractItemLongClickListener mListener;
+
     public class InteractItemViewHolder extends RecyclerView.ViewHolder{
         TextView mScore,mDate;
         ImageView mVoice;
@@ -34,10 +36,11 @@ public class MyInteractAdapter extends RecyclerView.Adapter<MyInteractAdapter.In
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
+
                     if (mListener!=null){
                         mListener.onItemLongClick(getAdapterPosition(),mInteractList);
                     }
-                    return false;
+                    return true;
                 }
             });
         }
@@ -51,14 +54,6 @@ public class MyInteractAdapter extends RecyclerView.Adapter<MyInteractAdapter.In
         View view=LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.layout_list_my_interact_item,viewGroup,false);
         InteractItemViewHolder holder=new InteractItemViewHolder(view);
-
-        holder.interactview.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return false;
-            }
-        });
-
         return  holder;
     }
 
