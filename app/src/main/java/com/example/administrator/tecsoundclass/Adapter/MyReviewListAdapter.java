@@ -1,8 +1,12 @@
 package com.example.administrator.tecsoundclass.Adapter;
 
 import android.content.Context;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +18,9 @@ import android.widget.TextView;
 import com.example.administrator.tecsoundclass.JavaBean.Point;
 import com.example.administrator.tecsoundclass.R;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
 import java.util.List;
 
 public class MyReviewListAdapter extends RecyclerView.Adapter<MyReviewListAdapter.PointItemViewHolder> {
@@ -21,7 +28,8 @@ public class MyReviewListAdapter extends RecyclerView.Adapter<MyReviewListAdapte
     private OnPointItemLongClickListener mListener;
 
     public class PointItemViewHolder extends RecyclerView.ViewHolder{
-        View Pointview,PopSound;
+        View Pointview;
+        View PopSound;
         TextView mDate,mVoiceSound,mPointContent;
         public View getPointview() {
             return Pointview;
@@ -34,12 +42,7 @@ public class MyReviewListAdapter extends RecyclerView.Adapter<MyReviewListAdapte
             mVoiceSound=itemView.findViewById(R.id.tv_voice_time);
             mPointContent=itemView.findViewById(R.id.tv_point_content);
             //设置点击事件
-            PopSound.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                }
-            });
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -65,10 +68,25 @@ public class MyReviewListAdapter extends RecyclerView.Adapter<MyReviewListAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PointItemViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull PointItemViewHolder viewHolder, final int i) {
         Point point=mPointList.get(i);
         viewHolder.mDate.setText(point.getPoint_time());
         viewHolder.mPointContent.setText(point.getPoint_content());
+        viewHolder.PopSound.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    File file =new File(mPointList.get(i).getPoint_voice_src());
+                    Log.d("File",file.getPath());
+                    MediaPlayer mediaPlayer =new MediaPlayer();
+                    mediaPlayer.setDataSource(file.getPath());
+                    mediaPlayer.prepare();
+                    mediaPlayer.start();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         //填入录音时间
     }
 
