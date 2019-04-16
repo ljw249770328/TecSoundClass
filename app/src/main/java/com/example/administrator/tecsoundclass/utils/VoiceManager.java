@@ -65,7 +65,7 @@ public class VoiceManager {
 
             }
         });
-        return "http://101.132.71.111:8080/images/"+filepath;
+        return "http://101.132.71.111:8080/"+filename;
     }
 
 }

@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.nfc.Tag;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 
 import com.example.administrator.tecsoundclass.JavaBean.Point;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.FileDownloadUtil;
+import com.liulishuo.filedownloader.FileDownloader;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,17 +32,16 @@ public class MyReviewListAdapter extends RecyclerView.Adapter<MyReviewListAdapte
 
     public class PointItemViewHolder extends RecyclerView.ViewHolder{
         View Pointview;
-        View PopSound;
-        TextView mDate,mVoiceSound,mPointContent;
+        TextView PopSound;
+        TextView mDate,mPointContent;
         public View getPointview() {
             return Pointview;
         }
         public PointItemViewHolder(@NonNull View itemView) {
             super(itemView);
             Pointview=itemView;
-            PopSound=itemView.findViewById(R.id.v_pop_pointsound);
             mDate=itemView.findViewById(R.id.tv_review_date);
-            mVoiceSound=itemView.findViewById(R.id.tv_voice_time);
+            PopSound=itemView.findViewById(R.id.tv_voice_time);
             mPointContent=itemView.findViewById(R.id.tv_point_content);
             //设置点击事件
 
@@ -75,16 +77,25 @@ public class MyReviewListAdapter extends RecyclerView.Adapter<MyReviewListAdapte
         viewHolder.PopSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    File file =new File(mPointList.get(i).getPoint_voice_src());
-                    Log.d("File",file.getPath());
-                    MediaPlayer mediaPlayer =new MediaPlayer();
-                    mediaPlayer.setDataSource(file.getPath());
-                    mediaPlayer.prepare();
-                    mediaPlayer.start();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                    FileDownloadUtil.mDownLoadFile(mPointList.get(i).getPoint_voice_src(), new FileDownloadUtil.DownloadCallBack() {
+                        @Override
+                        public void mOncompleted(String FilePath) {
+                            try {
+                                Log.d("Mfilepath",FilePath);
+                                MediaPlayer mediaPlayer =new MediaPlayer();
+                                mediaPlayer.setDataSource(FilePath);
+                                mediaPlayer.prepare();
+                                mediaPlayer.start();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void mOnError(Throwable e) {
+
+                        }
+                    });
             }
         });
         //填入录音时间

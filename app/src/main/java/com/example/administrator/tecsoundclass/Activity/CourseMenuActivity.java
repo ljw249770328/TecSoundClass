@@ -17,6 +17,8 @@ import com.example.administrator.tecsoundclass.Fragments.SignFragment;
 import com.example.administrator.tecsoundclass.JavaBean.Course;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
+import com.liulishuo.filedownloader.FileDownloader;
+import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection;
 
 import java.util.ArrayList;
 import java.util.List;
