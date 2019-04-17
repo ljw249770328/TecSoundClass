@@ -22,7 +22,7 @@ import com.example.administrator.tecsoundclass.Adapter.MyReviewListAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.Point;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.RecPointHandler;
-import com.example.administrator.tecsoundclass.utils.VoiceManager;
+import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
 import org.json.JSONArray;
@@ -188,7 +188,7 @@ public class ReviewFragment extends Fragment {
                     if (mBtnRecord.getText().equals("完成")){
                         //存入数据库
 //                        //上传音频
-                        String FileUrl=VoiceManager.UploadFile(mActivity.getApplicationContext(),"PointVoice",recPointHandler.getMfilepath(),recPointHandler.getMfilename(),"sound");
+                        String FileUrl=FileUploadUtil.UploadFile(mActivity.getApplicationContext(),"PointVoice",recPointHandler.getMfilepath(),recPointHandler.getMfilename(),"Point",null,null);
                         //存储数据词条
                         String url="http://101.132.71.111:8080/TecSoundWebApp/AddPointServlet";
                         Map<String,String> params =new HashMap<>();
@@ -200,7 +200,6 @@ public class ReviewFragment extends Fragment {
                             public void onFinish(JSONObject r) {
                                 try {
                                     String result =r.getString("Result");
-                                    Toast.makeText(getActivity(),result,Toast.LENGTH_SHORT).show();
                                     InitList();
                                 } catch (JSONException e) {
                                     e.printStackTrace();

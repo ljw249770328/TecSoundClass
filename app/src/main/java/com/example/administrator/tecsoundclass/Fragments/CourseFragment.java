@@ -138,6 +138,7 @@ public class CourseFragment extends Fragment {
                         course.setCourse_time(Cobj.getString("course_time"));
                         course.setCourse_request(Cobj.getString("course_request"));
                         course.setCourse_id(Cobj.getString("course_id"));
+
                         list.add(course);
                     }
                     CourseList.clear();

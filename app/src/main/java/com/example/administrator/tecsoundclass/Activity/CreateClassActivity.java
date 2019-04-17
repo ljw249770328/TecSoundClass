@@ -1,26 +1,28 @@
 package com.example.administrator.tecsoundclass.Activity;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.administrator.tecsoundclass.utils.CustomDatePicker;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.example.administrator.tecsoundclass.utils.TPDialogFactory;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class CreateClassActivity extends AppCompatActivity {
@@ -29,6 +31,7 @@ public class CreateClassActivity extends AppCompatActivity {
     private ImageView mIvLoadPic;
     private TPDialogFactory factory;
     private  boolean k1=false,k2=false;
+    private String CPicPath="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +62,7 @@ public class CreateClassActivity extends AppCompatActivity {
         mTvClassTime.setOnClickListener(onClick);
         mTvClassOver.setOnClickListener(onClick);
         mTvNext.setOnClickListener(onClick);
+        mIvLoadPic.setOnClickListener(onClick);
         mEtClassName.setOnFocusChangeListener(new OnFocusListener());
         mEtClassNum.setOnFocusChangeListener(new OnFocusListener());
         mTvClassTime.setOnFocusChangeListener(new OnFocusListener());
@@ -80,10 +84,16 @@ public class CreateClassActivity extends AppCompatActivity {
                 case R.id.tv_class_set__over_time:
                     factory.getTimePicker(CreateClassActivity.this,"下课时间",mTvClassOver,"1949-01-01 "+mTvClassTime.getText().toString()).show(factory.getTime());
                     break;
+                case R.id.iv_load_class_pic:
+                    Intent intent =new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(intent,1);
+                    break;
                 case R.id.tv_next:
                     mEtClassName.clearFocus();
                     mEtClassNum.clearFocus();
                     if(k1&&k2&&!mTvClassTime.getText().toString().equals("上课时间")&&!mTvClassOver.getText().toString().equals("下课时间")){
+                        //上传图片,返回图片路径!!!!!!!!!!!!!!!!!
+//                        String FileUrl =FileUploadUtil.UploadFile(getApplicationContext(),"uploadCpic",CPicPath,)
                         String url="http://101.132.71.111:8080/TecSoundWebApp/CreateClassServlet";
                         Map<String,String> params=new HashMap<>();
                         params.put("teacher_user_id",getIntent().getExtras().getString("teaId"));
@@ -91,6 +101,7 @@ public class CreateClassActivity extends AppCompatActivity {
                         params.put("course_time",mTvClassTime.getText().toString()+"-"+mTvClassOver.getText().toString());
                         params.put("course_request",mEtClassInfo.getText().toString());
                         params.put("course_name",mEtClassName.getText().toString());
+
                         VolleyCallback.getJSONObject(CreateClassActivity.this, "CreateClass", url, params, new VolleyCallback.VolleyJsonCallback() {
                             @Override
                             public void onFinish(JSONObject r) {
@@ -110,7 +121,7 @@ public class CreateClassActivity extends AppCompatActivity {
                             }
                         });
                     }else {
-                        Toast.makeText(CreateClassActivity.this,"请检查填写信息"+k1+k2,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateClassActivity.this,"请检查填写信息",Toast.LENGTH_SHORT).show();
                     }
                     break;
             }
@@ -152,4 +163,24 @@ public class CreateClassActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data!=null){
+            switch (requestCode){
+                case 1:
+                    Uri selectedImage =data.getData();
+                    String[] filePathClumn ={MediaStore.Images.Media.DATA};
+                    //获取照片的数据视图
+                    Cursor cursor=getContentResolver().query(selectedImage,filePathClumn,null,null,null);
+                    cursor.moveToFirst();
+                    //获取已选择的图片路径
+                    int columIndex =cursor.getColumnIndex(filePathClumn[0]);
+                    CPicPath= cursor.getString(columIndex);
+                    cursor.close();
+                    mIvLoadPic.setImageBitmap(BitmapFactory.decodeFile(CPicPath));
+                    break;
+            }
+        }
+    }
 }

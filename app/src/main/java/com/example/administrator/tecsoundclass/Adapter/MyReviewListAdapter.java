@@ -71,17 +71,16 @@ public class MyReviewListAdapter extends RecyclerView.Adapter<MyReviewListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull PointItemViewHolder viewHolder, final int i) {
-        Point point=mPointList.get(i);
+        final Point point=mPointList.get(i);
         viewHolder.mDate.setText(point.getPoint_time());
         viewHolder.mPointContent.setText(point.getPoint_content());
         viewHolder.PopSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    FileDownloadUtil.mDownLoadFile(mPointList.get(i).getPoint_voice_src(), new FileDownloadUtil.DownloadCallBack() {
+                    FileDownloadUtil.mDownLoadFile(point.getPoint_voice_src(), new FileDownloadUtil.DownloadCallBack() {
                         @Override
                         public void mOncompleted(String FilePath) {
                             try {
-                                Log.d("Mfilepath",FilePath);
                                 MediaPlayer mediaPlayer =new MediaPlayer();
                                 mediaPlayer.setDataSource(FilePath);
                                 mediaPlayer.prepare();

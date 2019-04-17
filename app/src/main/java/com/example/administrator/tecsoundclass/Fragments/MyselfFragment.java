@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -26,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.signature.MediaStoreSignature;
 import com.bumptech.glide.signature.ObjectKey;
 import com.example.administrator.tecsoundclass.Activity.EditMyInfoActivity;
 import com.example.administrator.tecsoundclass.Activity.FindPswActivity;
@@ -87,7 +89,7 @@ public class MyselfFragment extends Fragment {
     private void init(@NonNull View view){
         mIvMenu=view.findViewById(R.id.iv_menu_list);
         mTvStandards=view.findViewById(R.id.m_status_data);
-        mEditInfo=view.findViewById(R.id.ll_2);
+        mEditInfo=view.findViewById(R.id.ll_view_info);
         mIvHead=view.findViewById(R.id.iv_user_head);
         mTvUsername=view.findViewById(R.id.user_name);
         mTvUserId=view.findViewById(R.id.user_id);
@@ -118,25 +120,10 @@ public class MyselfFragment extends Fragment {
         mPop.showAsDropDown(mIvMenu);
     }
     private void SetInfo(){
-        String url = "http://101.132.71.111:8080/TecSoundWebApp/GetUInfoServlet";
-        Map<String, String> params = new HashMap<>();
-        params.put("user_id", activity.getStudentID());
-        VolleyCallback.getJSONObject(getActivity().getApplicationContext(), "GetUInfo", url, params, new VolleyCallback.VolleyJsonCallback() {
-            @Override
-            public void onFinish(JSONObject r) {
-                try {
-                    JSONArray users=r.getJSONArray("users");
-                    JSONObject user= (JSONObject) users.get(0);
-                    mTvUsername.setText(user.getString("user_name"));
-                    mTvUserId.setText(user.getString("user_id"));
-                    String updateTime = String.valueOf(System.currentTimeMillis());
-                    Glide.with(activity.getApplicationContext()).load(user.getString("user_pic_src")).signature(new ObjectKey(pref.getString("time",""))).encodeQuality(70).into(mIvHead);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
+        activity.UpdatemUser();
+        mTvUsername.setText(activity.getmUser().getUser_name());
+        mTvUserId.setText(activity.getmUser().getUser_id());
+        Glide.with(activity.getApplicationContext()).load(activity.getmUser().getUser_pic_src()).signature(new ObjectKey(activity.getmUser().getUpdate_time())).encodeQuality(70).into(mIvHead);
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -171,10 +158,10 @@ public class MyselfFragment extends Fragment {
                     intent=new Intent(getActivity(),SettingsActivity.class);
                     startActivity(intent);
                     break;
-                case R.id.ll_2:
+                case R.id.ll_view_info:
                     intent=new Intent(getActivity(),EditMyInfoActivity.class);
                     Bundle bundle1 =new Bundle();
-                    bundle1.putString("user_id",activity.getStudentID());
+                    bundle1.putSerializable("mUser",activity.getmUser());
                     intent.putExtras(bundle1);
                     startActivity(intent);
                     break;

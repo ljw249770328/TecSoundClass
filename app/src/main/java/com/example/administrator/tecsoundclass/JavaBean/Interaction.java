@@ -3,14 +3,30 @@ package com.example.administrator.tecsoundclass.JavaBean;
 import org.litepal.crud.LitePalSupport;
 
 public class Interaction {
-    private String propose_course_id="";
-    private String answer_user_id="";
-    private String answer_content="";
-    private String answer_content_src="";
-    private String answer_time="";
-    private String problem_id="";
-    private String answer_grade="";
+    private String propose_course_id = "";
+    private String answer_user_id = "";
+    private String answer_content = "";
+    private String answer_content_src = "";
+    private String problem_content = "";
+    private String problem_content_src = "";
+    private String answer_time = "";
+    private String problem_id = "";
+    private String answer_grade = "";
+    public String getProblem_content() {
+        return problem_content;
+    }
 
+    public void setProblem_content(String problem_content) {
+        this.problem_content = problem_content;
+    }
+
+    public String getProblem_content_src() {
+        return problem_content_src;
+    }
+
+    public void setProblem_content_src(String problem_content_src) {
+        this.problem_content_src = problem_content_src;
+    }
     public String getAnswer_content() {
         return answer_content;
     }
@@ -34,6 +50,7 @@ public class Interaction {
     public void setAnswer_grade(String answer_grace) {
         this.answer_grade = answer_grace;
     }
+
     public String getPropose_course_id() {
         return propose_course_id;
     }

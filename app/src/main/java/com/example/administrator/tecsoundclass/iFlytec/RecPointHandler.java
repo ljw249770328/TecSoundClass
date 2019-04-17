@@ -1,14 +1,12 @@
 package com.example.administrator.tecsoundclass.iFlytec;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Environment;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.administrator.tecsoundclass.utils.VoiceManager;
 import com.iflytek.cloud.RecognizerResult;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechError;
@@ -66,8 +64,8 @@ public class RecPointHandler {
         mIatDialog.setListener(mRListener);
     }
     public void StartHandle(String filename){
-        mfilename=filename;
-        mfilepath=Environment.getExternalStorageDirectory() + "/MyApplication/" + filename + ".wav";
+        mfilename=filename+ ".wav";
+        mfilepath=Environment.getExternalStorageDirectory() + "/MyApplication/" + filename ;
         setIatParam(mfilepath);
         mIatDialog.show();
     }

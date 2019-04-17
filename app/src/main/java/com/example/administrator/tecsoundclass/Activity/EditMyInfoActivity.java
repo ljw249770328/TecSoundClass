@@ -1,11 +1,9 @@
 package com.example.administrator.tecsoundclass.Activity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -19,12 +17,12 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
+import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
-import com.example.administrator.tecsoundclass.utils.PicManager;
+import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.example.administrator.tecsoundclass.utils.TPDialogFactory;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,11 +35,9 @@ public class EditMyInfoActivity extends AppCompatActivity {
     private RadioGroup mSexGroup;
     private RadioButton rb_male;
     private RadioButton rb_female;
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
     private String mSex="男";
     private String picTurePath="";
-
+    private User user ;
 
     private void init(){
         mBack=findViewById(R.id.im_back);
@@ -55,7 +51,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
         rb_male=findViewById(R.id.rb_sex_male);
         rb_female=findViewById(R.id.rb_sex_female);
         mTvChangeHead=findViewById(R.id.tv_change_head);
-        pref=PreferenceManager.getDefaultSharedPreferences(this);
+        user = (User) getIntent().getExtras().getSerializable("mUser");
     }
     private void SetListeners(){
         OnClick onClick =new OnClick();
@@ -88,13 +84,7 @@ public class EditMyInfoActivity extends AppCompatActivity {
                     factory.getDatePicker(EditMyInfoActivity.this,"出生日期",mTvMyBirthD).show(factory.getTime());
                     break;
                 case R.id.tv_save:
-                    //更新sharedpref中的时间信息使glide更新
-                    String updateTime = String.valueOf(System.currentTimeMillis());
-                    editor=pref.edit();
-                    editor.putString("time",updateTime);
-                    editor.apply();
-
-                    String path=PicManager.UpLoadPic(getApplicationContext(),"upload",picTurePath,mTvMyId.getText().toString(),"images");
+                    String path =FileUploadUtil.UploadFile(getApplicationContext(),"uploadhead",picTurePath,mTvMyId.getText().toString()+".jpeg","headpic","user",user.getUser_id());
                     String url="http://101.132.71.111:8080/TecSoundWebApp/AlterUInfoServlet";
                     Map<String,String> params=new HashMap<>();
                     params.put("user_id",mTvMyId.getText().toString());
@@ -128,28 +118,15 @@ public class EditMyInfoActivity extends AppCompatActivity {
         }
     }
     private void SetData(){
-        String url = "http://101.132.71.111:8080/TecSoundWebApp/GetUInfoServlet";
-        Map<String, String> params = new HashMap<>();
-        params.put("user_id",getIntent().getExtras().getString("user_id"));
-        VolleyCallback.getJSONObject(EditMyInfoActivity.this, "GetUInfo", url, params, new VolleyCallback.VolleyJsonCallback() {
-            @Override
-            public void onFinish(JSONObject r) {
-                try {
-                    JSONArray users=r.getJSONArray("users");
-                    JSONObject user= (JSONObject) users.get(0);
-                    mTvMyname.setText(user.getString("user_name"));
-                    mTvMyId.setText(user.getString("user_id"));
-                    mTvMyBirthD.setText(user.getString("user_age"));
-                    mTvMyIdentity.setText(user.getString("user_identity"));
-                    Glide.with(getApplicationContext()).load(user.getString("user_pic_src")).signature(new ObjectKey(pref.getString("time",""))).encodeQuality(70).into(mIvEditedHead);
-                    if (user.getString("user_sex").equals("女"));{
-                        mSexGroup.check(R.id.rb_sex_female);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        mTvMyname.setText(user.getUser_name());
+        mTvMyId.setText(user.getUser_id());
+        mTvMyBirthD.setText(user.getUser_age());
+        mTvMyIdentity.setText(user.getUser_identity());
+        String updateString =user.getUpdate_time();
+        Glide.with(getApplicationContext()).load(user.getUser_pic_src()).signature(new ObjectKey(updateString)).encodeQuality(70).into(mIvEditedHead);
+        if (user.getUser_sex().equals("女"));{
+            mSexGroup.check(R.id.rb_sex_female);
+        }
     }
 
     @Override
@@ -179,6 +156,12 @@ public class EditMyInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_myinfo);
         init();
         SetListeners();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         SetData();
     }
 
