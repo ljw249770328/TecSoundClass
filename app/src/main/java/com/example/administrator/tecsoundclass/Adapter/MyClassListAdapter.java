@@ -10,15 +10,19 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.signature.ObjectKey;
 import com.example.administrator.tecsoundclass.JavaBean.Course;
 import com.example.administrator.tecsoundclass.R;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 public class MyClassListAdapter extends RecyclerView.Adapter<MyClassListAdapter.ViewHolder> {
     private List<Course> mCourseList;
     private OnRecyclerItemClickListener mListener;
-
+    private Context mContext;
      class ViewHolder extends  RecyclerView.ViewHolder{
         ImageView mCoursePic;
         TextView mCourseName,mCourseid,mClass;
@@ -38,8 +42,9 @@ public class MyClassListAdapter extends RecyclerView.Adapter<MyClassListAdapter.
             });
         }
     }
-    public MyClassListAdapter(List<Course> courseList){
+    public MyClassListAdapter(List<Course> courseList,Context context){
         mCourseList=courseList;
+        mContext=context;
     }
     //提供Set方法调用
     public void setOnItemClickListener(OnRecyclerItemClickListener listener){
@@ -60,7 +65,13 @@ public class MyClassListAdapter extends RecyclerView.Adapter<MyClassListAdapter.
         viewHolder.mClass.setText(course.getCourse_class());
         viewHolder.mCourseName.setText(course.getCourse_name());
         viewHolder.mCourseid.setText(course.getCourse_id());
-
+        try {
+            if (!course.getCourse_pic_src().equals("")){
+                Glide.with(mContext).load(new URL(course.getCourse_pic_src())).signature(new ObjectKey(course.getUpdate_time())).encodeQuality(70).into(viewHolder.mCoursePic);
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

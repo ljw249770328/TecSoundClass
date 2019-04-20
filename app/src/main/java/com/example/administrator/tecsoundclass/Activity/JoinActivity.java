@@ -64,6 +64,9 @@ public class JoinActivity extends AppCompatActivity {
                                     course.setCourse_time(courses.getJSONObject(0).getString("course_time"));
                                     course.setRegister_time(courses.getJSONObject(0).getString("register_time"));
                                     course.setCourse_request(courses.getJSONObject(0).getString("course_request"));
+                                    course.setCourse_pic_src(courses.getJSONObject(0).getString("course_pic_src"));
+                                    course.setUpdate_time(courses.getJSONObject(0).getString("update_time"));
+
                                     bundle.putSerializable("CourseInfo",course);
                                     bundle.putString("Stuid",getIntent().getExtras().getString("Stuid"));
                                     intent.putExtras(bundle);

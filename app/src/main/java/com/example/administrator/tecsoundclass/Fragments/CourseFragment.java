@@ -28,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.administrator.tecsoundclass.Activity.LoginActivity;
 import com.example.administrator.tecsoundclass.Adapter.MyClassListAdapter;
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
@@ -115,8 +116,6 @@ public class CourseFragment extends Fragment {
         });
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRvCourse.setLayoutManager(layoutManager);
-
-
     }
 
     private List<Course> InitList() {
@@ -138,13 +137,14 @@ public class CourseFragment extends Fragment {
                         course.setCourse_time(Cobj.getString("course_time"));
                         course.setCourse_request(Cobj.getString("course_request"));
                         course.setCourse_id(Cobj.getString("course_id"));
-
+                        course.setCourse_pic_src(Cobj.getString("course_pic_src"));
+                        course.setUpdate_time(Cobj.getString("update_time"));
                         list.add(course);
+
                     }
                     CourseList.clear();
                     CourseList.addAll(list);
-                    adapter = new MyClassListAdapter(CourseList);
-                    adapter.notifyDataSetChanged();
+                    adapter = new MyClassListAdapter(CourseList,activity.getApplicationContext());
                     mRvCourse.setAdapter(adapter);
                     adapter.setOnItemClickListener(new MyClassListAdapter.OnRecyclerItemClickListener() {
                         @Override

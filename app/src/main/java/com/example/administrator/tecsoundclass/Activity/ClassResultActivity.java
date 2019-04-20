@@ -1,12 +1,16 @@
 package com.example.administrator.tecsoundclass.Activity;
 
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.signature.ObjectKey;
 import com.example.administrator.tecsoundclass.JavaBean.Course;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
@@ -14,6 +18,8 @@ import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,7 +28,7 @@ public class ClassResultActivity extends AppCompatActivity {
     private Course course;
     private Button mBtnJoin;
     private String StuId="";
-
+    private ImageView mIvCpic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,7 @@ public class ClassResultActivity extends AppCompatActivity {
         mTvCreateT=findViewById(R.id.tv_result_create);
         mBtnJoin=findViewById(R.id.btn_join);
         mTvCreq=findViewById(R.id.tv_result_req);
+        mIvCpic=findViewById(R.id.iv_class_pic);
     }
     private void SetData(){
         mTvCourseName.setText(course.getCourse_name());
@@ -52,6 +59,11 @@ public class ClassResultActivity extends AppCompatActivity {
         mTvCtime.setText(course.getCourse_time());
         mTvCreateT.setText(course.getRegister_time());
         mTvCreq.setText(course.getCourse_request());
+        try {
+            Glide.with(this).load(new URL(course.getCourse_pic_src())).signature(new ObjectKey(course.getUpdate_time())).encodeQuality(70).into(mIvCpic);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
     private void SetOnClickListener(){
         OnClick onClick =new OnClick();

@@ -1,5 +1,6 @@
 package com.example.administrator.tecsoundclass.Fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -43,6 +44,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.BufferUnderflowException;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,8 +55,6 @@ public class MyselfFragment extends Fragment {
     private PopupWindow mPop;
     private TextView mTvStandards,mTvUsername,mTvUserId,mTvFriendNum,mTvCourseNum;
     private LinearLayout mEditInfo;
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
     MainMenuActivity activity;
 
     public MyselfFragment() {
@@ -72,7 +73,13 @@ public class MyselfFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        SetInfo();
+        activity.UpdatemUser(new MainMenuActivity.UploadCallBack() {
+            @Override
+            public void OnUploaded() {
+                SetInfo();
+            }
+        });
+
     }
 
     @Override
@@ -95,7 +102,6 @@ public class MyselfFragment extends Fragment {
         mTvUserId=view.findViewById(R.id.user_id);
         mTvFriendNum=view.findViewById(R.id.fri_num);
         mTvCourseNum=view.findViewById(R.id.class_num);
-        pref=PreferenceManager.getDefaultSharedPreferences(getActivity());
     }
     private void SetOnclick(){
         OnClick onClick=new OnClick();
@@ -120,10 +126,13 @@ public class MyselfFragment extends Fragment {
         mPop.showAsDropDown(mIvMenu);
     }
     private void SetInfo(){
-        activity.UpdatemUser();
         mTvUsername.setText(activity.getmUser().getUser_name());
         mTvUserId.setText(activity.getmUser().getUser_id());
-        Glide.with(activity.getApplicationContext()).load(activity.getmUser().getUser_pic_src()).signature(new ObjectKey(activity.getmUser().getUpdate_time())).encodeQuality(70).into(mIvHead);
+        try {
+            Glide.with(activity.getApplicationContext()).load(new URL(activity.getmUser().getUser_pic_src())).signature(new ObjectKey(activity.getmUser().getUpdate_time())).encodeQuality(70).into(mIvHead);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

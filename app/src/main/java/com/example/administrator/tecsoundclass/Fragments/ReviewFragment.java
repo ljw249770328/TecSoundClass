@@ -188,7 +188,7 @@ public class ReviewFragment extends Fragment {
                     if (mBtnRecord.getText().equals("完成")){
                         //存入数据库
 //                        //上传音频
-                        String FileUrl=FileUploadUtil.UploadFile(mActivity.getApplicationContext(),"PointVoice",recPointHandler.getMfilepath(),recPointHandler.getMfilename(),"Point",null,null);
+                        String FileUrl=FileUploadUtil.UploadFile(mActivity.getApplicationContext(),"PointVoice",recPointHandler.getMfilepath(),recPointHandler.getMfilename(),"Point",null,null,null);
                         //存储数据词条
                         String url="http://101.132.71.111:8080/TecSoundWebApp/AddPointServlet";
                         Map<String,String> params =new HashMap<>();

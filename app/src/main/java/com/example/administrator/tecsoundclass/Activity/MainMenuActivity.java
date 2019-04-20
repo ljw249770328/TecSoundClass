@@ -39,7 +39,11 @@ public class MainMenuActivity extends AppCompatActivity {
         return mUser;
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
 
+    }
 
     @Override
     protected void onRestart() {
@@ -54,7 +58,7 @@ public class MainMenuActivity extends AppCompatActivity {
         StudentID = studentID;
     }
 
-    public void UpdatemUser(){
+    public void UpdatemUser(final UploadCallBack callBack){
         String url = "http://101.132.71.111:8080/TecSoundWebApp/GetUInfoServlet";
         Map<String, String> params = new HashMap<>();
         params.put("user_id", mUser.getUser_id());
@@ -71,6 +75,7 @@ public class MainMenuActivity extends AppCompatActivity {
                     mUser.setUser_name(user.getString("user_name"));
                     mUser.setUser_pic_src(user.getString("user_pic_src"));
                     mUser.setUpdate_time(user.getString("update_time"));
+                    callBack.OnUploaded();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -137,5 +142,8 @@ public class MainMenuActivity extends AppCompatActivity {
             ft.hide(f);
         }
         ft.commit();
+    }
+    public interface UploadCallBack{
+        void OnUploaded();
     }
 }

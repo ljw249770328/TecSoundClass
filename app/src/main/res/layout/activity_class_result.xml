@@ -177,6 +177,7 @@
                 android:id="@+id/iv_class_pic"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:scaleType="centerCrop"
                 android:background="@drawable/bg_im_class_head"/>
         </LinearLayout>
     </RelativeLayout>

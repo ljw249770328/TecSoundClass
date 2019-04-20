@@ -9,9 +9,16 @@ public class Course implements Serializable {
     private String course_name="";
     private String course_time ="";
     private String course_request="";
+    private String course_pic_src ="";
     private String register_time="";
     private String update_time="";
+    public String getCourse_pic_src() {
+        return course_pic_src;
+    }
 
+    public void setCourse_pic_src(String course_pic_src) {
+        this.course_pic_src = course_pic_src;
+    }
     public String getCourse_id() {
         return course_id;
     }

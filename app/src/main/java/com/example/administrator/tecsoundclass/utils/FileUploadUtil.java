@@ -1,6 +1,9 @@
 package com.example.administrator.tecsoundclass.utils;
 
+import android.content.ContentResolver;
 import android.content.Context;
+import android.content.res.Resources;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.util.Base64;
 import android.util.Log;
@@ -45,7 +48,7 @@ public class FileUploadUtil {
         return  base64;
     }
 
-    public static String UploadFile(final  Context context, String tag, String filepath, String filename, String folder, @Nullable String table, @Nullable String tablekey){
+    public static  String UploadFile(final  Context context, String tag, String filepath, String filename, String folder, @Nullable String table, @Nullable String tablekey, @Nullable final FileUploadCallBack callBack){
         String base64file=encodeBase64File(filepath);
         String path = filename;
         String url = "http://101.132.71.111:8080/TecSoundWebApp/Base642fileServlet";
@@ -65,7 +68,11 @@ public class FileUploadUtil {
                 String result = null;
                 try {
                     result = r.getString("Result");
-                    Log.d("Tag", result);
+                    Log.d("Uploaded", result);
+                    if (callBack!=null){
+                        callBack.OnUploaded(result);
+                    }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -75,4 +82,7 @@ public class FileUploadUtil {
         return "http://101.132.71.111:8080/"+folder+"/"+filename;
     }
 
+    public interface FileUploadCallBack{
+        void OnUploaded(String  Fileurl);
+    }
 }

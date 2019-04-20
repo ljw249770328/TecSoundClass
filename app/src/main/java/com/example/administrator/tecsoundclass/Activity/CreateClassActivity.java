@@ -1,6 +1,8 @@
 package com.example.administrator.tecsoundclass.Activity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -24,6 +26,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class CreateClassActivity extends AppCompatActivity {
     private TextView mTvCancle,mTvNext,mTvClassTime,mTvClassOver;
@@ -92,34 +95,48 @@ public class CreateClassActivity extends AppCompatActivity {
                     mEtClassName.clearFocus();
                     mEtClassNum.clearFocus();
                     if(k1&&k2&&!mTvClassTime.getText().toString().equals("上课时间")&&!mTvClassOver.getText().toString().equals("下课时间")){
-                        //上传图片,返回图片路径!!!!!!!!!!!!!!!!!
-//                        String FileUrl =FileUploadUtil.UploadFile(getApplicationContext(),"uploadCpic",CPicPath,)
-                        String url="http://101.132.71.111:8080/TecSoundWebApp/CreateClassServlet";
-                        Map<String,String> params=new HashMap<>();
-                        params.put("teacher_user_id",getIntent().getExtras().getString("teaId"));
-                        params.put("course_class",mEtClassNum.getText().toString()+"班");
-                        params.put("course_time",mTvClassTime.getText().toString()+"-"+mTvClassOver.getText().toString());
-                        params.put("course_request",mEtClassInfo.getText().toString());
-                        params.put("course_name",mEtClassName.getText().toString());
-
-                        VolleyCallback.getJSONObject(CreateClassActivity.this, "CreateClass", url, params, new VolleyCallback.VolleyJsonCallback() {
+                        String url="http://101.132.71.111:8080/TecSoundWebApp/ClassRandomNumServlet";
+                        Map <String,String> params =new HashMap<>();
+                        params.put("index","10");
+                        VolleyCallback.getJSONObject(CreateClassActivity.this, "getCid", url, params, new VolleyCallback.VolleyJsonCallback() {
                             @Override
                             public void onFinish(JSONObject r) {
                                 try {
-                                    String result =r.getString("Result");
-                                    if (result.length()==10){
-                                        Toast.makeText(CreateClassActivity.this,"创建成功,课堂Id为"+result,Toast.LENGTH_SHORT).show();
-                                        finish();
-                                    }else
-                                    {
-                                        Toast.makeText(CreateClassActivity.this,result,Toast.LENGTH_SHORT).show();
-                                    }
+                                    String Cid =r.getString("Result");
+                                    String url="http://101.132.71.111:8080/TecSoundWebApp/CreateClassServlet";
+                                    Map<String,String> params=new HashMap<>();
+                                    params.put("course_id",Cid);
+                                    params.put("teacher_user_id",getIntent().getExtras().getString("teaId"));
+                                    params.put("course_class",mEtClassNum.getText().toString()+"班");
+                                    params.put("course_time",mTvClassTime.getText().toString()+"-"+mTvClassOver.getText().toString());
+                                    params.put("course_request",mEtClassInfo.getText().toString());
+                                    params.put("course_name",mEtClassName.getText().toString());
+                                    String FileUrl =FileUploadUtil.UploadFile(getApplicationContext(),"uploadCpic",CPicPath,Cid+".jpeg","ClassPic","course","course_id",null);
+                                    params.put("course_pic_src",FileUrl);
+                                    VolleyCallback.getJSONObject(CreateClassActivity.this, "CreateClass", url, params, new VolleyCallback.VolleyJsonCallback() {
+                                        @Override
+                                        public void onFinish(JSONObject r) {
+                                            try {
+                                                String result =r.getString("Result");
+                                                if (result.length()==10){
+                                                    Toast.makeText(CreateClassActivity.this,"创建成功,课堂Id为"+result,Toast.LENGTH_SHORT).show();
+                                                    finish();
+                                                }else
+                                                {
+                                                    Toast.makeText(CreateClassActivity.this,result,Toast.LENGTH_SHORT).show();
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+
+                                        }
+                                    });
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-
                             }
                         });
+
                     }else {
                         Toast.makeText(CreateClassActivity.this,"请检查填写信息",Toast.LENGTH_SHORT).show();
                     }

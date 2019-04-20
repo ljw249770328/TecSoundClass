@@ -26,6 +26,8 @@ import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -84,30 +86,35 @@ public class EditMyInfoActivity extends AppCompatActivity {
                     factory.getDatePicker(EditMyInfoActivity.this,"出生日期",mTvMyBirthD).show(factory.getTime());
                     break;
                 case R.id.tv_save:
-                    String path =FileUploadUtil.UploadFile(getApplicationContext(),"uploadhead",picTurePath,mTvMyId.getText().toString()+".jpeg","headpic","user",user.getUser_id());
-                    String url="http://101.132.71.111:8080/TecSoundWebApp/AlterUInfoServlet";
-                    Map<String,String> params=new HashMap<>();
-                    params.put("user_id",mTvMyId.getText().toString());
-                    params.put("user_age",mTvMyBirthD.getText().toString());
-                    params.put("user_sex",mSex);
-                    params.put("user_pic_src",path);
-                    VolleyCallback.getJSONObject(EditMyInfoActivity.this, "EditMyinfo", url, params, new VolleyCallback.VolleyJsonCallback() {
+                    FileUploadUtil.UploadFile(getApplicationContext(), "uploadhead", picTurePath, mTvMyId.getText().toString() + ".jpeg", "headpic", "user", user.getUser_id(), new FileUploadUtil.FileUploadCallBack() {
                         @Override
-                        public void onFinish(JSONObject r) {
-                            try {
-                                String Result =r.getString("Result");
-                                if(Result.equals("success")){
-                                    Toast.makeText(EditMyInfoActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
+                        public void OnUploaded(String Fileurl) {
+                            String url="http://101.132.71.111:8080/TecSoundWebApp/AlterUInfoServlet";
+                            Map<String,String> params=new HashMap<>();
+                            params.put("user_id",mTvMyId.getText().toString());
+                            params.put("user_age",mTvMyBirthD.getText().toString());
+                            params.put("user_sex",mSex);
+                            params.put("user_pic_src",Fileurl);
+                            VolleyCallback.getJSONObject(EditMyInfoActivity.this, "EditMyinfo", url, params, new VolleyCallback.VolleyJsonCallback() {
+                                @Override
+                                public void onFinish(JSONObject r) {
+                                    try {
+                                        String Result =r.getString("Result");
+                                        if(Result.equals("success")){
+                                            Toast.makeText(EditMyInfoActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
+
+                                        }else {
+                                            Toast.makeText(EditMyInfoActivity.this,"出现异常"+Result,Toast.LENGTH_SHORT).show();
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                     finish();
-                                }else {
-                                    Toast.makeText(EditMyInfoActivity.this,"出现异常"+Result,Toast.LENGTH_SHORT).show();
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                            });
                         }
                     });
-                    finish();
+
                     break;
                 case R.id.tv_change_head:
                     Intent intent =new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -123,8 +130,12 @@ public class EditMyInfoActivity extends AppCompatActivity {
         mTvMyBirthD.setText(user.getUser_age());
         mTvMyIdentity.setText(user.getUser_identity());
         String updateString =user.getUpdate_time();
-        Glide.with(getApplicationContext()).load(user.getUser_pic_src()).signature(new ObjectKey(updateString)).encodeQuality(70).into(mIvEditedHead);
-        if (user.getUser_sex().equals("女"));{
+        try {
+            Glide.with(EditMyInfoActivity.this).load(new URL(user.getUser_pic_src())).signature(new ObjectKey(updateString)).encodeQuality(70).into(mIvEditedHead);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        if (user.getUser_sex().equals("女")){
             mSexGroup.check(R.id.rb_sex_female);
         }
     }
@@ -156,13 +167,13 @@ public class EditMyInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_myinfo);
         init();
         SetListeners();
-
+        SetData();
+        Toast.makeText(this,user.getUpdate_time(),Toast.LENGTH_SHORT).show();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        SetData();
     }
 
     @Override

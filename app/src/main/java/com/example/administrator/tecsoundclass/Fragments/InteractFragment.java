@@ -295,7 +295,7 @@ public class InteractFragment extends Fragment {
                                     @Override
                                     public void onDismiss(DialogInterface dialog) {
                                         //上传音频
-                                        String FileURL =FileUploadUtil.UploadFile(mActivity.getApplicationContext(),"InteractVoice",interactHandler.getMfilepath(),interactHandler.getMfilename(),"Interact",null,null);
+                                        String FileURL =FileUploadUtil.UploadFile(mActivity.getApplicationContext(),"InteractVoice",interactHandler.getMfilepath(),interactHandler.getMfilename(),"Interact",null,null,null);
                                         //写入数据
                                         String url = "http://101.132.71.111:8080/TecSoundWebApp/AddInteractServlet";
                                         Map<String,String> params =new HashMap<>();
