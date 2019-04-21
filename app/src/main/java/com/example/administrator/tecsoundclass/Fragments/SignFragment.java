@@ -1,5 +1,6 @@
 package com.example.administrator.tecsoundclass.Fragments;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -15,7 +16,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.JavaBean.Sign;
+import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.RegeditVoiceActivity;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
@@ -52,19 +53,19 @@ public class SignFragment extends Fragment {
     private AlertDialog mSignDialog;
     private SpeakerVerifier mSpeakerVerifier;
     private Toast mToast;
-    private String mAuthId = "", mTime = "", mDate = "", mStatus = "";
-    private String mTextPwd = "";
+    private String mAuthId , mTime = "", mDate = "", mStatus = "";
+    private String mNumPwd = "";
     private final String TAG = CourseMenuActivity.class.getSimpleName();
-    private static final int PWD_TYPE_TEXT = 1;
+    private static final int PWD_TYPE_NUM = 3;
     private TextView mResultText;
-    private Button mErrorResult;
+    private TextView mErrorResult;
     private String[] items;
-    private Bundle bundle;
     private MySignListAdapter adapter;
     private List<Sign> signList = new ArrayList<>();
     private List<Sign> list;
     private PopupWindow mpop;
     private Onclick onclick = new Onclick();
+    private User user;
     CourseMenuActivity mActivity;
 
     public SignFragment() {
@@ -103,8 +104,8 @@ public class SignFragment extends Fragment {
         mIvBack = view.findViewById(R.id.im_back);
         mTvSign = view.findViewById(R.id.tv_start_sign);
         mToast = Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT);
-        bundle = getActivity().getIntent().getExtras();
-        mAuthId = bundle.getString("StudentId");
+        user=mActivity.getmUser();
+        mAuthId = user.getUser_id();
         mRvSign = view.findViewById(R.id.recycler_view_sign);
     }
 
@@ -119,7 +120,6 @@ public class SignFragment extends Fragment {
         SetClickLIstener();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRvSign.setLayoutManager(layoutManager);
-
     }
 
     //从数据库中获得显示的数据
@@ -221,7 +221,7 @@ public class SignFragment extends Fragment {
                         @Override
                         public void onClick(View v) {
                             VoiceIdentifier voiceIdentifier = new VoiceIdentifier();
-                            voiceIdentifier.PrepareIdentify();
+                            voiceIdentifier.StartIdentify();
                         }
                     });
                     break;
@@ -237,51 +237,51 @@ public class SignFragment extends Fragment {
 
     private class VoiceIdentifier {
         //获取密码
-        private void PrepareIdentify() {
-            // 清空参数
-            mSpeakerVerifier.setParameter(SpeechConstant.PARAMS, null);
-            //设置会话场景
-            mSpeakerVerifier.setParameter(SpeechConstant.MFV_SCENES, "ivp");
-            //设置下载密码类型为文本
-            mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWDT, "" + PWD_TYPE_TEXT);
-            SpeechListener mPwdListenter = new SpeechListener() {
-                @Override
-                public void onEvent(int i, Bundle bundle) {
-
-                }
-
-                @Override
-                public void onBufferReceived(byte[] bytes) {
-                    String result = new String(bytes);
-                    try {
-                        JSONObject object = new JSONObject(result);
-                        if (!object.has("txt_pwd")) {
-                            mResultText.setText("");
-                            return;
-                        }
-                        //JSONBOJECT.optjsonarray()方法比与getjsonarray()方法类似,前者不需要trycatch
-                        JSONArray pwdArray = object.optJSONArray("txt_pwd");
-                        items = new String[pwdArray.length()];
-                        for (int i = 0; i < pwdArray.length(); i++) {
-                            items[i] = pwdArray.getString(i);
-                        }
-                        mTextPwd = items[0];
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onCompleted(SpeechError speechError) {
-                    if (null != speechError && ErrorCode.SUCCESS != speechError.getErrorCode()) {
-                        showTip("获取失败：" + speechError.getErrorCode());
-                    }
-                    //在这里调用开始验证可以解决业务类型为验证时由于mTextPwd未获取到导致传参错误的问题
-                    StartIdentify();
-                }
-            };
-            mSpeakerVerifier.getPasswordList(mPwdListenter);
-        }
+//        private void PrepareIdentify() {
+//            // 清空参数
+//            mSpeakerVerifier.setParameter(SpeechConstant.PARAMS, null);
+//            //设置会话场景
+//            mSpeakerVerifier.setParameter(SpeechConstant.MFV_SCENES, "ivp");
+//            //设置下载密码类型为数字
+//            mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWDT, "" + PWD_TYPE_NUM);
+//            SpeechListener mPwdListenter = new SpeechListener() {
+//                @Override
+//                public void onEvent(int i, Bundle bundle) {
+//
+//                }
+//
+//                @Override
+//                public void onBufferReceived(byte[] bytes) {
+//                    String result = new String(bytes);
+//                    try {
+//                        JSONObject object = new JSONObject(result);
+//                        if (!object.has("txt_pwd")) {
+//                            mResultText.setText("");
+//                            return;
+//                        }
+//                        //JSONBOJECT.optjsonarray()方法比与getjsonarray()方法类似,前者不需要trycatch
+//                        JSONArray pwdArray = object.optJSONArray("txt_pwd");
+//                        items = new String[pwdArray.length()];
+//                        for (int i = 0; i < pwdArray.length(); i++) {
+//                            items[i] = pwdArray.getString(i);
+//                        }
+//                        mNumPwd = items[0];
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//
+//                @Override
+//                public void onCompleted(SpeechError speechError) {
+//                    if (null != speechError && ErrorCode.SUCCESS != speechError.getErrorCode()) {
+//                        showTip("获取失败：" + speechError.getErrorCode());
+//                    }
+//                    //在这里调用开始验证可以解决业务类型为验证时由于mTextPwd未获取到导致传参错误的问题
+//                    StartIdentify();
+//                }
+//            };
+//            mSpeakerVerifier.getPasswordList(mPwdListenter);
+//        }
 
         private void StartIdentify() {
             //验证
@@ -294,14 +294,14 @@ public class SignFragment extends Fragment {
             // 消噪
             //mSpeakerVerifier.setParameter(SpeechConstant.AUDIO_SOURCE, "" + MediaRecorder.AudioSource.VOICE_RECOGNITION);
             //设置识别类型
-            mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWD, mTextPwd);
-            mResultText.setText("请读出：" + mTextPwd);
-            mErrorResult.setText("识别中...");
+            String verifyPwd = mSpeakerVerifier.generatePassword(8);
+            mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWD, verifyPwd);
+            mResultText.setText("请读出：" + verifyPwd);
             // 设置auth_id
             mSpeakerVerifier.setParameter(SpeechConstant.AUTH_ID, mAuthId);
-            mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWDT, "" + PWD_TYPE_TEXT);
+            mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWDT, "" + PWD_TYPE_NUM);
             // 开始验证
-            if (mTextPwd == "") {
+            if (verifyPwd == "") {
                 showTip("mText未下载");
             } else {
                 mSpeakerVerifier.startListening(mVerifyListener);
@@ -411,6 +411,8 @@ public class SignFragment extends Fragment {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(getActivity(), RegeditVoiceActivity.class);
+                            Bundle bundle =new Bundle();
+                            bundle.putSerializable("mUser",user);
                             intent.putExtras(bundle);
                             mSignDialog.dismiss();
                             startActivity(intent);

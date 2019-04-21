@@ -32,7 +32,7 @@
         android:text=""
         android:textStyle="bold"
         android:textSize="30sp"/>
-    <Button
+    <TextView
         android:id="@+id/error_result"
         android:layout_width="150dp"
         android:layout_height="150dp"

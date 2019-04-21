@@ -59,7 +59,7 @@
         android:gravity="center"
         android:textSize="17sp"
         android:padding="15dp"/>
-    <Button
+    <TextView
         android:id="@+id/isv_reocrd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
