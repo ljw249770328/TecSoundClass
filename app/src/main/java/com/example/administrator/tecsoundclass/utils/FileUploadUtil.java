@@ -56,10 +56,10 @@ public class FileUploadUtil {
         params.put("file",base64file);
         params.put("kinds",folder);
         params.put("path",path);
-        if (!table.equals("")){
+        if (table!=null){
             params.put("table",table);
         }
-       if (!tablekey.equals("")){
+       if (table!=null){
             params.put("tablekey",tablekey);
        }
         VolleyCallback.getJSONObject(context, tag, url, params, new VolleyCallback.VolleyJsonCallback() {

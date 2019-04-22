@@ -183,7 +183,7 @@ public class MyselfFragment extends Fragment {
                 case R.id.m_status_data:
                     intent=new Intent(getActivity(),StandDataActivity.class);
                     Bundle bundle=new Bundle();
-                    bundle.putString("StudentId",activity.getStudentID());
+                    bundle.putSerializable("mUser",activity.getmUser());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     break;

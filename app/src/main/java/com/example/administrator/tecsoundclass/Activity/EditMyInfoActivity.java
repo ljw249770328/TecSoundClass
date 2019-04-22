@@ -168,7 +168,6 @@ public class EditMyInfoActivity extends AppCompatActivity {
         init();
         SetListeners();
         SetData();
-        Toast.makeText(this,user.getUpdate_time(),Toast.LENGTH_SHORT).show();
     }
 
     @Override

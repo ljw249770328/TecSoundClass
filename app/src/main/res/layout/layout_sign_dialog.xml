@@ -7,6 +7,7 @@
     android:paddingBottom="70dp"
     android:background="@color/colorGreen">
     <TextView
+        android:id="@+id/tv_CTitle_from"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

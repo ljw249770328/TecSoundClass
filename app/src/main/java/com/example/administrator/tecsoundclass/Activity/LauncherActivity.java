@@ -42,7 +42,7 @@ public class LauncherActivity extends AppCompatActivity {
                         .readTimeout(15_000) // set read timeout.
                 ))
                 .commit();
-        handler.sendEmptyMessageDelayed(1,100);//延时发送，第二个参数跟的毫秒
+        handler.sendEmptyMessageDelayed(1,700);//延时发送，第二个参数跟的毫秒
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }

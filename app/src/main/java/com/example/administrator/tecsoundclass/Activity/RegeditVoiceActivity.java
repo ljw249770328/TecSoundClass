@@ -1,16 +1,14 @@
-package com.example.administrator.tecsoundclass.iFlytec;
+package com.example.administrator.tecsoundclass.Activity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.media.MediaRecorder;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,7 +36,7 @@ public class RegeditVoiceActivity extends AppCompatActivity implements View.OnCl
     private String mAuthId,mNumPwd ;
     private TextView mResultText,mErrorResult;
     private SpeakerVerifier mSpeakerVerifier;
-    private TextView mBtnStartRecord;
+    private TextView mBtnStartRecord,mTvDeleteModel;
     private ProgressDialog mProDialog;
     private String[] items;
     private String[] mNumPwdSegs;
@@ -80,9 +78,12 @@ public class RegeditVoiceActivity extends AppCompatActivity implements View.OnCl
             }
         });
         mBtnStartRecord=findViewById(R.id.isv_reocrd);
+        mTvDeleteModel=findViewById(R.id.isv_delete);
         mBtnStartRecord.setOnClickListener(this);
         findViewById(R.id.isv_getpassword).setOnClickListener(this);
-        findViewById(R.id.isv_delete).setOnClickListener(this);
+        mTvDeleteModel.setOnClickListener(this);
+        mBtnStartRecord.setVisibility(View.GONE);
+        mTvDeleteModel.setVisibility(View.GONE);
         //设置加载框可关闭防止无网络等待
         mProDialog = new ProgressDialog(this);
         mProDialog.setCancelable(true);
@@ -117,6 +118,8 @@ public class RegeditVoiceActivity extends AppCompatActivity implements View.OnCl
             case R.id.isv_getpassword:
                 if(mNumPwd==null){
                     downloadPwd();
+                    mBtnStartRecord.setVisibility(View.VISIBLE);
+                    mTvDeleteModel.setVisibility(View.VISIBLE);
                 }
                 break;
             case R.id.isv_reocrd:

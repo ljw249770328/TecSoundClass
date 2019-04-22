@@ -1,6 +1,5 @@
 package com.example.administrator.tecsoundclass.Fragments;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -26,14 +25,13 @@ import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.JavaBean.Sign;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
-import com.example.administrator.tecsoundclass.iFlytec.RegeditVoiceActivity;
+import com.example.administrator.tecsoundclass.Activity.RegeditVoiceActivity;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
 import com.iflytek.cloud.SpeakerVerifier;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechError;
-import com.iflytek.cloud.SpeechListener;
 import com.iflytek.cloud.VerifierListener;
 import com.iflytek.cloud.VerifierResult;
 
@@ -211,6 +209,8 @@ public class SignFragment extends Fragment {
                     //点击签到按钮产生签到弹窗
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_sign_dialog, null);
+                    TextView mTvSigntitle=view.findViewById(R.id.tv_CTitle_from);
+                    mTvSigntitle.setText("来自"+mActivity.getmCourse().getCourse_name()+"("+mActivity.getmCourse().getCourse_class()+")");
                     mResultText = view.findViewById(R.id.edt_result);
                     mErrorResult = view.findViewById(R.id.error_result);
                     builder.setView(view);
@@ -296,7 +296,6 @@ public class SignFragment extends Fragment {
             //设置识别类型
             String verifyPwd = mSpeakerVerifier.generatePassword(8);
             mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWD, verifyPwd);
-            mResultText.setText("请读出：" + verifyPwd);
             // 设置auth_id
             mSpeakerVerifier.setParameter(SpeechConstant.AUTH_ID, mAuthId);
             mSpeakerVerifier.setParameter(SpeechConstant.ISV_PWDT, "" + PWD_TYPE_NUM);
@@ -304,6 +303,7 @@ public class SignFragment extends Fragment {
             if (verifyPwd == "") {
                 showTip("mText未下载");
             } else {
+                mResultText.setText("请读出：" + verifyPwd);
                 mSpeakerVerifier.startListening(mVerifyListener);
             }
 

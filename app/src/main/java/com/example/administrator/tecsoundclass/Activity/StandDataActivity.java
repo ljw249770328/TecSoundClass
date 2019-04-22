@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.administrator.tecsoundclass.R;
-import com.example.administrator.tecsoundclass.iFlytec.RegeditVoiceActivity;
 
 public class StandDataActivity extends AppCompatActivity {
     private TextView mTvback,mTvVoiceData;
