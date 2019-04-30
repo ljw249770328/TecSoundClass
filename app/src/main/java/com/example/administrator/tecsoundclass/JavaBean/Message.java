@@ -1,23 +1,15 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
 public class Message {
-    private int mes_id=0;
-    private String set_user_id="",receive_user_id="",mes_content="",mes_time="";
 
-    public int getMes_id() {
-        return mes_id;
+    private String send_user_id="",receive_user_id="",mes_content="",mes_time="";
+
+    public String getSend_user_id() {
+        return send_user_id;
     }
 
-    public void setMes_id(int mes_id) {
-        this.mes_id = mes_id;
-    }
-
-    public String getSet_user_id() {
-        return set_user_id;
-    }
-
-    public void setSet_user_id(String set_user_id) {
-        this.set_user_id = set_user_id;
+    public void setSend_user_id(String send_user_id) {
+        this.send_user_id = send_user_id;
     }
 
     public String getReceive_user_id() {

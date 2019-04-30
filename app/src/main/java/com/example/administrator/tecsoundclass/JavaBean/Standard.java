@@ -1,16 +1,7 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
 public class Standard {
-    private int stand_info=0;
     private String stand_user_id="",point_facepic_src="",point_voice_src="",update_time="";
-
-    public int getStand_info() {
-        return stand_info;
-    }
-
-    public void setStand_info(int stand_info) {
-        this.stand_info = stand_info;
-    }
 
     public String getStand_user_id() {
         return stand_user_id;
