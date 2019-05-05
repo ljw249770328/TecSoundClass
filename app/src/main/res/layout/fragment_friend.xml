@@ -66,7 +66,7 @@
                     android:textColorHint="@color/colorSmallGray"
                     android:background="@drawable/bg_edit_seach"/>
             </LinearLayout>
-            <ListView
+            <android.support.v7.widget.RecyclerView
                 android:id="@+id/lv_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,7 +75,7 @@
                 android:divider="@color/colorDarkGray"
                 android:listSelector="@drawable/course_list_item">
 
-            </ListView>
+            </android.support.v7.widget.RecyclerView>
         </LinearLayout>
     </LinearLayout>
 

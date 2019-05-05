@@ -1,8 +1,14 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
 public class Follow {
-    private String follower_user_id="",fan_user_id="",follow_time="";
+    private String follow_id="", follower_user_id="",fan_user_id="",follow_time="";
+    public String getFollow_id() {
+        return follow_id;
+    }
 
+    public void setFollow_id(String follow_id) {
+        this.follow_id = follow_id;
+    }
     public String getFollower_user_id() {
         return follower_user_id;
     }
