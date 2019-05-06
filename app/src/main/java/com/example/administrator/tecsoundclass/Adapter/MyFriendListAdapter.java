@@ -38,7 +38,7 @@ import java.util.Map;
 public class MyFriendListAdapter extends Adapter<MyFriendListAdapter.Viewholder> {
     private Context mContext;
     private List<Follow> mFollowList;
-    private Handler handler=null;
+
     private String user_id="";
     private Viewholder holder=null;
     public MyFriendListAdapter(List<Follow> list,Context context){
@@ -66,63 +66,62 @@ public class MyFriendListAdapter extends Adapter<MyFriendListAdapter.Viewholder>
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Viewholder viewholder, int i) {
+    public void onBindViewHolder(@NonNull final Viewholder viewholder, int i) {
         user_id=mFollowList.get(i).getFan_user_id();
-
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                String url = "http://101.132.71.111:8080/TecSoundWebApp/GetUInfoServlet";
-                Map<String, String> params = new HashMap<>();
-                params.put("user_id",user_id);
-                VolleyCallback.getJSONObject(mContext, "GetFollowuser", url, params, new VolleyCallback.VolleyJsonCallback() {
-                    @Override
-                    public void onFinish(JSONObject r) {
-                        try {
-                            JSONArray users=r.getJSONArray("users");
-                            JSONObject user= (JSONObject) users.get(0);
-
-                            User u=new User();
-                            //封装user对象
-                            u.setUser_id(user.getString("user_id"));
-                            u.setUser_age(user.getString("user_age"));
-                            u.setUser_identity(user.getString("user_identity"));
-                            u.setUser_sex(user.getString("user_sex"));
-                            u.setUser_name(user.getString("user_name"));
-                            u.setUser_pic_src(user.getString("user_pic_src"));
-                            u.setUpdate_time(user.getString("update_time"));
-                            Message message =new Message();
-                            message.what=1;
-                            message.obj=u;
-                            handler.sendMessage(message);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }
-        }.start();
-        holder=viewholder;
-        handler =new Handler(){
-
+        Transfer2User.GetUserById(mContext,user_id,new Handler(){
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                 switch (msg.what){
-                     case 1:
+                switch (msg.what){
+                    case 1:
                         User user = (User) msg.obj;
-                        Toast.makeText(mContext,String.valueOf(holder.getAdapterPosition()),Toast.LENGTH_SHORT).show();
-                         holder.mFriendName.setText(user.getUser_name());
-
-                 }
+                        viewholder.mFriendName.setText(user.getUser_name());
+                }
             }
-        };
+        });
         viewholder.mFriendStatus.setText("正在上'java基础'");
         viewholder.mTime.setText("2:22");
     }
     @Override
     public int getItemCount() {
         return mFollowList.size();
+    }
+    static class Transfer2User{
+        public static void GetUserById(final Context context, final String id, final Handler handler){
+            new Thread(){
+                @Override
+                public void run() {
+                    super.run();
+                    String url = "http://101.132.71.111:8080/TecSoundWebApp/GetUInfoServlet";
+                    Map<String, String> params = new HashMap<>();
+                    params.put("user_id",id);
+                    VolleyCallback.getJSONObject(context, "GetFollowuser", url, params, new VolleyCallback.VolleyJsonCallback() {
+                        @Override
+                        public void onFinish(JSONObject r) {
+                            try {
+                                JSONArray users=r.getJSONArray("users");
+                                JSONObject user= (JSONObject) users.get(0);
+
+                                User u=new User();
+                                //封装user对象
+                                u.setUser_id(user.getString("user_id"));
+                                u.setUser_age(user.getString("user_age"));
+                                u.setUser_identity(user.getString("user_identity"));
+                                u.setUser_sex(user.getString("user_sex"));
+                                u.setUser_name(user.getString("user_name"));
+                                u.setUser_pic_src(user.getString("user_pic_src"));
+                                u.setUpdate_time(user.getString("update_time"));
+                                Message message =new Message();
+                                message.what=1;
+                                message.obj=u;
+                                handler.sendMessage(message);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+            }.start();
+        }
     }
 }
