@@ -21,15 +21,19 @@ import com.example.administrator.tecsoundclass.utils.TransferMore;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class MyFriendListAdapter extends Adapter<MyFriendListAdapter.Viewholder> {
     private Context mContext;
     private List<Follow> mFollowList;
-
+    private User user=null;
+    private List<User> mFans=new ArrayList<>();
     private String user_id="";
     private Viewholder holder=null;
+    private OnRecyclerItemClickListener mListener;
+
     public MyFriendListAdapter(List<Follow> list,Context context){
         this.mContext=context;
         mFollowList=list;
@@ -43,7 +47,19 @@ public class MyFriendListAdapter extends Adapter<MyFriendListAdapter.Viewholder>
             mFriendName=itemView.findViewById(R.id.tv_friend_name);
             mFriendStatus=itemView.findViewById(R.id.tv_friend_status);
             mTime=itemView.findViewById(R.id.tv_time);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener!=null){
+                        mListener.onItemClick(getAdapterPosition(),mFans);
+                    }
+                }
+            });
         }
+    }
+
+    public void  SetOnItemClickListener(OnRecyclerItemClickListener listener){
+        mListener=listener;
     }
 
     @NonNull
@@ -63,7 +79,8 @@ public class MyFriendListAdapter extends Adapter<MyFriendListAdapter.Viewholder>
                 super.handleMessage(msg);
                 switch (msg.what){
                     case 1:
-                        User user = (User) msg.obj;
+                        user = (User) msg.obj;
+                        mFans.add(user);
                         viewholder.mFriendName.setText(user.getUser_name());
                         try {
                             if (!user.getUser_pic_src().equals("")){
@@ -81,5 +98,8 @@ public class MyFriendListAdapter extends Adapter<MyFriendListAdapter.Viewholder>
     @Override
     public int getItemCount() {
         return mFollowList.size();
+    }
+    public interface OnRecyclerItemClickListener{
+        void onItemClick(int posision,List<User> mFans);
     }
 }
