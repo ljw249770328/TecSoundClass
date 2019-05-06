@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.signature.ObjectKey;
 import com.example.administrator.tecsoundclass.Fragments.CourseFragment;
 import com.example.administrator.tecsoundclass.Fragments.FriendFragment;
 import com.example.administrator.tecsoundclass.Fragments.MyselfFragment;
@@ -37,7 +39,11 @@ public class MainMenuActivity extends AppCompatActivity {
         return mUser;
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
 
+    }
 
     @Override
     protected void onRestart() {
@@ -52,6 +58,31 @@ public class MainMenuActivity extends AppCompatActivity {
         StudentID = studentID;
     }
 
+    public void UpdatemUser(final UploadCallBack callBack){
+        String url = "http://101.132.71.111:8080/TecSoundWebApp/GetUInfoServlet";
+        Map<String, String> params = new HashMap<>();
+        params.put("user_id", mUser.getUser_id());
+        VolleyCallback.getJSONObject(getApplicationContext().getApplicationContext(), "GetUInfo", url, params, new VolleyCallback.VolleyJsonCallback() {
+            @Override
+            public void onFinish(JSONObject r) {
+                try {
+                    JSONArray users=r.getJSONArray("users");
+                    JSONObject user= (JSONObject) users.get(0);
+                    mUser.setUser_id(user.getString("user_id"));
+                    mUser.setUser_age(user.getString("user_age"));
+                    mUser.setUser_identity(user.getString("user_identity"));
+                    mUser.setUser_sex(user.getString("user_sex"));
+                    mUser.setUser_name(user.getString("user_name"));
+                    mUser.setUser_pic_src(user.getString("user_pic_src"));
+                    mUser.setUpdate_time(user.getString("update_time"));
+                    callBack.OnUploaded();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
 
 
     @Override
@@ -111,5 +142,8 @@ public class MainMenuActivity extends AppCompatActivity {
             ft.hide(f);
         }
         ft.commit();
+    }
+    public interface UploadCallBack{
+        void OnUploaded();
     }
 }

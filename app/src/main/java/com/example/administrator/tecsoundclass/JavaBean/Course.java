@@ -3,8 +3,22 @@ package com.example.administrator.tecsoundclass.JavaBean;
 import java.io.Serializable;
 
 public class Course implements Serializable {
-    private String course_id="",teacher_user_id="",course_class="",course_name="",course_time ="",course_request="" ,register_time="";
+    private String course_id="";
+    private String teacher_user_id="";
+    private String course_class="";
+    private String course_name="";
+    private String course_time ="";
+    private String course_request="";
+    private String course_pic_src ="";
+    private String register_time="";
+    private String update_time="";
+    public String getCourse_pic_src() {
+        return course_pic_src;
+    }
 
+    public void setCourse_pic_src(String course_pic_src) {
+        this.course_pic_src = course_pic_src;
+    }
     public String getCourse_id() {
         return course_id;
     }
@@ -20,7 +34,13 @@ public class Course implements Serializable {
     public void setTeacher_user_id(String teacher_user_id) {
         this.teacher_user_id = teacher_user_id;
     }
+    public String getUpdate_time() {
+        return update_time;
+    }
 
+    public void setUpdate_time(String update_time) {
+        this.update_time = update_time;
+    }
     public String getCourse_class() {
         return course_class;
     }

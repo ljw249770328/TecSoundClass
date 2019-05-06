@@ -37,10 +37,7 @@ public class RecPointHandler {
         return mfilename;
     }
 
-    public void setMfilename(String mfilename) {
-        this.mfilename = mfilename;
-    }
-    public RecPointHandler(Context context, TextView tv, final Button button){
+    public RecPointHandler(final Context context, TextView tv, final Button button){
         mTvSpeechResult=tv;
         button.setText("录音中");
         mRListener = new RecognizerDialogListener() {
@@ -52,6 +49,7 @@ public class RecPointHandler {
                 Log.d("text",text);
                 result +=text;
                 mTvSpeechResult.setText(result);
+                button.setText("记录");
                 if (isLast) {
                     result = "";
                     button.setText("完成");
@@ -66,8 +64,8 @@ public class RecPointHandler {
         mIatDialog.setListener(mRListener);
     }
     public void StartHandle(String filename){
-        mfilename=filename;
-        mfilepath=Environment.getExternalStorageDirectory() + "/MyApplication/" + filename + ".wav";
+        mfilename=filename+ ".wav";
+        mfilepath=Environment.getExternalStorageDirectory() + "/MyApplication/" + filename ;
         setIatParam(mfilepath);
         mIatDialog.show();
     }
@@ -93,6 +91,7 @@ public class RecPointHandler {
         mIatDialog.setParameter(SpeechConstant.AUDIO_FORMAT,"wav");
         mIatDialog.setParameter(SpeechConstant.ASR_AUDIO_PATH, filepath);
     }
+
     public static String parseIatResult(String json) {
         StringBuffer ret = new StringBuffer();
         try {

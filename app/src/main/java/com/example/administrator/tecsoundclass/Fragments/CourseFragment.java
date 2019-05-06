@@ -28,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.example.administrator.tecsoundclass.Activity.LoginActivity;
 import com.example.administrator.tecsoundclass.Adapter.MyClassListAdapter;
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
@@ -54,9 +55,11 @@ public class CourseFragment extends Fragment {
     private RecyclerView mRvCourse;
     MainMenuActivity activity;
     private MyClassListAdapter adapter;
-    private List<Course> CourseList=new ArrayList<>();
-    private  List<Course> list ;
+    private List<Course> CourseList = new ArrayList<>();
+    private List<Course> list;
     private SwipeRefreshLayout swipeRefresh;
+    private TextView mTvCreate,mTvJoin;
+
     public CourseFragment() {
 
     }
@@ -72,10 +75,9 @@ public class CourseFragment extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_course,container,false);
+        View view = inflater.inflate(R.layout.fragment_course, container, false);
         return view;
     }
 
@@ -88,7 +90,7 @@ public class CourseFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        activity= (MainMenuActivity) getActivity();
+        activity = (MainMenuActivity) getActivity();
     }
 
     @Override
@@ -97,57 +99,61 @@ public class CourseFragment extends Fragment {
         mIvMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                View view=getActivity().getLayoutInflater().inflate(R.layout.layout_pop_add_course,null);
-                TextView mTvCreate=view.findViewById(R.id.tv_create);
-                TextView mTvJoin=view.findViewById(R.id.tv_add_course);
-                OnClick onclick=new OnClick();
+                View view = getActivity().getLayoutInflater().inflate(R.layout.layout_pop_add_course, null);
+                mTvCreate = view.findViewById(R.id.tv_create);
+                mTvJoin = view.findViewById(R.id.tv_add_course);
+                if (activity.getmUser().getUser_identity().equals("老师")) {
+                    mTvCreate.setVisibility(View.VISIBLE);
+                }
+                OnClick onclick = new OnClick();
                 mTvCreate.setOnClickListener(onclick);
                 mTvJoin.setOnClickListener(onclick);
-                mPop=new PopupWindow(view,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                mPop = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 mPop.setOutsideTouchable(true);
                 mPop.setFocusable(true);
                 mPop.showAsDropDown(mIvMenu);
             }
         });
-        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRvCourse.setLayoutManager(layoutManager);
-
-
     }
-    private List<Course>InitList(){
-        list =new ArrayList<>();
-        String url="http://101.132.71.111:8080/TecSoundWebApp/GetCListServlet";
-        Map<String,String>params=new HashMap<>();
-        params.put("user_id",activity.getStudentID());
+
+    private List<Course> InitList() {
+        list = new ArrayList<>();
+        String url = "http://101.132.71.111:8080/TecSoundWebApp/GetCListServlet";
+        Map<String, String> params = new HashMap<>();
+        params.put("user_id", activity.getStudentID());
         VolleyCallback.getJSONObject(getActivity().getApplicationContext(), "GetCourseList", url, params, new VolleyCallback.VolleyJsonCallback() {
             @Override
             public void onFinish(JSONObject r) {
                 try {
-                    JSONArray courses =r.getJSONArray("courses");
-                    for (int i=0;i<courses.length();i++){
-                        JSONObject Cobj= (JSONObject) courses.get(i);
-                        Course course =new Course();
+                    JSONArray courses = r.getJSONArray("courses");
+                    for (int i = 0; i < courses.length(); i++) {
+                        JSONObject Cobj = (JSONObject) courses.get(i);
+                        Course course = new Course();
                         course.setTeacher_user_id(Cobj.getString("teacher_user_id"));
                         course.setCourse_class(Cobj.getString("course_class"));
                         course.setCourse_name(Cobj.getString("course_name"));
                         course.setCourse_time(Cobj.getString("course_time"));
                         course.setCourse_request(Cobj.getString("course_request"));
                         course.setCourse_id(Cobj.getString("course_id"));
+                        course.setCourse_pic_src(Cobj.getString("course_pic_src"));
+                        course.setUpdate_time(Cobj.getString("update_time"));
                         list.add(course);
-                        }
+
+                    }
                     CourseList.clear();
                     CourseList.addAll(list);
-                    adapter=new MyClassListAdapter(CourseList);
-                    adapter.notifyDataSetChanged();
+                    adapter = new MyClassListAdapter(CourseList,activity.getApplicationContext());
                     mRvCourse.setAdapter(adapter);
                     adapter.setOnItemClickListener(new MyClassListAdapter.OnRecyclerItemClickListener() {
                         @Override
                         public void onItemClick(int position, List<Course> CourseList) {
-                            String CourseId=CourseList.get(position).getCourse_id();
-                            Intent intent=new Intent(getActivity(),CourseMenuActivity.class);
-                            Bundle bundle=new Bundle();
-                            bundle.putSerializable("user",activity.getmUser());
-                            bundle.putSerializable("course",CourseList.get(position));
+                            String CourseId = CourseList.get(position).getCourse_id();
+                            Intent intent = new Intent(getActivity(), CourseMenuActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putSerializable("user", activity.getmUser());
+                            bundle.putSerializable("course", CourseList.get(position));
                             intent.putExtras(bundle);
                             startActivity(intent);
                         }
@@ -159,41 +165,25 @@ public class CourseFragment extends Fragment {
         });
         return list;
     }
-    private class OnClick implements View.OnClickListener{
+
+    private class OnClick implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             mPop.dismiss();
-            switch (v.getId()){
+            Intent intent ;
+            switch (v.getId()) {
                 case R.id.tv_create:
-                    String url = "http://101.132.71.111:8080/TecSoundWebApp/GetUInfoServlet";
-                    Map<String, String> params = new HashMap<>();
-                    params.put("user_id", activity.getStudentID());
-                    VolleyCallback.getJSONObject(getActivity().getApplicationContext(), "GetUInfo", url, params, new VolleyCallback.VolleyJsonCallback() {
-                        @Override
-                        public void onFinish(JSONObject r) {
-                            try {
-                                JSONArray users=r.getJSONArray("users");
-                                JSONObject user= (JSONObject) users.get(0);
-                                if(user.getString("user_identity").equals("老师")){
-                                    Intent intent=new Intent(getActivity(),CreateClassActivity.class);
-                                    Bundle b=new Bundle();
-                                    b.putString("teaId",activity.getStudentID());
-                                    intent.putExtras(b);
-                                    startActivity(intent);
-                                } else {
-                                    Toast.makeText(getActivity(),"您没有权限",Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-
+                    intent = new Intent(getActivity(), CreateClassActivity.class);
+                    Bundle b = new Bundle();
+                    b.putString("teaId", activity.getStudentID());
+                    intent.putExtras(b);
+                    startActivity(intent);
                     break;
                 case R.id.tv_add_course:
-                    Intent intent=new Intent(getActivity(),JoinActivity.class);;
-                    Bundle bundle=new Bundle();
-                    bundle.putString("Stuid",activity.getmUser().getUser_id());
+                    intent = new Intent(getActivity(), JoinActivity.class);
+                    ;
+                    Bundle bundle = new Bundle();
+                    bundle.putString("Stuid", activity.getmUser().getUser_id());
                     intent.putExtras(bundle);
                     startActivity(intent);
                     break;
@@ -201,11 +191,12 @@ public class CourseFragment extends Fragment {
 
         }
     }
+
     @SuppressLint("ResourceAsColor")
-    private void  init(View view){
-        mIvMenu=view.findViewById(R.id.iv_more);
-        mRvCourse=view.findViewById(R.id.rv_course);
-        swipeRefresh=view.findViewById(R.id.swipe_refresh);
+    private void init(View view) {
+        mIvMenu = view.findViewById(R.id.iv_more);
+        mRvCourse = view.findViewById(R.id.rv_course);
+        swipeRefresh = view.findViewById(R.id.swipe_refresh);
         swipeRefresh.setColorSchemeColors(R.color.colorDarkGreen);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

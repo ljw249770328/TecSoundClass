@@ -1,29 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingRight="15dp"
-    android:paddingTop="5dp"
+    android:padding="5dp"
     android:layout_marginTop="10dp"
-    android:layout_marginBottom="5dp">
+    android:layout_marginBottom="5dp"
+    android:background="@drawable/recyclelist_point_item">
         <LinearLayout
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:background="@drawable/message"
-            android:gravity="right">
+            android:layout_width="220dp"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:background="@drawable/message">
             <TextView
                 android:id="@+id/tv_voice_time"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:layout_marginBottom="13dp"
-                android:layout_marginRight="3dp"
+                android:padding="3dp"
                 android:textSize="9sp"
+                android:layout_marginRight="3dp"
                 android:textStyle="bold"
                 android:textColor="@color/colorDarkGray"
                 android:drawableRight="@drawable/sound"
                 android:text="(语音时长)"/>
+
+            <TextView
+                android:id="@+id/tv_point_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:maxLines="3"
+                android:scrollbars="vertical"
+                android:textSize="14sp"
+                android:textStyle="bold" />
         </LinearLayout>
     <TextView
         android:id="@+id/tv_review_date"
@@ -32,7 +44,7 @@
         android:text="(日期)"
         android:layout_gravity="center"
         android:paddingLeft="5dp"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textColor="@color/colorSmallGray"/>
     <View
         android:id="@+id/divider"

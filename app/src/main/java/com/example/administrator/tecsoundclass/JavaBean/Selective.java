@@ -1,10 +1,13 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
+import java.util.UUID;
+
 public class  Selective {
     String course_id="";
     String join_user_id="";
     String join_time="";
     String selective_id="";
+
     public String getSelective_id() {
         return selective_id;
     }

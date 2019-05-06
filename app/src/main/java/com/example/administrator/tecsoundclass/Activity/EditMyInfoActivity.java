@@ -1,5 +1,11 @@
 package com.example.administrator.tecsoundclass.Activity;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,24 +15,31 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.signature.ObjectKey;
+import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.example.administrator.tecsoundclass.utils.TPDialogFactory;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 public class EditMyInfoActivity extends AppCompatActivity {
     private ImageView mBack,mIvEditedHead;
-    private TextView mTvMyname,mTvMyId,mTvMyBirthD,mTvMyIdentity,mTvSave;
+    private TextView mTvMyname,mTvMyId,mTvMyBirthD,mTvMyIdentity,mTvSave,mTvChangeHead;
     private RadioGroup mSexGroup;
     private RadioButton rb_male;
     private RadioButton rb_female;
     private String mSex="男";
+    private String picTurePath="";
+    private User user ;
 
     private void init(){
         mBack=findViewById(R.id.im_back);
@@ -39,12 +52,15 @@ public class EditMyInfoActivity extends AppCompatActivity {
         mSexGroup=findViewById(R.id.rg_sex_group);
         rb_male=findViewById(R.id.rb_sex_male);
         rb_female=findViewById(R.id.rb_sex_female);
+        mTvChangeHead=findViewById(R.id.tv_change_head);
+        user = (User) getIntent().getExtras().getSerializable("mUser");
     }
     private void SetListeners(){
         OnClick onClick =new OnClick();
         mBack.setOnClickListener(onClick);
         mTvMyBirthD.setOnClickListener(onClick);
         mTvSave.setOnClickListener(onClick);
+        mTvChangeHead.setOnClickListener(onClick);
         mSexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             int count = mSexGroup.getChildCount();
             @Override
@@ -70,56 +86,81 @@ public class EditMyInfoActivity extends AppCompatActivity {
                     factory.getDatePicker(EditMyInfoActivity.this,"出生日期",mTvMyBirthD).show(factory.getTime());
                     break;
                 case R.id.tv_save:
-                    String url="http://101.132.71.111:8080/TecSoundWebApp/AlterUInfoServlet";
-                    Map<String,String> params=new HashMap<>();
-                    params.put("user_id",mTvMyId.getText().toString());
-                    params.put("user_age",mTvMyBirthD.getText().toString());
-                    params.put("user_sex",mSex);
-                    VolleyCallback.getJSONObject(EditMyInfoActivity.this, "EditMyinfo", url, params, new VolleyCallback.VolleyJsonCallback() {
+                    FileUploadUtil.UploadFile(getApplicationContext(), "uploadhead", picTurePath, mTvMyId.getText().toString() + ".jpeg", "headpic", "user", user.getUser_id(), new FileUploadUtil.FileUploadCallBack() {
                         @Override
-                        public void onFinish(JSONObject r) {
-                            try {
-                                String Result =r.getString("Result");
-                                if(Result.equals("success")){
-                                    Toast.makeText(EditMyInfoActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
+                        public void OnUploaded(String Fileurl) {
+                            String url="http://101.132.71.111:8080/TecSoundWebApp/AlterUInfoServlet";
+                            Map<String,String> params=new HashMap<>();
+                            params.put("user_id",mTvMyId.getText().toString());
+                            params.put("user_age",mTvMyBirthD.getText().toString());
+                            params.put("user_sex",mSex);
+                            params.put("user_pic_src",Fileurl);
+                            VolleyCallback.getJSONObject(EditMyInfoActivity.this, "EditMyinfo", url, params, new VolleyCallback.VolleyJsonCallback() {
+                                @Override
+                                public void onFinish(JSONObject r) {
+                                    try {
+                                        String Result =r.getString("Result");
+                                        if(Result.equals("success")){
+                                            Toast.makeText(EditMyInfoActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
+
+                                        }else {
+                                            Toast.makeText(EditMyInfoActivity.this,"出现异常"+Result,Toast.LENGTH_SHORT).show();
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                     finish();
-                                }else {
-                                    Toast.makeText(EditMyInfoActivity.this,"出现异常",Toast.LENGTH_SHORT).show();
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                            });
                         }
                     });
+
+                    break;
+                case R.id.tv_change_head:
+                    Intent intent =new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(intent,1);
                 default:
                     break;
             }
         }
     }
     private void SetData(){
-        String url = "http://101.132.71.111:8080/TecSoundWebApp/GetUInfoServlet";
-        Map<String, String> params = new HashMap<>();
-        params.put("user_id",getIntent().getExtras().getString("user_id"));
-        VolleyCallback.getJSONObject(EditMyInfoActivity.this, "GetUInfo", url, params, new VolleyCallback.VolleyJsonCallback() {
-            @Override
-            public void onFinish(JSONObject r) {
-                try {
-                    JSONArray users=r.getJSONArray("users");
-                    JSONObject user= (JSONObject) users.get(0);
-                    mTvMyname.setText(user.getString("user_name"));
-                    mTvMyId.setText(user.getString("user_id"));
-                    mTvMyBirthD.setText(user.getString("user_age"));
-                    mTvMyIdentity.setText(user.getString("user_identity"));
-                    if (user.getString("user_sex").equals("女"));{
-                        mSexGroup.check(R.id.rb_sex_female);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        });
+        mTvMyname.setText(user.getUser_name());
+        mTvMyId.setText(user.getUser_id());
+        mTvMyBirthD.setText(user.getUser_age());
+        mTvMyIdentity.setText(user.getUser_identity());
+        String updateString =user.getUpdate_time();
+        try {
+            Glide.with(EditMyInfoActivity.this).load(new URL(user.getUser_pic_src())).signature(new ObjectKey(updateString)).encodeQuality(70).into(mIvEditedHead);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        if (user.getUser_sex().equals("女")){
+            mSexGroup.check(R.id.rb_sex_female);
+        }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data!=null){
+            switch (requestCode){
+                case 1:
+                    Uri selectedImage =data.getData();
+                    String[] filePathClumn ={MediaStore.Images.Media.DATA};
+                    //获取照片的数据视图
+                    Cursor cursor=getContentResolver().query(selectedImage,filePathClumn,null,null,null);
+                    cursor.moveToFirst();
+                    //获取已选择的图片路径
+                    int columIndex =cursor.getColumnIndex(filePathClumn[0]);
+                    picTurePath= cursor.getString(columIndex);
+                    cursor.close();
+                    mIvEditedHead.setImageBitmap(BitmapFactory.decodeFile(picTurePath));
+                    break;
+            }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,5 +168,15 @@ public class EditMyInfoActivity extends AppCompatActivity {
         init();
         SetListeners();
         SetData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
     }
 }

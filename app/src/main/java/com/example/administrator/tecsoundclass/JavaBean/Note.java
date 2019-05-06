@@ -1,16 +1,7 @@
 package com.example.administrator.tecsoundclass.JavaBean;
 
 public class Note {
-    private int note_id=0;
     private String note_user_id="",note_content="",note_voice_src="",note_pic_src="",note_time_src="";
-
-    public int getNote_id() {
-        return note_id;
-    }
-
-    public void setNote_id(int note_id) {
-        this.note_id = note_id;
-    }
 
     public String getNote_user_id() {
         return note_user_id;

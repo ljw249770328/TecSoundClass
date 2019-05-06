@@ -87,7 +87,7 @@
             android:id="@+id/recycler_view_point"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-             android:layout_below="@id/tv_title"
+            android:layout_below="@id/tv_title"
             android:layout_above="@id/btn_class_begin">
          </android.support.v7.widget.RecyclerView>
         <Button

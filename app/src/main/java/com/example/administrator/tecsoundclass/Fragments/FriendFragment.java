@@ -1,27 +1,44 @@
 package com.example.administrator.tecsoundclass.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.example.administrator.tecsoundclass.Activity.MainMenuActivity;
 import com.example.administrator.tecsoundclass.Adapter.MyFriendListAdapter;
+import com.example.administrator.tecsoundclass.JavaBean.Follow;
+import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.VolleyCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FriendFragment extends Fragment {
 
     private ImageView mIvAFriends;
     private PopupWindow mPop;
-    private ListView mLv1;
-
+    private RecyclerView mRvFriends;
+    private List<Follow> FollowList =new ArrayList<>();
+    private List<Follow> list;
+    MainMenuActivity activity;
+    private MyFriendListAdapter adapter;
     public FriendFragment() {
 
     }
@@ -43,29 +60,75 @@ public class FriendFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        init(view);
+        SetListeners();
+        RecyclerView.LayoutManager layoutManager =new LinearLayoutManager(getActivity());
+        mRvFriends.setLayoutManager(layoutManager);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        activity= (MainMenuActivity) getActivity();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        InitList();
+    }
+
+    private void init(View view){
         mIvAFriends=view.findViewById(R.id.iv_add);
-        mLv1=view.findViewById(R.id.lv_1);
-            mIvAFriends.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    View view =getActivity().getLayoutInflater().inflate(R.layout.layout_pop_add_friends,null);
-                    TextView mTvAdd=view.findViewById(R.id.tv_add_friends);
-                    mTvAdd.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mPop.dismiss();
-                        }
-                    });
-                    mPop=new PopupWindow(view,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-                    mPop.setOutsideTouchable(true);
-                    mPop.setFocusable(true);
-                    mPop.showAsDropDown(mIvAFriends);
-                }
-            });
-        mLv1.setAdapter(new MyFriendListAdapter(getActivity()));
-        mLv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mRvFriends=view.findViewById(R.id.lv_1);
+    }
+    private List<Follow> InitList(){
+        list=new ArrayList<>();
+        String url="http://101.132.71.111:8080/TecSoundWebApp/GetFListServlet";
+        Map<String,String> params =new HashMap<>();
+        params.put("user_id",activity.getmUser().getUser_id());
+        VolleyCallback.getJSONObject(activity.getApplicationContext(), "GetFollowList", url, params, new VolleyCallback.VolleyJsonCallback() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onFinish(JSONObject r) {
+                try {
+                    JSONArray follows =r.getJSONArray("follows");
+                    for (int i = 0; i < follows.length(); i++) {
+                        JSONObject Fobj = (JSONObject) follows.get(i);
+                        Follow follow =new Follow();
+                        follow.setFollow_id(Fobj.getString("follow_id"));
+                        follow.setFollower_user_id(Fobj.getString("follow_user_id"));
+                        follow.setFan_user_id(Fobj.getString("fan_user_id"));
+                        follow.setFollow_time(Fobj.getString("follow_time"));
+                        list.add(follow);
+                    }
+                    FollowList.clear();
+                    FollowList.addAll(list);
+                    adapter=new MyFriendListAdapter(FollowList,activity.getApplicationContext());
+                    mRvFriends.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        return list;
+    }
+    private void SetListeners(){
+        mIvAFriends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View view =getActivity().getLayoutInflater().inflate(R.layout.layout_pop_add_friends,null);
+                TextView mTvAdd=view.findViewById(R.id.tv_add_friends);
+                mTvAdd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mPop.dismiss();
+                    }
+                });
+                mPop=new PopupWindow(view,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+                mPop.setOutsideTouchable(true);
+                mPop.setFocusable(true);
+                mPop.showAsDropDown(mIvAFriends);
             }
         });
     }

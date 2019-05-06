@@ -3,27 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingRight="15dp"
-    android:paddingTop="5dp"
+    android:padding="1dp"
+    android:paddingTop="2dp"
     android:layout_marginBottom="7dp">
     <LinearLayout
         android:id="@+id/ll_data"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:padding="5dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/recyclelist_sign_item">
         <LinearLayout
             android:layout_width="230dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
             <TextView
                 android:id="@+id/tv_sign_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="19sp"
-                android:text="(签到日期)"
+                android:text="(签到人)"
                 android:textColor="@color/colorDarkGray"/>
             <LinearLayout
                 android:layout_width="match_parent"

@@ -42,7 +42,7 @@
             android:layout_below="@id/rl_1"
             android:background="@color/colorBgGray">
             <LinearLayout
-                android:id="@+id/ll_2"
+                android:id="@+id/ll_view_info"
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:layout_below="@id/iv_user_head"
@@ -115,13 +115,14 @@
                         android:text="课程数"/>
                 </LinearLayout>
             </LinearLayout>
-            <ImageView
+            <com.example.administrator.tecsoundclass.utils.CircleImageView
                 android:id="@+id/iv_user_head"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="40dp"
+                android:scaleType="centerCrop"
                 android:background="@drawable/bg_im_user_head"/>
             <TextView
                 android:id="@+id/m_status_data"
@@ -130,7 +131,7 @@
                 android:padding="15dp"
                 android:gravity="center"
                 android:background="@color/colorDarkGray"
-                android:layout_below="@id/ll_2"
+                android:layout_below="@id/ll_view_info"
                 android:textColor="@color/colorWhite"
                 android:text="我的比对数据"
                 android:textSize="16sp"/>
