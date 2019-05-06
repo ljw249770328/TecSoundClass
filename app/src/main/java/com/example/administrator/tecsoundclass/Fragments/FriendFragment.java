@@ -2,6 +2,7 @@ package com.example.administrator.tecsoundclass.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
@@ -105,6 +106,7 @@ public class FriendFragment extends Fragment {
                     FollowList.addAll(list);
                     adapter=new MyFriendListAdapter(FollowList,activity.getApplicationContext());
                     mRvFriends.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -132,5 +134,6 @@ public class FriendFragment extends Fragment {
             }
         });
     }
+
 
 }
