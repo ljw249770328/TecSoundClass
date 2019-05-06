@@ -28,8 +28,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05f29af2-eb03-40b2-874f-94e93df6ba0a" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/TransferMore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyFriendListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyFriendListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_list_my_friends_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_list_my_friends_item.xml" afterDir="false" />
     </list>
     <ignored path=".idea/workspace.xml" />
     <ignored path=".gradle/" />
@@ -103,40 +107,47 @@
       <file leaf-file-name="FriendFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/FriendFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="108" column="51" selection-start-line="108" selection-start-column="51" selection-end-line="108" selection-end-column="51" />
+            <state relative-caret-position="435">
+              <caret line="106" column="59" selection-start-line="106" selection-start-column="59" selection-end-line="106" selection-end-column="59" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyFriendListAdapter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MyFriendListAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyFriendListAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="71" column="21" lean-forward="true" selection-start-line="71" selection-start-column="21" selection-end-line="71" selection-end-column="21" />
+            <state relative-caret-position="306">
+              <caret line="51" column="94" selection-start-line="51" selection-start-column="94" selection-end-line="51" selection-end-column="94" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2931#2932#0" expanded="true" />
-                <element signature="e#3084#3085#0" expanded="true" />
-                <element signature="e#3125#3126#0" expanded="true" />
-                <element signature="e#2846#4660#0" expanded="true" />
-                <element signature="e#3255#4626#0" expanded="true" />
-                <element signature="e#4625#4626#0" expanded="true" />
-                <element signature="e#4659#4660#0" expanded="true" />
+                <element signature="e#2646#3011#0" expanded="true" />
+                <element signature="e#3010#3011#0" expanded="true" />
+                <element signature="e#3095#3096#0" expanded="true" />
+                <element signature="e#3136#3137#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyClassListAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyClassListAdapter.java">
+      <file leaf-file-name="layout_list_my_friends_item.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_list_my_friends_item.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="64" column="33" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="33" />
+            <state relative-caret-position="266">
+              <caret line="14" column="56" lean-forward="true" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="56" />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TransferMore.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/TransferMore.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="235">
+              <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2984#2985#0" expanded="true" />
-                <element signature="e#3025#3026#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -214,7 +225,7 @@
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
       <map>
-        <entry key="$PROJECT_DIR$" value="C:\Users\Administrator\.gradle\wrapper\dists\gradle-4.6-all\bcst21l2brirad8k2ben1letg\gradle-4.6" />
+        <entry key="$PROJECT_DIR$" value="C:\Users\asus\.gradle\wrapper\dists\gradle-4.6-all\bcst21l2brirad8k2ben1letg\gradle-4.6" />
       </map>
     </option>
     <option name="myGradleVersions">
@@ -2470,8 +2481,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/CourseMenuActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/FileDownloadUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/JavaBean/Interaction.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyReviewListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/iFlytec/RecPointHandler.java" />
@@ -2520,15 +2529,17 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/LauncherActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyClassListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/FriendFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/Transfer2User.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyFriendListAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_list_my_friends_item.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-86" />
-    <option name="y" value="57" />
-    <option name="width" value="1259" />
-    <option name="height" value="877" />
+    <option name="x" value="37" />
+    <option name="y" value="33" />
+    <option name="width" value="1936" />
+    <option name="height" value="1066" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -2538,6 +2549,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -2553,7 +2566,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -2626,11 +2638,38 @@
               <item name="tecsoundclass" type="462c0819:PsiDirectoryNode" />
               <item name="Fragments" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="TecSoundClass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TecSoundClass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tecsoundclass" type="462c0819:PsiDirectoryNode" />
+              <item name="JavaBean" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TecSoundClass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TecSoundClass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tecsoundclass" type="462c0819:PsiDirectoryNode" />
+              <item name="utils" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TecSoundClass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TecSoundClass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2673,6 +2712,120 @@
       <recent name="F:\ASProject\TecSoundClass\app\src\main\assets" />
       <recent name="F:\ASProject\TecSoundClass\app\src\main\res\drawable-xxxhdpi" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/caches/build_file_checksums.ser</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/codeStyles/Project.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyFriendListAdapter.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/FriendFragment.java</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -3110,61 +3263,57 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="886" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <layout>
       <window_info anchor="bottom" id="Android Profiler" order="7" weight="0.32779622" />
-      <window_info id="Build Variants" order="3" side_tool="true" />
-      <window_info anchor="bottom" id="DB Execution Console" order="14" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.5025707" side_tool="true" weight="0.23374827" />
-      <window_info anchor="bottom" id="Logcat" order="11" sideWeight="0.4974293" weight="0.21853389" />
-      <window_info id="Capture Tool" order="6" />
-      <window_info id="Designer" order="2" />
-      <window_info anchor="bottom" id="Build" order="10" sideWeight="0.4974293" weight="0.28630707" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Device File Explorer" order="4" side_tool="true" weight="0.25449872" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32890365" />
-      <window_info id="DB Browser" order="7" weight="0.17480719" />
-      <window_info anchor="bottom" id="Messages" order="9" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="8" />
+      <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="right" id="Preview" order="7" weight="0.20308483" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.50192803" side_tool="true" weight="0.23928078" />
+      <window_info anchor="right" id="Preview" order="7" weight="0.20362474" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49840087" weight="0.2558783" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4978678" weight="0.3208852" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49840087" weight="0.25692138" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4978678" weight="0.32225913" />
+      <window_info anchor="bottom" id="Logcat" order="11" sideWeight="0.4974293" weight="0.1295681" />
       <window_info id="Captures" order="4" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16645244" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="Designer" order="2" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15565032" />
+      <window_info anchor="bottom" id="Build" order="10" sideWeight="0.49807197" visible="true" weight="0.16389811" />
       <window_info anchor="right" id="Gradle" order="5" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Device File Explorer" order="4" side_tool="true" weight="0.25449872" />
       <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info id="Designer" order="2" />
+      <window_info id="DB Browser" order="7" weight="0.17480719" />
       <window_info id="Build Variants" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.50192803" side_tool="true" weight="0.23928078" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15565032" />
-      <window_info anchor="right" id="Preview" order="7" weight="0.20362474" />
+      <window_info id="Designer" order="2" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15565032" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info active="true" anchor="bottom" id="Logcat" order="11" sideWeight="0.4974293" visible="true" weight="0.6267996" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4978678" weight="0.32225913" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info anchor="bottom" id="DB Execution Console" order="14" />
-      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="right" id="Device File Explorer" order="4" side_tool="true" weight="0.25449872" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info id="Image Layers" order="8" />
       <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info id="DB Browser" order="7" weight="0.17480719" />
       <window_info anchor="bottom" id="Android Profiler" order="7" weight="0.32779622" />
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49840087" weight="0.25692138" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32890365" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32890365" />
+      <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="right" id="Device File Explorer" order="4" side_tool="true" weight="0.25449872" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32890365" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Build" order="10" sideWeight="0.49807197" weight="0.44850498" />
       <window_info anchor="bottom" id="Messages" order="9" />
@@ -3273,31 +3422,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/app/libs/Msc.jar!/com/iflytek/cloud/VerifierResult.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-229">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_vocal_identify.xml">
-      <provider editor-type-id="text-editor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_record_dialog.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="47" column="24" selection-start-line="47" selection-start-column="24" selection-end-line="47" selection-end-column="24" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_regedit.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-171" />
@@ -3432,13 +3556,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/MyselfFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="172" column="34" selection-start-line="172" selection-start-column="34" selection-end-line="172" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyInteractAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1026">
@@ -3533,12 +3650,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/ClassResultActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="739">
+        <state relative-caret-position="1159">
           <caret line="82" column="44" selection-start-line="82" selection-start-column="44" selection-end-line="82" selection-end-column="44" />
-          <folding>
-            <element signature="e#3318#4383#0" expanded="true" />
-            <element signature="e#4382#4383#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3553,27 +3666,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/CourseFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-420">
-          <caret line="146" column="43" selection-start-line="146" selection-start-column="43" selection-end-line="146" selection-end-column="43" />
-          <folding>
-            <element signature="e#3312#4229#0" expanded="true" />
-            <element signature="e#4228#4229#0" expanded="true" />
-            <element signature="e#6136#6877#0" expanded="true" />
-            <element signature="e#6876#6877#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://D:/ASdk/sources/android-28/android/app/Activity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="284">
           <caret line="4330" column="26" selection-start-line="4330" selection-start-column="26" selection-end-line="4330" selection-end-column="26" />
-          <folding>
-            <element signature="e#182653#182654#0" expanded="true" />
-            <element signature="e#182707#182708#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3590,31 +3686,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/iFlytec/RegeditVoiceActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="49" column="24" selection-start-line="49" selection-start-column="24" selection-end-line="49" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/iFlytec/RegeditVoiceActivity.java" />
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
           <caret line="5" column="62" selection-start-line="5" selection-start-column="62" selection-end-line="5" selection-end-column="62" />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_friend.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="69" column="38" selection-start-line="69" selection-start-column="38" selection-end-line="69" selection-end-column="38" />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/iFlytec/InteractHandler.java">
@@ -3645,17 +3722,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/CourseFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="146" column="43" selection-start-line="146" selection-start-column="43" selection-end-line="146" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_friend.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="443">
+          <caret line="69" column="38" selection-start-line="69" selection-start-column="38" selection-end-line="69" selection-end-column="38" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/FriendFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="108" column="51" selection-start-line="108" selection-start-column="51" selection-end-line="108" selection-end-column="51" />
+        <state relative-caret-position="435">
+          <caret line="106" column="59" selection-start-line="106" selection-start-column="59" selection-end-line="106" selection-end-column="59" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_my.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="117" column="63" selection-start-line="117" selection-start-column="63" selection-end-line="117" selection-end-column="63" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyClassListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="64" column="33" selection-start-line="64" selection-start-column="33" selection-end-line="64" selection-end-column="33" />
+        <state relative-caret-position="406">
+          <caret line="73" column="9" selection-start-line="67" selection-start-column="8" selection-end-line="73" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2984#2985#0" expanded="true" />
@@ -3664,19 +3768,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/MyselfFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="92" column="50" selection-start-line="92" selection-start-column="50" selection-end-line="92" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyFriendListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="71" column="21" lean-forward="true" selection-start-line="71" selection-start-column="21" selection-end-line="71" selection-end-column="21" />
+        <state relative-caret-position="306">
+          <caret line="51" column="94" selection-start-line="51" selection-start-column="94" selection-end-line="51" selection-end-column="94" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2931#2932#0" expanded="true" />
-            <element signature="e#3084#3085#0" expanded="true" />
-            <element signature="e#3125#3126#0" expanded="true" />
-            <element signature="e#2846#4660#0" expanded="true" />
-            <element signature="e#3255#4626#0" expanded="true" />
-            <element signature="e#4625#4626#0" expanded="true" />
-            <element signature="e#4659#4660#0" expanded="true" />
+            <element signature="e#2646#3011#0" expanded="true" />
+            <element signature="e#3010#3011#0" expanded="true" />
+            <element signature="e#3095#3096#0" expanded="true" />
+            <element signature="e#3136#3137#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_list_my_friends_item.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="56" lean-forward="true" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="56" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/TransferMore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
