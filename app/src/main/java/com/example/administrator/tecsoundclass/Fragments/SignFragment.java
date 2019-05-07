@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -172,6 +173,9 @@ public class SignFragment extends Fragment {
                 mTvPopcopy.setOnClickListener(onclick);
                 mTbPopdelete.setOnClickListener(onclick);
                 mTvPopshare.setOnClickListener(onclick);
+                if (mActivity.getmUser().getUser_identity().equals("学生")){
+                     mTbPopdelete.setVisibility(View.GONE);
+                }
                 //弹出窗口
                 mpop=new PopupWindow(view,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
                 mpop.setOutsideTouchable(true);
@@ -195,35 +199,43 @@ public class SignFragment extends Fragment {
                     getActivity().finish();
                     break;
                 case R.id.tv_start_sign:
-                    //初始化声纹识别引擎
-                    mSpeakerVerifier = SpeakerVerifier.createVerifier(getActivity(), new InitListener() {
-                        @Override
-                        public void onInit(int i) {
-                            if (ErrorCode.SUCCESS == i) {
-                                showTip("引擎初始化成功");
-                            } else {
-                                showTip("引擎初始化失败，错误码：" + i);
+                    if (mActivity.getmUser().getUser_identity().equals("老师")){
+                        //开放签到通道
+                        Toast.makeText(getActivity(),"开放签到通道",Toast.LENGTH_SHORT).show();
+
+                    }else{
+                        //进行识别
+                        //初始化声纹识别引擎
+                        mSpeakerVerifier = SpeakerVerifier.createVerifier(getActivity(), new InitListener() {
+                            @Override
+                            public void onInit(int i) {
+                                if (ErrorCode.SUCCESS == i) {
+                                    showTip("引擎初始化成功");
+                                } else {
+                                    showTip("引擎初始化失败，错误码：" + i);
+                                }
                             }
-                        }
-                    });
-                    //点击签到按钮产生签到弹窗
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_sign_dialog, null);
-                    TextView mTvSigntitle=view.findViewById(R.id.tv_CTitle_from);
-                    mTvSigntitle.setText("来自"+mActivity.getmCourse().getCourse_name()+"("+mActivity.getmCourse().getCourse_class()+")");
-                    mResultText = view.findViewById(R.id.edt_result);
-                    mErrorResult = view.findViewById(R.id.error_result);
-                    builder.setView(view);
-                    mSignDialog = builder.create();
-                    mSignDialog.show();
-                    //点击按钮开始验证
-                    mErrorResult.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            VoiceIdentifier voiceIdentifier = new VoiceIdentifier();
-                            voiceIdentifier.StartIdentify();
-                        }
-                    });
+                        });
+                        //点击签到按钮产生签到弹窗
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_sign_dialog, null);
+                        TextView mTvSigntitle=view.findViewById(R.id.tv_CTitle_from);
+                        mTvSigntitle.setText("来自"+mActivity.getmCourse().getCourse_name()+"("+mActivity.getmCourse().getCourse_class()+")");
+                        mResultText = view.findViewById(R.id.edt_result);
+                        mErrorResult = view.findViewById(R.id.error_result);
+                        builder.setView(view);
+                        mSignDialog = builder.create();
+                        mSignDialog.show();
+                        //点击按钮开始验证
+                        mErrorResult.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                VoiceIdentifier voiceIdentifier = new VoiceIdentifier();
+                                voiceIdentifier.StartIdentify();
+                            }
+                        });
+                    }
+
                     break;
                 case R.id.tv_copy:
                     break;

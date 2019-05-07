@@ -196,7 +196,7 @@ public class InteractFragment extends Fragment {
                     mBtncatch = view.findViewById(R.id.tv_getchance);
                     mTvTime = view.findViewById(R.id.tv_message);
                     mBtncatch.setOnClickListener(onclick);
-                    mTvTime.setText(i + "");//这里不加""就会崩溃暂未找到原因怀疑是可能怕变量i不存在导致赋了空值
+                    mTvTime.setText(i + "");//这里不加""就会崩溃暂未找到原因怀疑是可能变量i不存在时导致赋了空值
                     builder.setView(view);
                     dialog = builder.show();
                     StartTime();

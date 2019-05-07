@@ -77,6 +77,9 @@ public class ReviewFragment extends Fragment {
         mIvBack=view.findViewById(R.id.im_back);
         mRvPoint=view.findViewById(R.id.recycler_view_point);
         mBtnClassBegin=view.findViewById(R.id.btn_class_begin);
+        if (mActivity.getmUser().getUser_identity().equals("学生")){
+            mBtnClassBegin.setVisibility(View.GONE);
+        }
     }
     private void SetListener(){
         mIvBack.setOnClickListener(onclick);
