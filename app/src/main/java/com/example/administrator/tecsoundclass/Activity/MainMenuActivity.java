@@ -20,10 +20,13 @@ import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,9 +38,11 @@ public class MainMenuActivity extends AppCompatActivity {
     private List<Fragment> mFragmentList = new ArrayList<>();
     private  String StudentID="";
     private User mUser;
+    private WebSocketClient client;// 连接客户端
     public User getmUser() {
         return mUser;
     }
+    public String address="";
 
     @Override
     protected void onPostResume() {
@@ -145,5 +150,30 @@ public class MainMenuActivity extends AppCompatActivity {
     }
     public interface UploadCallBack{
         void OnUploaded();
+    }
+    private WebSocketClient SocketConnect(WebSocketClient client){
+//        client=new WebSocketClient() {
+//            @Override
+//            public void onOpen(ServerHandshake handshakedata) {
+//
+//            }
+//
+//            @Override
+//            public void onMessage(String message) {
+//
+//            }
+//
+//            @Override
+//            public void onClose(int code, String reason, boolean remote) {
+//
+//            }
+//
+//            @Override
+//            public void onError(Exception ex) {
+//
+//            }
+//        }
+
+        return client;
     }
 }
