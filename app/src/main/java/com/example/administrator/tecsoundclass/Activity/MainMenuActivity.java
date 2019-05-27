@@ -42,7 +42,6 @@ public class MainMenuActivity extends AppCompatActivity {
     public User getmUser() {
         return mUser;
     }
-    public String address="";
 
     @Override
     protected void onPostResume() {
@@ -151,29 +150,5 @@ public class MainMenuActivity extends AppCompatActivity {
     public interface UploadCallBack{
         void OnUploaded();
     }
-    private WebSocketClient SocketConnect(WebSocketClient client){
-//        client=new WebSocketClient() {
-//            @Override
-//            public void onOpen(ServerHandshake handshakedata) {
-//
-//            }
-//
-//            @Override
-//            public void onMessage(String message) {
-//
-//            }
-//
-//            @Override
-//            public void onClose(int code, String reason, boolean remote) {
-//
-//            }
-//
-//            @Override
-//            public void onError(Exception ex) {
-//
-//            }
-//        }
 
-        return client;
-    }
 }
