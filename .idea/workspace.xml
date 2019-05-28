@@ -18,6 +18,7 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="msocket" />
     <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
@@ -62,11 +63,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="faabe70c-8b37-4ce3-ad2b-9f2e6e35e85e" name="Default" comment="开始制作socket链接部分">
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
+    <list default="true" id="faabe70c-8b37-4ce3-ad2b-9f2e6e35e85e" name="Default" comment="socket连接成功，下一步处理handler问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/LoginActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/MainMenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/MainMenuActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/MyselfFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/MyselfFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/WebSocketClientObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/WebSocketClientObject.java" afterDir="false" />
     </list>
     <ignored path=".idea/workspace.xml" />
@@ -98,15 +99,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="187" column="77" selection-start-line="187" selection-start-column="77" selection-end-line="187" selection-end-column="77" />
+            <state relative-caret-position="214">
+              <caret line="183" column="144" selection-start-line="183" selection-start-column="144" selection-end-line="183" selection-end-column="144" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5885#9685#0" expanded="true" />
-                <element signature="e#7121#8982#0" expanded="true" />
-                <element signature="e#8981#8982#0" expanded="true" />
-                <element signature="e#9684#9685#0" expanded="true" />
-                <element signature="e#10780#11575#0" />
+                <element signature="e#7973#8388#0" expanded="true" />
+                <element signature="e#8387#8388#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -115,14 +113,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/WebSocketClientObject.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="531">
-              <caret line="37" column="23" lean-forward="true" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
+            <state relative-caret-position="340">
+              <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1524#1525#0" expanded="true" />
-                <element signature="e#1581#1582#0" expanded="true" />
-                <element signature="e#1637#1638#0" expanded="true" />
-                <element signature="e#1705#1706#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -131,18 +125,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/MainMenuActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="742">
-              <caret line="96" selection-start-line="96" selection-end-line="96" />
+            <state relative-caret-position="380">
+              <caret line="105" column="40" selection-start-line="105" selection-start-column="40" selection-end-line="105" selection-end-column="40" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#onPostResume#0;class#MainMenuActivity#0" />
                 <element signature="method#UpdatemUser#0;class#MainMenuActivity#0" />
-                <element signature="e#3635#4087#0" />
-                <element signature="e#4152#4223#1" />
                 <element signature="method#changeFragment#0;class#MainMenuActivity#0" />
-                <element signature="e#4509#4560#1" />
                 <element signature="method#hideFragment#0;class#MainMenuActivity#0" />
                 <element signature="class#UploadCallBack#0;class#MainMenuActivity#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/TransferMore.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="122">
+              <caret line="17" column="97" selection-start-line="17" selection-start-column="97" selection-end-line="17" selection-end-column="97" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#478#2158#0" expanded="true" />
+                <element signature="e#2157#2158#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -239,7 +244,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/iFlytec/VoiceIdHandler.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_sign_dialog.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/StandDataActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/MyselfFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/FileUploadUtil.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/iFlytec/RegeditVoiceActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/EditMyInfoActivity.java" />
@@ -266,11 +270,12 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/InteractFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/VolleyCallback.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/MainMenuActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyFriendListAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/WebSocketClientObject.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/MyselfFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/WebSocketClientObject.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/MainMenuActivity.java" />
       </list>
     </option>
   </component>
@@ -286,21 +291,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="TecSoundClass" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="TecSoundClass" type="1abcf292:AndroidViewProjectNode" />
-              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -361,6 +353,16 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="tecsoundclass" type="462c0819:PsiDirectoryNode" />
+              <item name="Fragments" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="TecSoundClass" type="b2602c69:ProjectViewProjectNode" />
+              <item name="TecSoundClass" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tecsoundclass" type="462c0819:PsiDirectoryNode" />
               <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -375,8 +377,21 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="AndroidView">
+        <subPane>
+          <expand>
+            <path>
+              <item name="TecSoundClass" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="TecSoundClass" type="1abcf292:AndroidViewProjectNode" />
+              <item name="Gradle Scripts" type="ae0cef3a:AndroidBuildScriptsGroupNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -389,7 +404,7 @@
     <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="android.sdk.path" value="D:/ASdk" />
-    <property name="device.picker.selection" value="Pixel_3_API_28" />
+    <property name="device.picker.selection" value="Nexus_5X_API_28_x86" />
     <property name="last_opened_file_path" value="F:/websockket/WebSocketDemo" />
     <property name="not.eligible.for.single.variant.sync" value="true" />
     <property name="project.structure.last.edited" value="Dependencies" />
@@ -833,7 +848,14 @@
       <option name="project" value="LOCAL" />
       <updated>1558494263990</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="socket连接成功，下一步处理handler问题">
+      <created>1558961652008</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1558961652008</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TodoView">
@@ -848,7 +870,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18742369" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18742369" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Build Variants" order="3" side_tool="true" />
@@ -865,12 +887,12 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32890365" />
-      <window_info anchor="bottom" id="Android Profiler" order="7" weight="0.32779622" />
+      <window_info anchor="bottom" id="Android Profiler" order="7" weight="0.32706374" />
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49840087" weight="0.21262458" />
       <window_info anchor="bottom" id="Messages" order="9" />
       <window_info anchor="bottom" id="Build" order="10" sideWeight="0.49807197" weight="0.22884013" />
-      <window_info anchor="bottom" id="Logcat" order="11" sideWeight="0.4974293" weight="0.38662487" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4978678" weight="0.32225913" />
+      <window_info anchor="bottom" id="Logcat" order="11" sideWeight="0.4974293" visible="true" weight="0.24869384" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4978678" weight="0.3218391" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.50192803" side_tool="true" weight="0.23928078" />
       <window_info anchor="bottom" id="DB Execution Console" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -962,7 +984,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="抢答功能" />
     <MESSAGE value="课堂模块核心功能完成,差播放语音" />
     <MESSAGE value="解决部分bug" />
     <MESSAGE value="登陆与服务器连接" />
@@ -987,14 +1008,10 @@
     <MESSAGE value="2019.5.6Merge" />
     <MESSAGE value="存在请求后item位置错误的Bug" />
     <MESSAGE value="开始制作socket链接部分" />
-    <option name="LAST_COMMIT_MESSAGE" value="开始制作socket链接部分" />
+    <MESSAGE value="socket连接成功，下一步处理handler问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="socket连接成功，下一步处理handler问题" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_grade_dialog.xml">
-      <provider editor-type-id="text-editor" />
-      <provider selected="true" editor-type-id="android-designer2" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/RegeditVoiceActivity.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/StandDataActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
@@ -1111,13 +1128,6 @@
       </provider>
       <provider editor-type-id="android-designer2" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/MyselfFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="92" column="50" selection-start-line="92" selection-start-column="50" selection-end-line="92" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_list_my_friends_item.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
@@ -1184,20 +1194,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/FriendFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1729">
-          <caret line="122" column="43" selection-start-line="122" selection-start-column="43" selection-end-line="122" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="816">
           <caret line="48" column="19" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyClassListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1238,13 +1241,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/VolleyCallback.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-28/java/util/logging/Handler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="237">
@@ -1263,45 +1259,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/TransferMore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="17" column="30" lean-forward="true" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyFriendListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="75" column="21" selection-start-line="75" selection-start-column="21" selection-end-line="75" selection-end-column="21" />
-          <folding>
-            <element signature="e#2778#3629#0" expanded="true" />
-            <element signature="e#3628#3629#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/MainMenuActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="742">
-          <caret line="96" selection-start-line="96" selection-end-line="96" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#onPostResume#0;class#MainMenuActivity#0" />
-            <element signature="method#UpdatemUser#0;class#MainMenuActivity#0" />
-            <element signature="e#3635#4087#0" />
-            <element signature="e#4152#4223#1" />
-            <element signature="method#changeFragment#0;class#MainMenuActivity#0" />
-            <element signature="e#4509#4560#1" />
-            <element signature="method#hideFragment#0;class#MainMenuActivity#0" />
-            <element signature="class#UploadCallBack#0;class#MainMenuActivity#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.java-websocket/Java-WebSocket/1.3.0/6d378b4d798c368b005585168ca77649632a4417/Java-WebSocket-1.3.0-sources.jar!/org/java_websocket/client/WebSocketClient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
@@ -1309,31 +1266,103 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/WebSocketClientObject.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_more.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="37" column="23" lean-forward="true" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="23" />
+        <state relative-caret-position="359">
+          <caret line="178" column="36" selection-start-line="178" selection-start-column="36" selection-end-line="178" selection-end-column="36" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_pop_menu_my.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="37" column="20" selection-start-line="37" selection-start-column="20" selection-end-line="37" selection-end-column="20" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/MyselfFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="179" column="57" selection-start-line="179" selection-start-column="57" selection-end-line="179" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Fragments/FriendFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="122" column="43" selection-start-line="122" selection-start-column="43" selection-end-line="122" selection-end-column="43" />
+          <folding>
+            <element signature="e#3101#5022#0" expanded="true" />
+            <element signature="e#5021#5022#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/VolleyCallback.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="25" column="16" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Adapter/MyFriendListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="74" column="52" lean-forward="true" selection-start-line="74" selection-start-column="52" selection-end-line="74" selection-end-column="52" />
+          <folding>
+            <element signature="e#2778#3629#0" expanded="true" />
+            <element signature="e#3628#3629#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/TransferMore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="17" column="97" selection-start-line="17" selection-start-column="97" selection-end-line="17" selection-end-column="97" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1524#1525#0" expanded="true" />
-            <element signature="e#1581#1582#0" expanded="true" />
-            <element signature="e#1637#1638#0" expanded="true" />
-            <element signature="e#1705#1706#0" expanded="true" />
+            <element signature="e#478#2158#0" expanded="true" />
+            <element signature="e#2157#2158#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/utils/WebSocketClientObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/MainMenuActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="105" column="40" selection-start-line="105" selection-start-column="40" selection-end-line="105" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#onPostResume#0;class#MainMenuActivity#0" />
+            <element signature="method#UpdatemUser#0;class#MainMenuActivity#0" />
+            <element signature="method#changeFragment#0;class#MainMenuActivity#0" />
+            <element signature="method#hideFragment#0;class#MainMenuActivity#0" />
+            <element signature="class#UploadCallBack#0;class#MainMenuActivity#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/administrator/tecsoundclass/Activity/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="402">
-          <caret line="187" column="77" selection-start-line="187" selection-start-column="77" selection-end-line="187" selection-end-column="77" />
+        <state relative-caret-position="214">
+          <caret line="183" column="144" selection-start-line="183" selection-start-column="144" selection-end-line="183" selection-end-column="144" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5885#9685#0" expanded="true" />
-            <element signature="e#7121#8982#0" expanded="true" />
-            <element signature="e#8981#8982#0" expanded="true" />
-            <element signature="e#9684#9685#0" expanded="true" />
-            <element signature="e#10780#11575#0" />
+            <element signature="e#7973#8388#0" expanded="true" />
+            <element signature="e#8387#8388#0" expanded="true" />
           </folding>
         </state>
       </provider>

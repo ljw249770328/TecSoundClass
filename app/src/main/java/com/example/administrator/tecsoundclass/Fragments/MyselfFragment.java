@@ -39,6 +39,7 @@ import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.Activity.SettingsActivity;
 import com.example.administrator.tecsoundclass.Activity.StandDataActivity;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
+import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -176,6 +177,7 @@ public class MyselfFragment extends Fragment {
                     break;
                 case R.id.tv_exit:
                     mPop.dismiss();
+                    WebSocketClientObject.client.close();
                     intent=new Intent(getActivity(),LoginActivity.class);
                     startActivity(intent);
                     getActivity().finish();

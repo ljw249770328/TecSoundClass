@@ -56,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private CheckBox rememberPass;
     private User mUser=null;
-    private Handler mHandler =null;
     private WebSocketClientObject client =null;
     final String [] permissions=new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.INTERNET,Manifest.permission.RECORD_AUDIO,Manifest.permission.ACCESS_WIFI_STATE,Manifest.permission.ACCESS_NETWORK_STATE,Manifest.permission.READ_EXTERNAL_STORAGE};
 
@@ -180,18 +179,27 @@ public class LoginActivity extends AppCompatActivity {
                                                 switch (msg.what){
                                                     case 1:
                                                         mUser= (User) msg.obj;
-                                                        mHandler =new Handler();
                                                         Map<String,String> header= new HashMap<>();
                                                         try {
                                                             header.put("id", URLEncoder.encode(mEtaccount.getText().toString().trim(),"UTF-8"));
-                                                            client=WebSocketClientObject.getClient(mHandler,header);
+                                                            client=WebSocketClientObject.getClient(new Handler(){
+                                                                @Override
+                                                                public void handleMessage(Message msg) {
+                                                                    super.handleMessage(msg);
+                                                                    switch (msg.what){
+                                                                        case 1:
+                                                                            Intent intent=new Intent(LoginActivity.this,MainMenuActivity.class);
+                                                                            Bundle bundle=new Bundle();
+                                                                            bundle.putSerializable("user",mUser);
+                                                                            intent.putExtras(bundle);
+                                                                            startActivity(intent);
+                                                                            finish();
+                                                                            break;
+                                                                    }
+                                                                }
+                                                            },header);
                                                             client.connect();
-                                                            Intent intent=new Intent(LoginActivity.this,MainMenuActivity.class);
-                                                            Bundle bundle=new Bundle();
-                                                            bundle.putSerializable("user",mUser);
-                                                            intent.putExtras(bundle);
-                                                            startActivity(intent);
-                                                            finish();
+
                                                         } catch (UnsupportedEncodingException e) {
                                                             e.printStackTrace();
                                                         }

@@ -19,6 +19,7 @@ import com.example.administrator.tecsoundclass.Fragments.MyselfFragment;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
+import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -104,6 +105,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 switch(checkedId){
                     case R.id.rb_course:
                         changeFragment(CourseFragment.class.getName());
+                        WebSocketClientObject.client.send("点击发送");
                         break;
                     case R.id.rb_friends:
                         changeFragment(FriendFragment.class.getName());
