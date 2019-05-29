@@ -201,7 +201,6 @@ public class LoginActivity extends BaseActivity {
                                                                 }
                                                             },header);
                                                             client.connect();
-
                                                         } catch (UnsupportedEncodingException e) {
                                                             e.printStackTrace();
                                                         }

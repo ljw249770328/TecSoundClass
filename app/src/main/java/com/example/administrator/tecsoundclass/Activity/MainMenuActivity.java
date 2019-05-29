@@ -105,7 +105,7 @@ public class MainMenuActivity extends BaseActivity {
                 switch(checkedId){
                     case R.id.rb_course:
                         changeFragment(CourseFragment.class.getName());
-                        WebSocketClientObject.client.send("点击发送");
+//                        WebSocketClientObject.client.send("点击发送");
                         break;
                     case R.id.rb_friends:
                         changeFragment(FriendFragment.class.getName());

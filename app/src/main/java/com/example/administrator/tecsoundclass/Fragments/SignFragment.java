@@ -128,12 +128,12 @@ public class SignFragment extends Fragment {
         Map<String, String> params = new HashMap<>();
         params.put("user_id", mActivity.getmUser().getUser_id());
         params.put("course_id", mActivity.getmCourse().getCourse_id());
+        params.put("user_identity",mActivity.getmUser().getUser_identity());
         VolleyCallback.getJSONObject(mActivity.getApplicationContext(), "GetSignList", url, params, new VolleyCallback.VolleyJsonCallback() {
             @Override
             public void onFinish(JSONObject r) {
                 try {
                     JSONArray signs = r.getJSONArray("Signs");
-
                     for (int i = 0; i < signs.length(); i++) {
                         JSONObject obj = (JSONObject) signs.get(i);
                         Sign sign = new Sign();
@@ -148,7 +148,7 @@ public class SignFragment extends Fragment {
                     }
                     signList.clear();
                     signList.addAll(list);
-                    adapter = new MySignListAdapter(signList);
+                    adapter = new MySignListAdapter(mActivity.getApplicationContext(),signList,mActivity.getmUser().getUser_identity());
                     setPopupWindow(adapter);
                     adapter.notifyDataSetChanged();
                     mRvSign.setAdapter(adapter);
