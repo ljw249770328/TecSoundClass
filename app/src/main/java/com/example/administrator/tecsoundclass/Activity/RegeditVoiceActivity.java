@@ -28,7 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RegeditVoiceActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegeditVoiceActivity extends BaseActivity implements View.OnClickListener {
     private static final int PWD_TYPE_NUM = 3;
     private int mPwdType = PWD_TYPE_NUM;
     private ImageView mIvBack;

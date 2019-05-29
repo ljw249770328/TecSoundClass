@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import com.example.administrator.tecsoundclass.R;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends BaseActivity {
     private ImageView mIvBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

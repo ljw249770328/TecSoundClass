@@ -20,7 +20,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JoinActivity extends AppCompatActivity {
+public class JoinActivity extends BaseActivity {
     private TextView mTvCancle,mTvNext;
     private EditText mEtInput;
     private String ClassId="";

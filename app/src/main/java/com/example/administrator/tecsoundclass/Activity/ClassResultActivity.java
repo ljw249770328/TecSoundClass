@@ -23,7 +23,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ClassResultActivity extends AppCompatActivity {
+public class ClassResultActivity extends BaseActivity {
     private TextView mTvBack,mTvCourseName,mTvClass,mTvTea,mTvCtime,mTvCreateT,mTvCreq;
     private Course course;
     private Button mBtnJoin;

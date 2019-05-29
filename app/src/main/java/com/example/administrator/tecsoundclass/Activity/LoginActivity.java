@@ -47,7 +47,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
     private Button mBtnLogin;
     private TextView mTvRegedit,mTvForget;
     private EditText mEtaccount;
@@ -149,6 +149,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else {
 //                        LoginRequest(mEtaccount.getText().toString(),mEtpassword.getText().toString());
+                        mBtnLogin.setText("登录中");
                         String url = "http://101.132.71.111:8080/TecSoundWebApp/LoginServlet";
                         Map<String, String> params = new HashMap<>();
                         params.put("user_id", mEtaccount.getText().toString());  //注⑥
@@ -182,7 +183,7 @@ public class LoginActivity extends AppCompatActivity {
                                                         Map<String,String> header= new HashMap<>();
                                                         try {
                                                             header.put("id", URLEncoder.encode(mEtaccount.getText().toString().trim(),"UTF-8"));
-                                                            client=WebSocketClientObject.getClient(new Handler(){
+                                                            client=WebSocketClientObject.getClient(getApplicationContext(),new Handler(){
                                                                 @Override
                                                                 public void handleMessage(Message msg) {
                                                                     super.handleMessage(msg);
@@ -193,6 +194,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                             bundle.putSerializable("user",mUser);
                                                                             intent.putExtras(bundle);
                                                                             startActivity(intent);
+                                                                            mBtnLogin.setText("登录");
                                                                             finish();
                                                                             break;
                                                                     }
@@ -209,8 +211,10 @@ public class LoginActivity extends AppCompatActivity {
                                         });
                                     } else if(result.equals("pswerror")) {
                                         Toast.makeText(LoginActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
+                                        mBtnLogin.setText("登录");
                                     }else if(result.equals("notexists")) {
                                         Toast.makeText(LoginActivity.this,"用户不存在,请先注册",Toast.LENGTH_SHORT).show();
+                                        mBtnLogin.setText("登录");
                                     }
                                 } catch (JSONException e) {
                                    // 做自己的请求异常操作，如Toast提示（“无网络连接”等）

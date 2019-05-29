@@ -16,7 +16,7 @@ import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection;
 
 import org.litepal.LitePal;
 
-public class LauncherActivity extends AppCompatActivity {
+public class LauncherActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

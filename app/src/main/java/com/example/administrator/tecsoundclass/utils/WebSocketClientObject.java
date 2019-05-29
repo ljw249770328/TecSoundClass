@@ -1,5 +1,7 @@
 package com.example.administrator.tecsoundclass.utils;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -18,14 +20,15 @@ import java.util.Map;
 public class WebSocketClientObject extends WebSocketClient {
     public static WebSocketClientObject client;
     public static Handler mHandler;
-    public static String Uri ="ws://192.168.1.104:8886";
-//    public static String Uri ="ws://101.132.71.111:8886";
+    public static Context mContext;
+//    public static String Uri ="ws://172.20.10.10:8886";
+    public static String Uri ="ws://101.132.71.111:8886";
 
     public WebSocketClientObject(URI serverUri, Draft draft,Map<String, String> header, int timeout) {
         super(serverUri, draft,header,timeout);
     }
 
-    public static WebSocketClientObject getClient(Handler handler,@Nullable Map<String, String> header){
+    public static WebSocketClientObject getClient(Context context,Handler handler, @Nullable Map<String, String> header){
 
         try {
             if (client==null){
@@ -36,6 +39,7 @@ public class WebSocketClientObject extends WebSocketClient {
             e.printStackTrace();
             client.close();
         }
+        mContext=context;
         mHandler=handler;
         return  client;
     }
@@ -56,6 +60,8 @@ public class WebSocketClientObject extends WebSocketClient {
     @Override
     public void onClose(int code, String reason, boolean remote) {
         Log.e("mSocket","与服务器【"+getURI()+"】断开连接，返回码："+code);
+        Intent intent=new Intent("com.example.administrator.tecsoundclass.FORCE_OFFLINE");
+        mContext.sendBroadcast(intent);
         client=null;
     }
 

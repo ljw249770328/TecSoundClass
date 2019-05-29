@@ -33,7 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ForgetpswActivity extends AppCompatActivity {
+public class ForgetpswActivity extends BaseActivity {
     private ImageView mIvbackicon;
     private Button mBtnCheck;
     private EditText mEtFgtId;

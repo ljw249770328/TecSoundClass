@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.example.administrator.tecsoundclass.R;
 
-public class StandDataActivity extends AppCompatActivity {
+public class StandDataActivity extends BaseActivity {
     private TextView mTvback,mTvVoiceData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
