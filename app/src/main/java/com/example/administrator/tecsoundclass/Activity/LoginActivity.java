@@ -188,7 +188,7 @@ public class LoginActivity extends BaseActivity {
                                                                 public void handleMessage(Message msg) {
                                                                     super.handleMessage(msg);
                                                                     switch (msg.what){
-                                                                        case 1:
+                                                                        case 0:
                                                                             Intent intent=new Intent(LoginActivity.this,MainMenuActivity.class);
                                                                             Bundle bundle=new Bundle();
                                                                             bundle.putSerializable("user",mUser);

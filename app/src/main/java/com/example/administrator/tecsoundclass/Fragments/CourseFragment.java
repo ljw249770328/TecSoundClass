@@ -104,6 +104,7 @@ public class CourseFragment extends Fragment {
                 mTvJoin = view.findViewById(R.id.tv_add_course);
                 if (activity.getmUser().getUser_identity().equals("老师")) {
                     mTvCreate.setVisibility(View.VISIBLE);
+                    mTvJoin.setVisibility(View.GONE);
                 }
                 OnClick onclick = new OnClick();
                 mTvCreate.setOnClickListener(onclick);

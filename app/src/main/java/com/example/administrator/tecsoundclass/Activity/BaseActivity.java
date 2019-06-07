@@ -55,7 +55,7 @@ public class BaseActivity extends AppCompatActivity {
                 case "com.example.administrator.tecsoundclass.FORCE_OFFLINE":
                     AlertDialog.Builder builder =new AlertDialog.Builder(context);
                     builder.setTitle("下线通知");
-                    builder.setMessage("您的账号在别处登录，如非本人操作请及时修改密码并重新登录！");
+                    builder.setMessage("与服务器断开连接");
                     builder.setCancelable(false);
                     builder.setPositiveButton("退出登录", new DialogInterface.OnClickListener() {
                         @Override

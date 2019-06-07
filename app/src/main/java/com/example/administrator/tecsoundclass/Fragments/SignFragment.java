@@ -1,5 +1,6 @@
 package com.example.administrator.tecsoundclass.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -7,7 +8,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,13 +24,17 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.tecsoundclass.Adapter.MyReviewListAdapter;
 import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
+import com.example.administrator.tecsoundclass.Adapter.MySignResultListAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.Sign;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.Activity.RegeditVoiceActivity;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
+import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
+import com.google.gson.Gson;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
 import com.iflytek.cloud.SpeakerVerifier;
@@ -36,16 +43,27 @@ import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.VerifierListener;
 import com.iflytek.cloud.VerifierResult;
 
+import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ObjectOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class SignFragment extends Fragment {
+    public static final int SIGN_STARTED =1;
+    public static final int SIGN_STOPPED =3;
+    public static final int SUC_SIGN =2;
+    public static final int SIGN_DENYED=0;
+    public static final int SIGN_ACCESSED=4;
+    public static final int SIGN_ED=5;
+
     private ImageView mIvBack;
     private RecyclerView mRvSign;
     private TextView mTvSign;
@@ -62,11 +80,83 @@ public class SignFragment extends Fragment {
     private MySignListAdapter adapter;
     private List<Sign> signList = new ArrayList<>();
     private List<Sign> list;
+    private List<String> signStu= new ArrayList<>();
     private PopupWindow mpop;
     private Onclick onclick = new Onclick();
     private User user;
+    private AlertDialog.Builder builder=null;
+    private View view=null;
     CourseMenuActivity mActivity;
 
+
+    private Handler mHandler =new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            switch (msg.what){
+                case SIGN_STOPPED:
+                    signStu= (List<String>) msg.obj;
+                    builder=new AlertDialog.Builder(getActivity());
+                    view=LayoutInflater.from(getActivity()).inflate(R.layout.layout_sign_result_dialog,null);
+                    RecyclerView mRvSignRLst=view.findViewById(R.id.rv_sign_res_lst);
+                    RecyclerView.LayoutManager manager=new LinearLayoutManager(getActivity());
+                    mRvSignRLst.setLayoutManager(manager);
+                    MySignResultListAdapter adapter=new MySignResultListAdapter(signStu,mActivity.getApplicationContext());
+                    mRvSignRLst.setAdapter(adapter);
+                    builder.setView(view);
+                    builder.create().show();
+                    mTvSign.setText("开始签到");
+                    break;
+                case SIGN_STARTED:
+                    mTvSign.setText("结束签到");
+                    break;
+                case SUC_SIGN:
+                    Toast.makeText(mActivity.getApplicationContext(),"签到完成，请认真上课",Toast.LENGTH_SHORT).show();
+                    mTvSign.setText("已签到");
+                    break;
+                case SIGN_DENYED:
+                    Toast.makeText(mActivity.getApplicationContext(),"教师未开放签到通道",Toast.LENGTH_SHORT).show();
+                    break;
+                case SIGN_ED:
+                    Toast.makeText(mActivity.getApplicationContext(),"您已参与本次签到",Toast.LENGTH_SHORT).show();
+                    mTvSign.setText("已签到");
+                    break;
+                case SIGN_ACCESSED:
+                    //进行识别
+                    //初始化声纹识别引擎
+                    mSpeakerVerifier = SpeakerVerifier.createVerifier(getActivity(), new InitListener() {
+                        @Override
+                        public void onInit(int i) {
+                            if (ErrorCode.SUCCESS == i) {
+                                showTip("引擎初始化成功");
+                            } else {
+                                showTip("引擎初始化失败，错误码：" + i);
+                            }
+                        }
+                    });
+                    //点击签到按钮产生签到弹窗
+                    builder = new AlertDialog.Builder(getActivity());
+                    view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_sign_dialog, null);
+                    TextView mTvSigntitle=view.findViewById(R.id.tv_CTitle_from);
+                    mTvSigntitle.setText("来自"+mActivity.getmCourse().getCourse_name()+"("+mActivity.getmCourse().getCourse_class()+")");
+                    mResultText = view.findViewById(R.id.edt_result);
+                    mErrorResult = view.findViewById(R.id.error_result);
+                    builder.setView(view);
+                    mSignDialog = builder.create();
+                    mSignDialog.show();
+                    //点击按钮开始验证
+                    mErrorResult.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            VoiceIdentifier voiceIdentifier = new VoiceIdentifier();
+                            voiceIdentifier.StartIdentify();
+                        }
+                    });
+                    break;
+
+            }
+            return false;
+        }
+    });
     public SignFragment() {
 
     }
@@ -106,6 +196,9 @@ public class SignFragment extends Fragment {
         user=mActivity.getmUser();
         mAuthId = user.getUser_id();
         mRvSign = view.findViewById(R.id.recycler_view_sign);
+        if(mActivity.getmUser().getUser_identity().equals("学生")){
+            mTvSign.setText("签到");
+        }
     }
 
     private void SetClickLIstener() {
@@ -199,41 +292,45 @@ public class SignFragment extends Fragment {
                     getActivity().finish();
                     break;
                 case R.id.tv_start_sign:
+                    Map<String,String>  msg =new HashMap<>();
+                    Gson gson=new Gson();
                     if (mActivity.getmUser().getUser_identity().equals("老师")){
-                        //开放签到通道
-                        Toast.makeText(getActivity(),"开放签到通道",Toast.LENGTH_SHORT).show();
 
+                        if(mTvSign.getText().toString().equals("开始签到")){
+                            msg.put("SignClass",mActivity.getmCourse().getCourse_id());
+                            msg.put("condition","SignStart");
+
+                            //开放签到通道
+                            try {
+                                WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
+                                        .send(URLEncoder.encode(gson.toJson(msg),"UTF-8"));
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
+
+                        }else if (mTvSign.getText().toString().equals("结束签到")){
+                            msg.put("StopClass",mActivity.getmCourse().getCourse_id());
+                            msg.put("condition","SignStop");
+                            //关闭签到通道
+                            try {
+                                WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
+                                        .send(URLEncoder.encode(gson.toJson(msg),"UTF-8"));
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }else{
-                        //进行识别
-                        //初始化声纹识别引擎
-                        mSpeakerVerifier = SpeakerVerifier.createVerifier(getActivity(), new InitListener() {
-                            @Override
-                            public void onInit(int i) {
-                                if (ErrorCode.SUCCESS == i) {
-                                    showTip("引擎初始化成功");
-                                } else {
-                                    showTip("引擎初始化失败，错误码：" + i);
-                                }
-                            }
-                        });
-                        //点击签到按钮产生签到弹窗
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_sign_dialog, null);
-                        TextView mTvSigntitle=view.findViewById(R.id.tv_CTitle_from);
-                        mTvSigntitle.setText("来自"+mActivity.getmCourse().getCourse_name()+"("+mActivity.getmCourse().getCourse_class()+")");
-                        mResultText = view.findViewById(R.id.edt_result);
-                        mErrorResult = view.findViewById(R.id.error_result);
-                        builder.setView(view);
-                        mSignDialog = builder.create();
-                        mSignDialog.show();
-                        //点击按钮开始验证
-                        mErrorResult.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                VoiceIdentifier voiceIdentifier = new VoiceIdentifier();
-                                voiceIdentifier.StartIdentify();
-                            }
-                        });
+                        //检查签到通道开启以及当次签到状态
+                        msg.put("SignClass",mActivity.getmCourse().getCourse_id());
+                        msg.put("SignStu",mActivity.getmUser().getUser_id());
+                        msg.put("condition","CheckSign");
+                        try {
+                            WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
+                                    .send(URLEncoder.encode(gson.toJson(msg),"UTF-8"));
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+
                     }
 
                     break;
@@ -360,7 +457,6 @@ public class SignFragment extends Fragment {
                         try {
                             String Result=r.getString("Result");
                             Log.d("ERROR",Result);
-                            Toast.makeText(getActivity(),Result,Toast.LENGTH_SHORT).show();
                             mErrorResult.setClickable(false);
                             //签到弹窗消失后刷新RecyclerView
                             mSignDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -375,7 +471,18 @@ public class SignFragment extends Fragment {
 
                     }
                 });
-
+                //socket对象分组
+                Map<String,String> msg =new HashMap<>();
+                Gson gson=new Gson();
+                msg.put("condition","SignSuccess");
+                msg.put("Sid",mActivity.getmUser().getUser_id());
+                msg.put("Cid",mActivity.getmCourse().getCourse_id());
+                try {
+                    WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
+                            .send(URLEncoder.encode(gson.toJson(msg),"UTF-8"));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
             } else {
                 // 验证不通过
                 switch (result.err) {
@@ -448,5 +555,6 @@ public class SignFragment extends Fragment {
             showTip("开始说话");
         }
     };
+
 }
 
