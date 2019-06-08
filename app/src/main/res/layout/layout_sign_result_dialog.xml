@@ -2,21 +2,21 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="400dp"
     android:orientation="vertical"
-    android:background="@color/colorLightGreen">
+    android:background="@drawable/bg_rv_res_dialog">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:text="签到人员统计"
         android:gravity="center"
-        android:textSize="25dp" />
+        android:textSize="25dp"
+        android:textStyle="bold"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_sign_res_lst"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp">
 
     </android.support.v7.widget.RecyclerView>

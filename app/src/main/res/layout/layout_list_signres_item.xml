@@ -7,8 +7,8 @@
     android:padding="14dp">
     <com.example.administrator.tecsoundclass.utils.CircleImageView
         android:id="@+id/cv_headpic"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:scaleType="centerCrop"
         android:layout_gravity="center" />
 
@@ -22,8 +22,7 @@
         android:gravity="center"
         android:text="名字"
         android:textColor="@color/colorWhite"
-        android:textSize="25sp"
-        android:textStyle="bold" />
+        android:textSize="17sp" />
 
 
 </RelativeLayout>

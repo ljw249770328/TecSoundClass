@@ -68,6 +68,7 @@ public class SignFragment extends Fragment {
     private RecyclerView mRvSign;
     private TextView mTvSign;
     private AlertDialog mSignDialog;
+    private AlertDialog mSignResDialog;
     private SpeakerVerifier mSpeakerVerifier;
     private Toast mToast;
     private String mAuthId , mTime = "", mDate = "", mStatus = "";
@@ -103,7 +104,14 @@ public class SignFragment extends Fragment {
                     MySignResultListAdapter adapter=new MySignResultListAdapter(signStu,mActivity.getApplicationContext());
                     mRvSignRLst.setAdapter(adapter);
                     builder.setView(view);
-                    builder.create().show();
+                    mSignResDialog=builder.create();
+                    mSignResDialog.show();
+                    mSignResDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            InitList();
+                        }
+                    });
                     mTvSign.setText("开始签到");
                     break;
                 case SIGN_STARTED:
@@ -214,7 +222,7 @@ public class SignFragment extends Fragment {
         mRvSign.setLayoutManager(layoutManager);
     }
 
-    //从数据库中获得显示的数据
+    //刷新显示列表
     private List<Sign> InitList() {
         list = new ArrayList<>();
         String url = "http://101.132.71.111:8080/TecSoundWebApp/GetSignListServlet";
