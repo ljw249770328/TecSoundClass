@@ -307,7 +307,7 @@ public class SignFragment extends Fragment {
                         if(mTvSign.getText().toString().equals("开始签到")){
                             msg.put("SignClass",mActivity.getmCourse().getCourse_id());
                             msg.put("condition","SignStart");
-
+                            msg.put("ClsTea",mActivity.getmUser().getUser_id());
                             //开放签到通道
                             try {
                                 WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
@@ -319,6 +319,7 @@ public class SignFragment extends Fragment {
                         }else if (mTvSign.getText().toString().equals("结束签到")){
                             msg.put("StopClass",mActivity.getmCourse().getCourse_id());
                             msg.put("condition","SignStop");
+                            msg.put("ClsTea",mActivity.getmUser().getUser_id());
                             //关闭签到通道
                             try {
                                 WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)

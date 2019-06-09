@@ -4,12 +4,15 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.MaskFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,17 +29,24 @@ import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.Adapter.KeyboardAdapter;
 
 import com.example.administrator.tecsoundclass.Adapter.MyInteractAdapter;
+import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.Interaction;
 
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.InteractHandler;
+import com.example.administrator.tecsoundclass.iFlytec.RecQuestionHandler;
 import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
+import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
+import com.google.gson.Gson;
 
+import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,9 +56,11 @@ import java.util.TimerTask;
 import java.util.UUID;
 
 public class InteractFragment extends Fragment {
+    public static final int QUESTION_ED=1;
+    public static final int COME_QUESTION=6;
     private ImageView mIvBack;
     private RecyclerView mRvInteract;
-    private TextView mTvTime, mTvgrade;
+    private TextView mTvTime, mTvgrade,mTvQuestion;
     private Button mBtncatch;
     private AlertDialog dialog;
     private Timer timer = null;
@@ -63,7 +75,10 @@ public class InteractFragment extends Fragment {
     private List<Interaction> mInteractionList = new ArrayList<>();
     private List<Interaction> list;
     private PopupWindow mpop;
+    private Button mBtnInteract;
     CourseMenuActivity mActivity;
+    private RecQuestionHandler recQuestionHandler;
+    private Handler mHandler=null;
 
     public InteractFragment() {
     }
@@ -77,6 +92,27 @@ public class InteractFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuthId = getActivity().getIntent().getExtras().getString("StudentId");
+        mHandler=new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                Map<String,String> param=new HashMap<>();
+                Gson gson =new Gson();
+                switch (msg.what){
+                    case QUESTION_ED:
+                        param.put("Question", (String) msg.obj);
+                        param.put("Course",mActivity.getmCourse().getCourse_id());
+                        param.put("condition","ActQuestion");
+                        try {
+                            WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
+                                    .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -98,10 +134,14 @@ public class InteractFragment extends Fragment {
     private void init(View view){
         mIvBack = view.findViewById(R.id.im_back);
         mRvInteract = view.findViewById(R.id.recycler_view_interact);
+        mBtnInteract= view.findViewById(R.id.btn_race_resp);
+        if (mActivity.getmUser().getUser_identity().equals("学生")){
+            mBtnInteract.setVisibility(View.GONE);
+        }
     }
     private void SetListener(View view){
         mIvBack.setOnClickListener(onclick);
-        view.findViewById(R.id.btn_race_resp).setOnClickListener(onclick);
+        mBtnInteract.setOnClickListener(onclick);
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -190,28 +230,30 @@ public class InteractFragment extends Fragment {
                 case R.id.tv_share:
                     break;
                 case R.id.btn_race_resp:
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_raceresp_dialog, null);
-                    i = 10;
-                    mBtncatch = view.findViewById(R.id.tv_getchance);
-                    mTvTime = view.findViewById(R.id.tv_message);
-                    mBtncatch.setOnClickListener(onclick);
-                    mTvTime.setText(i + "");//这里不加""就会崩溃暂未找到原因怀疑是可能变量i不存在时导致赋了空值
-                    builder.setView(view);
-                    dialog = builder.show();
-                    StartTime();
+                    recQuestionHandler=new RecQuestionHandler(getActivity(),mHandler);
+                    recQuestionHandler.StartHandle("Question_"+mActivity.getmCourse().getCourse_id()+"_"+UUID.randomUUID().toString());
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                    View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_raceresp_dialog, null);
+//                    i = 10;
+//                    mBtncatch = view.findViewById(R.id.tv_getchance);
+//                    mTvTime = view.findViewById(R.id.tv_message);
+//                    mBtncatch.setOnClickListener(onclick);
+//                    mTvTime.setText(i + "");//这里不加""就会崩溃暂未找到原因怀疑是可能变量i不存在时导致赋了空值
+//                    builder.setView(view);
+//                    dialog = builder.show();
+//                    StartTime();
                     break;
                 case R.id.tv_getchance:
-                    StopTime();
-                    mTvTime.setText("抢到机会,点击开始回答");
-                    mBtncatch.setText("开始");
-                    mBtncatch.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            interactHandler = new InteractHandler(getActivity(), mTvTime, mBtncatch);
-                            interactHandler.StartHandle(mActivity.getmUser().getUser_id()+ "_" +mActivity.getmCourse().getCourse_id()+"_"+UUID.randomUUID().toString());
-                        }
-                    });
+//                    StopTime();
+//                    mTvTime.setText("抢到机会,点击开始回答");
+//                    mBtncatch.setText("开始");
+//                    mBtncatch.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            interactHandler = new InteractHandler(getActivity(), mTvTime, mBtncatch);
+//                            interactHandler.StartHandle(mActivity.getmUser().getUser_id()+ "_" +mActivity.getmCourse().getCourse_id()+"_"+UUID.randomUUID().toString());
+//                        }
+//                    });
                     dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                         @Override
                         public void onDismiss(DialogInterface dialog) {
@@ -329,7 +371,7 @@ public class InteractFragment extends Fragment {
         }
     }
 
-    private Handler mHandler = new Handler() {
+    private Handler TimeHandler = new Handler() {
         public void handleMessage(Message msg) {
             mTvTime.setText(msg.arg1 + "");
             if (i == 0) {
@@ -349,9 +391,9 @@ public class InteractFragment extends Fragment {
             public void run() {
                 if (i > 0) {
                     i--;
-                    Message message = mHandler.obtainMessage();//获取实例
+                    Message message = TimeHandler.obtainMessage();//获取实例
                     message.arg1 = i;
-                    mHandler.sendMessage(message);
+                    TimeHandler.sendMessage(message);
                 }
             }
         };

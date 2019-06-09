@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.LongDef;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -28,8 +29,8 @@ public class WebSocketClientObject extends WebSocketClient {
     public static WebSocketClientObject client;
     public static Handler mHandler;
     public static Context mContext;
-//    public static String Uri ="ws://172.20.10.10:8886";
-    public static String Uri ="ws://101.132.71.111:8886";
+    public static String Uri ="ws://192.168.0.103:8886";
+//    public static String Uri ="ws://101.132.71.111:8886";
     private Gson gson=new Gson();
     public WebSocketClientObject(URI serverUri, Draft draft,Map<String, String> header, int timeout) {
         super(serverUri, draft,header,timeout);
@@ -89,7 +90,19 @@ public class WebSocketClientObject extends WebSocketClient {
                 case "SIGN_ED":
                     msg.what=5;
                     mHandler.sendMessage(msg);
-
+                    break;
+                case "COME_QUESTION":
+//                    msg.what=6;
+//                    msg.obj=params.get("question");
+//                    mHandler.sendMessage(msg);
+                    Log.e("fragment", params.get("question")+params.get("CourseId"));
+                    Intent intent=new Intent("com.example.administrator.tecsoundclass.COME_MESSAGE");
+                    intent.putExtra("question", params.get("question"));
+                    intent.putExtra("Cid",params.get("CourseId"));
+                    mContext.sendBroadcast(intent);
+                    break;
+                case "Grade_dialog":
+                    break;
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
