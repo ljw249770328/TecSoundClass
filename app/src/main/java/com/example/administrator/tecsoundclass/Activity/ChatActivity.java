@@ -76,6 +76,7 @@ public class ChatActivity extends AppCompatActivity {
                         msgRecyclerView.scrollToPosition(msgList.size()-1);
                         inputText.setText("");
                     }
+                    break;
                 case R.id.chat_back:
                     finish();
                     break;
