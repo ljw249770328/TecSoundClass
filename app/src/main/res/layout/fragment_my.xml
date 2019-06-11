@@ -10,7 +10,7 @@
         <RelativeLayout
             android:id="@+id/rl_1"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:orientation="horizontal"
             android:background="@color/colorBlue">
             <ImageView
@@ -25,58 +25,59 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="我的信息"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorTitleBlue"
                 android:textStyle="bold"
                 android:textSize="18sp" />
             <ImageView
                 android:id="@+id/iv_menu_list"
-                android:layout_width="35dp"
+                android:layout_width="20dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="7dp"
-                android:src="@drawable/menu" />
+                android:src="@drawable/more" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/rl_1"
-            android:background="@color/colorBgGray">
+            android:background="@color/colorWhite">
             <LinearLayout
                 android:id="@+id/ll_view_info"
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:layout_below="@id/iv_user_head"
-                android:layout_marginTop="-35dp"
+                android:layout_marginTop="-45dp"
                 android:padding="15dp"
                 android:orientation="vertical"
-                android:background="@color/colorSmallGray">
+                android:background="@color/colorWhite"
+                android:alpha="0.5">
                 <TextView
                     android:id="@+id/user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
-                    android:drawableRight="@drawable/edit"
-                    android:layout_marginLeft="13dp"
+                    android:drawableRight="@drawable/next"
+                    android:layout_marginLeft="8dp"
                     android:textColor="@color/colorBlack"
                     android:text="(用户名)"
-                    android:textSize="19dp"/>
+                    android:textSize="15dp"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginLeft="13dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="8dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorGray"
+                        android:textColor="@color/colorBlack"
                         android:text="帐号:"
-                        android:textSize="17dp"/>
+                        android:textSize="13dp"/>
                     <TextView
                         android:id="@+id/user_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="5dp"
-                        android:textColor="@color/colorGray"
+                        android:textColor="@color/colorBlack"
                         android:text="xxxxxx"
                         android:textSize="13dp"/>
                 </LinearLayout>
@@ -85,66 +86,70 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="7dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginTop="5dp"
                     android:padding="5dp">
                     <TextView
                         android:id="@+id/fri_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorBlack"
                         android:text="0"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorBlack"
                         android:layout_marginLeft="5dp"
                         android:text="好友数"/>
                     <TextView
                         android:id="@+id/class_num"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorBlack"
                         android:layout_marginLeft="15dp"
                         android:text="0"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorWhite"
+                        android:textColor="@color/colorBlack"
                         android:layout_marginLeft="5dp"
                         android:text="课程数"/>
                 </LinearLayout>
             </LinearLayout>
             <com.example.administrator.tecsoundclass.utils.CircleImageView
                 android:id="@+id/iv_user_head"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="5dp"
                 android:scaleType="centerCrop"
-                android:background="@drawable/bg_im_user_head"/>
+                android:background="@drawable/head_image"/>
             <TextView
                 android:id="@+id/m_status_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
+                android:padding="5dp"
                 android:gravity="center"
-                android:background="@color/colorDarkGray"
+                android:layout_marginTop="-53dp"
+                android:background="@color/colorDarkWhite"
                 android:layout_below="@id/ll_view_info"
                 android:textColor="@color/colorWhite"
                 android:text="我的比对数据"
+
                 android:textSize="16sp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/m_status_data">
+                android:layout_below="@id/m_status_data"
+                android:layout_marginTop="1dp">
                 <TextView
                     android:padding="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorDarkWhite"
                     android:text="动态"
+                    android:alpha="0.7"
                     android:textColor="@color/colorSmallGray"
                     android:gravity="center"/>
             </LinearLayout>

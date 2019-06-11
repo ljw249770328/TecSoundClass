@@ -1,6 +1,7 @@
 package com.example.administrator.tecsoundclass.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -9,11 +10,15 @@ import android.support.v7.widget.RecyclerView.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
+import com.example.administrator.tecsoundclass.Activity.ChatActivity;
+import com.example.administrator.tecsoundclass.Activity.LoginActivity;
+import com.example.administrator.tecsoundclass.Activity.MainMenuActivity;
 import com.example.administrator.tecsoundclass.JavaBean.Follow;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
@@ -29,14 +34,19 @@ public class MyFriendListAdapter extends Adapter<MyFriendListAdapter.Viewholder>
     private Context mContext;
     private List<Follow> mFollowList;
     private User user=null;
+
+
+
     private List<User> mFans=new ArrayList<>();
     private String user_id="";
     private Viewholder holder=null;
     private OnRecyclerItemClickListener mListener;
-
     public MyFriendListAdapter(List<Follow> list,Context context){
         this.mContext=context;
         mFollowList=list;
+    }
+    public List<User> getmFans() {
+        return mFans;
     }
     class Viewholder extends RecyclerView.ViewHolder{
         ImageView mFriendPic;
@@ -61,7 +71,6 @@ public class MyFriendListAdapter extends Adapter<MyFriendListAdapter.Viewholder>
     public void  SetOnItemClickListener(OnRecyclerItemClickListener listener){
         mListener=listener;
     }
-
     @NonNull
     @Override
     public Viewholder onCreateViewHolder(@NonNull ViewGroup viewGroup,int i) {

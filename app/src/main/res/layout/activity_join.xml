@@ -6,7 +6,7 @@
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:background="@color/colorBlue">
         <TextView
@@ -14,15 +14,16 @@
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:text="取消"
+            android:textColor="@color/colorTitleBlue"
             android:gravity="center"
-            android:textSize="17sp"
-            android:layout_marginLeft="7dp"/>
+            android:textSize="15sp"
+            android:layout_marginLeft="0dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="加入课堂"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorTitleBlue"
             android:textStyle="bold"
             android:textSize="18sp" />
         <TextView
@@ -31,17 +32,17 @@
             android:layout_height="match_parent"
             android:text="下一步"
             android:gravity="center"
-            android:textSize="18sp"
+            android:textSize="15sp"
+            android:textColor="@color/colorTitleBlue"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="7dp"
-            android:src="@drawable/add" />
+            android:layout_marginRight="0dp" />
     </RelativeLayout>
     <EditText
         android:id="@+id/et_input"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@drawable/bg_et_edit"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="1dp"
         android:maxLength="10"
         android:textColor="@color/colorBlack"
         android:paddingLeft="15dp"

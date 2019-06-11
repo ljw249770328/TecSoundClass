@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/colorBgGray"
+>
+
+    <RelativeLayout
+        android:id="@+id/head"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/colorBlue">
+        <ImageView
+            android:id="@+id/chat_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/small_back"
+            android:gravity="center"
+            android:textSize="17sp"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="7dp"/>
+        <TextView
+            android:id="@+id/fri_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="好友姓名"
+            android:textColor="@color/colorTitleBlue"
+            android:textStyle="bold"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+
+        android:id="@+id/msg_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="0dp"
+            android:layout_weight="6"
+            android:layout_height="50dp">
+            <EditText
+                android:id="@+id/input_text"
+                android:textSize="15dp"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:background="@drawable/bg_btn_chat_button"
+                android:layout_marginBottom="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/bt_send"
+            android:padding="5dp"
+            android:textSize="12dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:text="发送"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/colorTextOrange"
+            android:background="@color/colorBlue"
+            android:layout_width="50dp"
+            android:layout_height="30dp"/>
+    </LinearLayout>
+
+</LinearLayout>

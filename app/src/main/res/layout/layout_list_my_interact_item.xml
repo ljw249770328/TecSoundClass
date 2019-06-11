@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="70dp"
+    android:layout_height="50dp"
     android:layout_marginBottom="7dp"
     android:background="@drawable/recyclelist_interact_item"
     android:orientation="horizontal"
     android:padding="3dp">
 
     <LinearLayout
-        android:layout_width="255dp"
+        android:layout_width="150dp"
         android:layout_height="match_parent"
         android:layout_marginLeft="5dp"
         android:orientation="vertical">
@@ -21,8 +21,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Q:"
-                android:textColor="@color/colorDarkGray"
-                android:textSize="23sp"
+                android:textColor="@color/colorTitleBlue"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 />
             <TextView
@@ -31,21 +31,25 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="问题"
-                android:ellipsize="marquee"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:textColor="@color/colorDarkGray"
-                android:textSize="20sp" />
+                android:textColor="@color/colorTitleBlue"
+                android:textSize="17sp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="7dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="A:"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:textColor="@color/colorSmallGray"
-                android:textSize="17sp"
+                android:textSize="12sp"
                 android:textStyle="bold"/>
             <TextView
                 android:id="@+id/tv_answer"
@@ -56,24 +60,18 @@
                 android:paddingLeft="3dp"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:textSize="15sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 
 
     </LinearLayout>
-    <ImageView
-        android:id="@+id/iv_interact_voice"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:scaleType="fitCenter"
-        android:padding="5dp"
-        android:src="@drawable/microphone" />
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="right"
-        android:padding="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:gravity="left"
         android:orientation="vertical">
         <TextView
             android:id="@+id/tv_interact_score"
@@ -81,9 +79,19 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="得分"
-            android:paddingRight="3dp"
+            android:paddingRight="33dp"
             android:textColor="@color/colorDarkGray"
-            android:textSize="20sp" />
+            android:textSize="12sp" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="27dp"
+        android:layout_marginLeft="30dp">
+
         <TextView
             android:id="@+id/tv_interact_date"
             android:layout_width="match_parent"
@@ -91,16 +99,22 @@
             android:text="(回答日期)"
             android:gravity="center"
             android:textColor="@color/colorSmallGray"
-            android:textSize="8sp" />
-
+            android:textSize="12sp" />
     </LinearLayout>
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_above="@id/rg_main"
-        android:layout_gravity="bottom"
-        android:background="@color/colorDarkGray" />
+    <ImageView
+        android:id="@+id/iv_interact_voice"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        android:layout_marginLeft="20dp"
+        android:padding="5dp"
+        android:src="@drawable/play" />
+    <!--<View-->
+        <!--android:id="@+id/divider"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0.5dp"-->
+        <!--android:layout_above="@id/rg_main"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:background="@color/colorDarkGray" />-->
 
 </LinearLayout>

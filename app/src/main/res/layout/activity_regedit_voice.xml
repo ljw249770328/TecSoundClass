@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".iFlytec.RegeditVoiceActivity"
-    android:background="@color/colorBlue">
+    android:background="@color/colorWhite">
     <LinearLayout
         android:id="@+id/ll_1"
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:layout_height="50dp">
         <ImageView
             android:id="@+id/im_back"
-            android:layout_width="35dp"
+            android:layout_width="25dp"
             android:layout_height="match_parent"
             android:src="@drawable/small_back"
             android:scaleType="fitCenter"
@@ -21,11 +21,12 @@
     </LinearLayout>
     <ImageView
         android:id="@+id/isv_getpassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginLeft="150dp"
         android:layout_below="@id/ll_1"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/microphone_re"/>
+        android:layout_marginTop="100dp"
+        android:src="@drawable/micphone"/>
     <TextView
         android:id="@+id/edt_result"
         android:layout_width="match_parent"
@@ -35,8 +36,8 @@
         android:text="点击麦克风获取识别字符"
         android:gravity="center"
         android:textStyle="bold"
-        android:textColor="@color/colorWhite"
-        android:textSize="25sp"/>
+        android:textColor="@color/colorTitleBlue"
+        android:textSize="20sp"/>
     <TextView
         android:id="@+id/error_result"
         android:layout_width="match_parent"
@@ -50,26 +51,30 @@
         android:textSize="20sp"/>
     <TextView
         android:id="@+id/isv_delete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
+        android:layout_width="320dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/btn_complete"
         android:layout_above="@id/isv_reocrd"
         android:text="删除模型"
-        android:textColor="@color/colorTextRed"
+        android:textColor="@color/colorTitleBlue"
         android:gravity="center"
-        android:textSize="17sp"
-        android:padding="15dp"/>
+        android:textSize="15sp"
+        android:padding="5dp"/>
     <TextView
         android:id="@+id/isv_reocrd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
+        android:layout_width="320dp"
+        android:layout_marginLeft="20dp"
+
+        android:layout_height="40dp"
+        android:background="@drawable/btn_complete"
         android:layout_alignParentBottom="true"
         android:text="开始录音"
-        android:textColor="@color/colorBlue"
+        android:textColor="@color/colorTitleBlue"
         android:gravity="center"
-        android:textSize="17sp"
-        android:layout_marginBottom="1dp"
-        android:padding="15dp"/>
-
+        android:textSize="15sp"
+        android:layout_marginBottom="150dp"
+        android:padding="5dp"/>
+‘
 </RelativeLayout>

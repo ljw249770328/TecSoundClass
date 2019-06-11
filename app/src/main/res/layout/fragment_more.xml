@@ -10,12 +10,12 @@
         <RelativeLayout
             android:id="@+id/rl_1"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:orientation="horizontal"
             android:background="@color/colorBlue">
             <ImageView
                 android:id="@+id/im_back"
-                android:layout_width="35dp"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/small_back"
                 android:scaleType="fitCenter"
@@ -26,7 +26,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="(当前课程名)"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorTitleBlue"
                 android:textStyle="bold"
                 android:textSize="18sp" />
         </RelativeLayout>
@@ -42,20 +42,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorWhite"
-                    android:padding="10dp"
+                    android:padding="0dp"
                     android:gravity="center"
                     android:orientation="horizontal">
                     <ImageView
                         android:id="@+id/iv_change_cpic"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="5dp"
                         android:scaleType="centerCrop"
-                        android:background="@drawable/bg_im_class_head"/>
+                        android:background="@drawable/head_image"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
+                        android:padding="5dp"
                         android:layout_marginLeft="20dp"
                         android:orientation="vertical">
 
@@ -63,26 +63,25 @@
                             android:id="@+id/tv_class_id"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="课堂ID:"
-                            android:textColor="@color/colorBlack"
-                            android:textSize="14dp" />
+                            android:text="课堂ID"
+                            android:textColor="@color/colorGray"
+                            android:textSize="12dp" />
                         <TextView
                             android:id="@+id/tv_mcourse_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="课堂名称"
-                            android:textSize="17dp"
-                            android:textStyle="bold"
+                            android:textSize="12dp"
                             android:layout_marginTop="5dp"
-                            android:textColor="@color/colorBlack"/>
+                            android:textColor="@color/colorGray"/>
                         <TextView
                             android:id="@+id/tv_mclass_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="班级名称"
-                            android:textSize="14dp"
+                            android:textSize="12dp"
                             android:textColor="@color/colorGray"
-                            android:layout_marginTop="15dp" />
+                            android:layout_marginTop="5dp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -90,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_marginTop="25dp">
+                    android:layout_marginTop="1dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -135,6 +134,7 @@
                             android:layout_weight="8"
                             android:text="上课时间:"
                             android:textSize="16sp"
+                            android:layout_marginTop="1dp"
                             android:background="@drawable/bg_textview"
                             android:textColor="@color/colorBlack"/>
                         <TextView
@@ -144,6 +144,7 @@
                             android:layout_weight="5"
                             android:padding="7dp"
                             android:text="xxxxx"
+                            android:layout_marginTop="1dp"
                             android:gravity="right"
                             android:textSize="16sp"
                             android:maxLines="1"
@@ -154,7 +155,7 @@
                             android:id="@+id/tv_class_request"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp"
+                            android:layout_marginTop="1dp"
                             android:layout_below="@id/ll_1"
                             android:padding="7dp"
                             android:text="课堂要求:"
@@ -165,29 +166,35 @@
 
                         <TextView
                             android:id="@+id/tv_request_text"
-                            android:layout_width="match_parent"
+                            android:layout_width="350dp"
                             android:layout_height="150dp"
-                            android:layout_marginTop="1dp"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:layout_marginLeft="5dp"
                             android:background="@drawable/bg_layout_classres_bg"
                             android:visibility="gone"
                             android:padding="7dp"
                             android:textColor="@color/colorDarkGray"
                             android:textSize="14sp" />
                     </LinearLayout>
-
-                    <TextView
-                        android:id="@+id/tv_exit"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:padding="7dp"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="退出课堂"
-                        android:textSize="16sp"
-                        android:layout_alignParentBottom="true"
-                        android:background="@drawable/bg_et_edit"
-
-                        android:textColor="@color/colorTextRed"/>
+                        android:paddingTop="350dp">
+                        <TextView
+                            android:id="@+id/tv_exit"
+                            android:layout_width="350dp"
+                            android:layout_height="45dp"
+                            android:padding="7dp"
+                            android:gravity="center"
+                            android:text="退出课堂"
+                            android:textSize="16sp"
+                            android:background="@drawable/btn_complete"
+                            android:textColor="@color/colorTitleBlue"/>
+                    </LinearLayout>
                 </RelativeLayout>
+
 
         </LinearLayout>
 

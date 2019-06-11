@@ -12,7 +12,7 @@
         android:layout_height="60dp"
         android:padding="5dp"
         android:orientation="horizontal"
-        android:background="@drawable/recyclelist_sign_item">
+        android:background="@drawable/bg_textview">
         <LinearLayout
             android:layout_width="230dp"
             android:layout_height="match_parent"
@@ -24,22 +24,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="19sp"
+                android:textSize="16sp"
                 android:text="(签到人)"
                 android:textColor="@color/colorDarkGray"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp">
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="15dp">
 
                 <TextView
                     android:id="@+id/tv_sign_time"
                     android:layout_width="wrap_content"
+
                     android:layout_height="match_parent"
                     android:text="(具体时间)"
                     android:textColor="@color/colorSmallGray"
-                    android:textSize="15sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -54,7 +55,7 @@
                 android:layout_height="match_parent"
                 android:paddingLeft="20dp"
                 android:gravity="center"
-                android:textSize="17sp"
+                android:textSize="16sp"
                 android:text="(签到状态)"
                 android:textColor="@color/colorGray"/>
         </LinearLayout>

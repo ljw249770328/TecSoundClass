@@ -3,27 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:background="#009898">
+    android:background="@color/colorWhite">
     <RelativeLayout
         android:id="@+id/head"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:background="@color/colorBlue">
-        <TextView
+        <ImageView
             android:id="@+id/tv_back"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:text="返回"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/small_back"
             android:gravity="center"
             android:textSize="17sp"
+            android:layout_marginTop="7dp"
             android:layout_marginLeft="7dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="搜索结果"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorTitleBlue"
             android:textStyle="bold"
             android:textSize="18sp" />
     </RelativeLayout>
@@ -36,31 +37,21 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="270dp"
             android:layout_below="@id/ll_1"
             android:orientation="vertical"
-            android:layout_marginTop="-35dp"
+            android:layout_marginTop="-85dp"
             android:background="@drawable/bg_layout_classres_bg">
             <TextView
                 android:id="@+id/tv_result_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="17sp"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="95dp"
                 android:text="(课堂名)"
                 android:textColor="@color/colorBlack"
                 android:gravity="center"/>
-            <Button
-                android:id="@+id/btn_join"
-                android:layout_width="260dp"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_btn_button"
-                android:text="加入"
-                android:textSize="15dp"
-                android:layout_gravity="center"
-                android:textColor="@color/colorBlue"
-                android:layout_marginTop="10dp"
-                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -145,29 +136,10 @@
                     android:textSize="15sp"
                     android:textColor="@color/colorBlack"/>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:layout_marginTop="15dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="课堂要求:"
-                    android:textSize="15sp"
-                    android:textColor="@color/colorSmallGray"/>
-                <TextView
-                    android:id="@+id/tv_result_req"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="35dp"
-                    android:text="()"
-                    android:textSize="15sp"
-                    android:textColor="@color/colorBlack"/>
-            </LinearLayout>
+
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll_1"
             android:layout_width="match_parent"
@@ -178,9 +150,62 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:scaleType="centerCrop"
-                android:background="@drawable/bg_im_class_head"/>
+                android:background="@drawable/head_image"/>
         </LinearLayout>
     </RelativeLayout>
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_below="@id/head"
+       android:layout_marginTop="270dp"
+       android:layout_marginLeft="15dp">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:paddingLeft="15dp"
+           android:layout_marginTop="15dp">
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="课堂要求:"
+               android:textSize="15sp"
+               android:textColor="@color/colorSmallGray"/>
+
+
+       </LinearLayout>
+       <TextView
+           android:layout_marginTop="40dp"
+           android:id="@+id/tv_result_req"
+           android:layout_width="370dp"
+           android:layout_height="270dp"
+           android:layout_marginLeft="5dp"
+           android:text="课堂要求详情"
+           android:gravity="center"
+           android:background="@drawable/bg_layout_classres_bg"
+           android:textSize="15sp"
+           android:textColor="@color/colorSmallGray"/>
+
+   </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <Button
+            android:id="@+id/btn_join"
+            android:layout_width="360dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_complete"
+            android:text="加入"
+            android:textSize="15dp"
+            android:layout_gravity="center"
+            android:textColor="@color/colorTitleBlue"
+            android:layout_marginTop="300dp"
+            />
+    </LinearLayout>
 
 
 </RelativeLayout>

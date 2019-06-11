@@ -11,10 +11,9 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:text="上课中..."
-    android:textSize="30sp"
+    android:textSize="20sp"
     android:textStyle="bold"
-
-    android:textColor="@color/colorWhite"/>
+    android:textColor="@color/colorTitleBlue"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +22,7 @@
         android:textSize="17sp"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
-        android:textColor="@color/colorGray"/>
+        android:textColor="@color/colorTitleBlue"/>
 
     <TextView
         android:id="@+id/tv_message"
@@ -48,22 +47,24 @@
             android:id="@+id/btn_record"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/bg_tv_sign_button"
+            android:background="@drawable/small_ring"
+            android:alpha="0.4"
             android:gravity="center"
             android:text="记录"
             android:layout_marginBottom="30dp"
             android:textStyle="bold"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:textColor="@color/colorDialogButtonText"/>
         <Button
             android:id="@+id/btn_class_over"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:background="@drawable/bg_tv_sign_button"
+            android:background="@drawable/small_ring"
+            android:alpha="0.4"
             android:gravity="center"
             android:text="下课"
             android:textStyle="bold"
-            android:textSize="15sp"
+            android:textSize="12sp"
             android:textColor="@color/colorDialogButtonText"/>
     </LinearLayout>
 

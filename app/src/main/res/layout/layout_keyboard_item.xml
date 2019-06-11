@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:clickable="false"
         android:gravity="center"
-        android:background="@color/colorOrange"
+        android:background="@drawable/get_grade"
         android:text="1"
         android:textSize="20sp"
         android:layout_margin="0.5dp"

@@ -1,26 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/btn_friend"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
     android:paddingTop="5dp"
-    android:paddingBottom="5dp">
+    android:paddingBottom="5dp"
+    android:background="@drawable/bg_et_edit">
     <com.example.administrator.tecsoundclass.utils.CircleImageView
         android:id="@+id/iv_friend_pic"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:scaleType="centerCrop"
-        android:background="@drawable/bg_im_friend_head"
+        android:background="@drawable/head_image"
         android:layout_gravity="center"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="10dp"
-        android:paddingTop="7dp"
-        android:layout_marginLeft="20dp">
+        android:paddingTop="0dp"
+        android:layout_marginLeft="15dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,8 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="好友名"
-                android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="13sp"
                 android:textColor="@color/colorBlack"/>
             <TextView
             android:id="@+id/tv_time"
@@ -40,7 +41,7 @@
             android:layout_marginBottom="10dp"
                 android:layout_marginRight="7dp"
             android:textColor="@color/colorGray"
-            android:textSize="14sp"
+            android:textSize="10sp"
             android:layout_alignParentRight="true"
             android:text="2:17"/>
         </RelativeLayout>
@@ -54,7 +55,7 @@
                 android:id="@+id/tv_friend_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="10sp"
                 android:text="小伙伴正在上'java基础'"
                 android:textColor="@color/colorGray" />
 

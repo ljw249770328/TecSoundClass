@@ -7,13 +7,13 @@
     android:padding="5dp"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="5dp"
-    android:background="@drawable/recyclelist_point_item">
+    android:background="@drawable/bg_textview">
         <LinearLayout
             android:layout_width="220dp"
             android:layout_height="60dp"
             android:orientation="horizontal"
             android:gravity="center"
-            android:background="@drawable/message">
+            android:background="@drawable/bg_textview">
             <TextView
                 android:id="@+id/tv_voice_time"
                 android:layout_width="wrap_content"
@@ -23,7 +23,7 @@
                 android:textSize="9sp"
                 android:layout_marginRight="3dp"
                 android:textStyle="bold"
-                android:textColor="@color/colorDarkGray"
+                android:textColor="@color/colorTitleBlue"
                 android:drawableRight="@drawable/sound"
                 android:text="(语音时长)"/>
 
@@ -45,14 +45,14 @@
         android:layout_gravity="center"
         android:paddingLeft="5dp"
         android:textSize="13sp"
-        android:textColor="@color/colorSmallGray"/>
+        android:textColor="@color/colorTitleBlue"/>
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_above="@id/rg_main"
         android:layout_gravity="bottom"
-        android:background="#BBBBBB" />
+        android:background="@color/colorBlue" />
 
 
 </LinearLayout>

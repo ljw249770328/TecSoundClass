@@ -9,24 +9,31 @@
     android:gravity="center"
     android:background="@color/colorBlue">
 
-    <ImageView
-        android:id="@+id/iv_1"
-        android:layout_width="260dp"
-        android:layout_height="190dp"
-        android:src="@drawable/logo"
-        android:scaleType="centerCrop"
-        android:paddingLeft="10dp"/>
-
     <TextView
-        android:id="@+id/tv_1"
+        android:id="@+id/tv_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="65dp"
         android:gravity="center"
-        android:textStyle="bold"
+        android:textSize="18sp"
+        android:ems="1"
+        android:textColor="@color/colorTitleBlue"
+        android:text="学习本无底，前行莫彷徨。"
+        />
+    <TextView
+        android:id="@+id/tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="105dp"
+        android:gravity="center"
+
         android:textSize="40sp"
-        android:textColor="@color/colorWhite"
+        android:textColor="@color/colorTitleBlue"
         android:text="师音课堂"
          />
-
+<!--<ImageView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="105dp"-->
+    <!--android:background="@drawable/logo"/>-->
 </LinearLayout>

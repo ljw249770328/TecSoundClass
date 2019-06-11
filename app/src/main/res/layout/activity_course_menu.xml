@@ -20,7 +20,7 @@
     <RadioGroup
         android:id="@+id/rg_course_menu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:background="@color/colorBlue">
@@ -29,58 +29,58 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="1dp"
             android:background="@android:color/transparent"
             android:button="@null"
             android:checked="true"
-            android:drawablePadding="3dp"
-            android:drawableTop="@drawable/rb_my_sign"
+            android:drawablePadding="1dp"
+            android:drawableTop="@drawable/sign"
             android:gravity="center"
             android:text="签到"
-            android:textColor="@color/main_menu_text_selector_tab"
-            android:textSize="15sp" />
+            android:textColor="@color/colorTitleBlue"
+            android:textSize="12sp" />
         <RadioButton
             android:id="@+id/rb_review"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="1dp"
             android:background="@android:color/transparent"
             android:button="@null"
-            android:drawablePadding="3dp"
-            android:drawableTop="@drawable/rb_my_review"
+            android:drawablePadding="1dp"
+            android:drawableTop="@drawable/review"
             android:gravity="center"
             android:text="课堂回顾"
-            android:textColor="@color/main_menu_text_selector_tab"
-            android:textSize="15sp" />
+            android:textColor="@color/colorTitleBlue"
+            android:textSize="12sp" />
         <RadioButton
             android:id="@+id/rb_interact"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="1dp"
             android:background="@android:color/transparent"
             android:button="@null"
-            android:drawablePadding="3dp"
-            android:drawableTop="@drawable/rb_my_interact"
+            android:drawablePadding="1dp"
+            android:drawableTop="@drawable/interact"
             android:gravity="center"
             android:text="互动记录"
-            android:textColor="@color/main_menu_text_selector_tab"
-            android:textSize="15sp" />
+            android:textColor="@color/colorTitleBlue"
+            android:textSize="12sp" />
         <RadioButton
             android:id="@+id/rb_more"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="1dp"
             android:background="@android:color/transparent"
             android:button="@null"
-            android:drawablePadding="3dp"
-            android:drawableTop="@drawable/rb_course_more"
+            android:drawablePadding="1dp"
+            android:drawableTop="@drawable/menu_more"
             android:gravity="center"
             android:text="更多"
-            android:textColor="@color/main_menu_text_selector_tab"
-            android:textSize="15sp" />
+            android:textColor="@color/colorTitleBlue"
+            android:textSize="12sp" />
 
     </RadioGroup>
 </RelativeLayout>

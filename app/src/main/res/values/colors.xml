@@ -7,7 +7,7 @@
     <color name="colorDarkGreen">#22a58b</color>
     <color name="colorOrange">#ebb774</color>
     <color name="colorWhite">#FFF</color>
-    <color name="colorBgGray">#ececed</color>
+    <color name="colorBgGray">#F9F9F9</color>
     <color name="colorDarkWhite">#e0e0e4</color>
     <color name="colorSmallGray">#c4bfbf</color>
     <color name="colorTranslucence">#82ffffff</color>
@@ -34,4 +34,5 @@
     <color name="color_bg">#b0ffffff</color>
     <color name="color_gold">#00574B</color>
     <color name="color_popwindow_bg">#000000</color>
+    <color name="colorTitleBlue">#004B71</color>
 </resources>

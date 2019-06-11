@@ -15,5 +15,8 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowBackground">@color/color_bg</item>
     </style>
-
-</resources>
+    <style name="My_CheckBox" parent="@android:style/Widget.Material.CompoundButton.CheckBox">
+        <item name="android:colorControlActivated">@color/colorTitleBlue</item>
+        <item name="android:colorControlNormal">@color/colorDarkGray</item>
+    </style>
+   </resources>

@@ -26,7 +26,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="设置"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorTitleBlue"
                 android:textStyle="bold"
                 android:textSize="18sp" />
         </RelativeLayout>
@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="25dp">
+                android:layout_marginTop="2dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -81,7 +81,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="2dp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -100,8 +100,9 @@
                         android:id="@+id/tv_my_birth_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
                         android:layout_below="@id/tv_my_id"
-                        android:background="@drawable/bg_et_edit"
+                        android:background="@drawable/bg_textview"
                         android:padding="7dp"
                         android:text="意见反馈"
                         android:textColor="@color/colorBlack"
@@ -116,6 +117,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/tv_my_id"
+                            android:layout_marginTop="2dp"
                             android:layout_weight="8"
                             android:background="@drawable/bg_textview"
                             android:padding="7dp"
@@ -128,6 +130,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
+                            android:layout_marginTop="2dp"
                             android:background="@drawable/bg_textview"
                             android:drawableRight="@drawable/edit"
                             android:gravity="right"
@@ -139,17 +142,24 @@
 
 
                 </LinearLayout>
-                <TextView
-                    android:id="@+id/tv_logout"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:padding="7dp"
+                    android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="完成"
-                    android:textSize="16sp"
-                    android:layout_alignParentBottom="true"
-                    android:background="@color/colorBlue"
-                    android:textColor="@color/colorWhite"/>
+                    android:layout_marginTop="450dp">
+                    <TextView
+                        android:id="@+id/tv_logout"
+                        android:layout_width="350dp"
+                        android:layout_height="50dp"
+                        android:padding="7dp"
+                        android:gravity="center"
+                        android:text="完成"
+                        android:textSize="16sp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@drawable/btn_complete"
+                        android:textColor="@color/colorTitleBlue"/>
+                </LinearLayout>
+
             </RelativeLayout>
 
         </LinearLayout>

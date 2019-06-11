@@ -10,23 +10,23 @@
         <RelativeLayout
             android:id="@+id/rl_1"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:orientation="horizontal"
             android:background="@color/colorBlue">
             <ImageView
                 android:id="@+id/im_back"
-                android:layout_width="35dp"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/small_back"
                 android:scaleType="fitCenter"
-                android:layout_marginLeft="7dp" />
+                 />
             <TextView
                 android:id="@+id/course_title"
-                android:layout_width="match_parent"
+                android:layout_width="320dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="互动得分"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorTitleBlue"
                 android:textStyle="bold"
                 android:textSize="18sp" />
         </RelativeLayout>
@@ -42,15 +42,17 @@
 
         <Button
             android:id="@+id/btn_race_resp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="320dp"
+            android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:padding="10dp"
             android:text="抢答测试"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
             android:textSize="16sp"
-            android:background="@drawable/bg_btn_button"
-            android:textColor="@color/colorBlue"
-            android:layout_marginBottom="3dp"/>
+            android:background="@drawable/btn_complete"
+            android:textColor="@color/colorTitleBlue"
+            android:layout_marginBottom="100dp"/>
 
     </RelativeLayout>
 </FrameLayout>

@@ -8,8 +8,8 @@
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_bg"
+        android:layout_height="40dp"
+        android:background="@color/colorBgGray"
         android:paddingRight="10dp"
         android:paddingLeft="10dp">
 
@@ -18,10 +18,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:padding="10dp"
+            android:padding="5dp"
             android:text="@string/cancle"
-            android:textColor="@color/color_gold"
-            android:textSize="16sp" />
+            android:textColor="@color/colorTitleBlue"
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -29,8 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="@string/title"
-            android:textColor="@color/color_gold"
-            android:textSize="20sp" />
+            android:textColor="@color/colorTitleBlue"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tv_select"
@@ -38,10 +38,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:padding="10dp"
+            android:padding="5dp"
             android:text="@string/commit"
-            android:textColor="@color/color_gold"
-            android:textSize="16sp" />
+            android:textColor="@color/colorTitleBlue"
+            android:textSize="13sp" />
 
     </RelativeLayout>
 
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:background="@color/color_bg"
+            android:background="@color/colorWhite"
             android:orientation="horizontal"
             android:paddingBottom="15dp"
             android:paddingLeft="20dp"
@@ -80,7 +80,7 @@
                 android:gravity="center"
                 android:text="@string/year"
                 android:textColor="@color/color_unit"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <com.example.administrator.tecsoundclass.utils.DatePickerView
                 android:id="@+id/month_pv"
@@ -96,7 +96,7 @@
                 android:gravity="center"
                 android:text="@string/month"
                 android:textColor="@color/color_unit"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <com.example.administrator.tecsoundclass.utils.DatePickerView
                 android:id="@+id/day_pv"
@@ -112,7 +112,7 @@
                 android:gravity="center"
                 android:text="@string/day"
                 android:textColor="@color/color_unit"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <com.example.administrator.tecsoundclass.utils.DatePickerView
                 android:id="@+id/hour_pv"
@@ -128,7 +128,7 @@
                 android:gravity="center"
                 android:text="@string/hour"
                 android:textColor="@color/color_unit"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <com.example.administrator.tecsoundclass.utils.DatePickerView
                 android:id="@+id/minute_pv"
@@ -144,7 +144,7 @@
                 android:gravity="center"
                 android:text="@string/minute"
                 android:textColor="@color/color_unit"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 

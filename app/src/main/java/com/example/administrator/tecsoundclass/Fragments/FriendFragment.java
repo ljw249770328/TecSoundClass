@@ -3,7 +3,6 @@ package com.example.administrator.tecsoundclass.Fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
@@ -17,6 +16,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.tecsoundclass.Activity.ChatActivity;
 import com.example.administrator.tecsoundclass.Activity.MainMenuActivity;
 import com.example.administrator.tecsoundclass.Adapter.MyFriendListAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.Follow;
@@ -111,11 +111,13 @@ public class FriendFragment extends Fragment {
                         @Override
                         public void onItemClick(int posision, List<User> mFans) {
                             //跳转聊天,传递adapter中user
-//                            Intent intent=new Intent(getActivity(),/*跳转类*/null);
-//                            Bundle bundle =new Bundle();
-//                            bundle.putSerializable("FanInfo",adapter.getUser());
-//                            intent.putExtras(bundle);
-                            Toast.makeText(getActivity(),"即将进入与"+mFans.get(posision).getUser_name()+"的聊天",Toast.LENGTH_SHORT).show();
+                            Intent intent=new Intent(getActivity(),ChatActivity.class);
+                            Bundle bundle =new Bundle();
+                            bundle.putSerializable("FanInfo",adapter.getmFans().get(posision));
+                            bundle.putSerializable("MyInfo",activity.getmUser());
+                            intent.putExtras(bundle);
+                            startActivity(intent);
+//                            Toast.makeText(getActivity(),"即将进入与"+mFans.get(posision).getUser_name()+"的聊天",Toast.LENGTH_SHORT).show();
                         }
                     });
                     mRvFriends.setAdapter(adapter);

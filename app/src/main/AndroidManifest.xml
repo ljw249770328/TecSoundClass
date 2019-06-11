@@ -64,6 +64,7 @@
         <activity android:name=".Activity.EditMyInfoActivity" />
         <activity android:name=".Activity.SettingsActivity" />
         <activity android:name=".iFlytec.RegeditVoiceActivity" />
+        <activity android:name=".Activity.ChatActivity"/>
     </application>
 
 </manifest>

@@ -6,7 +6,7 @@
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:background="@color/colorBlue">
         <TextView
@@ -14,26 +14,27 @@
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:text="返回"
+            android:textColor="@color/colorTitleBlue"
             android:gravity="center"
-            android:textSize="17sp"
-            android:layout_marginLeft="7dp"/>
+            android:textSize="15sp"
+           />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="我的比对数据"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorTitleBlue"
             android:textStyle="bold"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
     </RelativeLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:orientation="vertical">
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="65dp"
+            android:layout_height="45dp"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
             android:src="@drawable/smile"/>
@@ -45,7 +46,7 @@
             android:padding="10dp"
             android:textSize="15sp"
             android:text="人脸数据"
-            android:drawableRight="@drawable/edit"
+            android:drawableRight="@drawable/edit_next"
             android:textColor="@color/colorBlack"
             android:background="@drawable/bg_et_edit"
             />
@@ -53,11 +54,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="40dp"
         android:orientation="vertical">
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="65dp"
+            android:layout_height="45dp"
             android:layout_gravity="center"
             android:scaleType="fitCenter"
             android:src="@drawable/voice"/>
@@ -69,7 +70,7 @@
             android:padding="10dp"
             android:textSize="15sp"
             android:text="声纹数据"
-            android:drawableRight="@drawable/edit"
+            android:drawableRight="@drawable/edit_next"
             android:textColor="@color/colorBlack"
             android:background="@drawable/bg_et_edit"
             />

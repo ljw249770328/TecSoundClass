@@ -7,7 +7,7 @@
     <FrameLayout
         android:id="@+id/fl_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/rg_main"
         android:layout_alignParentTop="true"
         android:layout_marginTop="0dp"
@@ -19,11 +19,11 @@
         android:layout_height="0.5dp"
         android:layout_above="@id/rg_main"
         android:layout_gravity="bottom"
-        android:background="#BBBBBB" />
+        android:background="#FFFFFF" />
     <RadioGroup
         android:id="@+id/rg_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:background="@color/colorBlue">
@@ -32,44 +32,44 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="1dp"
             android:background="@android:color/transparent"
             android:button="@null"
             android:checked="true"
-            android:drawablePadding="3dp"
-            android:drawableTop="@drawable/rb_my_course"
+            android:drawablePadding="-4dp"
+            android:drawableTop="@drawable/course"
             android:gravity="center"
             android:text="课程"
-            android:textColor="@color/main_menu_text_selector_tab"
-            android:textSize="15sp" />
+            android:textColor="@color/colorTitleBlue"
+            android:textSize="13sp" />
         <RadioButton
             android:id="@+id/rb_friends"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="0dp"
             android:background="@android:color/transparent"
             android:button="@null"
-            android:drawablePadding="3dp"
-            android:drawableTop="@drawable/rb_my_friends"
+            android:drawablePadding="-4dp"
+            android:drawableTop="@drawable/friend"
             android:gravity="center"
             android:text="好友"
-            android:textColor="@color/main_menu_text_selector_tab"
-            android:textSize="15sp" />
+            android:textColor="@color/colorTitleBlue"
+            android:textSize="13sp" />
         <RadioButton
             android:id="@+id/rb_myself"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="1dp"
             android:background="@android:color/transparent"
             android:button="@null"
-            android:drawablePadding="3dp"
-            android:drawableTop="@drawable/rb_my_myself"
+            android:drawablePadding="-4dp"
+            android:drawableTop="@drawable/my"
             android:gravity="center"
             android:text="我"
-            android:textColor="@color/main_menu_text_selector_tab"
-            android:textSize="15sp" />
+            android:textColor="@color/colorTitleBlue"
+            android:textSize="13sp" />
 
 
     </RadioGroup>

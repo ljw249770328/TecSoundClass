@@ -15,7 +15,7 @@
         android:textSize="30sp"
         android:textStyle="bold"
         android:layout_marginTop="10dp"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/colorTitleBlue"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,13 +23,13 @@
         android:gravity="center">
         <TextView
             android:id="@+id/tv_grade"
-            android:layout_width="200dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:background="@color/colorLightGreen"
+            android:background="@drawable/get_grade"
             android:padding="10dp"
             android:text=""
-            android:textColor="@color/colorBlack"
+            android:textColor="#996600"
             android:textStyle="bold"
             android:textSize="30sp"/>
     </LinearLayout>
@@ -37,11 +37,12 @@
 
     <GridView
         android:id="@+id/gv_keyboard"
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
         android:numColumns="3"
-        android:background="@color/colorDarkOrange">
+        android:gravity="center"
+        android:background="@drawable/get_grade">
 
     </GridView>
 

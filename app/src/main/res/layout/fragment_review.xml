@@ -10,12 +10,12 @@
         <RelativeLayout
             android:id="@+id/rl_1"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:orientation="horizontal"
             android:background="@color/colorBlue">
             <ImageView
                 android:id="@+id/im_back"
-                android:layout_width="35dp"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/small_back"
                 android:scaleType="fitCenter"
@@ -26,7 +26,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="课堂回顾"
-                android:textColor="@color/colorWhite"
+                android:textColor="@color/colorTitleBlue"
                 android:textStyle="bold"
                 android:textSize="18sp" />
         </RelativeLayout>
@@ -76,7 +76,7 @@
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:background="@color/colorSmallGray"
+                android:background="@color/colorBgGray"
                 android:orientation="horizontal"
                 android:text="近期更新"
                 android:textSize="15sp"
@@ -90,17 +90,21 @@
             android:layout_below="@id/tv_title"
             android:layout_above="@id/btn_class_begin">
          </android.support.v7.widget.RecyclerView>
-        <Button
-            android:id="@+id/btn_class_begin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:padding="10dp"
-            android:text="开始上课"
-            android:textSize="16sp"
-            android:background="@drawable/bg_btn_button"
-            android:textColor="@color/colorBlue"
-            android:layout_marginBottom="3dp"/>
+
+                <Button
+                    android:id="@+id/btn_class_begin"
+                    android:layout_width="320dp"
+                    android:gravity="center"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="480dp"
+                    android:padding="10dp"
+                    android:text="开始上课"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="16sp"
+                    android:background="@drawable/btn_complete"
+                    android:textColor="@color/colorTitleBlue"
+                   />
+
         </RelativeLayout>
     </RelativeLayout>
 

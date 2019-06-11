@@ -9,20 +9,21 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="来自XXXX课堂"
-        android:textSize="17sp"
+        android:layout_marginLeft="6dp"
+        android:text="课堂名称"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/colorGray"/>
+        android:textColor="@color/colorTitleBlue"/>
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:alpha="0.4"
         android:gravity="center"
-        android:text="老师提问啦,抢答得分哦"
-        android:textSize="25sp"
-        android:textStyle="bold"
+        android:text="教师问题内容"
+        android:textSize="15sp"
+        android:background="@drawable/bg_layout_classres_bg"
         android:layout_marginTop="10dp"
-        android:textColor="@color/colorWhite"/>
+        android:textColor="@color/colorGray"/>
     <TextView
         android:id="@+id/tv_message"
         android:layout_width="match_parent"
@@ -40,13 +41,14 @@
         android:id="@+id/tv_getchance"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:background="@drawable/bg_tv_sign_button"
-        android:layout_marginTop="55dp"
+        android:background="@drawable/small_ring"
+        android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="抢答"
         android:textStyle="bold"
-        android:textSize="25sp"
-        android:textColor="@color/colorDialogButtonText"/>
+        android:alpha="0.5"
+        android:textSize="15sp"
+        android:textColor="#868686"/>
 
 
 </LinearLayout>

@@ -9,8 +9,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="发布动态"
-        android:drawableLeft="@drawable/sendzone"
-        android:textSize="17sp"
+        android:drawableLeft="@drawable/publish"
+        android:textSize="15sp"
         android:textColor="@color/colorBlack"
         android:paddingTop="10dp"
         android:paddingBottom="8dp"/>
@@ -19,8 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="修改密码"
-        android:drawableLeft="@drawable/resetcode"
-        android:textSize="17sp"
+        android:drawableLeft="@drawable/change"
+        android:textSize="15sp"
         android:textColor="@color/colorBlack"
         android:paddingTop="10dp"
         android:paddingBottom="8dp"/>
@@ -29,8 +29,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="设置"
-        android:drawableLeft="@drawable/settings"
-        android:textSize="17sp"
+        android:drawableLeft="@drawable/set"
+        android:textSize="15sp"
         android:textColor="@color/colorBlack"
         android:paddingTop="10dp"
         android:paddingBottom="8dp"/>
@@ -39,8 +39,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="退出登录"
-        android:drawableLeft="@drawable/exit"
-        android:textSize="17sp"
+        android:drawableLeft="@drawable/out"
+        android:textSize="15sp"
         android:textColor="@color/colorBlack"
         android:paddingTop="10dp"
         android:paddingBottom="8dp"/>
