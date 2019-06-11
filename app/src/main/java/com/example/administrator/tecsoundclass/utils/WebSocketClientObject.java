@@ -31,7 +31,7 @@ public class WebSocketClientObject extends WebSocketClient {
     public static WebSocketClientObject client;
     public static Handler mHandler;
     public static Context mContext;
-    public static String Uri ="ws://10.100.76.209:8886";
+    public static String Uri ="ws://172.20.10.10:8886";
 //    public static String Uri ="ws://101.132.71.111:8886";
     private Gson gson=new Gson();
     public WebSocketClientObject(URI serverUri, Draft draft,Map<String, String> header, int timeout) {
@@ -116,8 +116,15 @@ public class WebSocketClientObject extends WebSocketClient {
                     mContext.sendBroadcast(intent);
                     break;
                 case "DIALOG_CANCLE":
-                    msg.what=7;
-                    mHandler.sendMessage(msg);
+                    intent =new Intent("com.example.administrator.tecsoundclass.DIALOG_CANCEL");
+                    mContext.sendBroadcast(intent);
+                    break;
+                case "DRAW_ED":
+                    Log.e("picked", params.get("question")+params.get("CourseId"));
+                    intent=new Intent("com.example.administrator.tecsoundclass.PICKED");
+                    intent.putExtra("question", params.get("question"));
+                    intent.putExtra("Cid",params.get("CourseId"));
+                    mContext.sendBroadcast(intent);
                     break;
             }
         } catch (UnsupportedEncodingException e) {
