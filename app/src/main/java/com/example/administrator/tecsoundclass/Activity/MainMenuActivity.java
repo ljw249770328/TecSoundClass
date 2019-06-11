@@ -19,22 +19,27 @@ import com.example.administrator.tecsoundclass.Fragments.MyselfFragment;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
+import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
 
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class MainMenuActivity extends BaseActivity {
 
     private RadioGroup mRgTab;
     private List<Fragment> mFragmentList = new ArrayList<>();
     private  String StudentID="";
     private User mUser;
+    private WebSocketClient client;// 连接客户端
     public User getmUser() {
         return mUser;
     }
@@ -100,6 +105,7 @@ public class MainMenuActivity extends AppCompatActivity {
                 switch(checkedId){
                     case R.id.rb_course:
                         changeFragment(CourseFragment.class.getName());
+//                        WebSocketClientObject.client.send("点击发送");
                         break;
                     case R.id.rb_friends:
                         changeFragment(FriendFragment.class.getName());
@@ -146,4 +152,5 @@ public class MainMenuActivity extends AppCompatActivity {
     public interface UploadCallBack{
         void OnUploaded();
     }
+
 }

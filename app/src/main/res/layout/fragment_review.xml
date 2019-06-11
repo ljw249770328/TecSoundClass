@@ -93,13 +93,13 @@
 
                 <Button
                     android:id="@+id/btn_class_begin"
-                    android:layout_width="320dp"
+                    android:layout_width="match_parent"
                     android:gravity="center"
                     android:layout_height="40dp"
-                    android:layout_marginTop="480dp"
+                    android:layout_alignParentBottom="true"
                     android:padding="10dp"
                     android:text="开始上课"
-                    android:layout_marginLeft="20dp"
+                    android:layout_centerHorizontal="true"
                     android:textSize="16sp"
                     android:background="@drawable/btn_complete"
                     android:textColor="@color/colorTitleBlue"

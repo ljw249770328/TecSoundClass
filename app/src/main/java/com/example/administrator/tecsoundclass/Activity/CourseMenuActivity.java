@@ -23,7 +23,7 @@ import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseMenuActivity extends AppCompatActivity {
+public class CourseMenuActivity extends BaseActivity {
     private RadioGroup mRgTab;
     private List<Fragment> mFragmentList=new ArrayList<>();
     private User mUser;

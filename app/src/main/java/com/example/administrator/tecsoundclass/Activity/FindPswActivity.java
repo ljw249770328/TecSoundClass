@@ -31,7 +31,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FindPswActivity extends AppCompatActivity {
+public class FindPswActivity extends BaseActivity {
     private ImageView mIvbackicon;
     private Button mBtnAlter;
     private EditText mEtNewPsw;

@@ -104,6 +104,7 @@ public class CourseFragment extends Fragment {
                 mTvJoin = view.findViewById(R.id.tv_add_course);
                 if (activity.getmUser().getUser_identity().equals("老师")) {
                     mTvCreate.setVisibility(View.VISIBLE);
+                    mTvJoin.setVisibility(View.GONE);
                 }
                 OnClick onclick = new OnClick();
                 mTvCreate.setOnClickListener(onclick);
@@ -181,7 +182,6 @@ public class CourseFragment extends Fragment {
                     break;
                 case R.id.tv_add_course:
                     intent = new Intent(getActivity(), JoinActivity.class);
-                    ;
                     Bundle bundle = new Bundle();
                     bundle.putString("Stuid", activity.getmUser().getUser_id());
                     intent.putExtras(bundle);

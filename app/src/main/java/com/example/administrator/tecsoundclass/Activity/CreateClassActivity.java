@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class CreateClassActivity extends AppCompatActivity {
+public class CreateClassActivity extends BaseActivity {
     private TextView mTvCancle,mTvNext,mTvClassTime,mTvClassOver;
     private EditText mEtClassNum,mEtClassName,mEtClassInfo;
     private ImageView mIvLoadPic;

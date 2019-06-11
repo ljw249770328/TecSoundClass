@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.RegeditVoiceActivity;
 
-public class StandDataActivity extends AppCompatActivity {
+public class StandDataActivity extends BaseActivity {
     private TextView mTvback,mTvVoiceData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

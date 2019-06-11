@@ -4,12 +4,15 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.MaskFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,17 +29,24 @@ import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.Adapter.KeyboardAdapter;
 
 import com.example.administrator.tecsoundclass.Adapter.MyInteractAdapter;
+import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.Interaction;
 
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.InteractHandler;
+import com.example.administrator.tecsoundclass.iFlytec.RecQuestionHandler;
 import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
+import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
+import com.google.gson.Gson;
 
+import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,9 +56,11 @@ import java.util.TimerTask;
 import java.util.UUID;
 
 public class InteractFragment extends Fragment {
+    public static final int QUESTION_ED=1;
+    public static final int COME_QUESTION=6;
     private ImageView mIvBack;
     private RecyclerView mRvInteract;
-    private TextView mTvTime, mTvgrade;
+    private TextView mTvTime, mTvgrade,mTvQuestion;
     private Button mBtncatch;
     private AlertDialog dialog;
     private Timer timer = null;
@@ -63,7 +75,10 @@ public class InteractFragment extends Fragment {
     private List<Interaction> mInteractionList = new ArrayList<>();
     private List<Interaction> list;
     private PopupWindow mpop;
+    private Button mBtnInteract;
     CourseMenuActivity mActivity;
+    private RecQuestionHandler recQuestionHandler;
+    private Handler mHandler=null;
 
     public InteractFragment() {
     }
@@ -77,11 +92,33 @@ public class InteractFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAuthId = getActivity().getIntent().getExtras().getString("StudentId");
+        mHandler=new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                Map<String,String> param=new HashMap<>();
+                Gson gson =new Gson();
+                switch (msg.what){
+                    case QUESTION_ED:
+                        param.put("Question", (String) msg.obj);
+                        param.put("Course",mActivity.getmCourse().getCourse_id());
+                        param.put("condition","ActQuestion");
+                        try {
+                            WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
+                                    .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
         InitList();
     }
 
@@ -98,10 +135,14 @@ public class InteractFragment extends Fragment {
     private void init(View view){
         mIvBack = view.findViewById(R.id.im_back);
         mRvInteract = view.findViewById(R.id.recycler_view_interact);
+        mBtnInteract= view.findViewById(R.id.btn_race_resp);
+        if (mActivity.getmUser().getUser_identity().equals("学生")){
+            mBtnInteract.setVisibility(View.GONE);
+        }
     }
     private void SetListener(View view){
         mIvBack.setOnClickListener(onclick);
-        view.findViewById(R.id.btn_race_resp).setOnClickListener(onclick);
+        mBtnInteract.setOnClickListener(onclick);
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -175,6 +216,7 @@ public class InteractFragment extends Fragment {
             }
         });
     }
+
     private class Onclick implements View.OnClickListener {
 
         @Override
@@ -190,175 +232,144 @@ public class InteractFragment extends Fragment {
                 case R.id.tv_share:
                     break;
                 case R.id.btn_race_resp:
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_raceresp_dialog, null);
-                    i = 10;
-                    mBtncatch = view.findViewById(R.id.tv_getchance);
-                    mTvTime = view.findViewById(R.id.tv_message);
-                    mBtncatch.setOnClickListener(onclick);
-                    mTvTime.setText(i + "");//这里不加""就会崩溃暂未找到原因怀疑是可能怕变量i不存在导致赋了空值
-                    builder.setView(view);
-                    dialog = builder.show();
-                    StartTime();
+                    recQuestionHandler=new RecQuestionHandler(getActivity(),mHandler);
+                    recQuestionHandler.StartHandle("Question_"+mActivity.getmCourse().getCourse_id()+"_"+UUID.randomUUID().toString());
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                    View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_raceresp_dialog, null);
+//                    i = 10;
+//                    mBtncatch = view.findViewById(R.id.tv_getchance);
+//                    mTvTime = view.findViewById(R.id.tv_message);
+//                    mBtncatch.setOnClickListener(onclick);
+//                    mTvTime.setText(i + "");//这里不加""就会崩溃暂未找到原因怀疑是可能变量i不存在时导致赋了空值
+//                    builder.setView(view);
+//                    dialog = builder.show();
+//                    StartTime();
                     break;
                 case R.id.tv_getchance:
-                    StopTime();
-                    mTvTime.setText("抢到机会,点击开始回答");
-                    mBtncatch.setText("开始");
-                    mBtncatch.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            interactHandler = new InteractHandler(getActivity(), mTvTime, mBtncatch);
-                            interactHandler.StartHandle(mActivity.getmUser().getUser_id()+ "_" +mActivity.getmCourse().getCourse_id()+"_"+UUID.randomUUID().toString());
-                        }
-                    });
-                    dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                        @Override
-                        public void onDismiss(DialogInterface dialog) {
-                            if (mBtncatch.getText().equals("答题完成")) {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                                View view1 = LayoutInflater.from(getActivity()).inflate(R.layout.layout_grade_dialog, null);
-                                mTvgrade = view1.findViewById(R.id.tv_grade);
-                                GridView mGvKeyboard = view1.findViewById(R.id.gv_keyboard);
-                                mGvKeyboard.setAdapter(new KeyboardAdapter(getActivity()));
-                                mGvKeyboard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                    @Override
-                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                        switch (position) {
-                                            case 0:
-                                                grades += "1";
-                                                mTvgrade.setText(grades);
-                                                break;
-                                            case 1:
-                                                grades += "2";
-                                                mTvgrade.setText(grades);
-                                                break;
-                                            case 2:
-                                                grades += "3";
-                                                mTvgrade.setText(grades);
-                                                break;
-                                            case 3:
-                                                grades += "4";
-                                                mTvgrade.setText(grades);
-                                                break;
-                                            case 4:
-                                                grades += "5";
-                                                mTvgrade.setText(grades);
-                                                break;
-                                            case 5:
-                                                grades += "6";
-                                                mTvgrade.setText(grades);
-                                                break;
-                                            case 6:
-                                                grades += "7";
-                                                mTvgrade.setText(grades);
-                                                break;
-                                            case 7:
-                                                grades += "8";
-                                                mTvgrade.setText(grades);
-                                                break;
-                                            case 8:
-                                                grades += "9";
-                                                mTvgrade.setText(grades);
-                                                break;
-                                            case 9:
-                                                grades = "";
-                                                mTvgrade.setText(grades);
-                                                break;
-                                            case 10:
-                                                grades += "0";
-                                                mTvgrade.setText(grades);
-                                                break;
-                                            case 11:
-                                                if (mTvgrade.getText().toString().isEmpty()) {
-                                                    Toast.makeText(getActivity(), "您还未评分", Toast.LENGTH_SHORT).show();
-                                                    break;
-                                                } else {
-                                                    GradeDialog.dismiss();
-                                                    break;
-                                                }
-                                            default:
-                                                break;
-                                        }
-                                        if (!mTvgrade.getText().toString().isEmpty()) {
-                                            if (Integer.parseInt((String) mTvgrade.getText()) > 100) {
-                                                mTvgrade.setText("100");
-                                                grades = "100";
-                                            }
-                                        }
-                                    }
-                                });
-                                GradeDialog = builder.setView(view1).create();
-                                GradeDialog.setCancelable(false);
-                                //弹窗消失,教师评分完成存入数据库并显示在recycview中
-                                GradeDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                                    @Override
-                                    public void onDismiss(DialogInterface dialog) {
-                                        //上传音频
-                                        String FileURL =FileUploadUtil.UploadFile(mActivity.getApplicationContext(),"InteractVoice",interactHandler.getMfilepath(),interactHandler.getMfilename(),"Interact",null,null,null);
-                                        //写入数据
-                                        String url = "http://101.132.71.111:8080/TecSoundWebApp/AddInteractServlet";
-                                        Map<String,String> params =new HashMap<>();
-                                        params.put("propose_course_id",mActivity.getmCourse().getCourse_id());
-                                        params.put("answer_user_id",mActivity.getmUser().getUser_id());
-                                        params.put("answer_content",mTvTime.getText().toString());
-                                        params.put("answer_content_src",FileURL);
-                                        params.put("answer_grade",mTvgrade.getText().toString());
-                                        VolleyCallback.getJSONObject(mActivity.getApplicationContext(), "insertInteract", url, params, new VolleyCallback.VolleyJsonCallback() {
-                                            @Override
-                                            public void onFinish(JSONObject r) {
-                                                String result = null;
-                                                try {
-                                                    result = r.getString("Result");
-                                                    Toast.makeText(getActivity(),result,Toast.LENGTH_SHORT).show();
-                                                    InitList();
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                }
-
-                                            }
-                                        });
-                                    }
-                                });
-                                GradeDialog.show();
-                            }
-                        }
-                    });
-                    break;
+//                    StopTime();
+//                    mTvTime.setText("抢到机会,点击开始回答");
+//                    mBtncatch.setText("开始");
+//                    mBtncatch.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            interactHandler = new InteractHandler(getActivity(), mTvTime, mBtncatch);
+//                            interactHandler.StartHandle(mActivity.getmUser().getUser_id()+ "_" +mActivity.getmCourse().getCourse_id()+"_"+UUID.randomUUID().toString());
+//                        }
+//                    });
+//                    dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//                        @Override
+//                        public void onDismiss(DialogInterface dialog) {
+//                            if (mBtncatch.getText().equals("答题完成")) {
+//                                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//                                View view1 = LayoutInflater.from(getActivity()).inflate(R.layout.layout_grade_dialog, null);
+//                                mTvgrade = view1.findViewById(R.id.tv_grade);
+//                                GridView mGvKeyboard = view1.findViewById(R.id.gv_keyboard);
+//                                mGvKeyboard.setAdapter(new KeyboardAdapter(getActivity()));
+//                                mGvKeyboard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                                    @Override
+//                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                                        switch (position) {
+//                                            case 0:
+//                                                grades += "1";
+//                                                mTvgrade.setText(grades);
+//                                                break;
+//                                            case 1:
+//                                                grades += "2";
+//                                                mTvgrade.setText(grades);
+//                                                break;
+//                                            case 2:
+//                                                grades += "3";
+//                                                mTvgrade.setText(grades);
+//                                                break;
+//                                            case 3:
+//                                                grades += "4";
+//                                                mTvgrade.setText(grades);
+//                                                break;
+//                                            case 4:
+//                                                grades += "5";
+//                                                mTvgrade.setText(grades);
+//                                                break;
+//                                            case 5:
+//                                                grades += "6";
+//                                                mTvgrade.setText(grades);
+//                                                break;
+//                                            case 6:
+//                                                grades += "7";
+//                                                mTvgrade.setText(grades);
+//                                                break;
+//                                            case 7:
+//                                                grades += "8";
+//                                                mTvgrade.setText(grades);
+//                                                break;
+//                                            case 8:
+//                                                grades += "9";
+//                                                mTvgrade.setText(grades);
+//                                                break;
+//                                            case 9:
+//                                                grades = "";
+//                                                mTvgrade.setText(grades);
+//                                                break;
+//                                            case 10:
+//                                                grades += "0";
+//                                                mTvgrade.setText(grades);
+//                                                break;
+//                                            case 11:
+//                                                if (mTvgrade.getText().toString().isEmpty()) {
+//                                                    Toast.makeText(getActivity(), "您还未评分", Toast.LENGTH_SHORT).show();
+//                                                    break;
+//                                                } else {
+//                                                    GradeDialog.dismiss();
+//                                                    break;
+//                                                }
+//                                            default:
+//                                                break;
+//                                        }
+//                                        if (!mTvgrade.getText().toString().isEmpty()) {
+//                                            if (Integer.parseInt((String) mTvgrade.getText()) > 100) {
+//                                                mTvgrade.setText("100");
+//                                                grades = "100";
+//                                            }
+//                                        }
+//                                    }
+//                                });
+//                                GradeDialog = builder.setView(view1).create();
+//                                GradeDialog.setCancelable(false);
+//                                //弹窗消失,教师评分完成存入数据库并显示在recycview中
+//                                GradeDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//                                    @Override
+//                                    public void onDismiss(DialogInterface dialog) {
+//                                        //上传音频
+//                                        String FileURL =FileUploadUtil.UploadFile(mActivity.getApplicationContext(),"InteractVoice",interactHandler.getMfilepath(),interactHandler.getMfilename(),"Interact",null,null,null);
+//                                        //写入数据
+//                                        String url = "http://101.132.71.111:8080/TecSoundWebApp/AddInteractServlet";
+//                                        Map<String,String> params =new HashMap<>();
+//                                        params.put("propose_course_id",mActivity.getmCourse().getCourse_id());
+//                                        params.put("answer_user_id",mActivity.getmUser().getUser_id());
+//                                        params.put("answer_content",mTvTime.getText().toString());
+//                                        params.put("answer_content_src",FileURL);
+//                                        params.put("answer_grade",mTvgrade.getText().toString());
+//                                        VolleyCallback.getJSONObject(mActivity.getApplicationContext(), "insertInteract", url, params, new VolleyCallback.VolleyJsonCallback() {
+//                                            @Override
+//                                            public void onFinish(JSONObject r) {
+//                                                String result = null;
+//                                                try {
+//                                                    result = r.getString("Result");
+//                                                    Toast.makeText(getActivity(),result,Toast.LENGTH_SHORT).show();
+//                                                    InitList();
+//                                                } catch (JSONException e) {
+//                                                    e.printStackTrace();
+//                                                }
+//
+//                                            }
+//                                        });
+//                                    }
+//                                });
+//                                GradeDialog.show();
+//                            }
+//                        }
+//                    });
+//                    break;
             }
         }
-    }
-
-    private Handler mHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            mTvTime.setText(msg.arg1 + "");
-            if (i == 0) {
-                dialog.cancel();
-            } else {
-                StartTime();
-            }
-
-        }
-
-        ;
-    };
-    public void StartTime() {
-        timer = new Timer();
-        task = new TimerTask() {
-            @Override
-            public void run() {
-                if (i > 0) {
-                    i--;
-                    Message message = mHandler.obtainMessage();//获取实例
-                    message.arg1 = i;
-                    mHandler.sendMessage(message);
-                }
-            }
-        };
-        timer.schedule(task, 1000);
-    }
-
-    public void StopTime() {
-        timer.cancel();
     }
 }

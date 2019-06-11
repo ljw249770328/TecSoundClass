@@ -3,6 +3,7 @@ package com.example.administrator.tecsoundclass.iFlytec;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.media.MediaRecorder;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.administrator.tecsoundclass.Activity.BaseActivity;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.iflytek.cloud.ErrorCode;
@@ -28,7 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class RegeditVoiceActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegeditVoiceActivity extends BaseActivity implements View.OnClickListener {
     private static final int PWD_TYPE_NUM = 3;
     private int mPwdType = PWD_TYPE_NUM;
     private ImageView mIvBack;
@@ -154,7 +156,7 @@ public class RegeditVoiceActivity extends AppCompatActivity implements View.OnCl
         mSpeakerVerifier.setParameter(SpeechConstant.ASR_AUDIO_PATH,
                 Environment.getExternalStorageDirectory().getAbsolutePath() + "/msc/test.wav");
         // 消除噪音,但是需要的音量很大
-        //mSpeakerVerifier.setParameter(SpeechConstant.AUDIO_SOURCE, "" + MediaRecorder.AudioSource.VOICE_RECOGNITION);
+//        mSpeakerVerifier.setParameter(SpeechConstant.AUDIO_SOURCE, "" + MediaRecorder.AudioSource.VOICE_RECOGNITION);
         // 数字密码注册需要传入密码
         if (TextUtils.isEmpty(mNumPwd)) {
             showTip("请获取密码后进行操作");

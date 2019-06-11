@@ -129,22 +129,24 @@
                 android:divider="@color/colorDarkGray"
                 android:listSelector="@drawable/course_list_item">
             </android.support.v7.widget.RecyclerView>
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:gravity="center">
+
                 <TextView
-                    android:layout_marginTop="200dp"
                     android:id="@+id/tv_start_sign"
-                    android:layout_width="320dp"
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
+                    android:layout_margin="10dp"
                     android:layout_alignParentBottom="true"
+                    android:background="@drawable/btn_complete"
                     android:gravity="center"
                     android:text="开始签到"
-                    android:background="@drawable/btn_complete"
-                    android:textSize="18sp"
                     android:textColor="@color/colorTitleBlue"
-                    />
+                    android:textSize="18sp" />
             </LinearLayout>
 
         </RelativeLayout>

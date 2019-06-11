@@ -31,7 +31,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditMyInfoActivity extends AppCompatActivity {
+public class EditMyInfoActivity extends BaseActivity {
     private ImageView mBack,mIvEditedHead;
     private TextView mTvMyname,mTvMyId,mTvMyBirthD,mTvMyIdentity,mTvSave,mTvChangeHead;
     private RadioGroup mSexGroup;

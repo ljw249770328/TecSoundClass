@@ -82,10 +82,9 @@ public class MyFriendListAdapter extends Adapter<MyFriendListAdapter.Viewholder>
     @Override
     public void onBindViewHolder(@NonNull final Viewholder viewholder, int i) {
         user_id=mFollowList.get(i).getFan_user_id();
-        TransferMore.GetUserById(mContext,user_id,new Handler(){
+        TransferMore.GetUserById(mContext,user_id,new Handler(new Handler.Callback() {
             @Override
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
+            public boolean handleMessage(Message msg) {
                 switch (msg.what){
                     case 1:
                         user = (User) msg.obj;
@@ -99,8 +98,9 @@ public class MyFriendListAdapter extends Adapter<MyFriendListAdapter.Viewholder>
                             e.printStackTrace();
                         }
                 }
+                return false;
             }
-        });
+        }));
         viewholder.mFriendStatus.setText("正在上'java基础'");
         viewholder.mTime.setText("2:22");
     }

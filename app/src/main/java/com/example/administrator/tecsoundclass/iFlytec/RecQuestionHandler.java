@@ -1,16 +1,15 @@
 package com.example.administrator.tecsoundclass.iFlytec;
 
 import android.content.Context;
+import android.graphics.MaskFilter;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Message;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
-import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
-import com.google.gson.Gson;
 import com.iflytek.cloud.RecognizerResult;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechError;
@@ -21,18 +20,13 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
-
-public class InteractHandler   {
+public class RecQuestionHandler {
     private RecognizerDialog mIatDialog;
     private TextView mTvSpeechResult;
     private String mfilepath,mfilename;
     private RecognizerDialogListener mRListener;
     private String result="";
-    Gson gson=new Gson();
+
 
     public String getMfilepath() {
         return mfilepath;
@@ -46,46 +40,24 @@ public class InteractHandler   {
         return mfilename;
     }
 
-    public void setMfilename(String mfilename) {
-        this.mfilename = mfilename;
-    }
-
-    public InteractHandler(final Context context, final TextView tv, final String question, final String Class, final Button button, final Handler handler){
-        mTvSpeechResult=tv;
-        button.setText("录音中");
+    public RecQuestionHandler(final Context context, final Handler mhandler){
         mRListener = new RecognizerDialogListener() {
             @Override
             public void onResult(RecognizerResult results, boolean isLast) {
                 String text = parseIatResult(results.getResultString());
-                mTvSpeechResult.setTextSize(19);
-                mTvSpeechResult.setMovementMethod(new ScrollingMovementMethod());
                 Log.d("text",text);
                 result +=text;
-                mTvSpeechResult.setText(result);
                 if (isLast) {
+                    Message msg =new Message();
+                    msg.what=1;
+                    msg.obj=result;
+                    mhandler.sendMessage(msg);
                     result = "";
-                    button.setText("答题完成");
-                    button.setClickable(false);
-                    //上传音频
-                    String FileURL = FileUploadUtil.UploadFile(context,"InteractVoice",mfilepath,mfilename,"Interact",null,null,null);
-                    //通信
-                    Map<String,String> param =new HashMap<>();
-                    param.put("condition","Answered");
-                    param.put("question",question);
-                    param.put("Answer",mTvSpeechResult.getText().toString());
-                    param.put("VoiceURL",FileURL);
-                    param.put("Cid",Class);
-                    try {
-                        WebSocketClientObject.getClient(context,handler,null)
-                                .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
                 }
             }
             @Override
             public void onError(SpeechError speechError) {
-                button.setText("重试");
+
             }
         };
         mIatDialog = new RecognizerDialog(context, null);
@@ -97,7 +69,6 @@ public class InteractHandler   {
         setIatParam(mfilepath);
         mIatDialog.show();
     }
-
     private void setIatParam(String filepath) {
         // 清空参数
         mIatDialog.setParameter(SpeechConstant.PARAMS, null);
@@ -118,8 +89,9 @@ public class InteractHandler   {
         // 设置音频保存路径，保存音频格式支持pcm、wav，设置路径为sd卡请注意WRITE_EXTERNAL_STORAGE权限
         // 注：AUDIO_FORMAT参数语记需要更新版本才能生效
         mIatDialog.setParameter(SpeechConstant.AUDIO_FORMAT,"wav");
-        mIatDialog.setParameter(SpeechConstant.ASR_AUDIO_PATH,filepath);
+        mIatDialog.setParameter(SpeechConstant.ASR_AUDIO_PATH, filepath);
     }
+
     public static String parseIatResult(String json) {
         StringBuffer ret = new StringBuffer();
         try {

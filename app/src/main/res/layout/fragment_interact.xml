@@ -26,6 +26,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="互动得分"
+                android:layout_centerHorizontal="true"
                 android:textColor="@color/colorTitleBlue"
                 android:textStyle="bold"
                 android:textSize="18sp" />
@@ -42,17 +43,16 @@
 
         <Button
             android:id="@+id/btn_race_resp"
-            android:layout_width="320dp"
+            android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_margin="10dp"
             android:layout_alignParentBottom="true"
             android:padding="10dp"
-            android:text="抢答测试"
-            android:gravity="center"
-            android:layout_marginLeft="20dp"
+            android:layout_centerHorizontal="true"
+            android:text="提问"
             android:textSize="16sp"
             android:background="@drawable/btn_complete"
-            android:textColor="@color/colorTitleBlue"
-            android:layout_marginBottom="100dp"/>
+            android:textColor="@color/colorTitleBlue" />
 
     </RelativeLayout>
 </FrameLayout>

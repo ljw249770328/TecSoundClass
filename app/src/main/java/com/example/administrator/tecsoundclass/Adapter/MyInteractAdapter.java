@@ -74,7 +74,7 @@ public class MyInteractAdapter extends RecyclerView.Adapter<MyInteractAdapter.In
         String mDate =date[1]+"."+date[2]+" "+time[0]+":"+time[1];
         viewHolder.mScore.setText(interaction.getAnswer_grade()+"");
         viewHolder.mDate.setText(mDate);
-        viewHolder.mTvQuestion.setText("面向对象的特征有哪些?");
+        viewHolder.mTvQuestion.setVisibility(View.GONE);
         viewHolder.mTvAnswer.setText(interaction.getAnswer_content());
         viewHolder.mVoice.setOnClickListener(new View.OnClickListener() {
             @Override

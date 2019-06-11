@@ -36,7 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RegeditActivity extends AppCompatActivity {
+public class RegeditActivity extends BaseActivity {
     private ImageView mIvbackicon;
     private Button mBtnRegedit;
     private RadioGroup radioGroup;

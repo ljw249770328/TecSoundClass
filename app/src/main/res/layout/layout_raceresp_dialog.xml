@@ -7,6 +7,7 @@
     android:paddingBottom="70dp"
     android:background="@color/colorBlue">
     <TextView
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="6dp"
@@ -15,6 +16,7 @@
         android:textStyle="bold"
         android:textColor="@color/colorTitleBlue"/>
     <TextView
+        android:id="@+id/tv_question"
         android:layout_width="300dp"
         android:layout_height="200dp"
         android:alpha="0.4"
