@@ -2,6 +2,7 @@ package com.example.administrator.tecsoundclass.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.LongDef;
@@ -15,6 +16,7 @@ import org.java_websocket.drafts.Draft;
 import org.java_websocket.drafts.Draft_17;
 import org.java_websocket.handshake.ServerHandshake;
 
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.URI;
@@ -29,7 +31,7 @@ public class WebSocketClientObject extends WebSocketClient {
     public static WebSocketClientObject client;
     public static Handler mHandler;
     public static Context mContext;
-    public static String Uri ="ws://192.168.0.103:8886";
+    public static String Uri ="ws://10.100.76.209:8886";
 //    public static String Uri ="ws://101.132.71.111:8886";
     private Gson gson=new Gson();
     public WebSocketClientObject(URI serverUri, Draft draft,Map<String, String> header, int timeout) {
@@ -64,6 +66,7 @@ public class WebSocketClientObject extends WebSocketClient {
     public void onMessage(String message) {
         Log.e("mSocket","获取到服务器【"+getURI()+"】的消息"+message);
         Map<String,String> params =new HashMap<>();
+        Intent intent;
         try {
             params=gson.fromJson(URLDecoder.decode(message,"UTF-8"), params.getClass());
             Message msg =new Message();
@@ -96,12 +99,25 @@ public class WebSocketClientObject extends WebSocketClient {
 //                    msg.obj=params.get("question");
 //                    mHandler.sendMessage(msg);
                     Log.e("fragment", params.get("question")+params.get("CourseId"));
-                    Intent intent=new Intent("com.example.administrator.tecsoundclass.COME_MESSAGE");
+                    intent=new Intent("com.example.administrator.tecsoundclass.COME_MESSAGE");
                     intent.putExtra("question", params.get("question"));
                     intent.putExtra("Cid",params.get("CourseId"));
                     mContext.sendBroadcast(intent);
                     break;
-                case "Grade_dialog":
+                case "GRADE_DIALOG":
+                    intent=new Intent("com.example.administrator.tecsoundclass.ON_GRADE");
+                    intent.putExtra("params", (Serializable) params);
+                    Log.e("beforebroadcast",params.toString());
+                    mContext.sendBroadcast(intent);
+                    break;
+                case "GRADE_ED":
+                    intent=new Intent("com.example.administrator.tecsoundclass.GRADE_ED");
+                    intent.putExtra("grade",params.get("Grade"));
+                    mContext.sendBroadcast(intent);
+                    break;
+                case "DIALOG_CANCLE":
+                    msg.what=7;
+                    mHandler.sendMessage(msg);
                     break;
             }
         } catch (UnsupportedEncodingException e) {

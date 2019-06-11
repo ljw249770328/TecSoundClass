@@ -155,7 +155,7 @@ public class RegeditVoiceActivity extends BaseActivity implements View.OnClickLi
         mSpeakerVerifier.setParameter(SpeechConstant.ASR_AUDIO_PATH,
                 Environment.getExternalStorageDirectory().getAbsolutePath() + "/msc/test.wav");
         // 消除噪音,但是需要的音量很大
-        mSpeakerVerifier.setParameter(SpeechConstant.AUDIO_SOURCE, "" + MediaRecorder.AudioSource.VOICE_RECOGNITION);
+//        mSpeakerVerifier.setParameter(SpeechConstant.AUDIO_SOURCE, "" + MediaRecorder.AudioSource.VOICE_RECOGNITION);
         // 数字密码注册需要传入密码
         if (TextUtils.isEmpty(mNumPwd)) {
             showTip("请获取密码后进行操作");

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
 import com.google.gson.Gson;
 import com.iflytek.cloud.RecognizerResult;
@@ -65,8 +66,14 @@ public class InteractHandler   {
                     result = "";
                     button.setText("答题完成");
                     button.setClickable(false);
+                    //上传音频
+                    String FileURL = FileUploadUtil.UploadFile(context,"InteractVoice",mfilepath,mfilename,"Interact",null,null,null);
+                    //通信
                     Map<String,String> param =new HashMap<>();
                     param.put("condition","Answered");
+                    param.put("question",question);
+                    param.put("Answer",mTvSpeechResult.getText().toString());
+                    param.put("VoiceURL",FileURL);
                     param.put("Cid",Class);
                     try {
                         WebSocketClientObject.getClient(context,handler,null)
