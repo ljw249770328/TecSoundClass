@@ -2,9 +2,11 @@ package com.example.administrator.tecsoundclass.Fragments;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.MaskFilter;
 import android.os.Bundle;
 import android.os.Handler;
@@ -60,6 +62,7 @@ public class InteractFragment extends Fragment {
     public static final int COME_QUESTION=6;
     private ImageView mIvBack;
     private RecyclerView mRvInteract;
+    private Receiver mReceiver;
     private TextView mTvTime, mTvgrade,mTvQuestion;
     private Button mBtncatch;
     private AlertDialog dialog;
@@ -80,6 +83,17 @@ public class InteractFragment extends Fragment {
     private RecQuestionHandler recQuestionHandler;
     private Handler mHandler=null;
 
+    class Receiver extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            switch (intent.getAction()){
+                case "com.example.administrator.tecsoundclass.INTERACT_REFLESH":
+                    InitList();
+                    break;
+            }
+        }
+    }
+
     public InteractFragment() {
     }
 
@@ -91,6 +105,7 @@ public class InteractFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mAuthId = getActivity().getIntent().getExtras().getString("StudentId");
         mHandler=new Handler(new Handler.Callback() {
             @Override
@@ -118,7 +133,10 @@ public class InteractFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("com.example.administrator.tecsoundclass.INTERACT_REFLESH");
+        mReceiver=new Receiver();
+        mActivity.registerReceiver(mReceiver,intentFilter);
         InitList();
     }
 
@@ -168,6 +186,7 @@ public class InteractFragment extends Fragment {
                         Interaction interaction =new Interaction();
                         interaction.setProblem_id(interact.getString("problem_id"));
                         interaction.setPropose_course_id(interact.getString("propose_course_id"));
+                        interaction.setProblem_content(interact.getString("problem_content"));
                         interaction.setAnswer_user_id(interact.getString("answer_user_id"));
                         interaction.setAnswer_content(interact.getString("answer_content"));
                         interaction.setAnswer_content_src(interact.getString("answer_content_src"));

@@ -182,6 +182,8 @@ public class BaseActivity extends AppCompatActivity {
 
                         public void StopTime() {
                             timer.cancel();
+                            task.cancel();
+//
                         }
                     }
                     //学生端开始倒计时
@@ -304,6 +306,7 @@ public class BaseActivity extends AppCompatActivity {
                                         socketparams.put("condition","Graded");
                                         socketparams.put("Grade",mTvgrade.getText().toString());;
                                         socketparams.put("Sid",param.get("Sid"));
+                                        socketparams.put("Cid",param.get("Cid"));
                                         try {
                                             WebSocketClientObject.getClient(context,mHandler,null)
                                                     .send(URLEncoder.encode(gson.toJson(socketparams),"UTF-8"));
@@ -333,6 +336,8 @@ public class BaseActivity extends AppCompatActivity {
                 case "com.example.administrator.tecsoundclass.DIALOG_CANCEL":
                     if(dialog!=null){
                         dialog.dismiss();
+                        timer.cancel();
+                        task.cancel();
                     }
                     break;
                 case "com.example.administrator.tecsoundclass.PICKED":

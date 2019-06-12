@@ -31,8 +31,8 @@ public class WebSocketClientObject extends WebSocketClient {
     public static WebSocketClientObject client;
     public static Handler mHandler;
     public static Context mContext;
-    public static String Uri ="ws://172.20.10.10:8886";
-//    public static String Uri ="ws://101.132.71.111:8886";
+//    public static String Uri ="ws://172.20.10.10:8886";
+    public static String Uri ="ws://101.132.71.111:8886";
     private Gson gson=new Gson();
     public WebSocketClientObject(URI serverUri, Draft draft,Map<String, String> header, int timeout) {
         super(serverUri, draft,header,timeout);
@@ -95,9 +95,6 @@ public class WebSocketClientObject extends WebSocketClient {
                     mHandler.sendMessage(msg);
                     break;
                 case "COME_QUESTION":
-//                    msg.what=6;
-//                    msg.obj=params.get("question");
-//                    mHandler.sendMessage(msg);
                     Log.e("fragment", params.get("question")+params.get("CourseId"));
                     intent=new Intent("com.example.administrator.tecsoundclass.COME_MESSAGE");
                     intent.putExtra("question", params.get("question"));
@@ -124,6 +121,10 @@ public class WebSocketClientObject extends WebSocketClient {
                     intent=new Intent("com.example.administrator.tecsoundclass.PICKED");
                     intent.putExtra("question", params.get("question"));
                     intent.putExtra("Cid",params.get("CourseId"));
+                    mContext.sendBroadcast(intent);
+                    break;
+                case "INTERACT_REFLESH":
+                    intent=new Intent("com.example.administrator.tecsoundclass.INTERACT_REFLESH");
                     mContext.sendBroadcast(intent);
                     break;
             }
