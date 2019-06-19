@@ -122,6 +122,7 @@ public class WebSocketClientObject extends WebSocketClient {
                     intent.putExtra("question", params.get("question"));
                     intent.putExtra("Cid",params.get("CourseId"));
                     mContext.sendBroadcast(intent);
+
                     break;
                 case "INTERACT_REFLESH":
                     intent=new Intent("com.example.administrator.tecsoundclass.INTERACT_REFLESH");
