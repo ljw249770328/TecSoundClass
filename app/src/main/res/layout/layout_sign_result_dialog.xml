@@ -11,6 +11,7 @@
         android:padding="15dp"
         android:text="签到人员统计"
         android:gravity="center"
+        android:textColor="@color/colorGray"
         android:textSize="25dp"
         android:textStyle="bold"/>
     <android.support.v7.widget.RecyclerView

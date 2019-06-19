@@ -48,7 +48,9 @@ public class BaseActivity extends AppCompatActivity {
     private TimerTask task = null;
     private  AlertDialog dialog;
     private String grades="";
+    private String question="";
     private int i;
+    private View view;
     private  TextView mTvgrade;
     private Gson gson=new Gson();
     private Handler mHandler =new Handler(new Handler.Callback() {
@@ -56,6 +58,7 @@ public class BaseActivity extends AppCompatActivity {
         public boolean handleMessage(Message msg) {
             switch (msg.what){
                 case 7:
+                    Log.d("Test","Here");
                     if(dialog!=null){
                         dialog.dismiss();
                     }
@@ -79,6 +82,8 @@ public class BaseActivity extends AppCompatActivity {
         intentFilter.addAction("com.example.administrator.tecsoundclass.COME_MESSAGE");
         intentFilter.addAction("com.example.administrator.tecsoundclass.ON_GRADE");
         intentFilter.addAction("com.example.administrator.tecsoundclass.GRADE_ED");
+        intentFilter.addAction("com.example.administrator.tecsoundclass.DIALOG_CANCEL");
+        intentFilter.addAction("com.example.administrator.tecsoundclass.PICKED");
         receiver=new Receiver();
         registerReceiver(receiver,intentFilter);
     }
@@ -123,7 +128,7 @@ public class BaseActivity extends AppCompatActivity {
                 case "com.example.administrator.tecsoundclass.COME_MESSAGE":
                     final String Clsid=intent.getStringExtra("Cid");
                     builder = new AlertDialog.Builder(context);
-                    View view = LayoutInflater.from(context).inflate(R.layout.layout_raceresp_dialog, null);
+                    view = LayoutInflater.from(context).inflate(R.layout.layout_raceresp_dialog, null);
                     i = 10;
                     final Button mBtncatch = view.findViewById(R.id.tv_getchance);
                     final TextView mTvQuestion=view .findViewById(R.id.tv_question);
@@ -145,7 +150,14 @@ public class BaseActivity extends AppCompatActivity {
                                     //向服务器请求
                                     Map<String,String>param =new HashMap<>();
                                     param.put("condition","NoReply");
+                                    param.put("question",mTvQuestion.getText().toString());
                                     param.put("Cid",Clsid);
+                                    try {
+                                        WebSocketClientObject.getClient(context,mHandler,null)
+                                                .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+                                    } catch (UnsupportedEncodingException e) {
+                                        e.printStackTrace();
+                                    }
                                 } else {
                                     StartTime();
                                 }
@@ -170,6 +182,8 @@ public class BaseActivity extends AppCompatActivity {
 
                         public void StopTime() {
                             timer.cancel();
+                            task.cancel();
+//
                         }
                     }
                     //学生端开始倒计时
@@ -292,6 +306,7 @@ public class BaseActivity extends AppCompatActivity {
                                         socketparams.put("condition","Graded");
                                         socketparams.put("Grade",mTvgrade.getText().toString());;
                                         socketparams.put("Sid",param.get("Sid"));
+                                        socketparams.put("Cid",param.get("Cid"));
                                         try {
                                             WebSocketClientObject.getClient(context,mHandler,null)
                                                     .send(URLEncoder.encode(gson.toJson(socketparams),"UTF-8"));
@@ -317,6 +332,38 @@ public class BaseActivity extends AppCompatActivity {
                     break;
                 case "com.example.administrator.tecsoundclass.GRADE_ED":
                     Toast.makeText(context,"教师评分"+intent.getStringExtra("grade"),Toast.LENGTH_SHORT).show();
+                    break;
+                case "com.example.administrator.tecsoundclass.DIALOG_CANCEL":
+                    if(dialog!=null){
+                        dialog.dismiss();
+                        timer.cancel();
+                        task.cancel();
+                    }
+                    break;
+                case "com.example.administrator.tecsoundclass.PICKED":
+                    final String Cls=intent.getStringExtra("Cid");
+                    builder = new AlertDialog.Builder(context);
+                    view = LayoutInflater.from(context).inflate(R.layout.layout_raceresp_dialog, null);
+                    i = 10;
+                    final Button mBtncatch1 = view.findViewById(R.id.tv_getchance);
+                    final TextView mTvQuestion1=view .findViewById(R.id.tv_question);
+                    final TextView mTvTime1 = view.findViewById(R.id.tv_message);
+                    TextView mTvTitle1=view.findViewById(R.id.tv_title);
+                    mTvQuestion1.setText(intent.getStringExtra("question"));
+                    mTvTitle1.setText("来自"+Cls+"课堂");
+                    mTvTime1.setText("你被抽到啦，准备回答问题吧！");
+                    mBtncatch1.setText("开始回答");
+                    mBtncatch1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            InteractHandler interactHandler = new InteractHandler(context, mTvTime1,mTvQuestion1.getText().toString(),Cls, mBtncatch1,mHandler);
+                            interactHandler.StartHandle(UUID.randomUUID().toString());
+                            dialog.setCancelable(true);
+                        }
+                    });
+                    builder.setView(view);
+                    dialog = builder.show();
+                    dialog.setCancelable(false);
                     break;
             }
         }
