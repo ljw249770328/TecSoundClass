@@ -95,9 +95,6 @@ public class WebSocketClientObject extends WebSocketClient {
                     mHandler.sendMessage(msg);
                     break;
                 case "COME_QUESTION":
-//                    msg.what=6;
-//                    msg.obj=params.get("question");
-//                    mHandler.sendMessage(msg);
                     Log.e("fragment", params.get("question")+params.get("CourseId"));
                     intent=new Intent("com.example.administrator.tecsoundclass.COME_MESSAGE");
                     intent.putExtra("question", params.get("question"));
@@ -116,8 +113,20 @@ public class WebSocketClientObject extends WebSocketClient {
                     mContext.sendBroadcast(intent);
                     break;
                 case "DIALOG_CANCLE":
-                    msg.what=7;
-                    mHandler.sendMessage(msg);
+                    intent =new Intent("com.example.administrator.tecsoundclass.DIALOG_CANCEL");
+                    mContext.sendBroadcast(intent);
+                    break;
+                case "DRAW_ED":
+                    Log.e("picked", params.get("question")+params.get("CourseId"));
+                    intent=new Intent("com.example.administrator.tecsoundclass.PICKED");
+                    intent.putExtra("question", params.get("question"));
+                    intent.putExtra("Cid",params.get("CourseId"));
+                    mContext.sendBroadcast(intent);
+
+                    break;
+                case "INTERACT_REFLESH":
+                    intent=new Intent("com.example.administrator.tecsoundclass.INTERACT_REFLESH");
+                    mContext.sendBroadcast(intent);
                     break;
             }
         } catch (UnsupportedEncodingException e) {
