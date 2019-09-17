@@ -17,6 +17,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.Adapter.MyReviewListAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.Point;
@@ -137,6 +138,11 @@ public class ReviewFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
         });
         return list;
     }
@@ -207,6 +213,11 @@ public class ReviewFragment extends Fragment {
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
+
+                            }
+
+                            @Override
+                            public void onError(VolleyError error) {
 
                             }
                         });

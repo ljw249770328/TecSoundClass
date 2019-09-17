@@ -17,6 +17,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,7 +56,7 @@ public class MyselfFragment extends Fragment {
     private ImageView mIvMenu,mIvHead;
     private PopupWindow mPop;
     private TextView mTvStandards,mTvUsername,mTvUserId,mTvFriendNum,mTvCourseNum;
-    private LinearLayout mEditInfo;
+    private RelativeLayout mEditInfo;
     MainMenuActivity activity;
 
     public MyselfFragment() {
@@ -97,7 +98,7 @@ public class MyselfFragment extends Fragment {
     private void init(@NonNull View view){
         mIvMenu=view.findViewById(R.id.iv_menu_list);
         mTvStandards=view.findViewById(R.id.m_status_data);
-        mEditInfo=view.findViewById(R.id.ll_view_info);
+        mEditInfo=view.findViewById(R.id.rl_view_info);
         mIvHead=view.findViewById(R.id.iv_user_head);
         mTvUsername=view.findViewById(R.id.user_name);
         mTvUserId=view.findViewById(R.id.user_id);
@@ -168,7 +169,7 @@ public class MyselfFragment extends Fragment {
                     intent=new Intent(getActivity(),SettingsActivity.class);
                     startActivity(intent);
                     break;
-                case R.id.ll_view_info:
+                case R.id.rl_view_info:
                     intent=new Intent(getActivity(),EditMyInfoActivity.class);
                     Bundle bundle1 =new Bundle();
                     bundle1.putSerializable("mUser",activity.getmUser());

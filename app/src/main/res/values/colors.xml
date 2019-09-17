@@ -7,12 +7,16 @@
     <color name="colorDarkGreen">#22a58b</color>
     <color name="colorOrange">#ebb774</color>
     <color name="colorWhite">#FFF</color>
+    <color name="colortransGray">#F5FFFFFF</color>
+    <color name="colorSearchGray">#DCACACAC</color>
     <color name="colorBgGray">#ececed</color>
     <color name="colorDarkWhite">#e0e0e4</color>
     <color name="colorSmallGray">#c4bfbf</color>
+    <color name="colortransSmallGray">#CBC4BFBF</color>
     <color name="colorTranslucence">#82ffffff</color>
     <color name="colorBlack">#000</color>
     <color name="colorGray">#a0a0a1</color>
+    <color name="colorIconGray">#8a8a8a</color>
     <color name="colorDarkGray">#5d5d5e</color>
     <color name="colorSignItemGreen">#d8edd5</color>
     <color name="colorSignItemPressedGreen">#abd9a4</color>

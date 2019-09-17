@@ -24,6 +24,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.Adapter.MyReviewListAdapter;
 import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
@@ -257,6 +258,11 @@ public class SignFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
         });
         return list;
     }
@@ -477,6 +483,11 @@ public class SignFragment extends Fragment {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
 
                     }
                 });

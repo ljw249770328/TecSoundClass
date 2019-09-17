@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
 import com.example.administrator.tecsoundclass.JavaBean.User;
@@ -110,6 +111,11 @@ public class EditMyInfoActivity extends BaseActivity {
                                         e.printStackTrace();
                                     }
                                     finish();
+                                }
+
+                                @Override
+                                public void onError(VolleyError error) {
+
                                 }
                             });
                         }

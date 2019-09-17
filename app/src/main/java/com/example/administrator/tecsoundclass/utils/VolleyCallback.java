@@ -1,6 +1,8 @@
 package com.example.administrator.tecsoundclass.utils;
 
 import android.content.Context;
+import android.os.Looper;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -21,8 +23,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VolleyCallback {
+    private  static int times=5;
 
-    public static JSONObject getJSONObject(final Context context, String tag, String url, final Map<String, String> map, final VolleyJsonCallback callback){
+    public static JSONObject getJSONObject(final Context context, final String tag, final String url, final Map<String, String> map, final VolleyJsonCallback callback){
         //取得请求队列
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
@@ -45,10 +48,29 @@ public class VolleyCallback {
                     }
                 }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(final VolleyError error) {
                 //做响应错误操作，如Toast提示（“请稍后重试”等）
                 Log.e("TAG", error.getMessage(), error);
-                Toast.makeText(context,"响应错误,请稍后重试",Toast.LENGTH_SHORT).show();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            if (times>1){
+                                Thread.sleep(3000);
+                                getJSONObject(context,tag,url,map,callback);
+                                times--;
+                            }else {
+                                Looper.prepare();
+                                Toast.makeText(context,"响应错误,请稍后重试",Toast.LENGTH_SHORT).show();
+                                Looper.loop();
+                                callback.onError(error);
+                            }
+
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
             }
         }) {
             @Override
@@ -66,6 +88,9 @@ public class VolleyCallback {
     }
     public interface VolleyJsonCallback{
         void onFinish(JSONObject r);
+
+        void onError(VolleyError error);
+
     }
 
 }

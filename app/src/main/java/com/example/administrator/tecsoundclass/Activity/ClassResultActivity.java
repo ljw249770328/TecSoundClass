@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
 import com.example.administrator.tecsoundclass.JavaBean.Course;
@@ -24,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ClassResultActivity extends BaseActivity {
-    private TextView mTvBack,mTvCourseName,mTvClass,mTvTea,mTvCtime,mTvCreateT,mTvCreq;
+    private TextView mTvCourseName,mTvClass,mTvTea,mTvCtime,mTvCreateT,mTvCreq,mTvBack;
     private Course course;
     private Button mBtnJoin;
     private String StuId="";
@@ -100,6 +101,11 @@ public class ClassResultActivity extends BaseActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                        }
+
+                        @Override
+                        public void onError(VolleyError error) {
+
                         }
                     });
                     break;

@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.JavaBean.Course;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
@@ -76,6 +77,11 @@ public class JoinActivity extends BaseActivity {
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
+                        }
+
+                        @Override
+                        public void onError(VolleyError error) {
+
                         }
                     });
 

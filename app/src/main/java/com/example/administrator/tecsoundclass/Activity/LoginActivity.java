@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.utils.TransferMore;
@@ -72,8 +73,6 @@ public class LoginActivity extends BaseActivity {
         Requestpermission();
         //加载控件
         init();
-        //注册点击事件
-        SetListeners();
 
     }
 
@@ -82,9 +81,7 @@ public class LoginActivity extends BaseActivity {
         super.onResume();
         //判断是否有数据传递
         if(getIntent().getExtras()!=null){
-            Toast.makeText(LoginActivity.this,"有传递",Toast.LENGTH_SHORT).show();
             if(!getIntent().getExtras().getString("userid").equals("")){
-                Toast.makeText(LoginActivity.this,"已设置",Toast.LENGTH_SHORT).show();
                 mEtaccount.setText(getIntent().getExtras().getString("userid"));
             }
             if(!getIntent().getExtras().getString("psw").equals("")){
@@ -111,6 +108,7 @@ public class LoginActivity extends BaseActivity {
         }
     }
     //注册组件
+    @SuppressLint("Range")
     private void init(){
         mBtnLogin=findViewById(R.id.btn_login1);
         mTvForget=findViewById(R.id.tv_forget);
@@ -119,6 +117,8 @@ public class LoginActivity extends BaseActivity {
         mEtpassword=findViewById(R.id.et_password);
         pref=PreferenceManager.getDefaultSharedPreferences(this);
         rememberPass=findViewById(R.id.remember_psw);
+        //注册点击事件
+        SetListeners();
         boolean isRemember =pref.getBoolean("remember_password",false);
         if(isRemember){
             //设置已保存的帐号到文本框中
@@ -219,6 +219,11 @@ public class LoginActivity extends BaseActivity {
                                    // 做自己的请求异常操作，如Toast提示（“无网络连接”等）
                                      Log.e("TAG", e.getMessage(), e);
                                 }
+
+                            }
+
+                            @Override
+                            public void onError(VolleyError error) {
 
                             }
                         });

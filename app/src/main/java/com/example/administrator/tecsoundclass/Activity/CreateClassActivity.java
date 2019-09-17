@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.example.administrator.tecsoundclass.utils.TPDialogFactory;
@@ -123,17 +124,27 @@ public class CreateClassActivity extends BaseActivity {
                                                     finish();
                                                 }else
                                                 {
-                                                    Toast.makeText(CreateClassActivity.this,result,Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(CreateClassActivity.this,"您已创建此课堂的相同班级",Toast.LENGTH_SHORT).show();
                                                 }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }
 
                                         }
+
+                                        @Override
+                                        public void onError(VolleyError error) {
+
+                                        }
                                     });
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
+                            }
+
+                            @Override
+                            public void onError(VolleyError error) {
+
                             }
                         });
 

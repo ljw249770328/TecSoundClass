@@ -163,6 +163,11 @@ public class CourseFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
+
+            @Override
+            public void onError(VolleyError error) {
+
+            }
         });
         return list;
     }

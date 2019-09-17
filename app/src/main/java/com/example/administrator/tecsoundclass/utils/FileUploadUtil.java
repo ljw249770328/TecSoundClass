@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.util.Base64;
 import android.util.Log;
 
+import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.R;
 
 import org.json.JSONException;
@@ -76,6 +77,11 @@ public class FileUploadUtil {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+            }
+
+            @Override
+            public void onError(VolleyError error) {
 
             }
         });

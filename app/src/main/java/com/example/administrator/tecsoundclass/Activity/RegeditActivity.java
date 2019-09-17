@@ -123,6 +123,11 @@ public class RegeditActivity extends BaseActivity {
                                 Log.e("TAG", e.getMessage(), e);
                             }
                         }
+
+                        @Override
+                        public void onError(VolleyError error) {
+
+                        }
                     });
                 }else {
                     Toast.makeText(RegeditActivity.this,"填写信息有误",Toast.LENGTH_SHORT).show();

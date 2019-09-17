@@ -3,12 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBgGray"
+    android:animateLayoutChanges="true"
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:background="@color/colorGreen">
+        android:background="@drawable/bg_toolbar">
         <TextView
             android:id="@+id/tv_cancle"
             android:layout_width="80dp"

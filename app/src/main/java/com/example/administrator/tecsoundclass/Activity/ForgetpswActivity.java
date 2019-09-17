@@ -123,6 +123,11 @@ public class ForgetpswActivity extends BaseActivity {
                                     Toast.makeText(ForgetpswActivity.this,e.toString() ,Toast.LENGTH_SHORT).show();
                                 }
                             }
+
+                            @Override
+                            public void onError(VolleyError error) {
+
+                            }
                         });
                     }
                     break;

@@ -2,16 +2,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBgGray">
+    android:animateLayoutChanges="true"
+    android:background="@color/colorWhite">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:orientation="horizontal"
-            android:background="@color/colorGreen">
+            android:background="@drawable/bg_toolbar">
             <ImageView
                 android:id="@+id/im_logo"
                 android:layout_width="80dp"
@@ -29,9 +30,10 @@
                 android:textSize="18sp" />
             <ImageView
                 android:id="@+id/iv_more"
-                android:layout_width="35dp"
-                android:layout_height="match_parent"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="7dp"
                 android:src="@drawable/add" />
         </RelativeLayout>

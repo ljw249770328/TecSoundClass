@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:background="@color/colorBgGray">
     <FrameLayout
         android:id="@+id/fl_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/rg_main"
         android:layout_alignParentTop="true" />
 
     <View
@@ -16,57 +16,57 @@
         android:layout_height="0.5dp"
         android:layout_above="@id/rg_main"
         android:layout_gravity="bottom"
-        android:background="#BBBBBB" />
+        android:background="@color/colorBgGray" />
     <RadioGroup
         android:id="@+id/rg_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorGreen">
+        android:background="@color/colortransGray">
         <RadioButton
             android:id="@+id/rb_course"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="3dp"
+            android:paddingVertical="3dp"
             android:background="@android:color/transparent"
             android:button="@null"
             android:checked="true"
-            android:drawablePadding="3dp"
+            android:drawablePadding="1dp"
             android:drawableTop="@drawable/rb_my_course"
             android:gravity="center"
             android:text="课程"
             android:textColor="@color/main_menu_text_selector_tab"
-            android:textSize="15sp" />
+            android:textSize="10sp" />
         <RadioButton
             android:id="@+id/rb_friends"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="3dp"
+            android:paddingVertical="3dp"
             android:background="@android:color/transparent"
             android:button="@null"
-            android:drawablePadding="3dp"
+            android:drawablePadding="1dp"
             android:drawableTop="@drawable/rb_my_friends"
             android:gravity="center"
-            android:text="好友"
+            android:text="同学们"
             android:textColor="@color/main_menu_text_selector_tab"
-            android:textSize="15sp" />
+            android:textSize="10sp" />
         <RadioButton
             android:id="@+id/rb_myself"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginTop="3dp"
             android:background="@android:color/transparent"
+            android:paddingVertical="3dp"
             android:button="@null"
-            android:drawablePadding="3dp"
+            android:drawablePadding="1dp"
             android:drawableTop="@drawable/rb_my_myself"
             android:gravity="center"
-            android:text="我"
+            android:text="自己呀"
             android:textColor="@color/main_menu_text_selector_tab"
-            android:textSize="15sp" />
+            android:textSize="10sp" />
 
 
     </RadioGroup>

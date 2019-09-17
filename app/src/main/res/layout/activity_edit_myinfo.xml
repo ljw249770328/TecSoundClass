@@ -2,7 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBgGray"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorWhite"
+    android:animateLayoutChanges="true"
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -12,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal"
-            android:background="@color/colorGreen">
+            android:background="@drawable/bg_toolbar">
             <ImageView
                 android:id="@+id/im_back"
                 android:layout_width="35dp"
@@ -35,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/rl_1"
-            android:background="@color/colorBgGray"
+            android:background="@color/colorWhite"
             android:orientation="vertical">
             <LinearLayout
                 android:id="@+id/ll_my_info"
@@ -46,13 +48,13 @@
                 android:layout_marginTop="12dp"
                 android:gravity="center"
                 android:orientation="horizontal">
-                <ImageView
+                <com.shehuan.niv.NiceImageView
                     android:id="@+id/iv_edit_head"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginLeft="10dp"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/bg_im_class_head"/>
+                    app:is_circle="true"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -121,7 +123,6 @@
                             android:text="帐号:"
                             android:layout_weight="7"
                             android:textSize="16sp"
-                            android:background="@drawable/bg_textview"
                             android:textColor="@color/colorBlack"/>
                         <TextView
                             android:id="@+id/tv_my_id"
@@ -132,7 +133,6 @@
                             android:text="xxxxx"
                             android:gravity="center"
                             android:textSize="16sp"
-                            android:background="@drawable/bg_textview"
                             android:textColor="@color/colorDarkGray"/>
                     </LinearLayout>
                 <LinearLayout

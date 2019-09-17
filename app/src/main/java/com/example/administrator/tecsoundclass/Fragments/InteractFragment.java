@@ -27,6 +27,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.Adapter.KeyboardAdapter;
 
@@ -203,6 +204,11 @@ public class InteractFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
             }
         });
 

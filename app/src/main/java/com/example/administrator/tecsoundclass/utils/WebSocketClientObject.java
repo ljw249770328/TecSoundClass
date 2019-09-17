@@ -54,6 +54,10 @@ public class WebSocketClientObject extends WebSocketClient {
         return  client;
     }
 
+    public static void disConnect(){
+        client.close();
+    }
+
     @Override
     public void onOpen(ServerHandshake handshakedata) {
         Log.e("mSocket","成功与服务器【"+getURI()+"】连接");

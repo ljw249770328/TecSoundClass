@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
+import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 
 import org.json.JSONArray;
@@ -46,6 +47,11 @@ public class TransferMore {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                    }
+
+                    @Override
+                    public void onError(VolleyError error) {
+
                     }
                 });
             }

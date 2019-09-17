@@ -2,16 +2,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBgGray">
+    android:animateLayoutChanges="true"
+    android:background="@color/colorWhite">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:orientation="horizontal"
-            android:background="@color/colorGreen">
+            android:background="@drawable/bg_toolbar">
             <ImageView
                 android:id="@+id/im_logo"
                 android:layout_width="80dp"
@@ -29,9 +30,10 @@
                 android:textSize="18sp" />
             <ImageView
                 android:id="@+id/iv_add"
-                android:layout_width="35dp"
-                android:layout_height="match_parent"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
                 android:layout_marginRight="7dp"
                 android:src="@drawable/add" />
         </RelativeLayout>
@@ -39,29 +41,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@color/colorBgGray">
+            android:background="@color/colorWhite">
             <LinearLayout
                 android:id="@+id/ll_search_friend"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
                 android:layout_alignParentTop="true"
-                android:gravity="center"
-                android:background="@color/colorSmallGray"
-                android:textColor="@color/colorButtonText"
-                >
+                android:gravity="center">
                 <EditText
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="111"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="7dp"
                     android:layout_marginBottom="7dp"
-                    android:layout_marginRight="15dp"
-                    android:textColor="@color/colorSmallGray"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/colorSearchGray"
                     android:hint="搜索好友"
                     android:textSize="14dp"
                     android:paddingLeft="10dp"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:drawableLeft="@drawable/plane"
                     android:textColorHint="@color/colorSmallGray"
                     android:background="@drawable/bg_edit_seach"/>

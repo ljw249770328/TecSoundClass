@@ -105,6 +105,7 @@ public class CustomDatePicker {
             manager.getDefaultDisplay().getMetrics(dm);
             WindowManager.LayoutParams lp = window.getAttributes();
             lp.width = dm.widthPixels;
+            lp.windowAnimations=R.style.BottomDialogAnimation;
             window.setAttributes(lp);
         }
     }

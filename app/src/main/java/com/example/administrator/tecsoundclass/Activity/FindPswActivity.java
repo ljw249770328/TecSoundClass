@@ -112,6 +112,11 @@ public class FindPswActivity extends BaseActivity {
                                     Log.e("TAG", e.getMessage(), e);
                                 }
                             }
+
+                            @Override
+                            public void onError(VolleyError error) {
+
+                            }
                         });
                     }
                     break;

@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
@@ -157,6 +158,11 @@ public class MoreFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+
             }
         });
     }

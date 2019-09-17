@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,6 +21,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.Adapter.KeyboardAdapter;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.InteractHandler;
@@ -29,6 +31,7 @@ import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
 import com.google.gson.Gson;
 
+import org.java_websocket.client.WebSocketClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -50,7 +53,7 @@ public class BaseActivity extends AppCompatActivity {
     private String grades="";
     private String question="";
     private int i;
-    private View view;
+    private View view,statusBarView;
     private  TextView mTvgrade;
     private Gson gson=new Gson();
     private Handler mHandler =new Handler(new Handler.Callback() {
@@ -72,6 +75,19 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityCollector.addActivity(this);
+        statusBarView=getWindow().getDecorView().findViewById(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+
+    }
+    private void initStatusBar() {
+        if (statusBarView == null) {
+            //利用反射机制修改状态栏背景
+            int identifier = getResources().getIdentifier("statusBarBackground", "id", "android");
+            statusBarView = getWindow().findViewById(identifier);
+        }
+        if (statusBarView != null) {
+            statusBarView.setBackgroundResource(R.drawable.bg_toolbar);
+        }
     }
 
     @Override
@@ -86,6 +102,15 @@ public class BaseActivity extends AppCompatActivity {
         intentFilter.addAction("com.example.administrator.tecsoundclass.PICKED");
         receiver=new Receiver();
         registerReceiver(receiver,intentFilter);
+
+        //设置状态栏颜;
+        getWindow().getDecorView().addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                initStatusBar();
+                getWindow().getDecorView().removeOnLayoutChangeListener(this);
+            }
+        });
     }
 
     @Override
@@ -298,6 +323,11 @@ public class BaseActivity extends AppCompatActivity {
                                                 } catch (JSONException e) {
                                                     e.printStackTrace();
                                                 }
+
+                                            }
+
+                                            @Override
+                                            public void onError(VolleyError error) {
 
                                             }
                                         });
