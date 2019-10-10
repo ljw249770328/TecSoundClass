@@ -38,6 +38,9 @@ public class MyFriendListAdapter extends Adapter<MyFriendListAdapter.Viewholder>
         this.mContext=context;
         mFollowList=list;
     }
+    public List<User> getmFans() {
+        return mFans;
+    }
     class Viewholder extends RecyclerView.ViewHolder{
         ImageView mFriendPic;
         TextView mFriendName,mFriendStatus,mTime;
