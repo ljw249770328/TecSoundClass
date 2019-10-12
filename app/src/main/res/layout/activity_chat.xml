@@ -4,21 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@color/colorBgGray"
+    android:background="@color/colorWhite"
 >
 
     <RelativeLayout
         android:id="@+id/head"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:orientation="horizontal"
-        android:background="@color/colorWhite">
+        android:background="@drawable/bg_toolbar">
         <ImageView
             android:id="@+id/chat_back"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:background="@drawable/small_back"
-            android:gravity="center"
+            android:layout_centerVertical="true"
             android:textSize="17sp"
             android:layout_marginTop="7dp"
             android:layout_marginLeft="7dp"/>
@@ -28,7 +28,8 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="好友姓名"
-            android:textColor="@drawable/bg_toolbar"
+            android:textColor="@color/colorWhite"
+
             android:textStyle="bold"
             android:textSize="18sp" />
     </RelativeLayout>
@@ -38,6 +39,7 @@
         android:id="@+id/msg_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:padding="10dp"
         android:layout_weight="1">
 
     </android.support.v7.widget.RecyclerView>
@@ -45,19 +47,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:id="@+id/linearLayout">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"/>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="0dp"
             android:layout_weight="6"
+            android:gravity="center"
+            android:paddingLeft="3dp"
+            android:orientation="horizontal"
             android:layout_height="50dp">
             <EditText
                 android:id="@+id/input_text"
                 android:textSize="15dp"
                 android:layout_weight="1"
                 android:textColor="#000000"
-                android:background="@drawable/bg_btn_chat_button"
-                android:layout_marginBottom="2dp"
+                android:paddingLeft="8dp"
+                android:background="@drawable/bg_edit_chat"
+                android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
         </android.support.design.widget.TextInputLayout>
@@ -71,10 +82,13 @@
             android:text="发送"
             android:gravity="center"
             android:layout_marginTop="15dp"
-            android:textColor="@color/colorTextOrange"
-            android:background="@color/colorWhite"
-            android:layout_width="50dp"
-            android:layout_height="30dp"/>
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/bg_btn_chat_send"
+            android:alpha="0.8"
+            android:layout_weight="1"
+            android:width="0dp"
+            android:layout_height="30dp"
+            android:layout_width="0dp" />
     </LinearLayout>
 
 </LinearLayout>

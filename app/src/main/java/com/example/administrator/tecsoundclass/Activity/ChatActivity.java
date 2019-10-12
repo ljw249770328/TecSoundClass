@@ -2,6 +2,8 @@ package com.example.administrator.tecsoundclass.Activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,11 +21,19 @@ import com.example.administrator.tecsoundclass.Fragments.SignFragment;
 import com.example.administrator.tecsoundclass.JavaBean.Msg;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
+import com.google.gson.Gson;
 
+import org.java_websocket.client.WebSocketClient;
+
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
     private List<Msg> msgList=new ArrayList<>();
@@ -35,6 +45,13 @@ public class ChatActivity extends AppCompatActivity {
    private TextView friend_name;
     private User mFan;
     private User mMy;
+    private Gson gson;
+    private Handler handler=new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            return false;
+        }
+    });
 
 
     private void init(){
@@ -50,6 +67,7 @@ public class ChatActivity extends AppCompatActivity {
          mMy = (User) bundle.getSerializable("MyInfo");
         adapter=new MsgAdapter(this,msgList,mFan,mMy);
         msgRecyclerView.setAdapter(adapter);
+        gson=new Gson();
     }
 
     private void initMsgs(){
@@ -70,6 +88,19 @@ public class ChatActivity extends AppCompatActivity {
                 case R.id.bt_send:
                     String content=inputText.getText().toString();
                     if(!"".equals(content)){
+                        //发送
+                        Map<String,String> obj =new HashMap<>();
+                        obj.put("condition","SignStart");
+                        obj.put("message",content);
+                        obj.put("SendUser",mFan.getUser_id());
+                        try {
+                            WebSocketClientObject.getClient(getApplicationContext(),handler,null)
+                                    .send(URLEncoder.encode(gson.toJson(obj),"UTF-8"));
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+
+
                         Msg msg=new Msg(content,Msg.TYPE_SENT);
                         msgList.add(msg);
                         adapter.notifyItemInserted(msgList.size()-1);

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="3dp"
+    android:layout_marginVertical="3dp"
+    android:background="@color/colorWhite"
+    android:paddingVertical="10dp">
+    <com.shehuan.niv.NiceImageView
+        android:id="@+id/tv_sender_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:is_circle="true"
+        app:border_width="1.5dp"
+        app:border_color="@color/colorSmallGray"/>
+
+    <LinearLayout
+        android:layout_marginLeft="5dp"
+        android:orientation="vertical"
+        android:layout_alignBottom="@+id/tv_sender_icon"
+        android:layout_alignTop="@+id/tv_sender_icon"
+        android:layout_toRightOf="@+id/tv_sender_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="5dp"
+            android:singleLine="true"
+            android:id="@+id/tv_Sender_name"
+            android:text="Sender"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:textColor="@color/colorBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_sender_Message"
+            android:text="Here comes a message"
+            android:layout_marginTop="5dp"
+            android:textSize="14sp"
+            android:textColor="@color/colorBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</RelativeLayout>

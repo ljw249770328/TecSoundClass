@@ -132,6 +132,11 @@ public class WebSocketClientObject extends WebSocketClient {
                     intent=new Intent("com.example.administrator.tecsoundclass.INTERACT_REFLESH");
                     mContext.sendBroadcast(intent);
                     break;
+                case "COME_CHAT":
+                    intent=new Intent("com.example.administrator.tecsoundclass.COME_CHAT");
+                    intent.putExtra("message",params.get("message"));
+                    intent.putExtra("Sender",params.get("Sender"));
+                    mContext.sendBroadcast(intent);
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package com.example.administrator.tecsoundclass.Activity;
 
+import android.app.Notification;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -55,6 +56,7 @@ public class BaseActivity extends AppCompatActivity {
     private int i;
     private View view,statusBarView;
     private  TextView mTvgrade;
+    private static Notification notification;
     private Gson gson=new Gson();
     private Handler mHandler =new Handler(new Handler.Callback() {
         @Override
@@ -100,6 +102,7 @@ public class BaseActivity extends AppCompatActivity {
         intentFilter.addAction("com.example.administrator.tecsoundclass.GRADE_ED");
         intentFilter.addAction("com.example.administrator.tecsoundclass.DIALOG_CANCEL");
         intentFilter.addAction("com.example.administrator.tecsoundclass.PICKED");
+        intentFilter.addAction("com.example.administrator.tecsoundclass.COME_CHAT");
         receiver=new Receiver();
         registerReceiver(receiver,intentFilter);
 
@@ -394,6 +397,9 @@ public class BaseActivity extends AppCompatActivity {
                     builder.setView(view);
                     dialog = builder.show();
                     dialog.setCancelable(false);
+                    break;
+                case "com.example.administrator.tecsoundclass.COME_CHAT":
+
                     break;
             }
         }
