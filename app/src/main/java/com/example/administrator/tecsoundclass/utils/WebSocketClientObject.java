@@ -31,7 +31,7 @@ public class WebSocketClientObject extends WebSocketClient {
     public static WebSocketClientObject client;
     public static Handler mHandler;
     public static Context mContext;
-//    public static String Uri ="ws://172.20.10.10:8886";
+//    public static String Uri ="ws://127.0.0.1:8886";
     public static String Uri ="ws://101.132.71.111:8886";
     private Gson gson=new Gson();
     public WebSocketClientObject(URI serverUri, Draft draft,Map<String, String> header, int timeout) {
@@ -135,7 +135,7 @@ public class WebSocketClientObject extends WebSocketClient {
                 case "COME_CHAT":
                     intent=new Intent("com.example.administrator.tecsoundclass.COME_CHAT");
                     intent.putExtra("message",params.get("message"));
-                    intent.putExtra("Sender",params.get("Sender"));
+                    intent.putExtra("sender",params.get("Sender"));
                     mContext.sendBroadcast(intent);
             }
         } catch (UnsupportedEncodingException e) {

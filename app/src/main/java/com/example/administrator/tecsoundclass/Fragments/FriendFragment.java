@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.Activity.ChatActivity;
+import com.example.administrator.tecsoundclass.Activity.FollowActivity;
 import com.example.administrator.tecsoundclass.Activity.MainMenuActivity;
 import com.example.administrator.tecsoundclass.Adapter.MyFriendListAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.Follow;
@@ -146,6 +147,9 @@ public class FriendFragment extends Fragment {
                 mTvAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Intent intent=new Intent(getActivity(), FollowActivity.class);
+                        intent.putExtra("mUid",activity.getmUser().getUser_id());
+                        startActivity(intent);
                         mPop.dismiss();
                     }
                 });

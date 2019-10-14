@@ -1,33 +1,45 @@
 package com.example.administrator.tecsoundclass.Activity;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.Adapter.KeyboardAdapter;
+import com.example.administrator.tecsoundclass.JavaBean.MyApplication;
+import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.InteractHandler;
 import com.example.administrator.tecsoundclass.utils.ActivityCollector;
 import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
+import com.example.administrator.tecsoundclass.utils.ToastUtils;
+import com.example.administrator.tecsoundclass.utils.TransferMore;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
 import com.google.gson.Gson;
@@ -56,7 +68,11 @@ public class BaseActivity extends AppCompatActivity {
     private int i;
     private View view,statusBarView;
     private  TextView mTvgrade;
+    private RemoteViews mRview,mHeadView;;
     private static Notification notification;
+    private static NotificationCompat.Builder mNfBuilder,mNfHeadBuilder;
+    private static NotificationManager manager;
+
     private Gson gson=new Gson();
     private Handler mHandler =new Handler(new Handler.Callback() {
         @Override
@@ -134,9 +150,9 @@ public class BaseActivity extends AppCompatActivity {
 
     class Receiver extends BroadcastReceiver{
         @Override
-        public void onReceive(final Context context, Intent intent) {
+        public void onReceive(final Context context, final Intent intent) {
             String action =intent.getAction();
-            AlertDialog.Builder builder;
+            final AlertDialog.Builder builder;
             switch (action){
                 case "com.example.administrator.tecsoundclass.FORCE_OFFLINE":
                     builder =new AlertDialog.Builder(context);
@@ -301,7 +317,7 @@ public class BaseActivity extends AppCompatActivity {
                                     break;
                                 case 11:
                                     if (mTvgrade.getText().toString().isEmpty()) {
-                                        Toast.makeText(context, "您还未评分", Toast.LENGTH_SHORT).show();
+                                        ToastUtils.ShowMyToasts(context, "您还未评分", Gravity.CENTER);
                                         break;
                                     } else {
                                         grades="";
@@ -322,7 +338,7 @@ public class BaseActivity extends AppCompatActivity {
                                                 String result = null;
                                                 try {
                                                     result = r.getString("Result");
-                                                    Toast.makeText(context,result,Toast.LENGTH_SHORT).show();
+                                                    ToastUtils.ShowMyToasts(context,result,Gravity.CENTER);
                                                 } catch (JSONException e) {
                                                     e.printStackTrace();
                                                 }
@@ -364,7 +380,7 @@ public class BaseActivity extends AppCompatActivity {
                     dialog.show();
                     break;
                 case "com.example.administrator.tecsoundclass.GRADE_ED":
-                    Toast.makeText(context,"教师评分"+intent.getStringExtra("grade"),Toast.LENGTH_SHORT).show();
+                    ToastUtils.ShowMyToasts(context,"教师评分"+intent.getStringExtra("grade"),Gravity.CENTER);
                     break;
                 case "com.example.administrator.tecsoundclass.DIALOG_CANCEL":
                     if(dialog!=null){
@@ -399,6 +415,33 @@ public class BaseActivity extends AppCompatActivity {
                     dialog.setCancelable(false);
                     break;
                 case "com.example.administrator.tecsoundclass.COME_CHAT":
+                    String senderId=intent.getStringExtra("sender");
+                    TransferMore.GetUserById(getApplicationContext(), senderId, new TransferMore.TransferCallBack() {
+                        @TargetApi(Build.VERSION_CODES.O)
+                        @Override
+                        public void OnGetUserById(User u) {
+                            manager= (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                            mRview=new RemoteViews(context.getPackageName(),R.layout.layout_message_notify);
+                            mRview.setTextViewText(R.id.tv_Sender_name,u.getUser_name());
+                            mRview.setTextViewText(R.id.tv_sender_Message,intent.getStringExtra("message"));
+                            NotificationChannel channel=new NotificationChannel("1","聊天弹窗",NotificationManager.IMPORTANCE_HIGH);
+                            manager.createNotificationChannel(channel);
+                            Intent intent1=new Intent(getApplicationContext(),ChatActivity.class);
+                            Bundle bundle =new Bundle();
+                            bundle.putSerializable("FanInfo",u);
+                            bundle.putSerializable("MyInfo", MyApplication.getApplication().getmUser());
+                            bundle.putString("msg",intent.getStringExtra("message"));
+                            intent1.putExtras(bundle);
+                            PendingIntent pendingIntent=PendingIntent.getActivity(context,0,intent1,0);
+                            mNfBuilder=new NotificationCompat.Builder(context,"1");
+                            mNfBuilder.setSmallIcon(R.drawable.logo)
+                                    .setTicker("消息通知")
+                                    .setCustomContentView(mRview)
+                                    .setAutoCancel(true).setContentIntent(pendingIntent);
+                            notification=mNfBuilder.build();
+                            manager.notify(1,notification);
+                        }
+                    });
 
                     break;
             }

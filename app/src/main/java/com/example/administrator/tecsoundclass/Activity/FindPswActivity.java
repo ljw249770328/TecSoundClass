@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
 import org.json.JSONException;
@@ -81,11 +83,11 @@ public class FindPswActivity extends BaseActivity {
             switch (v.getId()){
                 case R.id.btn_alter:
                     if(mEtNewPsw.getText().toString().equals("")){
-                        Toast.makeText(FindPswActivity.this,"请输入新密码",Toast.LENGTH_SHORT).show();
+                        ToastUtils.ShowMyToasts(FindPswActivity.this,"请输入新密码", Gravity.CENTER);
                     }else if(mEtConfPsw.getText().toString().equals("")){
-                        Toast.makeText(FindPswActivity.this,"请确认密码",Toast.LENGTH_SHORT).show();
+                        ToastUtils.ShowMyToasts(FindPswActivity.this,"请确认密码",Gravity.CENTER);
                     }else if (!mEtConfPsw.getText().toString().equals(mEtNewPsw.getText().toString())){
-                        Toast.makeText(FindPswActivity.this,"两次输入密码不一致,请重新输入",Toast.LENGTH_SHORT).show();
+                        ToastUtils.ShowMyToasts(FindPswActivity.this,"两次输入密码不一致,请重新输入",Gravity.CENTER);
                         mEtConfPsw.setText("");
                     }else {
 //                        AlterRequest(userid,mEtNewPsw.getText().toString());
@@ -106,7 +108,7 @@ public class FindPswActivity extends BaseActivity {
                                      setResult(RESULT_OK,intent);
                                      finish();
                                  }else {
-                                    Toast.makeText(FindPswActivity.this,r.toString(),Toast.LENGTH_SHORT).show();
+                                     ToastUtils.ShowMyToasts(FindPswActivity.this,r.toString(),Gravity.CENTER);
                                  }
                                 } catch (JSONException e) {
                                     Log.e("TAG", e.getMessage(), e);
@@ -141,20 +143,20 @@ public class FindPswActivity extends BaseActivity {
                         if (e.length()>=16){
                             e.setText(e.getText().toString().substring(0,16));
                             e.setSelection(16);
-                            Toast.makeText(FindPswActivity.this,"长度超出范围",Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(FindPswActivity.this,"长度超出范围",Gravity.CENTER);
                         }else if(e.getTextSize()<6){
-                            Toast.makeText(FindPswActivity.this,"长度不足6位",Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(FindPswActivity.this,"长度不足6位",Gravity.CENTER);
                         }
                         break;
                     case R.id.et_cfg_psw:
                         if (e.length()>=16){
                             e.setText(e.getText().toString().substring(0,16));
                             e.setSelection(16);
-                            Toast.makeText(FindPswActivity.this,"长度超出范围",Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(FindPswActivity.this,"长度超出范围",Gravity.CENTER);
                         }else if(e.length()<6){
-                            Toast.makeText(FindPswActivity.this,"长度不足6位",Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(FindPswActivity.this,"长度不足6位",Gravity.CENTER);
                         }else if (!e.getText().toString().equals(mEtConfPsw.getText().toString())){
-                            Toast.makeText(FindPswActivity.this,"两次输入密码不一致",Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(FindPswActivity.this,"两次输入密码不一致",Gravity.CENTER);
                             e.setText("");
                         }
                         break;

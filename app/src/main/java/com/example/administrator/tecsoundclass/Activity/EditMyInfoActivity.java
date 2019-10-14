@@ -8,6 +8,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -22,6 +23,7 @@ import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.example.administrator.tecsoundclass.utils.TPDialogFactory;
+import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
 import org.json.JSONException;
@@ -102,10 +104,10 @@ public class EditMyInfoActivity extends BaseActivity {
                                     try {
                                         String Result =r.getString("Result");
                                         if(Result.equals("success")){
-                                            Toast.makeText(EditMyInfoActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
+                                            ToastUtils.ShowMyToasts(EditMyInfoActivity.this,"修改成功", Gravity.CENTER);
 
                                         }else {
-                                            Toast.makeText(EditMyInfoActivity.this,"出现异常"+Result,Toast.LENGTH_SHORT).show();
+                                            ToastUtils.ShowMyToasts(EditMyInfoActivity.this,"出现异常"+Result,Gravity.CENTER);
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();

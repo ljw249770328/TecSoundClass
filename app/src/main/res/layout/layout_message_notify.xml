@@ -4,16 +4,17 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:paddingHorizontal="3dp"
-    android:layout_marginVertical="3dp"
     android:background="@color/colorWhite"
     android:paddingVertical="10dp">
-    <com.shehuan.niv.NiceImageView
+    <ImageView
         android:id="@+id/tv_sender_icon"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        app:is_circle="true"
-        app:border_width="1.5dp"
-        app:border_color="@color/colorSmallGray"/>
+        android:padding="8dp"
+        android:layout_marginRight="3dp"
+        android:layout_centerVertical="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo"/>
 
     <LinearLayout
         android:layout_marginLeft="5dp"
@@ -43,5 +44,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </LinearLayout>
+
 
 </RelativeLayout>

@@ -95,8 +95,8 @@ public class MyFriendListAdapter extends Adapter<MyFriendListAdapter.Viewholder>
                 return false;
             }
         }));
-        viewholder.mFriendStatus.setText("正在上'java基础'");
-        viewholder.mTime.setText("2:22");
+        viewholder.mFriendStatus.setText("");
+        viewholder.mTime.setText("");
     }
     @Override
     public int getItemCount() {

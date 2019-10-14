@@ -19,18 +19,20 @@
     <!-- 定位信息是敏感信息，可通过Setting.setLocationEnable(false)关闭定位请求 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 如需使用人脸识别，还要添加：摄相头权限，拍照需要用到 -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <application
-        android:name="org.litepal.LitePalApplication"
+        android:name=".JavaBean.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="师音课堂"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Activity.ChatActivity"></activity>
+        <activity android:name=".Activity.FriendResultActivity"></activity>
+        <activity android:name=".Activity.FollowActivity" />
+        <activity android:name=".Activity.ChatActivity" />
         <activity android:name=".Activity.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -22,6 +23,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
 import org.json.JSONException;
@@ -93,9 +95,9 @@ public class ForgetpswActivity extends BaseActivity {
             switch (v.getId()){
                 case R.id.btn_check:
                     if(mEtFgtId.getText().toString().equals("")){
-                        Toast.makeText(ForgetpswActivity.this,"请输入需要找回的帐号Id",Toast.LENGTH_SHORT).show();
+                        ToastUtils.ShowMyToasts(ForgetpswActivity.this,"请输入需要找回的帐号Id", Gravity.CENTER);
                     }else if(mEtRealname.getText().toString().equals("")){
-                        Toast.makeText(ForgetpswActivity.this,"请输入注册账户时填写的真实姓名",Toast.LENGTH_SHORT).show();
+                        ToastUtils.ShowMyToasts(ForgetpswActivity.this,"请输入注册账户时填写的真实姓名",Gravity.CENTER);
                     }else{
 //                        VerifyRequest(mEtFgtId.getText().toString(),mEtRealname.getText().toString());
                         String url = "http://101.132.71.111:8080/TecSoundWebApp/VerifyServlet";
@@ -108,7 +110,7 @@ public class ForgetpswActivity extends BaseActivity {
                                 try {
                                     String result = r.getString("Result");  //注④
                                     if(result.equals("notexists")){
-                                        Toast.makeText(ForgetpswActivity.this,"账户不存在",Toast.LENGTH_SHORT).show();
+                                        ToastUtils.ShowMyToasts(ForgetpswActivity.this,"账户不存在",Gravity.CENTER);
                                     }else if(result.equals("success")) {
                                         Intent intent=new Intent(ForgetpswActivity.this,FindPswActivity.class);
                                         Bundle bundle=new Bundle();
@@ -116,11 +118,11 @@ public class ForgetpswActivity extends BaseActivity {
                                         intent.putExtras(bundle);
                                         startActivityForResult(intent,1);
                                     }else if(result.equals("fail")){
-                                        Toast.makeText(ForgetpswActivity.this,"姓名和用户id不匹配",Toast.LENGTH_SHORT).show();
+                                        ToastUtils.ShowMyToasts(ForgetpswActivity.this,"姓名和用户id不匹配",Gravity.CENTER);
                                     }
                                 } catch (JSONException e) {
                                     Log.e("TAG", e.getMessage(), e);
-                                    Toast.makeText(ForgetpswActivity.this,e.toString() ,Toast.LENGTH_SHORT).show();
+                                    ToastUtils.ShowMyToasts(ForgetpswActivity.this,e.toString() ,Gravity.CENTER);
                                 }
                             }
 

@@ -33,6 +33,7 @@ import com.example.administrator.tecsoundclass.JavaBean.Sign;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.Activity.RegeditVoiceActivity;
+import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
 import com.google.gson.Gson;
@@ -119,14 +120,14 @@ public class SignFragment extends Fragment {
                     mTvSign.setText("结束签到");
                     break;
                 case SUC_SIGN:
-                    Toast.makeText(mActivity.getApplicationContext(),"签到完成，请认真上课",Toast.LENGTH_SHORT).show();
+                    ToastUtils.ShowMyToasts(mActivity.getApplicationContext(),"签到完成，请认真上课",Gravity.CENTER);
                     mTvSign.setText("已签到");
                     break;
                 case SIGN_DENYED:
-                    Toast.makeText(mActivity.getApplicationContext(),"教师未开放签到通道",Toast.LENGTH_SHORT).show();
+                    ToastUtils.ShowMyToasts(mActivity.getApplicationContext(),"教师未开放签到通道",Gravity.CENTER);
                     break;
                 case SIGN_ED:
-                    Toast.makeText(mActivity.getApplicationContext(),"您已参与本次签到",Toast.LENGTH_SHORT).show();
+                    ToastUtils.ShowMyToasts(mActivity.getApplicationContext(),"您已参与本次签到",Gravity.CENTER);
                     mTvSign.setText("已签到");
                     break;
                 case SIGN_ACCESSED:

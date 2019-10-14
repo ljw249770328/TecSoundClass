@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.example.administrator.tecsoundclass.utils.TPDialogFactory;
+import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
 import org.json.JSONException;
@@ -120,11 +122,11 @@ public class CreateClassActivity extends BaseActivity {
                                             try {
                                                 String result =r.getString("Result");
                                                 if (result.length()==10){
-                                                    Toast.makeText(CreateClassActivity.this,"创建成功,课堂Id为"+result,Toast.LENGTH_SHORT).show();
+                                                    ToastUtils.ShowMyToasts(CreateClassActivity.this,"创建成功,课堂Id为"+result, Gravity.CENTER);
                                                     finish();
                                                 }else
                                                 {
-                                                    Toast.makeText(CreateClassActivity.this,"您已创建此课堂的相同班级",Toast.LENGTH_SHORT).show();
+                                                    ToastUtils.ShowMyToasts(CreateClassActivity.this,"您已创建此课堂的相同班级",Gravity.CENTER);
                                                 }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
@@ -149,7 +151,7 @@ public class CreateClassActivity extends BaseActivity {
                         });
 
                     }else {
-                        Toast.makeText(CreateClassActivity.this,"请检查填写信息",Toast.LENGTH_SHORT).show();
+                        ToastUtils.ShowMyToasts(CreateClassActivity.this,"请检查填写信息",Gravity.CENTER);
                     }
                     break;
             }
@@ -163,11 +165,11 @@ public class CreateClassActivity extends BaseActivity {
                     case R.id.class_edt_name:
                         k1=false;
                         if(mEtClassName.getText().toString().equals("")){
-                            Toast.makeText(CreateClassActivity.this,"未填写课程名", Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(CreateClassActivity.this,"未填写课程名", Gravity.CENTER);
                         }else if (mEtClassName.length()>15) {
                             mEtClassName.setText(mEtClassName.getText().toString().substring(0, 15));
                             mEtClassName.setSelection(15);
-                            Toast.makeText(CreateClassActivity.this, "超出长度范围", Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(CreateClassActivity.this, "超出长度范围", Gravity.CENTER);
                         }else{
                             k1=true;
                         }
@@ -175,11 +177,11 @@ public class CreateClassActivity extends BaseActivity {
                     case R.id.class_edt_number:
                         k2=false;
                         if(mEtClassNum.getText().toString().equals("")){
-                            Toast.makeText(CreateClassActivity.this,"未填写班级", Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(CreateClassActivity.this,"未填写班级", Gravity.CENTER);
                         }else if (mEtClassNum.length()>12) {
                             mEtClassNum.setText(mEtClassNum.getText().toString().substring(0, 12));
                             mEtClassNum.setSelection(12);
-                            Toast.makeText(CreateClassActivity.this, "超出长度范围", Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(CreateClassActivity.this, "超出长度范围",Gravity.CENTER);
                         }else{
                             k2=true;
                         }

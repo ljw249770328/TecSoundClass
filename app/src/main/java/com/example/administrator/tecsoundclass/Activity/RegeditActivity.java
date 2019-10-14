@@ -8,6 +8,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -26,6 +27,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
 import org.json.JSONException;
@@ -114,9 +116,9 @@ public class RegeditActivity extends BaseActivity {
                                 setResult(RESULT_OK,intent);
                                 finish();
                             }else if(result.equals("0")){
-                                Toast.makeText(RegeditActivity.this,"帐户已存在", Toast.LENGTH_SHORT).show();
+                                ToastUtils.ShowMyToasts(RegeditActivity.this,"帐户已存在", Gravity.CENTER);
                             } else {
-                                Toast.makeText(RegeditActivity.this,result,Toast.LENGTH_SHORT).show();
+                                ToastUtils.ShowMyToasts(RegeditActivity.this,result,Gravity.CENTER);
                             }
                             } catch (JSONException e) {
                                 //做自己的请求异常操作，如Toast提示（“无网络连接”等）
@@ -130,7 +132,7 @@ public class RegeditActivity extends BaseActivity {
                         }
                     });
                 }else {
-                    Toast.makeText(RegeditActivity.this,"填写信息有误",Toast.LENGTH_SHORT).show();
+                    ToastUtils.ShowMyToasts(RegeditActivity.this,"填写信息有误",Gravity.CENTER);
                 }
 
             }
@@ -166,11 +168,11 @@ public class RegeditActivity extends BaseActivity {
                     case R.id.et_reg_id:
                         k1=false;
                         if (e.getText().toString().equals("")){
-                            Toast.makeText(RegeditActivity.this,"您还未填写注册Id", Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(RegeditActivity.this,"您还未填写注册Id", Gravity.CENTER);
                         }else if (e.length()>20){
                             e.setText(e.getText().toString().substring(0,20));
                             e.setSelection(20);
-                            Toast.makeText(RegeditActivity.this,"超出长度范围",Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(RegeditActivity.this,"超出长度范围",Gravity.CENTER);
                         }else {
                             k1=true;
                         }
@@ -178,14 +180,14 @@ public class RegeditActivity extends BaseActivity {
                     case R.id.et_reg_psw:
                         k2=false;
                         if (e.getText().toString().equals("")){
-                            Toast.makeText(RegeditActivity.this,"您还未填写账户密码", Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(RegeditActivity.this,"您还未填写账户密码", Gravity.CENTER);
                         }
                         else if (e.length()>=16){
                             e.setText(e.getText().toString().substring(0,16));
                             e.setSelection(16);
-                            Toast.makeText(RegeditActivity.this,"长度超出范围",Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(RegeditActivity.this,"长度超出范围",Gravity.CENTER);
                         }else if(e.getTextSize()<6){
-                            Toast.makeText(RegeditActivity.this,"长度不足6位",Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(RegeditActivity.this,"长度不足6位",Gravity.CENTER);
                         }else {
                             k2=true;
                         }
@@ -193,16 +195,16 @@ public class RegeditActivity extends BaseActivity {
                     case R.id.et_reg_configpsw:
                         k3=false;
                         if (e.getText().toString().equals("")){
-                            Toast.makeText(RegeditActivity.this,"您还未确认账户密码", Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(RegeditActivity.this,"您还未确认账户密码", Gravity.CENTER);
                         }
                         else if (e.length()>=16){
                             e.setText(e.getText().toString().substring(0,16));
                             e.setSelection(16);
-                            Toast.makeText(RegeditActivity.this,"长度超出范围",Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(RegeditActivity.this,"长度超出范围",Gravity.CENTER);
                         }else if(e.length()<6){
-                            Toast.makeText(RegeditActivity.this,"长度不足6位",Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(RegeditActivity.this,"长度不足6位",Gravity.CENTER);
                         }else if (!e.getText().toString().equals(mEtPsw.getText().toString())){
-                            Toast.makeText(RegeditActivity.this,"两次输入密码不一致",Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(RegeditActivity.this,"两次输入密码不一致",Gravity.CENTER);
                             e.setText("");
                         }else{
                             k3=true;
@@ -211,7 +213,7 @@ public class RegeditActivity extends BaseActivity {
                     case R.id.et_reg_realname:
                         k4=false;
                         if (e.getText().toString().equals("")){
-                            Toast.makeText(RegeditActivity.this,"注册姓名为空", Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(RegeditActivity.this,"注册姓名为空",Gravity.CENTER);
                         }else{
                             k4=true;
                         }

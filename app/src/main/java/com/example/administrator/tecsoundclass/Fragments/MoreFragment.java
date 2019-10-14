@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.JavaBean.Course;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
+import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
 import org.json.JSONArray;
@@ -154,7 +156,7 @@ public class MoreFragment extends Fragment {
             public void onFinish(JSONObject r) {
                 try {
                     String result =r.getString("Result");
-                    Toast.makeText(getActivity(),result,Toast.LENGTH_SHORT).show();
+                    ToastUtils.ShowMyToasts(getActivity(),result, Gravity.CENTER);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 
 import android.view.WindowManager;
@@ -28,6 +29,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.TransferMore;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
@@ -58,7 +60,7 @@ public class LoginActivity extends BaseActivity {
     private CheckBox rememberPass;
     private User mUser=null;
     private WebSocketClientObject client =null;
-    final String [] permissions=new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.INTERNET,Manifest.permission.RECORD_AUDIO,Manifest.permission.ACCESS_WIFI_STATE,Manifest.permission.ACCESS_NETWORK_STATE,Manifest.permission.READ_EXTERNAL_STORAGE};
+    final String [] permissions=new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.INTERNET,Manifest.permission.RECORD_AUDIO,Manifest.permission.ACCESS_WIFI_STATE,Manifest.permission.ACCESS_NETWORK_STATE,Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.ACCESS_NOTIFICATION_POLICY};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,7 +147,7 @@ public class LoginActivity extends BaseActivity {
                 case R.id.btn_login1:
                     if (mEtaccount.getText().toString().equals("")||mEtpassword.getText().toString().equals(""))
                     {
-                        Toast.makeText(LoginActivity.this,"用户名或密码为空，登陆失败",Toast.LENGTH_SHORT).show();
+                        ToastUtils.ShowMyToasts(LoginActivity.this,"用户名或密码为空，登陆失败", Gravity.CENTER);
                     }
                     else {
 //                        LoginRequest(mEtaccount.getText().toString(),mEtpassword.getText().toString());
@@ -209,10 +211,10 @@ public class LoginActivity extends BaseActivity {
                                             }
                                         });
                                     } else if(result.equals("pswerror")) {
-                                        Toast.makeText(LoginActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
+                                        ToastUtils.ShowMyToasts(LoginActivity.this,"密码错误",Gravity.CENTER);
                                         mBtnLogin.setText("登录");
                                     }else if(result.equals("notexists")) {
-                                        Toast.makeText(LoginActivity.this,"用户不存在,请先注册",Toast.LENGTH_SHORT).show();
+                                        ToastUtils.ShowMyToasts(LoginActivity.this,"用户不存在,请先注册",Gravity.CENTER);
                                         mBtnLogin.setText("登录");
                                     }
                                 } catch (JSONException e) {

@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -24,8 +25,10 @@ import com.bumptech.glide.signature.ObjectKey;
 import com.example.administrator.tecsoundclass.Fragments.CourseFragment;
 import com.example.administrator.tecsoundclass.Fragments.FriendFragment;
 import com.example.administrator.tecsoundclass.Fragments.MyselfFragment;
+import com.example.administrator.tecsoundclass.JavaBean.MyApplication;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.TransferMore;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
@@ -113,7 +116,7 @@ public class MainMenuActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         pref= PreferenceManager.getDefaultSharedPreferences(this);
-        if (getIntent().getAction().equals("ACTION_SAVED_LOGIN_AUTO")){
+        if (getIntent().getAction()!=null&&getIntent().getAction().equals("ACTION_SAVED_LOGIN_AUTO")){
             Login(new Handler(new Handler.Callback() {
                 @Override
                 public boolean handleMessage(Message msg) {
@@ -130,6 +133,8 @@ public class MainMenuActivity extends BaseActivity {
             }));
         }else {
             mUser= (User) getIntent().getExtras().getSerializable("user");
+            MyApplication application=MyApplication.getApplication();
+            application.setmUser(mUser);
             StudentID=mUser.getUser_id();
             if(savedInstanceState == null){
                 changeFragment(CourseFragment.class.getName());
@@ -221,7 +226,7 @@ public class MainMenuActivity extends BaseActivity {
                                         }
                                     });
                                 } else if(result.equals("pswerror")) {
-                                    Toast.makeText(MainMenuActivity.this,"密码错误,请重新登录",Toast.LENGTH_SHORT).show();
+                                    ToastUtils.ShowMyToasts(MainMenuActivity.this,"密码错误,请重新登录", Gravity.CENTER);
                                     Intent intent=new Intent(MainMenuActivity.this,LoginActivity.class);
                                     startActivity(intent);
                                     finish();

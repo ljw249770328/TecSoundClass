@@ -9,8 +9,8 @@
     android:paddingBottom="5dp">
     <com.example.administrator.tecsoundclass.utils.CircleImageView
         android:id="@+id/iv_friend_pic"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:scaleType="centerCrop"
         android:background="@drawable/bg_im_friend_head"
         android:layout_gravity="center"/>
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="10dp"
-        android:paddingTop="7dp"
+        android:paddingTop="5dp"
         android:layout_marginLeft="20dp">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:text="好友名"
                 android:textStyle="bold"
-                android:textSize="18sp"
+                android:textSize="14sp"
                 android:textColor="@color/colorBlack"/>
             <TextView
             android:id="@+id/tv_time"
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:text="小伙伴正在上'java基础'"
+                android:text=""
                 android:textColor="@color/colorGray" />
 
         </RelativeLayout>

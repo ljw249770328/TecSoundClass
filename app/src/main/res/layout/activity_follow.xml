@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="加入课堂"
+            android:text="加关注"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
             android:textSize="18sp" />
@@ -30,7 +30,7 @@
             android:id="@+id/tv_next"
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:text="下一步"
+            android:text="搜索"
             android:gravity="center"
             android:textSize="18sp"
             android:layout_alignParentRight="true"
@@ -46,10 +46,10 @@
             android:layout_height="40dp"
             android:background="@color/colorWhite"
             android:layout_marginTop="40dp"
-            android:maxLength="10"
+            android:maxLength="16"
             android:textColor="@color/colorBlack"
             android:paddingLeft="15dp"
-            android:hint="在这里填写课程号"
+            android:hint="在这里填写想要关注人的账号"
             android:textColorHint="@color/colorSmallGray"
             android:textSize="14dp"
             android:inputType="number"
@@ -60,4 +60,5 @@
             android:background="@color/colorBgGray"
             android:layout_below="@id/et_input"/>
     </RelativeLayout>
+
 </LinearLayout>

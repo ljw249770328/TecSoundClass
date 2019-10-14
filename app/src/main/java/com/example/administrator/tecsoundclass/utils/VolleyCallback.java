@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -43,7 +44,7 @@ public class VolleyCallback {
                         } catch (JSONException e) {
                             //做请求异常操作，如Toast提示（“无网络连接”等）
                             Log.e("TAG", e.getMessage(), e);
-                            Toast.makeText(context,"请求服务器异常",Toast.LENGTH_SHORT).show();
+                            ToastUtils.ShowMyToasts(context,"请求服务器异常", Gravity.CENTER);
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -61,7 +62,7 @@ public class VolleyCallback {
                                 times--;
                             }else {
                                 Looper.prepare();
-                                Toast.makeText(context,"响应错误,请稍后重试",Toast.LENGTH_SHORT).show();
+                                ToastUtils.ShowMyToasts(context,"响应错误,请稍后重试",Gravity.CENTER);
                                 Looper.loop();
                                 callback.onError(error);
                             }

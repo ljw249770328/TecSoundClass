@@ -3,6 +3,7 @@ package com.example.administrator.tecsoundclass.Activity;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.ObjectKey;
 import com.example.administrator.tecsoundclass.JavaBean.Course;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
 import org.json.JSONException;
@@ -89,12 +91,12 @@ public class ClassResultActivity extends BaseActivity {
                             try {
                                 String result=r.getString("Result");
                                 if (result.equals("exists")){
-                                    Toast.makeText(ClassResultActivity.this,"不能重复加入已加入的课堂",Toast.LENGTH_SHORT).show();
+                                    ToastUtils.ShowMyToasts(ClassResultActivity.this,"不能重复加入已加入的课堂", Gravity.CENTER);
                                 }
                                 if (result.equals("abandon")){
-                                    Toast.makeText(ClassResultActivity.this,"已加入该课堂的其他班级,请退出原班级后重新进入",Toast.LENGTH_SHORT).show();
+                                    ToastUtils.ShowMyToasts(ClassResultActivity.this,"已加入该课堂的其他班级,请退出原班级后重新进入",Gravity.CENTER);
                                 }else{
-                                    Toast.makeText(ClassResultActivity.this,result,Toast.LENGTH_SHORT).show();
+                                    ToastUtils.ShowMyToasts(ClassResultActivity.this,result,Gravity.CENTER);
                                     finish();
                                 }
 

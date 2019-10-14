@@ -6,6 +6,13 @@
     android:orientation="horizontal"
     android:animateLayoutChanges="true"
     android:background="#FFF">
+    <ImageView
+        android:id="@+id/iv_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-290dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_head_shape"/>
     <RelativeLayout
         android:id="@+id/head"
         android:layout_width="match_parent"
@@ -16,7 +23,7 @@
             android:id="@+id/tv_back"
             android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:text="返回"
+            android:text="取消"
             android:gravity="center"
             android:textSize="17sp"
             android:layout_marginLeft="7dp"/>
@@ -29,60 +36,60 @@
             android:textStyle="bold"
             android:textSize="18sp" />
     </RelativeLayout>
-
+    <com.shehuan.niv.NiceImageView
+        android:id="@+id/iv_user_pic"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerCrop"
+        app:border_width="1dp"
+        app:corner_radius="7dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:layout_below="@id/head"
+        app:is_circle="true"
+        app:border_color="@color/colorDarkGreen"/>
+    <TextView
+        android:id="@+id/tv_result_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="(用户)"
+        android:textStyle="bold"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/colorWhite"
+        android:layout_below="@id/iv_user_pic"
+        android:gravity="center"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/head"
+        android:layout_below="@id/iv_head"
         android:layout_marginTop="50dp"
         android:padding="15dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_below="@id/ll_1"
             android:orientation="vertical"
-            android:layout_marginTop="-35dp"
             android:background="@drawable/bg_layout_classres_bg">
-            <TextView
-                android:id="@+id/tv_result_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="17sp"
-                android:layout_marginTop="45dp"
-                android:text="(课堂名)"
-                android:textStyle="bold"
-                android:textColor="@color/colorWhite"
-                android:gravity="center"/>
-            <Button
-                android:id="@+id/btn_join"
-                android:layout_width="260dp"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_btn_button"
-                android:text="加入"
-                android:textSize="15dp"
-                android:layout_gravity="center"
-                android:textColor="@color/colorGreen"
-                android:layout_marginTop="10dp"
-                />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:layout_marginTop="15dp">
+                android:paddingLeft="30dp"
+                android:layout_marginTop="30dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="注册班级:"
+                    android:text="账号:"
                     android:textSize="15sp"
                     android:textColor="@color/colorWhite"/>
                 <TextView
-                    android:id="@+id/tv_result_class"
+                    android:id="@+id/tv_result_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="35dp"
-                    android:text="虚拟现实班"
+                    android:layout_marginLeft="55dp"
+                    android:text=""
                     android:textStyle="bold"
                     android:textSize="15sp"
                     android:textColor="@color/colorWhite"/>
@@ -91,20 +98,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="15dp"
+                android:paddingLeft="30dp"
                 android:layout_marginTop="15dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="授课老师:"
+                    android:text="性别:"
                     android:textSize="15sp"
                     android:textColor="@color/colorWhite"/>
                 <TextView
-                    android:id="@+id/tv_result_tea"
+                    android:id="@+id/tv_result_sex"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="35dp"
-                    android:text="()"
+                    android:layout_marginLeft="55dp"
+                    android:text=""
                     android:textStyle="bold"
                     android:textSize="15sp"
                     android:textColor="@color/colorWhite"/>
@@ -113,20 +120,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="15dp"
+                android:paddingLeft="30dp"
                 android:layout_marginTop="15dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="上课时间:"
+                    android:text="出生日期："
                     android:textSize="15sp"
                     android:textColor="@color/colorWhite"/>
                 <TextView
                     android:id="@+id/tv_result_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="35dp"
-                    android:text="()"
+                    android:layout_marginLeft="15dp"
+                    android:text=""
                     android:textStyle="bold"
                     android:textSize="15sp"
                     android:textColor="@color/colorWhite"/>
@@ -135,62 +142,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingLeft="15dp"
+                android:paddingLeft="30dp"
                 android:layout_marginTop="15dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="创建时间:"
+                    android:text="账号身份:"
                     android:textSize="15sp"
                     android:textColor="@color/colorWhite"/>
                 <TextView
-                    android:id="@+id/tv_result_create"
+                    android:id="@+id/tv_result_identity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="35dp"
-                    android:text="()"
-                    android:textStyle="bold"
-                    android:textSize="15sp"
-                    android:textColor="@color/colorWhite"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:layout_marginTop="15dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="课堂要求:"
-                    android:textSize="15sp"
-                    android:textColor="@color/colorWhite"/>
-                <TextView
-                    android:id="@+id/tv_result_req"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="35dp"
-                    android:text="()"
+                    android:layout_marginLeft="30dp"
+                    android:text=""
                     android:textStyle="bold"
                     android:textSize="15sp"
                     android:textColor="@color/colorWhite"/>
             </LinearLayout>
 
+            <Button
+                android:id="@+id/btn_follow"
+                android:layout_width="260dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_btn_button"
+                android:text="关注"
+                android:textSize="15dp"
+                android:layout_gravity="center"
+                android:textColor="@color/colorGreen"
+                android:layout_marginTop="80dp"
+                />
         </LinearLayout>
-        <LinearLayout
-            android:id="@+id/ll_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-            <com.shehuan.niv.NiceImageView
-                android:id="@+id/iv_class_pic"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:scaleType="centerCrop"
-                app:border_width="1dp"
-                app:corner_radius="7dp"
-                app:border_color="@color/colorDarkGreen"/>
-        </LinearLayout>
+
     </RelativeLayout>
 
 

@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.Activity.SettingsActivity;
 import com.example.administrator.tecsoundclass.Activity.StandDataActivity;
+import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
 
@@ -154,7 +156,7 @@ public class MyselfFragment extends Fragment {
                     break;
                 case R.id.tv_send_zone:
                     mPop.dismiss();
-                    Toast.makeText(getActivity(),"暂未开放,敬请期待",Toast.LENGTH_LONG).show();
+                    ToastUtils.ShowMyToasts(getActivity(),"暂未开放,敬请期待", Gravity.CENTER);
                     break;
                 case R.id.tv_reset:
                     mPop.dismiss();
