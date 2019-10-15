@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    android:background="@color/colorBgGray"
+    android:background="@color/colorWhite"
     android:orientation="vertical">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/rl_1"
-            android:background="@color/colorBgGray"
+            android:background="@color/colorWhite"
             android:orientation="vertical">
             <!--<LinearLayout-->
                 <!--android:id="@+id/ll_search"-->
@@ -78,9 +78,13 @@
                 android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:background="@color/colorSmallGray"
                 android:orientation="horizontal"
-                android:text="近期更新"
+                android:layout_marginTop="10dp"
+                android:text="-------近期更新------"
+                android:textStyle="bold"
+                android:gravity="center"
+
+                android:textColor="#999"
                 android:textSize="15sp"
                 android:padding="5dp">
             </TextView>
@@ -97,12 +101,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:padding="10dp"
             android:text="开始上课"
+            android:textStyle="bold"
+            android:paddingVertical="7dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@drawable/bg_sign_btn"
             android:textSize="16sp"
-            android:background="@drawable/bg_btn_button"
-            android:textColor="@color/colorGreen"
-            android:layout_marginBottom="3dp"/>
+            android:textColor="@color/colorWhite"
+            android:layout_marginBottom="10dp"/>
         </RelativeLayout>
     </RelativeLayout>
 

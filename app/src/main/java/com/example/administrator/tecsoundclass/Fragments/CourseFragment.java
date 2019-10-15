@@ -38,6 +38,7 @@ import com.example.administrator.tecsoundclass.Activity.MainMenuActivity;
 import com.example.administrator.tecsoundclass.JavaBean.Course;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.TranslateFactory;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
 import org.json.JSONArray;
@@ -112,7 +113,8 @@ public class CourseFragment extends Fragment {
                 mPop = new PopupWindow(view, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 mPop.setOutsideTouchable(true);
                 mPop.setFocusable(true);
-                mPop.showAsDropDown(mIvMenu);
+                view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+                mPop.showAsDropDown(mIvMenu, TranslateFactory.dip2px(getActivity(), -110), TranslateFactory.dip2px(getActivity(), 5));
             }
         });
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());

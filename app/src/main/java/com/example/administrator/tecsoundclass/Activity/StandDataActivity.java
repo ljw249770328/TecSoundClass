@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.example.administrator.tecsoundclass.R;
 
 public class StandDataActivity extends BaseActivity {
-    private TextView mTvback,mTvVoiceData;
+    private TextView mTvback,mTvVoiceData,mTvFaceData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +17,7 @@ public class StandDataActivity extends BaseActivity {
         final Bundle bundle=getIntent().getExtras();
         mTvback=findViewById(R.id.tv_back);
         mTvVoiceData=findViewById(R.id.tv_voice_data);
+        mTvFaceData=findViewById(R.id.face);
         mTvback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -28,6 +29,13 @@ public class StandDataActivity extends BaseActivity {
             public void onClick(View v) {
                 Intent intent =new Intent(StandDataActivity.this,RegeditVoiceActivity.class);
                 intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        mTvFaceData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(StandDataActivity.this,RegeditFaceDataActivity.class);
                 startActivity(intent);
             }
         });

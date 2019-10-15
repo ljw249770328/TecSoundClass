@@ -19,6 +19,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -68,7 +69,7 @@ public class SignFragment extends Fragment {
 
     private ImageView mIvBack;
     private RecyclerView mRvSign;
-    private TextView mTvSign;
+    private Button mBtnSign;
     private AlertDialog mSignDialog;
     private AlertDialog mSignResDialog;
     private SpeakerVerifier mSpeakerVerifier;
@@ -114,21 +115,21 @@ public class SignFragment extends Fragment {
                             InitList();
                         }
                     });
-                    mTvSign.setText("开始签到");
+                    mBtnSign.setText("开始签到");
                     break;
                 case SIGN_STARTED:
-                    mTvSign.setText("结束签到");
+                    mBtnSign.setText("结束签到");
                     break;
                 case SUC_SIGN:
                     ToastUtils.ShowMyToasts(mActivity.getApplicationContext(),"签到完成，请认真上课",Gravity.CENTER);
-                    mTvSign.setText("已签到");
+                    mBtnSign.setText("已签到");
                     break;
                 case SIGN_DENYED:
                     ToastUtils.ShowMyToasts(mActivity.getApplicationContext(),"教师未开放签到通道",Gravity.CENTER);
                     break;
                 case SIGN_ED:
                     ToastUtils.ShowMyToasts(mActivity.getApplicationContext(),"您已参与本次签到",Gravity.CENTER);
-                    mTvSign.setText("已签到");
+                    mBtnSign.setText("已签到");
                     break;
                 case SIGN_ACCESSED:
                     //进行识别
@@ -201,19 +202,19 @@ public class SignFragment extends Fragment {
 
     private void init(View view) {
         mIvBack = view.findViewById(R.id.im_back);
-        mTvSign = view.findViewById(R.id.tv_start_sign);
+        mBtnSign = view.findViewById(R.id.btn_start_sign);
         mToast = Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT);
         user=mActivity.getmUser();
         mAuthId = user.getUser_id();
         mRvSign = view.findViewById(R.id.recycler_view_sign);
         if(mActivity.getmUser().getUser_identity().equals("学生")){
-            mTvSign.setText("签到");
+            mBtnSign.setText("签到");
         }
     }
 
     private void SetClickLIstener() {
         mIvBack.setOnClickListener(onclick);
-        mTvSign.setOnClickListener(onclick);
+        mBtnSign.setOnClickListener(onclick);
     }
 
     @Override
@@ -306,12 +307,12 @@ public class SignFragment extends Fragment {
                 case R.id.im_back:
                     getActivity().finish();
                     break;
-                case R.id.tv_start_sign:
+                case R.id.btn_start_sign:
                     Map<String,String>  msg =new HashMap<>();
                     Gson gson=new Gson();
                     if (mActivity.getmUser().getUser_identity().equals("老师")){
 
-                        if(mTvSign.getText().toString().equals("开始签到")){
+                        if(mBtnSign.getText().toString().equals("开始签到")){
                             msg.put("SignClass",mActivity.getmCourse().getCourse_id());
                             msg.put("condition","SignStart");
                             msg.put("ClsTea",mActivity.getmUser().getUser_id());
@@ -323,7 +324,7 @@ public class SignFragment extends Fragment {
                                 e.printStackTrace();
                             }
 
-                        }else if (mTvSign.getText().toString().equals("结束签到")){
+                        }else if (mBtnSign.getText().toString().equals("结束签到")){
                             msg.put("StopClass",mActivity.getmCourse().getCourse_id());
                             msg.put("condition","SignStop");
                             msg.put("ClsTea",mActivity.getmUser().getUser_id());

@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBgGray"
+    android:background="@color/colorWhite"
     android:animateLayoutChanges="true"
     android:orientation="vertical">
     <RelativeLayout
@@ -37,22 +37,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/rl_1"
-            android:background="@color/colorBgGray"
+            android:background="@color/colorWhite"
             android:orientation="vertical">
                 <LinearLayout
                     android:id="@+id/ll_more_head"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/colorWhite"
-                    android:padding="10dp"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp"
                     android:gravity="center"
+                    android:layout_marginTop="20dp"
                     android:orientation="horizontal">
                     <ImageView
                         android:id="@+id/iv_change_cpic"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
                         android:layout_marginLeft="10dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="center"
                         android:background="@drawable/bg_im_class_head"/>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -67,13 +69,13 @@
                             android:layout_height="wrap_content"
                             android:text="课堂ID:"
                             android:textColor="@color/colorBlack"
-                            android:textSize="14dp" />
+                            android:textSize="10dp" />
                         <TextView
                             android:id="@+id/tv_mcourse_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="课堂名称"
-                            android:textSize="17dp"
+                            android:textSize="15dp"
                             android:textStyle="bold"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/colorBlack"/>
@@ -82,8 +84,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="班级名称"
-                            android:textSize="14dp"
-                            android:textColor="@color/colorGray"
+                            android:textSize="12dp"
+                            android:textColor="@color/colorSmallGray"
                             android:layout_marginTop="15dp" />
                     </LinearLayout>
 
@@ -96,11 +98,14 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:paddingHorizontal="5dp"
                         android:orientation="vertical">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:background="@drawable/bg_c_info_item">
                         <TextView
                             android:id="@+id/tv_tea_info"
                             android:layout_width="0dp"
@@ -108,26 +113,27 @@
                             android:layout_weight="8"
                             android:padding="7dp"
                             android:text="教师信息:"
+                            android:textStyle="bold"
                             android:gravity="left"
                             android:textSize="16sp"
-                            android:background="@drawable/bg_textview"
-                            android:textColor="@color/colorBlack"/>
+                            android:textColor="@color/colorWhite"/>
                         <TextView
                             android:id="@+id/tv_ctea_name"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="5"
-                            android:background="@drawable/bg_textview"
                             android:gravity="right"
                             android:padding="7dp"
                             android:text="xxxxx"
-                            android:textColor="@color/colorDarkGray"
+                            android:textColor="@color/colorWhite"
                             android:maxLines="1"
                             android:textSize="16sp" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:background="@drawable/bg_c_info_item"
                         android:orientation="horizontal">
                         <TextView
                             android:id="@+id/tv_class_time"
@@ -137,8 +143,8 @@
                             android:layout_weight="8"
                             android:text="上课时间:"
                             android:textSize="16sp"
-                            android:background="@drawable/bg_textview"
-                            android:textColor="@color/colorBlack"/>
+                            android:textColor="@color/colorWhite"
+                            android:textStyle="bold"/>
                         <TextView
                             android:id="@+id/tv_Ctime"
                             android:layout_width="0dp"
@@ -149,8 +155,7 @@
                             android:gravity="right"
                             android:textSize="16sp"
                             android:maxLines="1"
-                            android:background="@drawable/bg_textview"
-                            android:textColor="@color/colorDarkGray"/>
+                            android:textColor="@color/colorWhite"/>
                     </LinearLayout>
                         <TextView
                             android:id="@+id/tv_class_request"
@@ -161,19 +166,21 @@
                             android:padding="7dp"
                             android:text="课堂要求:"
                             android:drawableRight="@drawable/down"
+                            android:background="@drawable/bg_c_info_item"
                             android:textSize="16sp"
-                            android:background="@drawable/bg_textview"
-                            android:textColor="@color/colorBlack"/>
+                            android:textStyle="bold"
+                            android:textColor="@color/colorWhite"/>
 
                         <TextView
                             android:id="@+id/tv_request_text"
                             android:layout_width="match_parent"
                             android:layout_height="150dp"
-                            android:layout_marginTop="1dp"
-                            android:background="@drawable/bg_layout_classres_bg"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/bg_c_info_item"
+                            android:layout_marginHorizontal="3dp"
                             android:visibility="gone"
                             android:padding="7dp"
-                            android:textColor="@color/colorDarkGray"
+                            android:textColor="@color/colorWhite"
                             android:textSize="14sp" />
                     </LinearLayout>
 
@@ -184,11 +191,14 @@
                         android:padding="7dp"
                         android:gravity="center"
                         android:text="退出课堂"
-                        android:textSize="16sp"
                         android:layout_alignParentBottom="true"
-                        android:background="@drawable/bg_et_edit"
-
-                        android:textColor="@color/colorTextRed"/>
+                        android:textStyle="bold"
+                        android:paddingVertical="7dp"
+                        android:layout_marginHorizontal="30dp"
+                        android:background="@drawable/bg_exit_btn"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorWhite"
+                        android:layout_marginBottom="10dp"/>
                 </RelativeLayout>
 
         </LinearLayout>

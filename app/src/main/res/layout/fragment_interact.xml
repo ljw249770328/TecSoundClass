@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBgGray"
+    android:background="@color/colorWhite"
     android:animateLayoutChanges="true"
     android:orientation="vertical">
     <RelativeLayout
@@ -49,10 +49,13 @@
             android:layout_alignParentBottom="true"
             android:padding="10dp"
             android:text="提问"
+            android:textStyle="bold"
+            android:paddingVertical="7dp"
+            android:layout_marginHorizontal="30dp"
+            android:background="@drawable/bg_sign_btn"
             android:textSize="16sp"
-            android:background="@drawable/bg_btn_button"
-            android:textColor="@color/colorGreen"
-            android:layout_marginBottom="3dp"/>
+            android:textColor="@color/colorWhite"
+            android:layout_marginBottom="10dp"/>
 
     </RelativeLayout>
 </FrameLayout>

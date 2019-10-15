@@ -13,6 +13,7 @@
             android:layout_height="60dp"
             android:orientation="horizontal"
             android:gravity="center"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/message">
             <TextView
                 android:id="@+id/tv_voice_time"
@@ -44,8 +45,8 @@
         android:text="(日期)"
         android:layout_gravity="center"
         android:paddingLeft="5dp"
-        android:textSize="13sp"
-        android:textColor="@color/colorSmallGray"/>
+        android:textSize="10sp"
+        android:textColor="@color/colorBlack"/>
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"

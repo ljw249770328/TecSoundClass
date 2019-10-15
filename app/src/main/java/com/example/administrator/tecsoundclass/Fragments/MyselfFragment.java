@@ -41,6 +41,7 @@ import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.Activity.SettingsActivity;
 import com.example.administrator.tecsoundclass.Activity.StandDataActivity;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
+import com.example.administrator.tecsoundclass.utils.TranslateFactory;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
 
@@ -127,7 +128,8 @@ public class MyselfFragment extends Fragment {
         mPop=new PopupWindow(view,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
         mPop.setOutsideTouchable(true);
         mPop.setFocusable(true);
-        mPop.showAsDropDown(mIvMenu);
+        view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        mPop.showAsDropDown(mIvMenu, TranslateFactory.dip2px(getActivity(), -110), TranslateFactory.dip2px(getActivity(), 5));
     }
     private void SetInfo(){
         mTvUsername.setText(activity.getmUser().getUser_name());

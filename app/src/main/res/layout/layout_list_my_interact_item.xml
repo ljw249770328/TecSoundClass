@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Q:"
-                android:textColor="@color/colorDarkGray"
+                android:textColor="@color/colorWhite"
                 android:textSize="23sp"
                 android:textStyle="bold"
                 />
@@ -31,9 +31,10 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="问题"
+                android:textStyle="bold"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:textColor="@color/colorDarkGray"
+                android:textColor="@color/colorWhite"
                 android:textSize="20sp" />
         </LinearLayout>
         <LinearLayout
@@ -44,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="A:"
-                android:textColor="@color/colorSmallGray"
+                android:textColor="#E9E511"
                 android:textSize="17sp"
                 android:textStyle="bold"/>
             <TextView
@@ -52,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="回答"
-                android:textColor="@color/colorSmallGray"
+                android:textColor="#E9E511"
                 android:paddingLeft="3dp"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
@@ -82,7 +83,7 @@
             android:gravity="center"
             android:text="得分"
             android:paddingRight="3dp"
-            android:textColor="@color/colorDarkGray"
+            android:textColor="@color/colorWhite"
             android:textSize="20sp" />
         <TextView
             android:id="@+id/tv_interact_date"
@@ -90,7 +91,7 @@
             android:layout_height="match_parent"
             android:text="(回答日期)"
             android:gravity="center"
-            android:textColor="@color/colorSmallGray"
+            android:textColor="#E7E7E7"
             android:textSize="8sp" />
 
     </LinearLayout>

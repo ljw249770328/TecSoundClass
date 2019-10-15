@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -36,7 +37,8 @@ import java.util.Map;
 
 public class EditMyInfoActivity extends BaseActivity {
     private ImageView mBack,mIvEditedHead;
-    private TextView mTvMyname,mTvMyId,mTvMyBirthD,mTvMyIdentity,mTvSave,mTvChangeHead;
+    private Button mBtnSave;
+    private TextView mTvMyname,mTvMyId,mTvMyBirthD,mTvMyIdentity,mTvChangeHead;
     private RadioGroup mSexGroup;
     private RadioButton rb_male;
     private RadioButton rb_female;
@@ -51,7 +53,7 @@ public class EditMyInfoActivity extends BaseActivity {
         mTvMyId=findViewById(R.id.tv_my_id);
         mTvMyIdentity=findViewById(R.id.tv_my_occupation);
         mTvMyBirthD=findViewById(R.id.tv_my_birth_date);
-        mTvSave=findViewById(R.id.tv_save);
+        mBtnSave=findViewById(R.id.btn_save);
         mSexGroup=findViewById(R.id.rg_sex_group);
         rb_male=findViewById(R.id.rb_sex_male);
         rb_female=findViewById(R.id.rb_sex_female);
@@ -62,7 +64,7 @@ public class EditMyInfoActivity extends BaseActivity {
         OnClick onClick =new OnClick();
         mBack.setOnClickListener(onClick);
         mTvMyBirthD.setOnClickListener(onClick);
-        mTvSave.setOnClickListener(onClick);
+        mBtnSave.setOnClickListener(onClick);
         mTvChangeHead.setOnClickListener(onClick);
         mSexGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             int count = mSexGroup.getChildCount();
@@ -88,7 +90,7 @@ public class EditMyInfoActivity extends BaseActivity {
                     TPDialogFactory factory =new TPDialogFactory();
                     factory.getDatePicker(EditMyInfoActivity.this,"出生日期",mTvMyBirthD).show(factory.getTime());
                     break;
-                case R.id.tv_save:
+                case R.id.btn_save:
                     FileUploadUtil.UploadFile(getApplicationContext(), "uploadhead", picTurePath, mTvMyId.getText().toString() + ".jpeg", "headpic", "user", user.getUser_id(), new FileUploadUtil.FileUploadCallBack() {
                         @Override
                         public void OnUploaded(String Fileurl) {

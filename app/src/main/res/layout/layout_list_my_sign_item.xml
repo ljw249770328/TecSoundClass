@@ -5,14 +5,15 @@
     android:orientation="horizontal"
     android:padding="1dp"
     android:paddingTop="2dp"
-    android:layout_marginBottom="7dp">
+    android:layout_marginBottom="7dp"
+    android:background="@drawable/recyclelist_sign_item">
     <LinearLayout
         android:id="@+id/ll_data"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:padding="5dp"
         android:orientation="horizontal"
-        android:background="@drawable/recyclelist_sign_item">
+        >
         <LinearLayout
             android:layout_width="230dp"
             android:layout_height="match_parent"
@@ -24,9 +25,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:textSize="19sp"
+                android:textSize="16sp"
                 android:text="(签到人)"
-                android:textColor="@color/colorDarkGray"/>
+                android:textColor="@color/colorWhite"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,8 +39,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="(具体时间)"
-                    android:textColor="@color/colorSmallGray"
-                    android:textSize="15sp" />
+                    android:textColor="@color/colorWhite"
+                    android:textSize="13sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -54,9 +55,10 @@
                 android:layout_height="match_parent"
                 android:paddingLeft="20dp"
                 android:gravity="center"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:text="(签到状态)"
-                android:textColor="@color/colorGray"/>
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"/>
         </LinearLayout>
     </LinearLayout>
     <View

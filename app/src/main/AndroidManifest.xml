@@ -30,7 +30,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".Activity.FriendResultActivity"></activity>
+        <activity android:name=".Activity.RegeditFaceDataActivity"></activity>
+        <activity android:name=".Activity.FriendResultActivity" />
         <activity android:name=".Activity.FollowActivity" />
         <activity android:name=".Activity.ChatActivity" />
         <activity android:name=".Activity.LauncherActivity">
