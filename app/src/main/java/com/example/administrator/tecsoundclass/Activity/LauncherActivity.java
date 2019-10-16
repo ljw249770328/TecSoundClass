@@ -74,66 +74,6 @@ public class LauncherActivity extends BaseActivity {
                     intent.setAction("ACTION_SAVED_LOGIN_AUTO");
                     startActivity(intent);
                     finish();
-//                    String url = "http://101.132.71.111:8080/TecSoundWebApp/LoginServlet";
-//                    Map<String, String> params = new HashMap<>();
-//                    params.put("user_id", pref.getString("userid",""));  //注⑥
-//                    params.put("user_password", pref.getString("psw",""));
-//                    //登陆请求
-//                    VolleyCallback.getJSONObject(getApplicationContext(), "Login", url, params, new VolleyCallback.VolleyJsonCallback() {
-//                        @SuppressLint("HandlerLeak")
-//                        @Override
-//                        public void onFinish(JSONObject r) {
-//                            String result = null;  //注④
-//                            try {
-//                                result = r.getString("Result");
-//                                if (result.equals("pass")) {
-//                                    //封装User对象
-//                                    TransferMore.GetUserById(getApplicationContext(),pref.getString("userid",""),new Handler(){
-//                                        @Override
-//                                        public void handleMessage(Message msg) {
-//                                            super.handleMessage(msg);
-//                                            switch (msg.what){
-//                                                case 1:
-//                                                    mUser= (User) msg.obj;
-//                                                    Map<String,String> header= new HashMap<>();
-//                                                    try {
-//                                                        header.put("id", URLEncoder.encode(pref.getString("userid",""),"UTF-8"));
-//                                                        WebSocketClient client= WebSocketClientObject.getClient(getApplicationContext(),new Handler(){
-//                                                            @Override
-//                                                            public void handleMessage(Message msg) {
-//                                                                super.handleMessage(msg);
-//                                                                switch (msg.what){
-//                                                                    case 0:
-//                                                                        Intent intent=new Intent(LauncherActivity.this,MainMenuActivity.class);
-//                                                                        Bundle bundle=new Bundle();
-//                                                                        bundle.putSerializable("user",mUser);
-//                                                                        intent.putExtras(bundle);
-//                                                                        startActivity(intent);
-//                                                                        finish();
-//                                                                        break;
-//                                                                }
-//                                                            }
-//                                                        },header);
-//                                                        client.connect();
-//                                                    } catch (UnsupportedEncodingException e) {
-//                                                        e.printStackTrace();
-//                                                    }
-//                                                    break;
-//                                            }
-//                                        }
-//                                    });
-//                                } else if(result.equals("pswerror")) {
-//                                    Toast.makeText(LauncherActivity.this,"密码错误",Toast.LENGTH_SHORT).show();
-//                                }else if(result.equals("notexists")) {
-//                                    Toast.makeText(LauncherActivity.this,"用户不存在,请先注册",Toast.LENGTH_SHORT).show();
-//                                }
-//                            } catch (JSONException e) {
-//                                // 做自己的请求异常操作，如Toast提示（“无网络连接”等）
-//                                Log.e("TAG", e.getMessage(), e);
-//                            }
-//
-//                        }
-//                    });
                 }else {
                     Intent intent = new Intent(LauncherActivity.this,LoginActivity.class);
                     startActivity(intent);

@@ -2,7 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="400dp"
+    android:layout_height="600dp"
     android:orientation="vertical"
     android:background="@drawable/bg_rv_res_dialog">
     <TextView
@@ -10,8 +10,9 @@
         android:layout_height="wrap_content"
         android:padding="15dp"
         android:text="签到人员统计"
+        android:textColor="@color/colorWhite"
         android:gravity="center"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:textStyle="bold"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_sign_res_lst"

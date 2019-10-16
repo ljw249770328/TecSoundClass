@@ -14,12 +14,12 @@
         android:text="来自XXXX课堂"
         android:textSize="17sp"
         android:textStyle="bold"
-        android:textColor="@color/colorGray"/>
+        android:textColor="#CEF1F1F1"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="老师喊你签到啦"
+        android:text="点击按钮进行声纹验证"
         android:textSize="25sp"
         android:textStyle="bold"
         android:layout_marginTop="10dp"

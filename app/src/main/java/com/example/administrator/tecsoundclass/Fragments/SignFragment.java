@@ -26,6 +26,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.arcsoft.face.FaceEngine;
+import com.example.administrator.tecsoundclass.Activity.RecognizeFaceActivity;
 import com.example.administrator.tecsoundclass.Adapter.MyReviewListAdapter;
 import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
@@ -34,6 +36,7 @@ import com.example.administrator.tecsoundclass.JavaBean.Sign;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.Activity.RegeditVoiceActivity;
+import com.example.administrator.tecsoundclass.utils.ConfigUtil;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
@@ -132,36 +135,9 @@ public class SignFragment extends Fragment {
                     mBtnSign.setText("已签到");
                     break;
                 case SIGN_ACCESSED:
-                    //进行识别
-                    //初始化声纹识别引擎
-                    mSpeakerVerifier = SpeakerVerifier.createVerifier(getActivity(), new InitListener() {
-                        @Override
-                        public void onInit(int i) {
-                            if (ErrorCode.SUCCESS == i) {
-                                showTip("引擎初始化成功");
-                            } else {
-                                showTip("引擎初始化失败，错误码：" + i);
-                            }
-                        }
-                    });
-                    //点击签到按钮产生签到弹窗
-                    builder = new AlertDialog.Builder(getActivity());
-                    view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_sign_dialog, null);
-                    TextView mTvSigntitle=view.findViewById(R.id.tv_CTitle_from);
-                    mTvSigntitle.setText("来自"+mActivity.getmCourse().getCourse_name()+"("+mActivity.getmCourse().getCourse_class()+")");
-                    mResultText = view.findViewById(R.id.edt_result);
-                    mErrorResult = view.findViewById(R.id.error_result);
-                    builder.setView(view);
-                    mSignDialog = builder.create();
-                    mSignDialog.show();
-                    //点击按钮开始验证
-                    mErrorResult.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            VoiceIdentifier voiceIdentifier = new VoiceIdentifier();
-                            voiceIdentifier.StartIdentify();
-                        }
-                    });
+                    //进行人脸验证
+                    ConfigUtil.setFtOrient(getActivity(), FaceEngine.ASF_OP_0_HIGHER_EXT);
+                    startActivityForResult(new Intent(getActivity(), RecognizeFaceActivity.class),1);
                     break;
 
             }
@@ -578,5 +554,45 @@ public class SignFragment extends Fragment {
         }
     };
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 1:
+                if (resultCode==getActivity().RESULT_OK){
+                    //进行声纹识别
+                    //初始化声纹识别引擎
+                    mSpeakerVerifier = SpeakerVerifier.createVerifier(getActivity(), new InitListener() {
+                        @Override
+                        public void onInit(int i) {
+                            if (ErrorCode.SUCCESS == i) {
+                                showTip("引擎初始化成功");
+                            } else {
+                                showTip("引擎初始化失败，错误码：" + i);
+                            }
+                        }
+                    });
+                    //产生声纹签到弹窗
+                    builder = new AlertDialog.Builder(getActivity());
+                    view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_sign_dialog, null);
+                    TextView mTvSigntitle=view.findViewById(R.id.tv_CTitle_from);
+                    mTvSigntitle.setText("来自"+mActivity.getmCourse().getCourse_name()+"("+mActivity.getmCourse().getCourse_class()+")");
+                    mResultText = view.findViewById(R.id.edt_result);
+                    mErrorResult = view.findViewById(R.id.error_result);
+                    builder.setView(view);
+                    mSignDialog = builder.create();
+                    mSignDialog.show();
+                    //点击按钮开始验证
+                    mErrorResult.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //声纹
+                            VoiceIdentifier voiceIdentifier = new VoiceIdentifier();
+                            voiceIdentifier.StartIdentify();
+                        }
+                    });
+                }
+        }
+    }
 }
 
