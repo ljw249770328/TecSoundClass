@@ -13,10 +13,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +32,7 @@ import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
+import com.example.administrator.tecsoundclass.zxing.android.CreateCodeImg;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +45,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MoreFragment extends Fragment {
-    private ImageView mIvBack,mIvClasssPic;
+    private ImageView mIvBack,mIvClasssPic,mIvCodePic;
     private TextView mTvclassid,mTvCourseName,mTvClassName,mTvTeaInfo,mTvClasTime,mTvExit,mTvtitle,mTvClassRequest,mTvRequestText;
     private CourseMenuActivity mActivity;
     private String Uid;
@@ -80,7 +83,22 @@ public class MoreFragment extends Fragment {
         course=mActivity.getmCourse();
 //        Toast.makeText(getActivity(),course.getCourse_id(),Toast.LENGTH_SHORT).show();
         SetData();
+        ViewTreeObserver observer= view.getViewTreeObserver();
+        observer.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                CreateCodeImg.createQRcodeImage(mIvCodePic,mTvclassid.getText().toString().substring(5,15));
+            }
+        });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -114,6 +132,7 @@ public class MoreFragment extends Fragment {
         mTvtitle=view.findViewById(R.id.course_title);
         mTvRequestText=view.findViewById(R.id.tv_request_text);
         mTvExit=view.findViewById(R.id.tv_exit);
+        mIvCodePic=view.findViewById(R.id.iv_code_img);
         if (mActivity.getmUser().getUser_identity().equals("老师")){
             mTvExit.setText("解散课堂");
         }

@@ -184,6 +184,7 @@ public class InteractFragment extends Fragment {
 
                     for (int i=0;i<interacts.length();i++){
                         JSONObject interact= (JSONObject) interacts.get(i);
+                        Log.e("interactString",interact.toString());
                         Interaction interaction =new Interaction();
                         interaction.setProblem_id(interact.getString("problem_id"));
                         interaction.setPropose_course_id(interact.getString("propose_course_id"));
@@ -241,6 +242,7 @@ public class InteractFragment extends Fragment {
             }
         });
     }
+
 
     private class Onclick implements View.OnClickListener {
 
@@ -396,5 +398,12 @@ public class InteractFragment extends Fragment {
 //                    break;
             }
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mActivity.unregisterReceiver(mReceiver);
+
     }
 }
