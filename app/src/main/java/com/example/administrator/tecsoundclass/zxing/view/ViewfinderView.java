@@ -200,7 +200,7 @@ public final class ViewfinderView extends View {
 
         canvas.drawRect(frame, paint);
 
-        paint.setColor(Color.GREEN);
+        paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.FILL);
 
         int corWidth = 15;

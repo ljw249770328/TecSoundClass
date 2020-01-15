@@ -138,6 +138,7 @@ public class JoinActivity extends BaseActivity {
                         @Override
                         public void run() {
                             mEtInput.setText(data.getStringExtra("codedContent"));
+                            mTvNext.performLongClick();
                         }
                     });
                 }

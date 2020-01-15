@@ -32,6 +32,7 @@ import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.TransferMore;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
+import com.example.administrator.tecsoundclass.utils.baidu.BaiduApi;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -115,6 +116,8 @@ public class MainMenuActivity extends BaseActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+//        BaiduApi.SentimentAnalysis();
+
         pref= PreferenceManager.getDefaultSharedPreferences(this);
         if (getIntent().getAction()!=null&&getIntent().getAction().equals("ACTION_SAVED_LOGIN_AUTO")){
             Login(new Handler(new Handler.Callback() {
