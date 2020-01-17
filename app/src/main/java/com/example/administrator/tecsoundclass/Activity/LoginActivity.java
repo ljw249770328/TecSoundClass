@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 
 import com.android.volley.VolleyError;
+import com.example.administrator.tecsoundclass.JavaBean.MyApplication;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
@@ -57,7 +58,7 @@ public class LoginActivity extends BaseActivity {
     private EditText mEtaccount;
     private EditText mEtpassword;
     private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
+    private SharedPreferences.Editor editor,myEditor;
     private CheckBox rememberPass;
     private User mUser=null;
     private WebSocketClientObject client =null;
@@ -121,6 +122,7 @@ public class LoginActivity extends BaseActivity {
         mEtaccount=findViewById(R.id.et_username);
         mEtpassword=findViewById(R.id.et_password);
         pref=PreferenceManager.getDefaultSharedPreferences(this);
+        myEditor=getSharedPreferences("admin",MODE_PRIVATE).edit();
         rememberPass=findViewById(R.id.remember_psw);
         //注册点击事件
         SetListeners();
@@ -185,6 +187,11 @@ public class LoginActivity extends BaseActivity {
                                                 switch (msg.what){
                                                     case 1:
                                                         mUser= (User) msg.obj;
+                                                        //登录用户信息持久化
+                                                        myEditor.putString("sex",mUser.getUser_sex().toString().trim());
+                                                        myEditor.putString("identity",mUser.getUser_identity().toString().trim());
+                                                        myEditor.apply();
+                                                        //登录
                                                         Map<String,String> header= new HashMap<>();
                                                         try {
                                                             header.put("id", URLEncoder.encode(mEtaccount.getText().toString().trim(),"UTF-8"));

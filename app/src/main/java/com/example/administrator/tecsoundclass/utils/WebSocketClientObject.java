@@ -118,6 +118,7 @@ public class WebSocketClientObject extends WebSocketClient {
                     break;
                 case "DIALOG_CANCLE":
                     intent =new Intent("com.example.administrator.tecsoundclass.DIALOG_CANCEL");
+                    intent.putExtra("Ca_Uid",params.get("CaughtUid"));
                     mContext.sendBroadcast(intent);
                     break;
                 case "DRAW_ED":
@@ -125,6 +126,8 @@ public class WebSocketClientObject extends WebSocketClient {
                     intent=new Intent("com.example.administrator.tecsoundclass.PICKED");
                     intent.putExtra("question", params.get("question"));
                     intent.putExtra("Cid",params.get("CourseId"));
+                    intent.putExtra("CaughtUid",params.get("CaughtUid"));
+
                     mContext.sendBroadcast(intent);
 
                     break;

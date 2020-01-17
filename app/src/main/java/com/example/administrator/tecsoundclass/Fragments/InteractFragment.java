@@ -129,15 +129,15 @@ public class InteractFragment extends Fragment {
                 return false;
             }
         });
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction("com.example.administrator.tecsoundclass.INTERACT_REFLESH");
+        mReceiver=new Receiver();
+        mActivity.registerReceiver(mReceiver,intentFilter);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        IntentFilter intentFilter=new IntentFilter();
-        intentFilter.addAction("com.example.administrator.tecsoundclass.INTERACT_REFLESH");
-        mReceiver=new Receiver();
-        mActivity.registerReceiver(mReceiver,intentFilter);
         InitList();
     }
 

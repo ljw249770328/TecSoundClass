@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -72,6 +73,7 @@ public class BaseActivity extends AppCompatActivity {
     private static Notification notification;
     private static NotificationCompat.Builder mNfBuilder,mNfHeadBuilder;
     private static NotificationManager manager;
+    private SharedPreferences myPref;
 
     private Gson gson=new Gson();
     private Handler mHandler =new Handler(new Handler.Callback() {
@@ -170,98 +172,167 @@ public class BaseActivity extends AppCompatActivity {
                     builder.show();
                     break;
                 case "com.example.administrator.tecsoundclass.COME_MESSAGE":
-                    final String Clsid=intent.getStringExtra("Cid");
-                    builder = new AlertDialog.Builder(context);
-                    view = LayoutInflater.from(context).inflate(R.layout.layout_raceresp_dialog, null);
-                    i = 10;
-                    final Button mBtncatch = view.findViewById(R.id.tv_getchance);
-                    final TextView mTvQuestion=view .findViewById(R.id.tv_question);
-                    final TextView mTvTime = view.findViewById(R.id.tv_message);
-                    TextView mTvTitle=view.findViewById(R.id.tv_title);
-                    mTvQuestion.setText(intent.getStringExtra("question"));
-                    mTvTitle.setText("来自"+Clsid+"课堂");
-                    mTvTime.setText(i + "");//这里不加""就会崩溃暂未找到原因怀疑是可能变量i不存在时导致赋了空值
-                    builder.setView(view);
-                    dialog = builder.show();
-                    dialog.setCancelable(false);
-                    class Timediscounter{
-                        private Handler TimeHandler = new Handler(new Handler.Callback() {
-                            @Override
-                            public boolean handleMessage(Message msg) {
-                                mTvTime.setText(msg.arg1 + "");
-                                if (i == 0) {
-                                    dialog.cancel();
-                                    //向服务器请求
-                                    Map<String,String>param =new HashMap<>();
-                                    param.put("condition","NoReply");
-                                    param.put("question",mTvQuestion.getText().toString());
-                                    param.put("Cid",Clsid);
-                                    try {
-                                        WebSocketClientObject.getClient(context,mHandler,null)
-                                                .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
-                                    } catch (UnsupportedEncodingException e) {
-                                        e.printStackTrace();
-                                    }
-                                } else {
-                                    StartTime();
-                                }
-                                return false;
-                            }
-                        });
-                        public  void StartTime() {
-                            timer = new Timer();
-                            task = new TimerTask() {
+                    myPref=getSharedPreferences("admin",MODE_PRIVATE);
+                    if(myPref.getString("identity","").equals("学生")){
+                        final String Clsid=intent.getStringExtra("Cid");
+                        builder = new AlertDialog.Builder(context);
+                        view = LayoutInflater.from(context).inflate(R.layout.layout_raceresp_dialog, null);
+                        i = 10;
+                        final Button mBtncatch = view.findViewById(R.id.tv_getchance);
+                        final TextView mTvQuestion=view .findViewById(R.id.tv_question);
+                        final TextView mTvTime = view.findViewById(R.id.tv_message);
+                        TextView mTvTitle=view.findViewById(R.id.tv_title);
+                        mTvQuestion.setText(intent.getStringExtra("question"));
+                        mTvTitle.setText("来自"+Clsid+"课堂");
+                        mTvTime.setText(i + "");//这里不加""就会崩溃暂未找到原因怀疑是可能变量i不存在时导致赋了空值
+                        builder.setView(view);
+                        dialog = builder.show();
+                        dialog.setCancelable(false);
+                        class Timediscounter{
+                            private Handler TimeHandler = new Handler(new Handler.Callback() {
                                 @Override
-                                public void run() {
-                                    if (i > 0) {
-                                        i--;
-                                        Message message = TimeHandler.obtainMessage();//获取实例
-                                        message.arg1 = i;
-                                        TimeHandler.sendMessage(message);
+                                public boolean handleMessage(Message msg) {
+                                    mTvTime.setText(msg.arg1 + "");
+                                    if (i == 0) {
+                                        dialog.cancel();
+//                                        //向服务器请求
+//                                        Map<String,String>param =new HashMap<>();
+//                                        param.put("condition","NoReply");
+//                                        param.put("question",mTvQuestion.getText().toString());
+//                                        param.put("Cid",Clsid);
+//                                        try {
+//                                            WebSocketClientObject.getClient(context,mHandler,null)
+//                                                    .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+//                                        } catch (UnsupportedEncodingException e) {
+//                                            e.printStackTrace();
+//                                        }
+                                    } else {
+                                        StartTime();
                                     }
+                                    return false;
                                 }
-                            };
-                            timer.schedule(task, 1000);
-                        }
+                            });
+                            public  void StartTime() {
+                                timer = new Timer();
+                                task = new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        if (i > 0) {
+                                            i--;
+                                            Message message = TimeHandler.obtainMessage();//获取实例
+                                            message.arg1 = i;
+                                            TimeHandler.sendMessage(message);
+                                        }
+                                    }
+                                };
+                                timer.schedule(task, 1000);
+                            }
 
-                        public void StopTime() {
-                            timer.cancel();
-                            task.cancel();
+                            public void StopTime() {
+                                timer.cancel();
+                                task.cancel();
 //
+                            }
                         }
-                    }
-                    //学生端开始倒计时
-                    new Timediscounter().StartTime();
-                    mBtncatch.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        new Timediscounter().StopTime();
-                        mTvTime.setText("抢到机会,点击开始回答");
-                        mBtncatch.setText("开始");
-                        //取消其他人聊天框
-                        Map<String,String> param =new HashMap<>();
-                        param.put("condition","Caughted");
-                        param.put("Cid",Clsid);
-                        try {
-                            WebSocketClientObject.getClient(context,mHandler,null)
-                                    .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
+                        //学生端开始倒计时
+                        new Timediscounter().StartTime();
                         mBtncatch.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                InteractHandler interactHandler = new InteractHandler(context, mTvTime,mTvQuestion.getText().toString(),Clsid, mBtncatch,mHandler);
-                                interactHandler.StartHandle(UUID.randomUUID().toString());
-                                dialog.setCancelable(true);
+                                new Timediscounter().StopTime();
+                                mTvTime.setText("抢到机会,点击开始回答");
+                                mBtncatch.setText("开始");
+                                //取消其他人聊天框
+                                Map<String,String> param =new HashMap<>();
+                                param.put("condition","Caughted");
+                                param.put("Cid",Clsid);
+                                try {
+                                    WebSocketClientObject.getClient(context,mHandler,null)
+                                            .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
+                                mBtncatch.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        InteractHandler interactHandler = new InteractHandler(context, mTvTime,mTvQuestion.getText().toString(),Clsid, mBtncatch,mHandler);
+                                        interactHandler.StartHandle(UUID.randomUUID().toString());
+                                        dialog.setCancelable(true);
+                                    }
+                                });
                             }
                         });
+                    }else{
+                        final String Clsid=intent.getStringExtra("Cid");
+                        builder = new AlertDialog.Builder(context);
+                        view = LayoutInflater.from(context).inflate(R.layout.layout_quesing_dialog, null);
+                        i = 10;
+                        final Button mBtnselect = view.findViewById(R.id.btn_select);
+                        final Button mBtncancel = view.findViewById(R.id.btn_cancel);
+                        final TextView mTvQuestion=view .findViewById(R.id.tv_question);
+                        final TextView mTvTime = view.findViewById(R.id.tv_message);
+                        TextView mTvTitle=view.findViewById(R.id.tv_title);
+                        mTvQuestion.setText(intent.getStringExtra("question"));
+                        mTvTitle.setText(Clsid+"\n当前问题");
+                        mTvTime.setText(i + "");//这里不加""就会崩溃暂未找到原因怀疑是可能变量i不存在时导致赋了空值
+                        builder.setView(view);
+                        dialog = builder.show();
+                        dialog.setCancelable(false);
+                        class Timediscounter{
+                            private Handler TimeHandler = new Handler(new Handler.Callback() {
+                                @Override
+                                public boolean handleMessage(Message msg) {
+                                    mTvTime.setText(msg.arg1 + "");
+                                    if (i == 0) {
+                                        dialog.cancel();
+//                                        //向服务器请求
+                                        Map<String,String>param =new HashMap<>();
+                                        param.put("condition","NoReply");
+                                        param.put("question",mTvQuestion.getText().toString());
+                                        param.put("Cid",Clsid);
+                                        try {
+                                            WebSocketClientObject.getClient(context,mHandler,null)
+                                                    .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+                                        } catch (UnsupportedEncodingException e) {
+                                            e.printStackTrace();
+                                        }
+                                    } else {
+                                        StartTime();
+                                    }
+                                    return false;
+                                }
+                            });
+                            public  void StartTime() {
+                                timer = new Timer();
+                                task = new TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        if (i > 0) {
+                                            i--;
+                                            Message message = TimeHandler.obtainMessage();//获取实例
+                                            message.arg1 = i;
+                                            TimeHandler.sendMessage(message);
+                                        }
+                                    }
+                                };
+                                timer.schedule(task, 1000);
+                            }
+
+                            public void StopTime() {
+                                timer.cancel();
+                                task.cancel();
+//
+                            }
+                        }
+                        //开始倒计时
+                        new Timediscounter().StartTime();
                     }
-                });
                     break;
                 case "com.example.administrator.tecsoundclass.ON_GRADE":
                     final HashMap <String,String> param = (HashMap<String, String>) intent.getSerializableExtra("params");
-
+                    if (dialog!=null){
+                        dialog.dismiss();
+                    }
                     builder = new AlertDialog.Builder(context);
                     View view1 = LayoutInflater.from(context).inflate(R.layout.layout_grade_dialog, null);
                     mTvgrade = view1.findViewById(R.id.tv_grade);
@@ -384,35 +455,63 @@ public class BaseActivity extends AppCompatActivity {
                     break;
                 case "com.example.administrator.tecsoundclass.DIALOG_CANCEL":
                     if(dialog!=null){
-                        dialog.dismiss();
                         timer.cancel();
                         task.cancel();
+                        if (myPref.getString("identity","").equals("学生")){
+                            dialog.dismiss();
+                        }else {
+                            View view =dialog.getWindow().getDecorView();
+                            TextView mTvMessage=view.findViewById(R.id.tv_message);
+                            Button mBtnSelect=view.findViewById(R.id.btn_select);
+                            mTvMessage.setText(intent.getStringExtra("Ca_Uid")+"抢答");
+                            mBtnSelect.setClickable(false);
+                        }
+
+
                     }
                     break;
                 case "com.example.administrator.tecsoundclass.PICKED":
-                    final String Cls=intent.getStringExtra("Cid");
-                    builder = new AlertDialog.Builder(context);
-                    view = LayoutInflater.from(context).inflate(R.layout.layout_raceresp_dialog, null);
-                    i = 10;
-                    final Button mBtncatch1 = view.findViewById(R.id.tv_getchance);
-                    final TextView mTvQuestion1=view .findViewById(R.id.tv_question);
-                    final TextView mTvTime1 = view.findViewById(R.id.tv_message);
-                    TextView mTvTitle1=view.findViewById(R.id.tv_title);
-                    mTvQuestion1.setText(intent.getStringExtra("question"));
-                    mTvTitle1.setText("来自"+Cls+"课堂");
-                    mTvTime1.setText("你被抽到啦，准备回答问题吧！");
-                    mBtncatch1.setText("开始回答");
-                    mBtncatch1.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            InteractHandler interactHandler = new InteractHandler(context, mTvTime1,mTvQuestion1.getText().toString(),Cls, mBtncatch1,mHandler);
-                            interactHandler.StartHandle(UUID.randomUUID().toString());
-                            dialog.setCancelable(true);
-                        }
-                    });
-                    builder.setView(view);
-                    dialog = builder.show();
-                    dialog.setCancelable(false);
+                    if (myPref.getString("identity","").equals("学生")){
+                        final String Cls=intent.getStringExtra("Cid");
+                        builder = new AlertDialog.Builder(context);
+                        view = LayoutInflater.from(context).inflate(R.layout.layout_raceresp_dialog, null);
+                        final Button mBtncatch1 = view.findViewById(R.id.tv_getchance);
+                        final TextView mTvQuestion1=view .findViewById(R.id.tv_question);
+                        final TextView mTvTime1 = view.findViewById(R.id.tv_message);
+                        TextView mTvTitle1=view.findViewById(R.id.tv_title);
+                        mTvQuestion1.setText(intent.getStringExtra("question"));
+                        mTvTitle1.setText("来自"+Cls+"课堂");
+                        mTvTime1.setText("你被抽到啦，准备回答问题吧！");
+                        mBtncatch1.setText("开始回答");
+                        mBtncatch1.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                InteractHandler interactHandler = new InteractHandler(context, mTvTime1,mTvQuestion1.getText().toString(),Cls, mBtncatch1,mHandler);
+                                interactHandler.StartHandle(UUID.randomUUID().toString());
+                                dialog.setCancelable(true);
+                            }
+                        });
+                        builder.setView(view);
+                        dialog = builder.show();
+                        dialog.setCancelable(false);
+                    }else {
+                        view = LayoutInflater.from(context).inflate(R.layout.layout_quesing_dialog, null);
+                        final Button mBtnselect = view.findViewById(R.id.btn_select);
+                        final Button mBtncancel = view.findViewById(R.id.btn_cancel);
+                        final TextView mTvQuestion=view .findViewById(R.id.tv_question);
+                        final TextView mTvTime = view.findViewById(R.id.tv_message);
+                        TextView mTvTitle=view.findViewById(R.id.tv_title);
+                        mTvQuestion.setText(intent.getStringExtra("question"));
+                        mTvTitle.setText("当前问题（抽取）");
+                        mTvTime.setText("请"+intent.getStringExtra("CaughtUid")+"回答");
+                        mBtnselect.setVisibility(View.GONE);
+                        mBtncancel.setVisibility(View.GONE);
+                        view.findViewById(R.id.ll_waiting_view).setVisibility(View.VISIBLE);
+                        builder = new AlertDialog.Builder(context);
+                        builder.setView(view);
+                        dialog = builder.show();
+                    }
+
                     break;
                 case "com.example.administrator.tecsoundclass.COME_CHAT":
                     String senderId=intent.getStringExtra("sender");

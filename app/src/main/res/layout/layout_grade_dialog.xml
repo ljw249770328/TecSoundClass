@@ -30,7 +30,8 @@
             android:background="@color/colorLightGreen"
             android:padding="10dp"
             android:text=""
-            android:textColor="@color/colorBlack"
+            android:maxLength="3"
+            android:textColor="@color/viewfinder_mask"
             android:textStyle="bold"
             android:textSize="30sp"/>
     </LinearLayout>
