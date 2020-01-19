@@ -40,6 +40,7 @@ import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.Activity.SettingsActivity;
 import com.example.administrator.tecsoundclass.Activity.StandDataActivity;
+import com.example.administrator.tecsoundclass.service.BackService;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.TranslateFactory;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
@@ -186,6 +187,7 @@ public class MyselfFragment extends Fragment {
                     intent=new Intent(getActivity(),LoginActivity.class);
                     startActivity(intent);
                     getActivity().finish();
+                    getActivity().stopService(new Intent(getActivity(), BackService.class));
                     break;
                 case R.id.m_status_data:
                     intent=new Intent(getActivity(),StandDataActivity.class);

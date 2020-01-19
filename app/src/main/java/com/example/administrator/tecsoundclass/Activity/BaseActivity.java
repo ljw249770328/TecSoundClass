@@ -150,7 +150,9 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
-    class Receiver extends BroadcastReceiver{
+
+
+    class Receiver extends BroadcastReceiver implements View.OnClickListener {
         @Override
         public void onReceive(final Context context, final Intent intent) {
             String action =intent.getAction();
@@ -271,6 +273,8 @@ public class BaseActivity extends AppCompatActivity {
                         final Button mBtncancel = view.findViewById(R.id.btn_cancel);
                         final TextView mTvQuestion=view .findViewById(R.id.tv_question);
                         final TextView mTvTime = view.findViewById(R.id.tv_message);
+                        mBtncancel.setOnClickListener(this);
+                        mBtnselect.setOnClickListener(this);
                         TextView mTvTitle=view.findViewById(R.id.tv_title);
                         mTvQuestion.setText(intent.getStringExtra("question"));
                         mTvTitle.setText(Clsid+"\n当前问题");
@@ -542,6 +546,17 @@ public class BaseActivity extends AppCompatActivity {
                         }
                     });
 
+                    break;
+            }
+        }
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.btn_cancel:
+                    dialog.dismiss();
+                    break;
+                case R.id.btn_select:
                     break;
             }
         }

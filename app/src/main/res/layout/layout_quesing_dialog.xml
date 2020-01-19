@@ -5,7 +5,7 @@
     android:gravity="center"
     android:paddingTop="60dp"
     android:paddingBottom="70dp"
-    android:background="@color/colorGreen">
+    android:background="@drawable/bg_dialog">
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"

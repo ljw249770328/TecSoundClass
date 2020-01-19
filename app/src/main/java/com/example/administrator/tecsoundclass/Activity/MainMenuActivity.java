@@ -28,6 +28,7 @@ import com.example.administrator.tecsoundclass.Fragments.MyselfFragment;
 import com.example.administrator.tecsoundclass.JavaBean.MyApplication;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.service.BackService;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.TransferMore;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
@@ -117,7 +118,6 @@ public class MainMenuActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 //        BaiduApi.SentimentAnalysis();
-
         pref= PreferenceManager.getDefaultSharedPreferences(this);
         if (getIntent().getAction()!=null&&getIntent().getAction().equals("ACTION_SAVED_LOGIN_AUTO")){
             Login(new Handler(new Handler.Callback() {
@@ -143,6 +143,7 @@ public class MainMenuActivity extends BaseActivity {
                 changeFragment(CourseFragment.class.getName());
             }
         }
+        startService(new Intent(this,BackService.class));
         mRgTab=findViewById(R.id.rg_main);
         //点击切换Fragment
         mRgTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -221,6 +222,7 @@ public class MainMenuActivity extends BaseActivity {
                                                         header.put("id", URLEncoder.encode(pref.getString("userid",""),"UTF-8"));
                                                         WebSocketClient client= WebSocketClientObject.getClient(getApplicationContext(),connectHandler,header);
                                                         client.connect();
+
                                                     } catch (UnsupportedEncodingException e) {
                                                         e.printStackTrace();
                                                     }

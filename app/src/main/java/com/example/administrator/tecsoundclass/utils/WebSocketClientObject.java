@@ -149,8 +149,8 @@ public class WebSocketClientObject extends WebSocketClient {
     @Override
     public void onClose(int code, String reason, boolean remote) {
         Log.e("mSocket","与服务器【"+getURI()+"】断开连接，返回码："+code);
-        Intent intent=new Intent("com.example.administrator.tecsoundclass.FORCE_OFFLINE");
-        mContext.sendBroadcast(intent);
+//        Intent intent=new Intent("com.example.administrator.tecsoundclass.FORCE_OFFLINE");
+//        mContext.sendBroadcast(intent);
         client=null;
     }
 
