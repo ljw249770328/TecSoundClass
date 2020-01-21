@@ -30,6 +30,7 @@ import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.JavaBean.MyApplication;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.service.BackService;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.TransferMore;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
@@ -179,7 +180,8 @@ public class LoginActivity extends BaseActivity {
                                             editor.clear();
                                         }
                                         editor.apply();
-                                        //封装User对象
+
+//                                        封装User对象
                                         TransferMore.GetUserById(getApplicationContext(),mEtaccount.getText().toString(),new Handler(){
                                             @Override
                                             public void handleMessage(Message msg) {
@@ -192,34 +194,61 @@ public class LoginActivity extends BaseActivity {
                                                         myEditor.putString("identity",mUser.getUser_identity().toString().trim());
                                                         myEditor.apply();
                                                         //登录
-                                                        Map<String,String> header= new HashMap<>();
-                                                        try {
-                                                            header.put("id", URLEncoder.encode(mEtaccount.getText().toString().trim(),"UTF-8"));
-                                                            client=WebSocketClientObject.getClient(getApplicationContext(),new Handler(){
-                                                                @Override
-                                                                public void handleMessage(Message msg) {
-                                                                    super.handleMessage(msg);
-                                                                    switch (msg.what){
-                                                                        case 0:
-                                                                            Intent intent=new Intent(LoginActivity.this,MainMenuActivity.class);
-                                                                            Bundle bundle=new Bundle();
-                                                                            bundle.putSerializable("user",mUser);
-                                                                            intent.putExtras(bundle);
-                                                                            startActivity(intent);
-                                                                            mBtnLogin.setText("登录");
-                                                                            finish();
-                                                                            break;
-                                                                    }
-                                                                }
-                                                            },header);
-                                                            client.connect();
-                                                        } catch (UnsupportedEncodingException e) {
-                                                            e.printStackTrace();
-                                                        }
-                                                    break;
+                                                        Intent intent=new Intent(LoginActivity.this,MainMenuActivity.class);
+                                                        Bundle bundle=new Bundle();
+                                                        bundle.putSerializable("user",mUser);
+                                                        intent.putExtras(bundle);
+                                                        startActivity(intent);
+                                                        mBtnLogin.setText("登录");
+                                                        finish();
+                                                     break;
                                                 }
                                             }
                                         });
+
+
+
+//                                        //封装User对象
+//                                        TransferMore.GetUserById(getApplicationContext(),mEtaccount.getText().toString(),new Handler(){
+//                                            @Override
+//                                            public void handleMessage(Message msg) {
+//                                                super.handleMessage(msg);
+//                                                switch (msg.what){
+//                                                    case 1:
+//                                                        mUser= (User) msg.obj;
+//                                                        //登录用户信息持久化
+//                                                        myEditor.putString("sex",mUser.getUser_sex().toString().trim());
+//                                                        myEditor.putString("identity",mUser.getUser_identity().toString().trim());
+//                                                        myEditor.apply();
+//                                                        //登录
+//                                                        Map<String,String> header= new HashMap<>();
+//                                                        try {
+//                                                            header.put("id", URLEncoder.encode(mEtaccount.getText().toString().trim(),"UTF-8"));
+//                                                            client=WebSocketClientObject.getClient(getApplicationContext(),new Handler(){
+//                                                                @Override
+//                                                                public void handleMessage(Message msg) {
+//                                                                    super.handleMessage(msg);
+//                                                                    switch (msg.what){
+//                                                                        case 0:
+//                                                                            Intent intent=new Intent(LoginActivity.this,MainMenuActivity.class);
+//                                                                            Bundle bundle=new Bundle();
+//                                                                            bundle.putSerializable("user",mUser);
+//                                                                            intent.putExtras(bundle);
+//                                                                            startActivity(intent);
+//                                                                            mBtnLogin.setText("登录");
+//                                                                            finish();
+//                                                                            break;
+//                                                                    }
+//                                                                }
+//                                                            },header);
+//                                                            client.connect();
+//                                                        } catch (UnsupportedEncodingException e) {
+//                                                            e.printStackTrace();
+//                                                        }
+//                                                    break;
+//                                                }
+//                                            }
+//                                        });
                                     } else if(result.equals("pswerror")) {
                                         ToastUtils.ShowMyToasts(LoginActivity.this,"密码错误",Gravity.CENTER);
                                         mBtnLogin.setText("登录");

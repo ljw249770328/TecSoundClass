@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.administrator.tecsoundclass.JavaBean.MyApplication;
 import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
 import com.google.gson.Gson;
@@ -76,8 +77,10 @@ public class InteractHandler   {
                     param.put("VoiceURL",FileURL);
                     param.put("Cid",Class);
                     try {
-                        WebSocketClientObject.getClient(context,handler,null)
-                                .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+//                        WebSocketClientObject.getClient(context,handler,null)
+//                                .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+
+                        MyApplication.getmWebsocket().send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }

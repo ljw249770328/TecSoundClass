@@ -35,6 +35,7 @@ import com.example.administrator.tecsoundclass.Adapter.MyInteractAdapter;
 import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.Interaction;
 
+import com.example.administrator.tecsoundclass.JavaBean.MyApplication;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.InteractHandler;
 import com.example.administrator.tecsoundclass.iFlytec.RecQuestionHandler;
@@ -119,8 +120,10 @@ public class InteractFragment extends Fragment {
                         param.put("Course",mActivity.getmCourse().getCourse_id());
                         param.put("condition","ActQuestion");
                         try {
-                            WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
-                                    .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+//                            WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
+//                                    .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+
+                            MyApplication.getmWebsocket().send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }

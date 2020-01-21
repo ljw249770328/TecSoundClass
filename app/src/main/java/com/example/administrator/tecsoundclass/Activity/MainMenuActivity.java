@@ -119,22 +119,23 @@ public class MainMenuActivity extends BaseActivity {
         setContentView(R.layout.activity_main_menu);
 //        BaiduApi.SentimentAnalysis();
         pref= PreferenceManager.getDefaultSharedPreferences(this);
-        if (getIntent().getAction()!=null&&getIntent().getAction().equals("ACTION_SAVED_LOGIN_AUTO")){
-            Login(new Handler(new Handler.Callback() {
-                @Override
-                public boolean handleMessage(Message msg) {
-                    switch (msg.what){
-                        case 0:
-                            StudentID=mUser.getUser_id();
-                            if(savedInstanceState == null){
-                                changeFragment(CourseFragment.class.getName());
-                            }
-                            break;
-                    }
-                    return false;
-                }
-            }));
-        }else {
+        startService(new Intent(MainMenuActivity.this,BackService.class));
+//        if (getIntent().getAction()!=null&&getIntent().getAction().equals("ACTION_SAVED_LOGIN_AUTO")){
+//            Login(new Handler(new Handler.Callback() {
+//                @Override
+//                public boolean handleMessage(Message msg) {
+//                    switch (msg.what){
+//                        case 0:
+//                            StudentID=mUser.getUser_id();
+//                            if(savedInstanceState == null){
+//                                changeFragment(CourseFragment.class.getName());
+//                            }
+//                            break;
+//                    }
+//                    return false;
+//                }
+//            }));
+//        }else {
             mUser= (User) getIntent().getExtras().getSerializable("user");
             MyApplication application=MyApplication.getApplication();
             application.setmUser(mUser);
@@ -142,7 +143,7 @@ public class MainMenuActivity extends BaseActivity {
             if(savedInstanceState == null){
                 changeFragment(CourseFragment.class.getName());
             }
-        }
+//        }
         startService(new Intent(this,BackService.class));
         mRgTab=findViewById(R.id.rg_main);
         //点击切换Fragment
@@ -195,61 +196,61 @@ public class MainMenuActivity extends BaseActivity {
         ft.commit();
     }
 
-    private  void Login(final Handler connectHandler){
-                    String url = "http://101.132.71.111:8080/TecSoundWebApp/LoginServlet";
-                    Map<String, String> params = new HashMap<>();
-                    params.put("user_id", pref.getString("userid",""));  //注⑥
-                    params.put("user_password", pref.getString("psw",""));
-                    //登陆请求
-                    VolleyCallback.getJSONObject(getApplicationContext(), "Login", url, params, new VolleyCallback.VolleyJsonCallback() {
-                        @SuppressLint("HandlerLeak")
-                        @Override
-                        public void onFinish(JSONObject r) {
-                            String result = null;  //注④
-                            try {
-                                result = r.getString("Result");
-                                if (result.equals("pass")) {
-                                    //封装User对象
-                                    TransferMore.GetUserById(getApplicationContext(),pref.getString("userid",""),new Handler(){
-                                        @Override
-                                        public void handleMessage(Message msg) {
-                                            super.handleMessage(msg);
-                                            switch (msg.what){
-                                                case 1:
-                                                    mUser= (User) msg.obj;
-                                                    Map<String,String> header= new HashMap<>();
-                                                    try {
-                                                        header.put("id", URLEncoder.encode(pref.getString("userid",""),"UTF-8"));
-                                                        WebSocketClient client= WebSocketClientObject.getClient(getApplicationContext(),connectHandler,header);
-                                                        client.connect();
-
-                                                    } catch (UnsupportedEncodingException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    break;
-                                            }
-                                        }
-                                    });
-                                } else if(result.equals("pswerror")) {
-                                    ToastUtils.ShowMyToasts(MainMenuActivity.this,"密码错误,请重新登录", Gravity.CENTER);
-                                    Intent intent=new Intent(MainMenuActivity.this,LoginActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }else if(result.equals("notexists")) {
-                                }
-                            } catch (JSONException e) {
-                                // 做自己的请求异常操作，如Toast提示（“无网络连接”等）
-                                Log.e("TAG", e.getMessage(), e);
-                            }
-
-                        }
-
-                        @Override
-                        public void onError(VolleyError error) {
-
-                        }
-                    });
-    }
+//    private  void Login(final Handler connectHandler){
+//                    String url = "http://101.132.71.111:8080/TecSoundWebApp/LoginServlet";
+//                    Map<String, String> params = new HashMap<>();
+//                    params.put("user_id", pref.getString("userid",""));  //注⑥
+//                    params.put("user_password", pref.getString("psw",""));
+//                    //登陆请求
+//                    VolleyCallback.getJSONObject(getApplicationContext(), "Login", url, params, new VolleyCallback.VolleyJsonCallback() {
+//                        @SuppressLint("HandlerLeak")
+//                        @Override
+//                        public void onFinish(JSONObject r) {
+//                            String result = null;  //注④
+//                            try {
+//                                result = r.getString("Result");
+//                                if (result.equals("pass")) {
+//                                    //封装User对象
+//                                    TransferMore.GetUserById(getApplicationContext(),pref.getString("userid",""),new Handler(){
+//                                        @Override
+//                                        public void handleMessage(Message msg) {
+//                                            super.handleMessage(msg);
+//                                            switch (msg.what){
+//                                                case 1:
+//                                                    mUser= (User) msg.obj;
+//                                                    Map<String,String> header= new HashMap<>();
+//                                                    try {
+//                                                        header.put("id", URLEncoder.encode(pref.getString("userid",""),"UTF-8"));
+//                                                        WebSocketClient client= WebSocketClientObject.getClient(getApplicationContext(),connectHandler,header);
+//                                                        client.connect();
+//
+//                                                    } catch (UnsupportedEncodingException e) {
+//                                                        e.printStackTrace();
+//                                                    }
+//                                                    break;
+//                                            }
+//                                        }
+//                                    });
+//                                } else if(result.equals("pswerror")) {
+//                                    ToastUtils.ShowMyToasts(MainMenuActivity.this,"密码错误,请重新登录", Gravity.CENTER);
+//                                    Intent intent=new Intent(MainMenuActivity.this,LoginActivity.class);
+//                                    startActivity(intent);
+//                                    finish();
+//                                }else if(result.equals("notexists")) {
+//                                }
+//                            } catch (JSONException e) {
+//                                // 做自己的请求异常操作，如Toast提示（“无网络连接”等）
+//                                Log.e("TAG", e.getMessage(), e);
+//                            }
+//
+//                        }
+//
+//                        @Override
+//                        public void onError(VolleyError error) {
+//
+//                        }
+//                    });
+//    }
     public interface UploadCallBack{
         void OnUploaded();
     }

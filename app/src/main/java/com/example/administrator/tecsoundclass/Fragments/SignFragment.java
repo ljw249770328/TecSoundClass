@@ -3,12 +3,15 @@ package com.example.administrator.tecsoundclass.Fragments;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -32,10 +35,12 @@ import com.example.administrator.tecsoundclass.Adapter.MyReviewListAdapter;
 import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.Adapter.MySignResultListAdapter;
+import com.example.administrator.tecsoundclass.JavaBean.MyApplication;
 import com.example.administrator.tecsoundclass.JavaBean.Sign;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.Activity.RegeditVoiceActivity;
+import com.example.administrator.tecsoundclass.service.BackService;
 import com.example.administrator.tecsoundclass.utils.ConfigUtil;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
@@ -94,8 +99,6 @@ public class SignFragment extends Fragment {
     private AlertDialog.Builder builder=null;
     private View view=null;
     CourseMenuActivity mActivity;
-
-
     private Handler mHandler =new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -144,6 +147,20 @@ public class SignFragment extends Fragment {
             return false;
         }
     });
+
+    public BackService.mBinder binder;
+    private ServiceConnection connection=new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            binder= (BackService.mBinder) service;
+            binder.onServiceMessage(mHandler);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
     public SignFragment() {
 
     }
@@ -167,6 +184,8 @@ public class SignFragment extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        Intent intent=new Intent(getActivity(),BackService.class);
+        getActivity().bindService(intent,connection,Context.BIND_AUTO_CREATE);
         super.onCreate(savedInstanceState);
     }
 
@@ -174,6 +193,12 @@ public class SignFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sign, container, false);
         return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unbindService(connection);
     }
 
     private void init(View view) {
@@ -294,8 +319,9 @@ public class SignFragment extends Fragment {
                             msg.put("ClsTea",mActivity.getmUser().getUser_id());
                             //开放签到通道
                             try {
-                                WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
-                                        .send(URLEncoder.encode(gson.toJson(msg),"UTF-8"));
+//                                WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
+//                                        .send(URLEncoder.encode(gson.toJson(msg),"UTF-8"));
+                                MyApplication.getmWebsocket().send(URLEncoder.encode(gson.toJson(msg),"UTF-8"));
                             } catch (UnsupportedEncodingException e) {
                                 e.printStackTrace();
                             }
@@ -306,8 +332,9 @@ public class SignFragment extends Fragment {
                             msg.put("ClsTea",mActivity.getmUser().getUser_id());
                             //关闭签到通道
                             try {
-                                WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
-                                        .send(URLEncoder.encode(gson.toJson(msg),"UTF-8"));
+//                                WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
+//                                        .send(URLEncoder.encode(gson.toJson(msg),"UTF-8"));
+                                MyApplication.getmWebsocket().send(URLEncoder.encode(gson.toJson(msg),"UTF-8"));
                             } catch (UnsupportedEncodingException e) {
                                 e.printStackTrace();
                             }
@@ -318,8 +345,9 @@ public class SignFragment extends Fragment {
                         msg.put("SignStu",mActivity.getmUser().getUser_id());
                         msg.put("condition","CheckSign");
                         try {
-                            WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
-                                    .send(URLEncoder.encode(gson.toJson(msg),"UTF-8"));
+//                            WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
+//                                    .send(URLEncoder.encode(gson.toJson(msg),"UTF-8"));
+                            MyApplication.getmWebsocket().send(URLEncoder.encode(gson.toJson(msg),"UTF-8"));
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
@@ -476,8 +504,9 @@ public class SignFragment extends Fragment {
                 msg.put("Sid",mActivity.getmUser().getUser_id());
                 msg.put("Cid",mActivity.getmCourse().getCourse_id());
                 try {
-                    WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
-                            .send(URLEncoder.encode(gson.toJson(msg),"UTF-8"));
+//                    WebSocketClientObject.getClient(mActivity.getApplicationContext(),mHandler,null)
+//                            .send(URLEncoder.encode(gson.toJson(msg),"UTF-8"));
+                    MyApplication.getmWebsocket().send(URLEncoder.encode(gson.toJson(msg),"UTF-8"));
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }

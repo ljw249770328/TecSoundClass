@@ -130,8 +130,9 @@ public class ChatActivity extends BaseActivity {
                         obj.put("message",content);
                         obj.put("SendUser",mFan.getUser_id());
                         try {
-                            WebSocketClientObject.getClient(getApplicationContext(),handler,null)
-                                    .send(URLEncoder.encode(gson.toJson(obj),"UTF-8"));
+//                            WebSocketClientObject.getClient(getApplicationContext(),handler,null)
+//                                    .send(URLEncoder.encode(gson.toJson(obj),"UTF-8"));
+                            MyApplication.getmWebsocket().send(URLEncoder.encode(gson.toJson(obj),"UTF-8"));
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }

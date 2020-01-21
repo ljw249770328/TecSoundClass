@@ -6,14 +6,17 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -37,6 +40,7 @@ import com.example.administrator.tecsoundclass.JavaBean.MyApplication;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.InteractHandler;
+import com.example.administrator.tecsoundclass.service.BackService;
 import com.example.administrator.tecsoundclass.utils.ActivityCollector;
 import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
@@ -159,6 +163,10 @@ public class BaseActivity extends AppCompatActivity {
             final AlertDialog.Builder builder;
             switch (action){
                 case "com.example.administrator.tecsoundclass.FORCE_OFFLINE":
+                    stopService(new Intent(BaseActivity.this,BackService.class));
+                    SharedPreferences.Editor myEditor=getSharedPreferences("admin",Context.MODE_PRIVATE).edit();
+                    myEditor.clear();
+                    myEditor.commit();
                     builder =new AlertDialog.Builder(context);
                     builder.setTitle("下线通知");
                     builder.setMessage("与服务器断开连接");
@@ -249,8 +257,9 @@ public class BaseActivity extends AppCompatActivity {
                                 param.put("condition","Caughted");
                                 param.put("Cid",Clsid);
                                 try {
-                                    WebSocketClientObject.getClient(context,mHandler,null)
-                                            .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+//                                    WebSocketClientObject.getClient(context,mHandler,null)
+//                                            .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+                                    MyApplication.getmWebsocket().send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
                                 } catch (UnsupportedEncodingException e) {
                                     e.printStackTrace();
                                 }
@@ -295,8 +304,10 @@ public class BaseActivity extends AppCompatActivity {
                                         param.put("question",mTvQuestion.getText().toString());
                                         param.put("Cid",Clsid);
                                         try {
-                                            WebSocketClientObject.getClient(context,mHandler,null)
-                                                    .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+//                                            WebSocketClientObject.getClient(context,mHandler,null)
+//                                                    .send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+
+                                            MyApplication.getmWebsocket().send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
                                         } catch (UnsupportedEncodingException e) {
                                             e.printStackTrace();
                                         }
@@ -432,8 +443,10 @@ public class BaseActivity extends AppCompatActivity {
                                         socketparams.put("Sid",param.get("Sid"));
                                         socketparams.put("Cid",param.get("Cid"));
                                         try {
-                                            WebSocketClientObject.getClient(context,mHandler,null)
-                                                    .send(URLEncoder.encode(gson.toJson(socketparams),"UTF-8"));
+//                                            WebSocketClientObject.getClient(context,mHandler,null)
+//                                                    .send(URLEncoder.encode(gson.toJson(socketparams),"UTF-8"));
+
+                                            MyApplication.getmWebsocket().send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
                                         } catch (UnsupportedEncodingException e) {
                                             e.printStackTrace();
                                         }
@@ -545,7 +558,6 @@ public class BaseActivity extends AppCompatActivity {
                             manager.notify(1,notification);
                         }
                     });
-
                     break;
             }
         }

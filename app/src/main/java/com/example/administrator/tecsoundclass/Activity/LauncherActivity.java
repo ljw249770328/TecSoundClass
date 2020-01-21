@@ -15,10 +15,12 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
 import com.arcsoft.face.ActiveFileInfo;
 import com.arcsoft.face.ErrorInfo;
 import com.arcsoft.face.FaceEngine;
@@ -34,6 +36,14 @@ import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechUtility;
 import com.liulishuo.filedownloader.FileDownloader;
 import com.liulishuo.filedownloader.connection.FileDownloadUrlConnection;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -70,10 +80,59 @@ public class LauncherActivity extends BaseActivity {
             @Override
             public boolean handleMessage(Message msg) {
                 if (pref.getString("userid","")!=""&&pref.getString("psw","")!=""){
-                    Intent intent=new Intent(LauncherActivity.this,MainMenuActivity.class);
-                    intent.setAction("ACTION_SAVED_LOGIN_AUTO");
-                    startActivity(intent);
-                    finish();
+
+                    String url = "http://101.132.71.111:8080/TecSoundWebApp/LoginServlet";
+                    Map<String, String> params = new HashMap<>();
+                    params.put("user_id",pref.getString("userid",""));  //注⑥
+                    params.put("user_password",pref.getString("psw",""));
+                    //登陆请求
+                    VolleyCallback.getJSONObject(getApplicationContext(), "Login", url, params, new VolleyCallback.VolleyJsonCallback() {
+                        @SuppressLint("HandlerLeak")
+                        @Override
+                        public void onFinish(JSONObject r) {
+                            String result = null;  //注④
+                            try {
+                                result = r.getString("Result");
+                                if (result.equals("pass")) {
+                                    //封装User对象
+                                    TransferMore.GetUserById(getApplicationContext(),pref.getString("userid",""),new Handler(){
+                                        @Override
+                                        public void handleMessage(Message msg) {
+                                            super.handleMessage(msg);
+                                            switch (msg.what){
+                                                case 1:
+                                                   User mUser= (User) msg.obj;
+                                                    //登录
+                                                        Intent intent=new Intent(LauncherActivity.this,MainMenuActivity.class);
+                                                        Bundle bundle=new Bundle();
+                                                        bundle.putSerializable("user",mUser);
+                                                        intent.putExtras(bundle);
+                                                        startActivity(intent);
+                                                        finish();
+                                                    break;
+                                            }
+                                        }
+                                    });
+                                } else if(result.equals("pswerror")) {
+                                    ToastUtils.ShowMyToasts(LauncherActivity.this,"密码错误", Gravity.CENTER);
+                                    Intent intent=new Intent(LauncherActivity.this,LoginActivity.class);
+                                }else if(result.equals("notexists")) {
+                                    ToastUtils.ShowMyToasts(LauncherActivity.this,"用户不存在,请先注册",Gravity.CENTER);
+                                    Intent intent=new Intent(LauncherActivity.this,LoginActivity.class);
+
+                                }
+                            } catch (JSONException e) {
+                                // 做自己的请求异常操作，如Toast提示（“无网络连接”等）
+                                Log.e("TAG", e.getMessage(), e);
+                            }
+
+                        }
+
+                        @Override
+                        public void onError(VolleyError error) {
+
+                        }
+                    });
                 }else {
                     Intent intent = new Intent(LauncherActivity.this,LoginActivity.class);
                     startActivity(intent);

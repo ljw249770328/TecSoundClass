@@ -26,7 +26,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+/*
+* Websocket 工具类1.0
+* 当前类已弃用
+* */
 public class WebSocketClientObject extends WebSocketClient {
     public static WebSocketClientObject client;
     public static Handler mHandler;
@@ -140,6 +143,10 @@ public class WebSocketClientObject extends WebSocketClient {
                     intent.putExtra("message",params.get("message"));
                     intent.putExtra("sender",params.get("Sender"));
                     mContext.sendBroadcast(intent);
+                case "FORCE_OFFLINE":
+                    intent=new Intent("com.example.administrator.tecsoundclass.FORCE_OFFLINE");
+                    mContext.sendBroadcast(intent);
+                    break;
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
