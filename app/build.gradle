@@ -50,6 +50,7 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation files('libs/arcsoft_face.jar')
     implementation 'com.google.zxing:core:3.3.3'
-    implementation 'com.baidu.aip:java-sdk:4.11.3'
     implementation 'com.squareup.okhttp3:okhttp:3.8.1'
+    implementation 'com.tencentcloudapi:tencentcloud-sdk-java:3.0.93'
+    implementation files('libs/org.apache.xerces-2.9.0-20081006.jar')
 }

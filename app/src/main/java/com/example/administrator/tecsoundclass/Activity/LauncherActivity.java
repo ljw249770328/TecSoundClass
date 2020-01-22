@@ -69,6 +69,7 @@ public class LauncherActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
+
         pref= PreferenceManager.getDefaultSharedPreferences(this);
         //加载数据库
         //LitePal.getDatabase();

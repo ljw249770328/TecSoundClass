@@ -29,11 +29,11 @@ import com.example.administrator.tecsoundclass.JavaBean.MyApplication;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.service.BackService;
+import com.example.administrator.tecsoundclass.utils.Tencent.TencentApi;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.TransferMore;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
-import com.example.administrator.tecsoundclass.utils.baidu.BaiduApi;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
@@ -117,7 +117,8 @@ public class MainMenuActivity extends BaseActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-//        BaiduApi.SentimentAnalysis();
+        TencentApi.KeywordAnalysis("地球昼夜更替的原因是地球在不停的自转");
+        TencentApi.SentimentAnalyst("我觉得这道题选 A");
         pref= PreferenceManager.getDefaultSharedPreferences(this);
         startService(new Intent(MainMenuActivity.this,BackService.class));
 //        if (getIntent().getAction()!=null&&getIntent().getAction().equals("ACTION_SAVED_LOGIN_AUTO")){
