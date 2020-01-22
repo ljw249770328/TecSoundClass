@@ -20,8 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TencentApi {
-    private static final String SecretId= "AKIDFRXcWTE2Zx7ThjuWRHvRrAIE4pU05F0X";
-    private static final String SecretKey = "Vt6EAv9GDze9WiiLuIUedVBgigXDoHeq";
+    private static final String SecretId= "";
+    private static final String SecretKey = "";
 
     public static void KeywordAnalysis(final String text){
         new Thread(new Runnable() {
