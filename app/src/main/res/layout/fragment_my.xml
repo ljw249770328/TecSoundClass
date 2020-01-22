@@ -49,13 +49,13 @@
                 android:layout_width="match_parent"
                 android:paddingHorizontal="40dp"
                 android:layout_height="215dp"
+                android:background="@drawable/bg_toolbar"
                 android:padding="15dp">
                 <com.shehuan.niv.NiceImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
 
                     app:corner_radius="20dp"
-                    android:background="@drawable/bg_info_card"
                     />
                 <com.shehuan.niv.NiceImageView
                     android:id="@+id/iv_user_head"

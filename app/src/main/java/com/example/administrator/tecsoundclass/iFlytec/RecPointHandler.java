@@ -37,9 +37,9 @@ public class RecPointHandler {
         return mfilename;
     }
 
-    public RecPointHandler(final Context context, TextView tv, final Button button){
+    public RecPointHandler(final Context context, TextView tv){
         mTvSpeechResult=tv;
-        button.setText("录音中");
+//        button.setText("录音中");
         mRListener = new RecognizerDialogListener() {
             @Override
             public void onResult(RecognizerResult results, boolean isLast) {
@@ -49,15 +49,15 @@ public class RecPointHandler {
                 Log.d("text",text);
                 result +=text;
                 mTvSpeechResult.setText(result);
-                button.setText("记录");
+//                button.setText("记录");
                 if (isLast) {
                     result = "";
-                    button.setText("完成");
+//                    button.setText("完成");
                 }
             }
             @Override
             public void onError(SpeechError speechError) {
-                button.setText("记录");
+//                button.setText("记录");
             }
         };
         mIatDialog = new RecognizerDialog(context, null);

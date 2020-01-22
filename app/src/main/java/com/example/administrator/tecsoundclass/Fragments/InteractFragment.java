@@ -38,8 +38,10 @@ import com.example.administrator.tecsoundclass.JavaBean.Interaction;
 import com.example.administrator.tecsoundclass.JavaBean.MyApplication;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.iFlytec.InteractHandler;
+import com.example.administrator.tecsoundclass.iFlytec.RecPointHandler;
 import com.example.administrator.tecsoundclass.iFlytec.RecQuestionHandler;
 import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
+import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
 import com.google.gson.Gson;
@@ -62,11 +64,12 @@ import java.util.UUID;
 public class InteractFragment extends Fragment {
     public static final int QUESTION_ED=1;
     public static final int COME_QUESTION=6;
+    private AlertDialog mRecordResultDialog;
     private ImageView mIvBack;
     private RecyclerView mRvInteract;
     private Receiver mReceiver;
-    private TextView mTvTime, mTvgrade,mTvQuestion;
-    private Button mBtncatch;
+    private TextView mTvTime, mTvgrade,mTvQuestion,mTvResult;
+    private Button mBtncatch,mBtnRecPoint;
     private AlertDialog dialog;
     private Timer timer = null;
     private TimerTask task = null;
@@ -83,6 +86,7 @@ public class InteractFragment extends Fragment {
     private Button mBtnInteract;
     CourseMenuActivity mActivity;
     private RecQuestionHandler recQuestionHandler;
+    private RecPointHandler recPointHandler;
     private Handler mHandler=null;
 
     class Receiver extends BroadcastReceiver{
@@ -158,13 +162,16 @@ public class InteractFragment extends Fragment {
         mIvBack = view.findViewById(R.id.im_back);
         mRvInteract = view.findViewById(R.id.recycler_view_interact);
         mBtnInteract= view.findViewById(R.id.btn_race_resp);
+        mBtnRecPoint=view.findViewById(R.id.btn_cls_pnt);
         if (mActivity.getmUser().getUser_identity().equals("学生")){
             mBtnInteract.setVisibility(View.GONE);
+            mBtnRecPoint.setVisibility(View.GONE);
         }
     }
     private void SetListener(View view){
         mIvBack.setOnClickListener(onclick);
         mBtnInteract.setOnClickListener(onclick);
+        mBtnRecPoint.setOnClickListener(onclick);
     }
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -398,7 +405,56 @@ public class InteractFragment extends Fragment {
 //                            }
 //                        }
 //                    });
-//                    break;
+                    break;
+                case R.id.btn_cls_pnt:
+                    AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+                    View view =LayoutInflater.from(getActivity()).inflate(R.layout.layout_record_result_dialog,null);
+                    Button mBtnConfirm=view.findViewById(R.id.btn_record_confirm);
+                    Button mBtnCancel=view.findViewById(R.id.btn_record_cancel);
+                    mTvResult=view.findViewById(R.id.tv_result);
+                    mBtnConfirm.setOnClickListener(onclick);
+                    mBtnCancel.setOnClickListener(onclick);
+                    mRecordResultDialog=builder.setView(view).create();
+                    mRecordResultDialog.show();
+                    recPointHandler=new RecPointHandler(getActivity(),mTvResult);
+                    recPointHandler.StartHandle(mAuthId+"_"+mActivity.getmCourse().getCourse_id()+"_"+UUID.randomUUID().toString());
+                    mRecordResultDialog.show();
+                    break;
+                case R.id.btn_record_confirm:
+                    //存入数据库
+//                        //上传音频
+                    String FileUrl=FileUploadUtil.UploadFile(mActivity.getApplicationContext(),"PointVoice",recPointHandler.getMfilepath(),recPointHandler.getMfilename(),"Point",null,null,null);
+                    //存储数据词条
+                    String url="http://101.132.71.111:8080/TecSoundWebApp/AddPointServlet";
+                    Map<String,String> params =new HashMap<>();
+                    params.put("course_id",mActivity.getmCourse().getCourse_id());
+                    params.put("voice_url",FileUrl);
+                    params.put("content",mTvResult.getText().toString());
+                    VolleyCallback.getJSONObject(mActivity.getApplicationContext(), "AddPoint", url, params, new VolleyCallback.VolleyJsonCallback() {
+                        @Override
+                        public void onFinish(JSONObject r) {
+                            try {
+                                String result =r.getString("Result");
+                                ToastUtils.ShowMyToasts(getActivity(),"[已记录]",Gravity.CENTER);
+                                mRecordResultDialog.dismiss();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                        @Override
+                        public void onError(VolleyError error) {
+
+                        }
+                    });
+                    //刷新列表
+                    mTvResult.setText("");
+                    break;
+                case R.id.btn_record_cancel:
+                    mRecordResultDialog.dismiss();
+                    break;
+
             }
         }
     }

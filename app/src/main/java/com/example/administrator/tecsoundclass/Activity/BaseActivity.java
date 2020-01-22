@@ -110,7 +110,7 @@ public class BaseActivity extends AppCompatActivity {
             statusBarView = getWindow().findViewById(identifier);
         }
         if (statusBarView != null) {
-            statusBarView.setBackgroundResource(R.drawable.bg_toolbar);
+            statusBarView.setBackgroundResource(R.drawable.bg_status_bar);
         }
     }
 

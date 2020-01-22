@@ -27,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="互动得分"
+                android:text="课堂管理"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"
                 android:textSize="18sp" />
@@ -38,24 +38,46 @@
             android:layout_height="wrap_content"
             android:dividerHeight="0.25dp"
             android:layout_below="@id/rl_1"
-            android:layout_above="@id/btn_race_resp"
+            android:layout_above="@id/ll_cls_opr"
             android:divider="@color/colorDarkGray">
         </android.support.v7.widget.RecyclerView>
-
-        <Button
-            android:id="@+id/btn_race_resp"
+        <LinearLayout
+            android:id="@+id/ll_cls_opr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:padding="10dp"
-            android:text="提问"
-            android:textStyle="bold"
-            android:paddingVertical="7dp"
-            android:layout_marginHorizontal="30dp"
-            android:background="@drawable/bg_sign_btn"
-            android:textSize="16sp"
-            android:textColor="@color/colorWhite"
-            android:layout_marginBottom="10dp"/>
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true">
+            <Button
+                android:id="@+id/btn_race_resp"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="提问"
+                android:textStyle="bold"
+                android:paddingVertical="7dp"
+                android:layout_marginHorizontal="30dp"
+                android:background="@drawable/bg_sign_btn"
+                android:textSize="16sp"
+                android:textColor="@color/colorWhite"
+                android:layout_marginBottom="10dp"/>
+            <Button
+                android:id="@+id/btn_cls_pnt"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="重点记录"
+                android:textStyle="bold"
+                android:paddingVertical="7dp"
+                android:layout_marginHorizontal="30dp"
+                android:background="@drawable/bg_sign_btn"
+                android:textSize="16sp"
+                android:textColor="@color/colorWhite"
+                android:layout_marginBottom="10dp"/>
+
+        </LinearLayout>
+
 
     </RelativeLayout>
 </FrameLayout>

@@ -77,14 +77,14 @@ public class ReviewFragment extends Fragment {
         mToast = Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT);
         mIvBack=view.findViewById(R.id.im_back);
         mRvPoint=view.findViewById(R.id.recycler_view_point);
-        mBtnClassBegin=view.findViewById(R.id.btn_class_begin);
-        if (mActivity.getmUser().getUser_identity().equals("学生")){
-            mBtnClassBegin.setVisibility(View.GONE);
-        }
+//        mBtnClassBegin=view.findViewById(R.id.btn_class_begin);
+//        if (mActivity.getmUser().getUser_identity().equals("学生")){
+//            mBtnClassBegin.setVisibility(View.GONE);
+//        }
     }
     private void SetListener(){
         mIvBack.setOnClickListener(onclick);
-        mBtnClassBegin.setOnClickListener(onclick);
+//        mBtnClassBegin.setOnClickListener(onclick);
     }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -181,60 +181,60 @@ public class ReviewFragment extends Fragment {
                     getActivity().finish();
                     break;
                 case R.id.btn_class_begin:
-                    showTip("状态:上课");
-                    AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-                    View view =LayoutInflater.from(getActivity()).inflate(R.layout.layout_record_dialog,null);
-                    mBtnClassOver=view.findViewById(R.id.btn_class_over);
-                    mBtnRecord=view.findViewById(R.id.btn_record);
-                    mTvResult=view.findViewById(R.id.tv_message);
-                    mBtnRecord.setOnClickListener(onclick);
-                    mBtnClassOver.setOnClickListener(onclick);
-                    mRecordDialog=builder.setView(view).create();
-                    mRecordDialog.setCancelable(false);
-                    mRecordDialog.show();
+//                    showTip("状态:上课");
+//                    AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+//                    View view =LayoutInflater.from(getActivity()).inflate(R.layout.layout_record_dialog,null);
+//                    mBtnClassOver=view.findViewById(R.id.btn_class_over);
+//                    mBtnRecord=view.findViewById(R.id.btn_record);
+//                    mTvResult=view.findViewById(R.id.tv_message);
+//                    mBtnRecord.setOnClickListener(onclick);
+//                    mBtnClassOver.setOnClickListener(onclick);
+//                    mRecordDialog=builder.setView(view).create();
+//                    mRecordDialog.setCancelable(false);
+//                    mRecordDialog.show();
                     break;
                 case R.id.btn_record:
                     if (mBtnRecord.getText().equals("完成")){
-                        //存入数据库
-//                        //上传音频
-                        String FileUrl=FileUploadUtil.UploadFile(mActivity.getApplicationContext(),"PointVoice",recPointHandler.getMfilepath(),recPointHandler.getMfilename(),"Point",null,null,null);
-                        //存储数据词条
-                        String url="http://101.132.71.111:8080/TecSoundWebApp/AddPointServlet";
-                        Map<String,String> params =new HashMap<>();
-                        params.put("course_id",mActivity.getmCourse().getCourse_id());
-                        params.put("voice_url",FileUrl);
-                        params.put("content",mTvResult.getText().toString());
-                        VolleyCallback.getJSONObject(mActivity.getApplicationContext(), "AddPoint", url, params, new VolleyCallback.VolleyJsonCallback() {
-                            @Override
-                            public void onFinish(JSONObject r) {
-                                try {
-                                    String result =r.getString("Result");
-                                    InitList();
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-
-                            @Override
-                            public void onError(VolleyError error) {
-
-                            }
-                        });
-                        showTip("[已记录]");
-                        //刷新列表
-                        mTvResult.setText("");
-                        mBtnRecord.setText("记录");
+//                        //存入数据库
+////                        //上传音频
+//                        String FileUrl=FileUploadUtil.UploadFile(mActivity.getApplicationContext(),"PointVoice",recPointHandler.getMfilepath(),recPointHandler.getMfilename(),"Point",null,null,null);
+//                        //存储数据词条
+//                        String url="http://101.132.71.111:8080/TecSoundWebApp/AddPointServlet";
+//                        Map<String,String> params =new HashMap<>();
+//                        params.put("course_id",mActivity.getmCourse().getCourse_id());
+//                        params.put("voice_url",FileUrl);
+//                        params.put("content",mTvResult.getText().toString());
+//                        VolleyCallback.getJSONObject(mActivity.getApplicationContext(), "AddPoint", url, params, new VolleyCallback.VolleyJsonCallback() {
+//                            @Override
+//                            public void onFinish(JSONObject r) {
+//                                try {
+//                                    String result =r.getString("Result");
+//                                    InitList();
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+//
+//                            }
+//
+//                            @Override
+//                            public void onError(VolleyError error) {
+//
+//                            }
+//                        });
+//                        showTip("[已记录]");
+//                        //刷新列表
+//                        mTvResult.setText("");
+//                        mBtnRecord.setText("记录");
                     }else{
-                        recPointHandler=new RecPointHandler(getActivity(),mTvResult,mBtnRecord);
-                        recPointHandler.StartHandle(mAuthId+"_"+mActivity.getmCourse().getCourse_id()+"_"+UUID.randomUUID().toString());
+//                        recPointHandler=new RecPointHandler(getActivity(),mTvResult,mBtnRecord);
+//                        recPointHandler.StartHandle(mAuthId+"_"+mActivity.getmCourse().getCourse_id()+"_"+UUID.randomUUID().toString());
                     }
                     break;
                 case R.id.btn_class_over:
-                    mRecordDialog.setCancelable(true);
-                    mRecordDialog.dismiss();
-                    mRecordDialog.cancel();
-                    showTip("状态:下课");
+//                    mRecordDialog.setCancelable(true);
+//                    mRecordDialog.dismiss();
+//                    mRecordDialog.cancel();
+//                    showTip("状态:下课");
                     break;
                 case R.id.tv_copy:
                     break;

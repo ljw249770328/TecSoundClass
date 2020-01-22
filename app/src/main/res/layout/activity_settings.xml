@@ -16,7 +16,7 @@
             android:background="@drawable/bg_toolbar">
             <ImageView
                 android:id="@+id/im_back"
-                android:layout_width="35dp"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/small_back"
                 android:scaleType="fitCenter"
@@ -123,7 +123,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="3"
                             android:padding="7dp"
-                            android:text="1.12M"
+                            android:text="0.00M"
                             android:drawableRight="@drawable/edit"
                             android:gravity="right"
                             android:textSize="16sp"
@@ -142,7 +142,9 @@
                     android:text="完成"
                     android:textSize="16sp"
                     android:layout_alignParentBottom="true"
-                    android:background="@color/colorGreen"
+                    android:background="@drawable/bg_sign_btn"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="5dp"
                     android:textColor="@color/colorWhite"/>
             </RelativeLayout>
 
