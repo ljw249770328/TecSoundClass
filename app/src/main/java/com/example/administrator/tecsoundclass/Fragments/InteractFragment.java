@@ -4,10 +4,8 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.MaskFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,34 +17,27 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
-import com.example.administrator.tecsoundclass.Adapter.KeyboardAdapter;
 
 import com.example.administrator.tecsoundclass.Adapter.MyInteractAdapter;
-import com.example.administrator.tecsoundclass.Adapter.MySignListAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.Interaction;
 
 import com.example.administrator.tecsoundclass.JavaBean.MyApplication;
 import com.example.administrator.tecsoundclass.R;
-import com.example.administrator.tecsoundclass.iFlytec.InteractHandler;
-import com.example.administrator.tecsoundclass.iFlytec.RecPointHandler;
-import com.example.administrator.tecsoundclass.iFlytec.RecQuestionHandler;
+import com.example.administrator.tecsoundclass.utils.iFlytec.InteractHandler;
+import com.example.administrator.tecsoundclass.utils.iFlytec.RecPointHandler;
+import com.example.administrator.tecsoundclass.utils.iFlytec.RecQuestionHandler;
 import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
-import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
 import com.google.gson.Gson;
 
-import org.java_websocket.exceptions.WebsocketNotConnectedException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

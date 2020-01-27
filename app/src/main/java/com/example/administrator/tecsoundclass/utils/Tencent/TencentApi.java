@@ -23,7 +23,7 @@ public class TencentApi {
     private static final String SecretId= "";
     private static final String SecretKey = "";
 
-    public static void KeywordAnalysis(final String text){
+    public static void KeywordAnalysis(final String text, final TApiCallback callback){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -45,7 +45,9 @@ public class TencentApi {
                     KeywordsExtractionResponse resp = null;
 
                     resp = client.KeywordsExtraction(req);
-                    Log.e("TencentKeywordAnalysis",KeywordsExtractionRequest.toJsonString(resp));
+                    String reString=KeywordsExtractionRequest.toJsonString(resp);
+                    Log.e("TencentKeywordAnalysis",reString);
+                    callback.ResultCallback(reString);
                 } catch (TencentCloudSDKException e) {
                     e.printStackTrace();
                 }
@@ -56,7 +58,7 @@ public class TencentApi {
 
     }
 
-    public static void SentimentAnalyst(final String text){
+    public static void SentimentAnalyst(final String text, final TApiCallback callback){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -78,7 +80,9 @@ public class TencentApi {
                     SentimentAnalysisResponse resp = null;
 
                     resp = client.SentimentAnalysis(req);
-                    Log.e("TencentSentimentAnalyst",SentimentAnalysisRequest.toJsonString(resp));
+                    String reString=KeywordsExtractionRequest.toJsonString(resp);
+                    Log.e("TencentSentimentAnalyst",reString);
+                    callback.ResultCallback(reString);
                 } catch (TencentCloudSDKException e) {
                     e.printStackTrace();
                 }
@@ -87,5 +91,8 @@ public class TencentApi {
         }).start();
 
 
+    }
+    public interface TApiCallback{
+         void ResultCallback(String resp);
     }
 }

@@ -1,10 +1,10 @@
-package com.example.administrator.tecsoundclass.iFlytec;
+package com.example.administrator.tecsoundclass.utils.iFlytec;
 
 import android.content.Context;
 import android.os.Environment;
-import android.text.method.ScrollingMovementMethod;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.iflytek.cloud.RecognizerResult;
@@ -17,7 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-public class RecPointHandler {
+public class RecQuestionHandler {
     private RecognizerDialog mIatDialog;
     private TextView mTvSpeechResult;
     private String mfilepath,mfilename;
@@ -37,35 +37,32 @@ public class RecPointHandler {
         return mfilename;
     }
 
-    public RecPointHandler(final Context context, TextView tv){
-        mTvSpeechResult=tv;
-//        button.setText("录音中");
+    public RecQuestionHandler(final Context context, final Handler mhandler){
         mRListener = new RecognizerDialogListener() {
             @Override
             public void onResult(RecognizerResult results, boolean isLast) {
                 String text = parseIatResult(results.getResultString());
-                mTvSpeechResult.setTextSize(19);
-                mTvSpeechResult.setMovementMethod(new ScrollingMovementMethod());
                 Log.d("text",text);
                 result +=text;
-                mTvSpeechResult.setText(result);
-//                button.setText("记录");
                 if (isLast) {
+                    Message msg =new Message();
+                    msg.what=1;
+                    msg.obj=result;
+                    mhandler.sendMessage(msg);
                     result = "";
-//                    button.setText("完成");
                 }
             }
             @Override
             public void onError(SpeechError speechError) {
-//                button.setText("记录");
+
             }
         };
         mIatDialog = new RecognizerDialog(context, null);
         mIatDialog.setListener(mRListener);
     }
     public void StartHandle(String filename){
-        mfilename=filename+ ".wav";
-        mfilepath=Environment.getExternalStorageDirectory() + "/MyApplication/" + filename ;
+        mfilename=filename;
+        mfilepath=Environment.getExternalStorageDirectory() + "/MyApplication/" + filename + ".wav";
         setIatParam(mfilepath);
         mIatDialog.show();
     }

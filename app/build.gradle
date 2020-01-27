@@ -53,4 +53,5 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.8.1'
     implementation 'com.tencentcloudapi:tencentcloud-sdk-java:3.0.93'
     implementation files('libs/org.apache.xerces-2.9.0-20081006.jar')
+    implementation 'com.alibaba:fastjson:1.2.62'
 }

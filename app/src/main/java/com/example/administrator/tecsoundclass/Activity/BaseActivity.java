@@ -6,21 +6,18 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
+import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -31,31 +28,31 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.RemoteViews;
+import android.widget.TextClock;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.Adapter.KeyboardAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.MyApplication;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
-import com.example.administrator.tecsoundclass.iFlytec.InteractHandler;
+import com.example.administrator.tecsoundclass.View.CustomScoreBar;
+import com.example.administrator.tecsoundclass.utils.Tencent.TencentApi;
+import com.example.administrator.tecsoundclass.utils.iFlytec.InteractHandler;
 import com.example.administrator.tecsoundclass.service.BackService;
 import com.example.administrator.tecsoundclass.utils.ActivityCollector;
-import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.TransferMore;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
-import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
 import com.google.gson.Gson;
 
-import org.java_websocket.client.WebSocketClient;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.sql.Time;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Timer;
@@ -345,127 +342,149 @@ public class BaseActivity extends AppCompatActivity {
                     break;
                 case "com.example.administrator.tecsoundclass.ON_GRADE":
                     final HashMap <String,String> param = (HashMap<String, String>) intent.getSerializableExtra("params");
+                    final String Ques=param.get("question");
+                    final String Answ=param.get("answer");
+                    builder = new AlertDialog.Builder(context);
                     if (dialog!=null){
                         dialog.dismiss();
                     }
-                    builder = new AlertDialog.Builder(context);
-                    View view1 = LayoutInflater.from(context).inflate(R.layout.layout_grade_dialog, null);
-                    mTvgrade = view1.findViewById(R.id.tv_grade);
-                    GridView mGvKeyboard = view1.findViewById(R.id.gv_keyboard);
-                    mGvKeyboard.setAdapter(new KeyboardAdapter(context));
-                    mGvKeyboard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    TencentApi.SentimentAnalyst(Answ, new TencentApi.TApiCallback() {
                         @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            switch (position) {
-                                case 0:
-                                    grades += "1";
-                                    mTvgrade.setText(grades);
-                                    break;
-                                case 1:
-                                    grades += "2";
-                                    mTvgrade.setText(grades);
-                                    break;
-                                case 2:
-                                    grades += "3";
-                                    mTvgrade.setText(grades);
-                                    break;
-                                case 3:
-                                    grades += "4";
-                                    mTvgrade.setText(grades);
-                                    break;
-                                case 4:
-                                    grades += "5";
-                                    mTvgrade.setText(grades);
-                                    break;
-                                case 5:
-                                    grades += "6";
-                                    mTvgrade.setText(grades);
-                                    break;
-                                case 6:
-                                    grades += "7";
-                                    mTvgrade.setText(grades);
-                                    break;
-                                case 7:
-                                    grades += "8";
-                                    mTvgrade.setText(grades);
-                                    break;
-                                case 8:
-                                    grades += "9";
-                                    mTvgrade.setText(grades);
-                                    break;
-                                case 9:
-                                    grades = "";
-                                    mTvgrade.setText(grades);
-                                    break;
-                                case 10:
-                                    grades += "0";
-                                    mTvgrade.setText(grades);
-                                    break;
-                                case 11:
-                                    if (mTvgrade.getText().toString().isEmpty()) {
-                                        ToastUtils.ShowMyToasts(context, "您还未评分", Gravity.CENTER);
-                                        break;
-                                    } else {
-                                        grades="";
-                                        dialog.dismiss();
-                                        //存储
-                                        //写入数据
-                                        String url = "http://101.132.71.111:8080/TecSoundWebApp/AddInteractServlet";
-                                        Map<String,String> params =new HashMap<>();
-                                        params.put("propose_course_id",param.get("Cid"));
-                                        params.put("answer_user_id",param.get("Sid"));
-                                        params.put("answer_content",param.get("answer"));
-                                        params.put("answer_content_src",param.get("VoiceURL"));
-                                        params.put("problem_content",param.get("question"));
-                                        params.put("answer_grade",mTvgrade.getText().toString());
-                                        VolleyCallback.getJSONObject(context, "insertInteract", url, params, new VolleyCallback.VolleyJsonCallback() {
-                                            @Override
-                                            public void onFinish(JSONObject r) {
-                                                String result = null;
+                        public void ResultCallback(String resp) {
+                            Looper.prepare();
+                            View view1 = LayoutInflater.from(context).inflate(R.layout.layout_grade_dialog, null);
+                            CustomScoreBar scoreBar=view1.findViewById(R.id.scrollBar);
+                            TextView mTvQuestion=view1.findViewById(R.id.tv_question);
+                            TextView mTvAnswer=view1.findViewById(R.id.tv_answer);
+                            TextView mTvSentiment=view1.findViewById(R.id.tv_sentiment);
+                            com.alibaba.fastjson.JSONObject object= JSON.parseObject(resp);
+                            Log.e("BaseOnGrade",object.toString());
+                            float negative=  Float.valueOf(object.get("Negative").toString());
+                            float positive= Float.valueOf(object.get("Positive").toString());
+                            mTvQuestion.setText(Ques);
+                            mTvAnswer.setText(Answ);
+                            mTvSentiment.setText(object.get("Sentiment").toString());
+                            scoreBar.setScores(Math.round(negative*100),Math.round(positive*100));
+                            mTvgrade = view1.findViewById(R.id.tv_grade);
+                            GridView mGvKeyboard = view1.findViewById(R.id.gv_keyboard);
+                            mGvKeyboard.setAdapter(new KeyboardAdapter(context));
+                            mGvKeyboard.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                    switch (position) {
+                                        case 0:
+                                            grades += "1";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 1:
+                                            grades += "2";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 2:
+                                            grades += "3";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 3:
+                                            grades += "4";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 4:
+                                            grades += "5";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 5:
+                                            grades += "6";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 6:
+                                            grades += "7";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 7:
+                                            grades += "8";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 8:
+                                            grades += "9";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 9:
+                                            grades = "";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 10:
+                                            grades += "0";
+                                            mTvgrade.setText(grades);
+                                            break;
+                                        case 11:
+                                            if (mTvgrade.getText().toString().isEmpty()) {
+                                                ToastUtils.ShowMyToasts(context, "您还未评分", Gravity.CENTER);
+                                                break;
+                                            } else {
+                                                grades="";
+                                                dialog.dismiss();
+                                                //存储
+                                                //写入数据
+                                                String url = "http://101.132.71.111:8080/TecSoundWebApp/AddInteractServlet";
+                                                Map<String,String> params =new HashMap<>();
+                                                params.put("propose_course_id",param.get("Cid"));
+                                                params.put("answer_user_id",param.get("Sid"));
+                                                params.put("answer_content",param.get("answer"));
+                                                params.put("answer_content_src",param.get("VoiceURL"));
+                                                params.put("problem_content",param.get("question"));
+                                                params.put("answer_grade",mTvgrade.getText().toString());
+                                                VolleyCallback.getJSONObject(context, "insertInteract", url, params, new VolleyCallback.VolleyJsonCallback() {
+                                                    @Override
+                                                    public void onFinish(JSONObject r) {
+                                                        String result = null;
+                                                        try {
+                                                            result = r.getString("Result");
+                                                            ToastUtils.ShowMyToasts(context,result,Gravity.CENTER);
+                                                        } catch (JSONException e) {
+                                                            e.printStackTrace();
+                                                        }
+
+                                                    }
+
+                                                    @Override
+                                                    public void onError(VolleyError error) {
+
+                                                    }
+                                                });
+                                                //通信
+                                                Map<String,String> socketparams =new HashMap<>();
+                                                socketparams.put("condition","Graded");
+                                                socketparams.put("Grade",mTvgrade.getText().toString());;
+                                                socketparams.put("Sid",param.get("Sid"));
+                                                socketparams.put("Cid",param.get("Cid"));
                                                 try {
-                                                    result = r.getString("Result");
-                                                    ToastUtils.ShowMyToasts(context,result,Gravity.CENTER);
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                }
-
-                                            }
-
-                                            @Override
-                                            public void onError(VolleyError error) {
-
-                                            }
-                                        });
-                                        //通信
-                                        Map<String,String> socketparams =new HashMap<>();
-                                        socketparams.put("condition","Graded");
-                                        socketparams.put("Grade",mTvgrade.getText().toString());;
-                                        socketparams.put("Sid",param.get("Sid"));
-                                        socketparams.put("Cid",param.get("Cid"));
-                                        try {
 //                                            WebSocketClientObject.getClient(context,mHandler,null)
 //                                                    .send(URLEncoder.encode(gson.toJson(socketparams),"UTF-8"));
 
-                                            MyApplication.getmWebsocket().send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
-                                        } catch (UnsupportedEncodingException e) {
-                                            e.printStackTrace();
-                                        }
-                                        break;
+                                                    MyApplication.getmWebsocket().send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+                                                } catch (UnsupportedEncodingException e) {
+                                                    e.printStackTrace();
+                                                }
+                                                break;
+                                            }
+                                        default:
+                                            break;
                                     }
-                                default:
-                                    break;
-                            }
-                            if (!mTvgrade.getText().toString().isEmpty()) {
-                                if (Integer.parseInt(mTvgrade.getText().toString()) > 100) {
-                                    mTvgrade.setText("100");
-                                    grades = "100";
+                                    if (!mTvgrade.getText().toString().isEmpty()) {
+                                        if (Integer.parseInt(mTvgrade.getText().toString()) > 100) {
+                                            mTvgrade.setText("100");
+                                            grades = "100";
+                                        }
+                                    }
                                 }
-                            }
+                            });
+                            dialog = builder.setView(view1).create();
+                            dialog.setCancelable(false);
+                            dialog.show();
+                            Looper.loop();
                         }
                     });
-                    dialog = builder.setView(view1).create();
-                    dialog.setCancelable(false);
-                    dialog.show();
+
                     break;
                 case "com.example.administrator.tecsoundclass.GRADE_ED":
                     ToastUtils.ShowMyToasts(context,"教师评分"+intent.getStringExtra("grade"),Gravity.CENTER);

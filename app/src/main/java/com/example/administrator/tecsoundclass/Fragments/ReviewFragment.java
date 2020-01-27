@@ -22,8 +22,7 @@ import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
 import com.example.administrator.tecsoundclass.Adapter.MyReviewListAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.Point;
 import com.example.administrator.tecsoundclass.R;
-import com.example.administrator.tecsoundclass.iFlytec.RecPointHandler;
-import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
+import com.example.administrator.tecsoundclass.utils.iFlytec.RecPointHandler;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
 import org.json.JSONArray;
@@ -34,7 +33,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 public class ReviewFragment extends Fragment {
     private ImageView mIvBack;

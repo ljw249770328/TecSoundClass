@@ -54,6 +54,7 @@ public class BackService extends Service {
     public static Context mContext;
     public mBinder binder=new mBinder();
     private Gson gson=new Gson();
+    private InitSocketThread thread;
     MyApplication mApplication=MyApplication.getApplication();
 
 
@@ -78,6 +79,7 @@ public class BackService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     class InitSocketThread extends Thread {
@@ -103,7 +105,8 @@ public class BackService extends Service {
                 if (!isSuccess) {//长连接已断开
                     mHandler.removeCallbacks(heartBeatRunnable);
                     mWebSocket.cancel();//取消掉以前的长连接
-                    new InitSocketThread().start();//创建一个新的连接
+                   thread=new InitSocketThread();
+                   thread.start();//创建一个新的连接
                 } else {//长连接处于连接状态
 
                 }
@@ -231,12 +234,11 @@ public class BackService extends Service {
             @Override
             public void onClosed(okhttp3.WebSocket webSocket, int code, String reason) {
                 Log.e("mSocket","与服务器【】断开连接，返回码："+code);
-                mWebSocket=null;
             }
 
             @Override
             public void onFailure(okhttp3.WebSocket webSocket, Throwable t, Response response) {
-                Log.e("mSocket","与服务器【】连接异常，异常原因："+response.toString());
+                Log.e("mSocket","与服务器【】连接异常");
             }
         });
         client.dispatcher().executorService().shutdown();

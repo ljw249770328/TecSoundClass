@@ -1,66 +1,33 @@
 package com.example.administrator.tecsoundclass.Activity;
 
-import android.annotation.TargetApi;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.RemoteViews;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.VolleyError;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.signature.ObjectKey;
-import com.example.administrator.tecsoundclass.Adapter.KeyboardAdapter;
 import com.example.administrator.tecsoundclass.Adapter.MsgAdapter;
-import com.example.administrator.tecsoundclass.Fragments.SignFragment;
 import com.example.administrator.tecsoundclass.JavaBean.Msg;
 import com.example.administrator.tecsoundclass.JavaBean.MyApplication;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
-import com.example.administrator.tecsoundclass.iFlytec.InteractHandler;
-import com.example.administrator.tecsoundclass.utils.ActivityCollector;
-import com.example.administrator.tecsoundclass.utils.TransferMore;
-import com.example.administrator.tecsoundclass.utils.VolleyCallback;
-import com.example.administrator.tecsoundclass.utils.WebSocketClientObject;
 import com.google.gson.Gson;
 
-import org.java_websocket.client.WebSocketClient;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimerTask;
-import java.util.UUID;
 
 public class ChatActivity extends BaseActivity {
     private List<Msg> msgList=new ArrayList<>();

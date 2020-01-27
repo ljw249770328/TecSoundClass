@@ -63,7 +63,7 @@ public class MyselfFragment extends Fragment {
     private TextView mTvStandards,mTvUsername,mTvUserId,mTvFriendNum,mTvCourseNum;
     private RelativeLayout mEditInfo;
     MainMenuActivity activity;
-    private SharedPreferences.Editor myEditor;
+    private SharedPreferences.Editor myEditor,defEditor;
 
     public MyselfFragment() {
 
@@ -147,6 +147,7 @@ public class MyselfFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         init(view);
         myEditor=getActivity().getSharedPreferences("admin",Context.MODE_PRIVATE).edit();
+        defEditor=PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext()).edit();
         SetOnclick();
     }
 
@@ -186,14 +187,23 @@ public class MyselfFragment extends Fragment {
                     break;
                 case R.id.tv_exit:
                     mPop.dismiss();
-//                    WebSocketClientObject.client.close();
-                    MyApplication.getmWebsocket().cancel();
                     intent=new Intent(getActivity(),LoginActivity.class);
-                    startActivity(intent);
-                    myEditor.clear();
-                    myEditor.commit();
-                    getActivity().stopService(new Intent(getActivity(), BackService.class));
-                    getActivity().finish();
+                    final Intent finalIntent = intent;
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+//                    WebSocketClientObject.client.close();
+                            myEditor.clear();
+                            defEditor.putBoolean("remember_password",false);
+                            defEditor.putString("psw","");
+                            defEditor.commit();
+                            myEditor.commit();
+                            getActivity().stopService(new Intent(getActivity(), BackService.class));
+                            MyApplication.getmWebsocket().close(1000,"");
+                            startActivity(finalIntent);
+                            getActivity().finish();
+                        }
+                    }).start();
                     break;
                 case R.id.m_status_data:
                     intent=new Intent(getActivity(),StandDataActivity.class);

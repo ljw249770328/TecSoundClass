@@ -117,8 +117,18 @@ public class MainMenuActivity extends BaseActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        TencentApi.KeywordAnalysis("地球昼夜更替的原因是地球在不停的自转");
-        TencentApi.SentimentAnalyst("我觉得这道题选 A");
+//        TencentApi.KeywordAnalysis("地球昼夜更替的原因是地球在不停的自转",new TencentApi.TApiCallback() {
+//            @Override
+//            public void ResultCallback(String resp) {
+//
+//            }
+//        });
+//        TencentApi.SentimentAnalyst("我觉得这道题选 A", new TencentApi.TApiCallback() {
+//            @Override
+//            public void ResultCallback(String resp) {
+//
+//            }
+//        });
         pref= PreferenceManager.getDefaultSharedPreferences(this);
         startService(new Intent(MainMenuActivity.this,BackService.class));
 //        if (getIntent().getAction()!=null&&getIntent().getAction().equals("ACTION_SAVED_LOGIN_AUTO")){

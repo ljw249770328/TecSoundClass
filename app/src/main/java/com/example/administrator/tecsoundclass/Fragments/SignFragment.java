@@ -512,6 +512,7 @@ public class SignFragment extends Fragment {
                 }
             } else {
                 // 验证不通过
+                mBtnSign.setText("重试");
                 switch (result.err) {
                     case VerifierResult.MSS_ERROR_IVP_GENERAL:
                         mErrorResult.setText("内核异常");
