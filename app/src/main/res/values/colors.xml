@@ -52,4 +52,20 @@
     <color name="transparent">#00000000</color>
     <color name="viewfinder_laser">#ffcc0000</color> <!-- Android standard ICS color -->
     <color name="viewfinder_mask">#60000000</color>
+
+
+    <!--keyword 颜色-->
+    <color name="keyword_pink">#E6AAAA</color>
+    <color name="keyword_blue">#55A6BB</color>
+    <color name="keyword_purple">#A356D5</color>
+    <color name="keyword_red">#941717</color>
+    <color name="keyword_orange">#CA6420</color>
+    <color name="keyword_yellow">#DAC019</color>
+    <color name="keyword_green">#70D62A</color>
+    <color name="keyword_black">#707070</color>
+    <color name="keyword_brown">#361E1E</color>
+
+
+
+
 </resources>

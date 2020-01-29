@@ -5,8 +5,10 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +19,14 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.Activity.CourseMenuActivity;
+import com.example.administrator.tecsoundclass.Adapter.MyKeyWordAdapter;
 import com.example.administrator.tecsoundclass.Adapter.MyReviewListAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.Point;
 import com.example.administrator.tecsoundclass.R;
+import com.example.administrator.tecsoundclass.utils.Tencent.TencentApi;
 import com.example.administrator.tecsoundclass.utils.iFlytec.RecPointHandler;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
 
@@ -48,6 +53,8 @@ public class ReviewFragment extends Fragment {
     private List<Point> mPointList=new ArrayList<>();
     private String mAuthId;
     private PopupWindow mpop;
+    private List<String> mResultList=null;
+
     CourseMenuActivity mActivity;
 
 
@@ -128,7 +135,7 @@ public class ReviewFragment extends Fragment {
                     }
                     mPointList.clear();
                     mPointList.addAll(list);
-                    adapter=new MyReviewListAdapter(mPointList);
+                    adapter=new MyReviewListAdapter(getActivity(),getActivity().getApplicationContext(),mPointList);
                     setPopupWindow(adapter);
                     adapter.notifyDataSetChanged();
                     mRvPoint.setAdapter(adapter);
