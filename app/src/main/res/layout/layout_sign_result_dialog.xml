@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="600dp"
     android:orientation="vertical"
+    android:animateLayoutChanges="true"
+
     android:background="@drawable/bg_rv_res_dialog">
     <TextView
         android:layout_width="match_parent"

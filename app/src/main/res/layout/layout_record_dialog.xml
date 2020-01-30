@@ -5,6 +5,8 @@
     android:gravity="center"
     android:paddingTop="60dp"
     android:paddingBottom="70dp"
+    android:animateLayoutChanges="true"
+
     android:background="@drawable/bg_dialog">
     <TextView
     android:layout_width="match_parent"

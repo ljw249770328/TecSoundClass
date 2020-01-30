@@ -1,5 +1,6 @@
 package com.example.administrator.tecsoundclass.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.BroadcastReceiver;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -62,6 +64,7 @@ public class InteractFragment extends Fragment {
     private TextView mTvTime, mTvgrade,mTvQuestion,mTvResult;
     private Button mBtncatch,mBtnRecPoint;
     private AlertDialog dialog;
+    private SwipeRefreshLayout swipeRefresh;
     private Timer timer = null;
     private TimerTask task = null;
     private int i;
@@ -149,6 +152,7 @@ public class InteractFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_interact, container, false);
     }
+    @SuppressLint("ResourceAsColor")
     private void init(View view){
         mIvBack = view.findViewById(R.id.im_back);
         mRvInteract = view.findViewById(R.id.recycler_view_interact);
@@ -158,6 +162,18 @@ public class InteractFragment extends Fragment {
             mBtnInteract.setVisibility(View.GONE);
             mBtnRecPoint.setVisibility(View.GONE);
         }
+        swipeRefresh = view.findViewById(R.id.swipe_refresh);
+        swipeRefresh.setColorSchemeColors(R.color.colorDarkGreen);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mInteractionList.clear();
+                mInteractionList.addAll(InitList());
+                adapter.notifyDataSetChanged();
+                swipeRefresh.setRefreshing(false);
+            }
+
+        });
     }
     private void SetListener(View view){
         mIvBack.setOnClickListener(onclick);

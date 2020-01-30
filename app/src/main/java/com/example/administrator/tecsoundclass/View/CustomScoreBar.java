@@ -58,7 +58,7 @@ public class CustomScoreBar extends View {
         paintText.reset();
         paintText.setAntiAlias(true);
         //文字的大小取控件宽度的十分之一和高度的二分之一的最小值
-        paintText.setTextSize(15);
+        paintText.setTextSize(1);
         paintText.setColor(Color.WHITE);
         /*Paint.Align.CENTER：The text is drawn centered horizontally on the x,y origin*/
         paintText.setTextAlign(Paint.Align.CENTER);

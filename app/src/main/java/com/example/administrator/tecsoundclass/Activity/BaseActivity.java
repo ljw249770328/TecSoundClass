@@ -6,20 +6,25 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -27,6 +32,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RemoteViews;
 import android.widget.TextClock;
 import android.widget.TextView;
@@ -34,6 +41,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.android.volley.VolleyError;
 import com.example.administrator.tecsoundclass.Adapter.KeyboardAdapter;
+import com.example.administrator.tecsoundclass.Adapter.OnLineStuAdapter;
 import com.example.administrator.tecsoundclass.JavaBean.MyApplication;
 import com.example.administrator.tecsoundclass.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
@@ -53,7 +61,9 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -75,14 +85,52 @@ public class BaseActivity extends AppCompatActivity {
     private static NotificationCompat.Builder mNfBuilder,mNfHeadBuilder;
     private static NotificationManager manager;
     private SharedPreferences myPref;
-
+    public BackService.mBinder binder;
     private Gson gson=new Gson();
+
     private Handler mHandler =new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what){
+
+                case 0:
+                    unbindService(connection);
+                    ToastUtils.ShowMyToasts(BaseActivity.this,msg.obj.toString(),Gravity.CENTER);
+                    break;
+                case 1:
+                    List<String> OlStu= new ArrayList<>();
+                    Log.d("Testnow",OlStu.toString());
+                    OlStu= (List<String>) msg.obj;
+                    View view=dialog.getWindow().getDecorView();
+                    RecyclerView mRvOnlineStu=view.findViewById(R.id.rv_connect_list);
+                    LinearLayout mLlSelect =view.findViewById(R.id.ll_select);
+                    final TextView mTvQuestion =view.findViewById(R.id.tv_question);
+                    final TextView mTvCid=view.findViewById(R.id.tv_title);
+                    mRvOnlineStu.setLayoutManager(new GridLayoutManager(getApplicationContext(),3));
+                    final OnLineStuAdapter adapter=new OnLineStuAdapter(OlStu,BaseActivity.this);
+                    adapter.notifyDataSetChanged();
+                    adapter.SetOnItemClickListener(new OnLineStuAdapter.OnRecyclerItemClickListener() {
+                        @Override
+                        public void onItemClick(int posision) {
+                            unbindService(connection);
+                            Map<String,String> param =new HashMap<>();
+                            param.put("condition","TeaSelect");
+                            param.put("question",mTvQuestion.getText().toString());
+                            param.put("Cid",mTvCid.getText().toString().substring(0,10));
+                            param.put("Cid",mTvCid.getText().toString().substring(0,10));
+                            param.put("Sid",adapter.getmResList().get(posision));
+                            try {
+                                MyApplication.getmWebsocket().send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+                            } catch (UnsupportedEncodingException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+                    mRvOnlineStu.setAdapter(adapter);
+                    mLlSelect.setVisibility(View.VISIBLE);
+                    break;
                 case 7:
-                    Log.d("Test","Here");
                     if(dialog!=null){
                         dialog.dismiss();
                     }
@@ -92,6 +140,19 @@ public class BaseActivity extends AppCompatActivity {
         }
     });
 
+
+    private ServiceConnection connection=new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            binder= (BackService.mBinder) service;
+            binder.onServiceMessage(mHandler);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -153,7 +214,7 @@ public class BaseActivity extends AppCompatActivity {
 
 
 
-    class Receiver extends BroadcastReceiver implements View.OnClickListener {
+    class Receiver extends BroadcastReceiver {
         @Override
         public void onReceive(final Context context, final Intent intent) {
             String action =intent.getAction();
@@ -279,8 +340,45 @@ public class BaseActivity extends AppCompatActivity {
                         final Button mBtncancel = view.findViewById(R.id.btn_cancel);
                         final TextView mTvQuestion=view .findViewById(R.id.tv_question);
                         final TextView mTvTime = view.findViewById(R.id.tv_message);
-                        mBtncancel.setOnClickListener(this);
-                        mBtnselect.setOnClickListener(this);
+                        ImageView mIvClose =view.findViewById(R.id.iv_close);
+                        mIvClose.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                view.findViewById(R.id.ll_select).setVisibility(View.GONE);
+                            }
+                        });
+                        mBtncancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                                timer.cancel();
+                                task.cancel();
+                                Map<String,String> param =new HashMap<>();
+                                param.put("condition","InteractCancel");
+                                param.put("Cid",Clsid);
+                                try {
+                                    MyApplication.getmWebsocket().send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        mBtnselect.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Map<String,String> param =new HashMap<>();
+                                param.put("condition","GetStuList");
+                                param.put("Cid",Clsid);
+                                try {
+                                    MyApplication.getmWebsocket().send(URLEncoder.encode(gson.toJson(param),"UTF-8"));
+                                    Intent intent=new Intent(BaseActivity.this,BackService.class);
+                                    bindService(intent,connection,Context.BIND_AUTO_CREATE);
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
                         TextView mTvTitle=view.findViewById(R.id.tv_title);
                         mTvQuestion.setText(intent.getStringExtra("question"));
                         mTvTitle.setText(Clsid+"\n当前问题");
@@ -490,7 +588,7 @@ public class BaseActivity extends AppCompatActivity {
                     ToastUtils.ShowMyToasts(context,"教师评分"+intent.getStringExtra("grade"),Gravity.CENTER);
                     break;
                 case "com.example.administrator.tecsoundclass.DIALOG_CANCEL":
-                    if(dialog!=null){
+                    if(dialog!=null&&dialog.isShowing()){
                         timer.cancel();
                         task.cancel();
                         if (myPref.getString("identity","").equals("学生")){
@@ -499,11 +597,13 @@ public class BaseActivity extends AppCompatActivity {
                             View view =dialog.getWindow().getDecorView();
                             TextView mTvMessage=view.findViewById(R.id.tv_message);
                             Button mBtnSelect=view.findViewById(R.id.btn_select);
-                            mTvMessage.setText(intent.getStringExtra("Ca_Uid")+"抢答");
+                            mTvMessage.setText(intent.getStringExtra("Ca_Uid")+"回答");
                             mBtnSelect.setClickable(false);
+                            View v =dialog.getWindow().getDecorView();
+                            v.findViewById(R.id.ll_select).setVisibility(View.GONE);
+                            v.findViewById(R.id.ll_question_btns).setVisibility(View.GONE);
+                            v.findViewById(R.id.ll_waiting_view).setVisibility(View.VISIBLE);
                         }
-
-
                     }
                     break;
                 case "com.example.administrator.tecsoundclass.PICKED":
@@ -581,16 +681,7 @@ public class BaseActivity extends AppCompatActivity {
             }
         }
 
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.btn_cancel:
-                    dialog.dismiss();
-                    break;
-                case R.id.btn_select:
-                    break;
-            }
-        }
+
     }
 
 }

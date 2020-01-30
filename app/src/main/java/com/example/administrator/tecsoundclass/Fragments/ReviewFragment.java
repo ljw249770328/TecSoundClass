@@ -1,10 +1,12 @@
 package com.example.administrator.tecsoundclass.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,6 +55,7 @@ public class ReviewFragment extends Fragment {
     private List<Point> mPointList=new ArrayList<>();
     private String mAuthId;
     private PopupWindow mpop;
+    private SwipeRefreshLayout swipeRefresh;
     private List<String> mResultList=null;
 
     CourseMenuActivity mActivity;
@@ -78,10 +81,23 @@ public class ReviewFragment extends Fragment {
         mActivity= (CourseMenuActivity) getActivity();
     }
 
+    @SuppressLint("ResourceAsColor")
     private void init(View view){
         mToast = Toast.makeText(getActivity(), "", Toast.LENGTH_SHORT);
         mIvBack=view.findViewById(R.id.im_back);
         mRvPoint=view.findViewById(R.id.recycler_view_point);
+        swipeRefresh = view.findViewById(R.id.swipe_refresh);
+        swipeRefresh.setColorSchemeColors(R.color.colorDarkGreen);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPointList.clear();
+                mPointList.addAll(InitList());
+                adapter.notifyDataSetChanged();
+                swipeRefresh.setRefreshing(false);
+            }
+
+        });
 //        mBtnClassBegin=view.findViewById(R.id.btn_class_begin);
 //        if (mActivity.getmUser().getUser_identity().equals("学生")){
 //            mBtnClassBegin.setVisibility(View.GONE);
@@ -131,6 +147,7 @@ public class ReviewFragment extends Fragment {
                         point.setPoint_time(obj.getString("point_time"));
                         point.setPoint_voice_src(obj.getString("point_voice_src"));
                         point.setPoint_content(obj.getString("point_content"));
+
                         list.add(point);
                     }
                     mPointList.clear();

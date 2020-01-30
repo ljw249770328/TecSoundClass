@@ -5,6 +5,7 @@
     android:gravity="center"
     android:paddingTop="60dp"
     android:paddingBottom="70dp"
+    android:animateLayoutChanges="true"
     android:background="@drawable/bg_dialog">
     <TextView
         android:id="@+id/tv_title"
@@ -40,6 +41,7 @@
         android:textSize="23sp"/>
 
     <LinearLayout
+        android:id="@+id/ll_question_btns"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
@@ -71,6 +73,28 @@
             android:textSize="15sp"
             android:textColor="#A64343"/>
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_select"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="35dp"
+        android:visibility="gone"
+        android:orientation="vertical">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_connect_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp">
+
+        </android.support.v7.widget.RecyclerView>
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/close"/>
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/ll_waiting_view"
         android:layout_width="match_parent"

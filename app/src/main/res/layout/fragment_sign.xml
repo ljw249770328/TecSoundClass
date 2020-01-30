@@ -51,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="9dp"
                 android:paddingVertical="3dp"
+                android:visibility="gone"
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal">
                 <LinearLayout
@@ -124,17 +125,23 @@
                         android:textSize="16sp"
                         android:layout_marginLeft="50dp" />
             </LinearLayout>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view_sign"
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_below="@id/iv_head"
-                android:background="@color/colorWhite"
-                android:dividerHeight="0.25dp"
-                android:layout_above="@id/btn_start_sign"
-                android:divider="@color/colorDarkGray"
-                android:listSelector="@drawable/course_list_item">
-            </android.support.v7.widget.RecyclerView>
+                android:layout_above="@id/btn_start_sign">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_sign"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:dividerHeight="0.25dp"
+                    android:divider="@color/colorDarkGray"
+                    android:listSelector="@drawable/course_list_item">
+                </android.support.v7.widget.RecyclerView>
+            </android.support.v4.widget.SwipeRefreshLayout>
+
             <Button
                 android:id="@+id/btn_start_sign"
                 android:layout_width="match_parent"

@@ -48,6 +48,7 @@ import okio.ByteString;
 public class BackService extends Service {
     SharedPreferences pref;
     private static final String WEBSOCKET_HOST_AND_PORT = "ws://101.132.71.111:8886";//可替换为自己的主机名和端口号
+//    private static final String WEBSOCKET_HOST_AND_PORT = "ws://192.168.0.103:8886";
     private static final long HEART_BEAT_RATE = 10* 1000;//每隔15秒进行一次对长连接的心跳检测
     private static WebSocket mWebSocket;
     public static Handler actHandler;
@@ -219,6 +220,20 @@ public class BackService extends Service {
                         case "FORCE_OFFLINE":
                             intent=new Intent("com.example.administrator.tecsoundclass.FORCE_OFFLINE");
                             mContext.sendBroadcast(intent);
+                            break;
+                        case "ONLINE_LIST":
+                            List<String> OlStu=new ArrayList<>();
+                            SignStu=gson.fromJson(params.get("OnLineList"),OlStu.getClass());
+                            if (SignStu!=null&&SignStu.size()!=0){
+                                msg.what=1;
+                                msg.obj=SignStu;
+                                actHandler.sendMessage(msg);
+                            }else {
+                                msg.what=0;
+                                msg.obj="请先签到再执行本操作";
+                                actHandler.sendMessage(msg);
+                            }
+
                             break;
                     }
                 } catch (UnsupportedEncodingException e) {

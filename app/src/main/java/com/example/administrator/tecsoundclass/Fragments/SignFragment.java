@@ -15,6 +15,7 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -81,6 +82,7 @@ public class SignFragment extends Fragment {
     private AlertDialog mSignDialog;
     private AlertDialog mSignResDialog;
     private SpeakerVerifier mSpeakerVerifier;
+    private SwipeRefreshLayout swipeRefresh;
     private Toast mToast;
     private String mAuthId , mTime = "", mDate = "", mStatus = "";
     private String mNumPwd = "";
@@ -161,6 +163,8 @@ public class SignFragment extends Fragment {
 
         }
     };
+
+
     public SignFragment() {
 
     }
@@ -201,6 +205,7 @@ public class SignFragment extends Fragment {
         getActivity().unbindService(connection);
     }
 
+    @SuppressLint("ResourceAsColor")
     private void init(View view) {
         mIvBack = view.findViewById(R.id.im_back);
         mBtnSign = view.findViewById(R.id.btn_start_sign);
@@ -211,6 +216,18 @@ public class SignFragment extends Fragment {
         if(mActivity.getmUser().getUser_identity().equals("学生")){
             mBtnSign.setText("签到");
         }
+        swipeRefresh = view.findViewById(R.id.swipe_refresh);
+        swipeRefresh.setColorSchemeColors(R.color.colorDarkGreen);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                signList.clear();
+                signList.addAll(InitList());
+                adapter.notifyDataSetChanged();
+                swipeRefresh.setRefreshing(false);
+            }
+
+        });
     }
 
     private void SetClickLIstener() {

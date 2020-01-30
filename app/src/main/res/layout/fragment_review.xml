@@ -88,14 +88,19 @@
                 android:textSize="15sp"
                 android:padding="5dp">
             </TextView>
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/swipe_refresh"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tv_title"
+                android:layout_above="@id/btn_class_begin">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_point"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+            </android.support.v4.widget.SwipeRefreshLayout>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view_point"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_title"
-            android:layout_above="@id/btn_class_begin">
-         </android.support.v7.widget.RecyclerView>
         <Button
             android:id="@+id/btn_class_begin"
             android:layout_width="match_parent"
