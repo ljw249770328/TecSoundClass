@@ -10,7 +10,7 @@ import com.arcsoft.face.FaceEngine;
 import com.arcsoft.face.FaceFeature;
 import com.arcsoft.face.FaceInfo;
 import com.arcsoft.face.LivenessInfo;
-import com.example.administrator.tecsoundclass.common.Constants;
+import com.example.administrator.tecsoundclass.Presenter.common.Constants;
 import com.example.administrator.tecsoundclass.model.FacePreviewInfo;
 import com.example.administrator.tecsoundclass.utils.TrackUtil;
 

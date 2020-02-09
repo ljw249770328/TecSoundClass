@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
-    tools:context=".Activity.RegeditActivity"
+    tools:context=".View.Activity.RegeditActivity"
     android:orientation="vertical"
     android:background="@color/colorGreen"
     android:padding="15dp">

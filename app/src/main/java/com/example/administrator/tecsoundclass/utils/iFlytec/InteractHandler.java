@@ -8,7 +8,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.administrator.tecsoundclass.JavaBean.MyApplication;
+import com.example.administrator.tecsoundclass.model.JavaBean.MyApplication;
 import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.google.gson.Gson;
 import com.iflytek.cloud.RecognizerResult;

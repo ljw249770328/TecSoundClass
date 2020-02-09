@@ -12,12 +12,12 @@ import com.arcsoft.face.AgeInfo;
 import com.arcsoft.face.GenderInfo;
 import com.arcsoft.face.LivenessInfo;
 import com.example.administrator.tecsoundclass.model.DrawInfo;
-import com.example.administrator.tecsoundclass.widget.FaceRectView;
+import com.example.administrator.tecsoundclass.Presenter.widget.FaceRectView;
 
 import java.util.List;
 
 /**
- * 绘制人脸框帮助类，用于在{@link com.example.administrator.tecsoundclass.widget.FaceRectView}上绘制矩形
+ * 绘制人脸框帮助类，用于在{@link com.example.administrator.tecsoundclass.Presenter.widget.FaceRectView}上绘制矩形
  */
 public class DrawHelper {
     private int previewWidth, previewHeight, canvasWidth, canvasHeight, cameraDisplayOrientation, cameraId;

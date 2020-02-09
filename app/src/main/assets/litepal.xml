@@ -3,15 +3,15 @@
     <dbname value="Infomation"></dbname>
     <version value="2"></version>
     <list>
-        <mapping class="com.example.administrator.tecsoundclass.JavaBean.User"></mapping>
-        <mapping class="com.example.administrator.tecsoundclass.JavaBean.Course"></mapping>
-        <mapping class="com.example.administrator.tecsoundclass.JavaBean.Selective"></mapping>
-        <mapping class="com.example.administrator.tecsoundclass.JavaBean.Follow"></mapping>
-        <mapping class="com.example.administrator.tecsoundclass.JavaBean.Interaction"></mapping>
-        <mapping class="com.example.administrator.tecsoundclass.JavaBean.Message"></mapping>
-        <mapping class="com.example.administrator.tecsoundclass.JavaBean.Note"></mapping>
-        <mapping class="com.example.administrator.tecsoundclass.JavaBean.Point"></mapping>
-        <mapping class="com.example.administrator.tecsoundclass.JavaBean.Sign"></mapping>
-        <mapping class="com.example.administrator.tecsoundclass.JavaBean.Standard"></mapping>
+        <mapping class="com.example.administrator.tecsoundclass.model.JavaBean.User"></mapping>
+        <mapping class="com.example.administrator.tecsoundclass.model.JavaBean.Course"></mapping>
+        <mapping class="com.example.administrator.tecsoundclass.model.JavaBean.Selective"></mapping>
+        <mapping class="com.example.administrator.tecsoundclass.model.JavaBean.Follow"></mapping>
+        <mapping class="com.example.administrator.tecsoundclass.model.JavaBean.Interaction"></mapping>
+        <mapping class="com.example.administrator.tecsoundclass.model.JavaBean.Message"></mapping>
+        <mapping class="com.example.administrator.tecsoundclass.model.JavaBean.Note"></mapping>
+        <mapping class="com.example.administrator.tecsoundclass.model.JavaBean.Point"></mapping>
+        <mapping class="com.example.administrator.tecsoundclass.model.JavaBean.Sign"></mapping>
+        <mapping class="com.example.administrator.tecsoundclass.model.JavaBean.Standard"></mapping>
     </list>
 </litpal>

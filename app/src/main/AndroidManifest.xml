@@ -24,7 +24,7 @@
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <application
-        android:name=".JavaBean.MyApplication"
+        android:name=".model.JavaBean.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="师音课堂"
@@ -32,16 +32,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <service
-            android:name=".service.BackService"
+            android:name=".Presenter.service.BackService"
             android:enabled="true"
             android:exported="true"></service>
 
-        <activity android:name=".Activity.RecognizeFaceActivity" />
-        <activity android:name=".Activity.RegeditFaceDataActivity" />
-        <activity android:name=".Activity.FriendResultActivity" />
-        <activity android:name=".Activity.FollowActivity" />
-        <activity android:name=".Activity.ChatActivity" />
-        <activity android:name=".Activity.LauncherActivity">
+        <activity android:name=".View.Activity.RecognizeFaceActivity" />
+        <activity android:name=".View.Activity.RegeditFaceDataActivity" />
+        <activity android:name=".View.Activity.FriendResultActivity" />
+        <activity android:name=".View.Activity.FollowActivity" />
+        <activity android:name=".View.Activity.ChatActivity" />
+        <activity android:name=".View.Activity.LauncherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,23 +49,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".View.Activity.LoginActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".Activity.RegeditActivity" />
-        <activity android:name=".Activity.FindPswActivity" />
-        <activity android:name=".Activity.ForgetpswActivity" />
+        <activity android:name=".View.Activity.RegeditActivity" />
+        <activity android:name=".View.Activity.FindPswActivity" />
+        <activity android:name=".View.Activity.ForgetpswActivity" />
         <activity
-            android:name=".Activity.MainMenuActivity"
+            android:name=".View.Activity.MainMenuActivity"
             android:launchMode="singleTop" />
-        <activity android:name=".Activity.JoinActivity" />
-        <activity android:name=".Activity.ClassResultActivity" />
-        <activity android:name=".Activity.StandDataActivity" />
-        <activity android:name=".Activity.CreateClassActivity" />
-        <activity android:name=".Activity.CourseMenuActivity" />
-        <activity android:name=".Activity.EditMyInfoActivity" />
-        <activity android:name=".Activity.SettingsActivity" />
-        <activity android:name=".Activity.RegeditVoiceActivity" />
-        <activity android:name=".zxing.android.CaptureActivity" />
+        <activity android:name=".View.Activity.JoinActivity" />
+        <activity android:name=".View.Activity.ClassResultActivity" />
+        <activity android:name=".View.Activity.StandDataActivity" />
+        <activity android:name=".View.Activity.CreateClassActivity" />
+        <activity android:name=".View.Activity.CourseMenuActivity" />
+        <activity android:name=".View.Activity.EditMyInfoActivity" />
+        <activity android:name=".View.Activity.SettingsActivity" />
+        <activity android:name=".View.Activity.RegeditVoiceActivity" />
+        <activity android:name=".Presenter.zxing.android.CaptureActivity" />
     </application>
 
 </manifest>
