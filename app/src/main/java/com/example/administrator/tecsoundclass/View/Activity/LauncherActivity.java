@@ -23,7 +23,7 @@ import com.arcsoft.face.ErrorInfo;
 import com.arcsoft.face.FaceEngine;
 import com.example.administrator.tecsoundclass.model.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
-import com.example.administrator.tecsoundclass.Presenter.common.Constants;
+import com.example.administrator.tecsoundclass.Controller.common.Constants;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.TransferMore;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;

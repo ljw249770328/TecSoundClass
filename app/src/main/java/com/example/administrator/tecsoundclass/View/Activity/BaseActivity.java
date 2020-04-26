@@ -47,7 +47,7 @@ import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.View.CustomScoreBar;
 import com.example.administrator.tecsoundclass.utils.Tencent.TencentApi;
 import com.example.administrator.tecsoundclass.utils.iFlytec.InteractHandler;
-import com.example.administrator.tecsoundclass.Presenter.service.BackService;
+import com.example.administrator.tecsoundclass.Controller.service.BackService;
 import com.example.administrator.tecsoundclass.utils.ActivityCollector;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.TransferMore;

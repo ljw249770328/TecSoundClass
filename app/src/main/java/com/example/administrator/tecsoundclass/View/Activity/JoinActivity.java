@@ -19,7 +19,7 @@ import com.example.administrator.tecsoundclass.model.JavaBean.Course;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
-import com.example.administrator.tecsoundclass.Presenter.zxing.android.CaptureActivity;
+import com.example.administrator.tecsoundclass.Controller.zxing.android.CaptureActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

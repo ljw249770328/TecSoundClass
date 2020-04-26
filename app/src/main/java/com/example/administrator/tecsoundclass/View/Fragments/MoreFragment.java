@@ -27,7 +27,7 @@ import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.utils.FileUploadUtil;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;
-import com.example.administrator.tecsoundclass.Presenter.zxing.android.CreateCodeImg;
+import com.example.administrator.tecsoundclass.Controller.zxing.android.CreateCodeImg;
 
 import org.json.JSONException;
 import org.json.JSONObject;

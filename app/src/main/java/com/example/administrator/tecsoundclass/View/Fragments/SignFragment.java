@@ -39,7 +39,7 @@ import com.example.administrator.tecsoundclass.model.JavaBean.Sign;
 import com.example.administrator.tecsoundclass.model.JavaBean.User;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.View.Activity.RegeditVoiceActivity;
-import com.example.administrator.tecsoundclass.Presenter.service.BackService;
+import com.example.administrator.tecsoundclass.Controller.service.BackService;
 import com.example.administrator.tecsoundclass.utils.ConfigUtil;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.VolleyCallback;

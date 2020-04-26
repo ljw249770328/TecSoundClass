@@ -27,7 +27,7 @@ import com.example.administrator.tecsoundclass.model.JavaBean.MyApplication;
 import com.example.administrator.tecsoundclass.R;
 import com.example.administrator.tecsoundclass.View.Activity.SettingsActivity;
 import com.example.administrator.tecsoundclass.View.Activity.StandDataActivity;
-import com.example.administrator.tecsoundclass.Presenter.service.BackService;
+import com.example.administrator.tecsoundclass.Controller.service.BackService;
 import com.example.administrator.tecsoundclass.utils.ToastUtils;
 import com.example.administrator.tecsoundclass.utils.TranslateFactory;
 

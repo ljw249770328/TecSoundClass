@@ -32,7 +32,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <service
-            android:name=".Presenter.service.BackService"
+            android:name=".Controller.service.BackService"
             android:enabled="true"
             android:exported="true"></service>
 
@@ -65,7 +65,7 @@
         <activity android:name=".View.Activity.EditMyInfoActivity" />
         <activity android:name=".View.Activity.SettingsActivity" />
         <activity android:name=".View.Activity.RegeditVoiceActivity" />
-        <activity android:name=".Presenter.zxing.android.CaptureActivity" />
+        <activity android:name=".Controller.zxing.android.CaptureActivity" />
     </application>
 
 </manifest>
